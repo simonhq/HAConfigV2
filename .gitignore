@@ -27,7 +27,8 @@
 !appdaemon/apps/travel/
 !appdaemon/apps/pykevoplus/
 !packages/
-!packages/date-time/
+!packages/date_time/
+!packages/system_monitor/
 !www/
 !www/icons/
 !www/icons/dark_sky/

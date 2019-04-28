@@ -1,0 +1,72 @@
+#################################################################
+#                                                               #
+#                     Packages/Date & Time                      #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors - Workday              #
+#                                                  #
+#################################################### 
+
+  - platform: workday
+    country: AU
+    workdays: [mon, tue, wed, thu, fri]
+    
+#################################################################
+#                                                               #
+#                            Sensors                            #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#                Sensor - Time/Date                #
+#                                                  #
+####################################################
+
+  - platform: time_date
+    display_options:
+      - time
+      - date
+      - date_time
+      - time_date
+      - time_utc
+      - beat
+      
+####################################################
+#                                                  #
+#               Sensor - World Clock               #
+#                                                  #
+####################################################
+
+  - platform: worldclock
+    time_zone: Australia/Sydney
+    name: Home Time
+  
+  - platform: worldclock
+    time_zone: Australia/Brisbane
+    name: Lesley Time
+    
+  - platform: worldclock
+    time_zone: Europe/London
+    name: London Time
+  
+  - platform: worldclock
+    time_zone: America/New_York
+    name: America Eastern Time
+
+  - platform: worldclock
+    time_zone: America/Los_Angeles
+    name: America Pacific Time

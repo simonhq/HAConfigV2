@@ -1,39 +1,145 @@
+###########################################################################
+#
+# Home Assistant Configuration v2
+# 
+# Main Configuration
+#
+###########################################################################
+
 homeassistant:
-  # Name of the location where Home Assistant is running
-  name: Home
-  # Location required to calculate the time the sun rises and sets
-  latitude: -35.3862
-  longitude: 149.058
-  # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: 0
-  # metric for Metric, imperial for Imperial
+  name: !secret HA_NAME
+  latitude: !secret HA_LAT
+  longitude: !secret HA_LONG
+  elevation: !secret HA_ELE
   unit_system: metric
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  time_zone: Australia/Sydney
-  # Customization file
+  temperature_unit: C
+  time_zone: !secret HA_TZ
+  packages: !include_dir_named packages
   customize: !include customize.yaml
+
+###########################################################################
+# 
+# Standard Configuration
+#
+###########################################################################
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
+# Enables configuration UI
+config:
+
+# Checks for available updates
+updater:
+
 # Show the introduction message on startup.
 introduction:
 
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# Enables the frontend
+frontend:
+  themes: !include themes.yaml
+
+# uncomment when using SSL
 # http:
-#   base_url: example.duckdns.org:8123
+#   base_url: !secret HA_URL
+#   ssl_certificate: /ssl/fullchain.pem
+#   ssl_key: /ssl/privkey.pem
+#   ip_ban_enabled: true
+#   login_attempts_threshold: 5
 
 # Discover some devices automatically
 discovery:
+
+# Text to speech
+tts:
+  - platform: google
+
+# database controls
+recorder:
+  purge_keep_days: 5
+  purge_interval: 1
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# show system health information on info panel
+system_health:
+
+logger:
+  default: warning
+  #logs:
+  #  homeassistant.components.smartthings: debug
+
+###########################################################################
+# 
+# Custom Card/Component Configuration
+#
+###########################################################################
+
+# enables custom card updating & tracking
+custom_updater:
+  #mode: yaml
+  hide_sensor: false
+  show_installable: true
+  track:
+    - cards
+    - components
+    #- python scripts
+  component_urls:
+    - https://raw.githubusercontent.com/robmarkcole/Hue-sensors-HASS/master/custom_updater.json
+  card_urls:
+    - https://raw.githubusercontent.com/ljmerza/waze-card/master/updater.json
+  #python_urls:
+    #-
+
+###########################################################################
+# 
+# Setup Configuration
+#
+###########################################################################
+
+# Track the sun
+sun:
+
+# track devices 
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 
+      - 192.168.1.0/24
+    interval_seconds: 15
+    consider_home: 120
+    exclude:
+     - !secret hass_wired
+    new_device_defaults:
+      track_new_devices: yes
+      hide_if_away: False
+  - platform: netgear
+    password: !secret netgear_pass
+    port: 80
+
+#other device tracking - to be turned on when ready
+  #- platform: gpslogger
+  #- platform: huesensor
+  #- platform: trackr
+  #  username: !secret trackr_username
+  #  password: !secret trackr_password
+
+
 
 # Sensors
 sensor:
   # Weather prediction
   - platform: yr
 
-# Text to speech
-tts:
-  - platform: google
 
 group: !include groups.yaml
 automation: !include automations.yaml

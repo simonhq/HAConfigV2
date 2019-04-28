@@ -1,0 +1,84 @@
+#################################################################
+#                                                               #
+#                     Packages/System Monitor                   #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Sensors                                 #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#                Sensor - systemmonitor            #
+#                                                  #
+####################################################
+
+  - platform: systemmonitor
+    scan_interval:
+      seconds: 10
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: processor_use
+      - type: last_boot
+
+#################################################################
+#                                                               #
+#                       Input Numbers                           #
+#                                                               #
+#################################################################
+
+input_number:
+
+####################################################
+#                                                  #
+#            Disk & CPU Alerts                     #
+#                                                  #
+#################################################### 
+
+  disk_alert:
+    min: 0
+    max: 100
+    name: 'Disk notify at'
+    #initial: 75
+    unit_of_measurement: '%'
+    icon: mdi:harddisk
+
+  cpu_alert:
+    min: 0
+    max: 100
+    name: 'CPU notify at'
+    #initial: 85
+    unit_of_measurement: '%'
+    icon: mdi:gauge
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors - Alerts               #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      disk_alert:
+        friendly_name: Disk Alert
+        value_template: "{{ states('sensor.disk_use_percent')|float > states('input_number.disk_alert')|float }}"
+        icon_template: mdi:harddisk
+      cpu_alert:
+        friendly_name: CPU Alert
+        value_template: "{{ states('sensor.processor_use')|float > states('input_number.cpu_alert')|float }}"
+        icon_template: mdi:gauge-full
