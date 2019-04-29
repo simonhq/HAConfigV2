@@ -1,0 +1,146 @@
+#################################################################
+#                                                               #
+#                     Packages/Bus Times                        #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Sensors                                 #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#                Sensor - routes to watch          #
+#                                                  #
+####################################################
+  
+  - platform: gtfs
+    name: home_to_tugg_79_ej
+    offset: 300 # 5min
+    origin: 1075 #e&j
+    destination: 13 #tugg arr
+    scan_interval: 60 #1min
+    data: action.zip
+
+  - platform: gtfs
+    name: home_to_tugg_79_is
+    offset: 600 # 10min
+    origin: 1007 #isashops far
+    destination: 13 #tugg arr
+    scan_interval: 60 #1min
+    data: action.zip
+
+  # 78 to tugg
+  - platform: gtfs
+    name: home_to_tugg_78_is
+    offset: 600 # 10min
+    origin: 1008 #isashops near
+    destination: 13 #tugg arr
+    scan_interval: 60 #1min
+    data: action.zip
+
+  # R5 north
+  - platform: gtfs
+    name: home_to_city_r5_out
+    offset: 600 # 10min
+    origin: 1078 #outrim near
+    destination: 2709 #woden north
+    scan_interval: 60 #1min
+    data: action.zip
+
+  # R4 north
+  - platform: gtfs
+    name: tugg_to_city_r4
+    offset: 1200 # 20min
+    origin: 1808 #tugg pt8
+    destination: 2709 #woden north
+    scan_interval: 60 #1min
+    data: action.zip
+
+####################################################
+#                                                  #
+#                Sensor - stopes to watch          #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      #bus 1
+      home_to_tugg_79_ej_format:
+        friendly_name: Ell & Johnson (T)
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.home_to_tugg_79_ej', 'origin_stop_departure_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.home_to_tugg_79_ej', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {{ route }} at {{hms[0]}}:{{hms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
+      home_to_tugg_79_is_format:
+        friendly_name: Isa School
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.home_to_tugg_79_is', 'origin_stop_departure_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.home_to_tugg_79_is', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {{ route }} at {{hms[0]}}:{{hms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
+      
+
+      # home_to_tugg_78_is
+      home_to_tugg_78_is_format:
+        friendly_name: Isa Shops
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.home_to_tugg_78_is', 'origin_stop_departure_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.home_to_tugg_78_is', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {{ route }} at {{hms[0]}}:{{hms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
+        
+      # home_to_city_r5_out
+      home_to_city_r5_out_format:
+        friendly_name: Outtrim Av 
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.home_to_city_r5_out', 'origin_stop_departure_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.home_to_city_r5_out', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {{ route }} at {{hms[0]}}:{{hms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
+       
+      # tugg_to_city_r4
+      tugg_to_city_r4_format:
+        friendly_name: Tugg pt8
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.tugg_to_city_r4', 'origin_stop_departure_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.tugg_to_city_r4', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {{ route }} at {{hms[0]}}:{{hms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
+
+

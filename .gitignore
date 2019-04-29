@@ -27,7 +27,10 @@
 !appdaemon/apps/travel/
 !appdaemon/apps/pykevoplus/
 !packages/
+!packages/bed_warming/
+!packages/bus_times/
 !packages/date_time/
+!packages/house_modes/
 !packages/system_monitor/
 !www/
 !www/icons/

@@ -86,3 +86,12 @@ I also had an issue where the wifi card wasn't turned on my laptop:
 
 Hassio - http://xxx.xxx.xxx.xxx:8123
 Portainter - http://xxx.xxx.xxx.xxx:9000
+
+
+You then have to go into
+
+/usr/share/hassio/homeassistant 
+
+sudo chmod -R 777 /usr/share/hassio/homeassistant 
+
+(and again after known_devices.yaml has been created)

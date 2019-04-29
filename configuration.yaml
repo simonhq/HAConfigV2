@@ -32,9 +32,6 @@ config:
 # Checks for available updates
 updater:
 
-# Show the introduction message on startup.
-introduction:
-
 # Enables the frontend
 frontend:
   themes: !include themes.yaml
@@ -52,7 +49,8 @@ discovery:
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
 # database controls
 recorder:
@@ -142,5 +140,4 @@ sensor:
 
 
 group: !include groups.yaml
-automation: !include automations.yaml
 script: !include scripts.yaml
