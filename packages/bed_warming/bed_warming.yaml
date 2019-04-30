@@ -6,6 +6,73 @@
 
 #################################################################
 #                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  bedwarm_e:
+    name: Bed Warm Entities
+    view: no
+    entities:
+      - input_number.bed_s_flag
+      - input_number.bed_m_flag
+      - input_number.bed_st_flag
+      - input_number.bed_d_flag
+      - binary_sensor.sbed
+      - binary_sensor.mbed
+      - binary_sensor.stbed
+      - binary_sensor.dbed
+      - input_boolean.bed_s
+      - input_boolean.bed_m
+      - input_boolean.bed_st
+      - input_boolean.bed_d
+      - timer.bed_s_timer
+      - timer.bed_m_timer
+      - timer.bed_st_timer
+      - timer.bed_d_timer
+
+  bedwarm_s:
+    name: Bed Warm Scripts
+    view: no
+    entities:
+      - script.beds_on_prewarm
+      - script.bed_s_on
+      - script.bed_m_on
+      - script.bed_st_on
+      - script.bed_d_on
+      - script.beds_on_timer
+      - script.bed_s_on_t
+      - script.bed_m_on_t
+      - script.bed_st_on_t
+      - script.bed_d_on_t
+      - script.beds_off
+      - script.bed_s_off
+      - script.bed_m_off
+      - script.bed_st_off
+      - script.bed_d_off
+
+  bedwarm_a:
+    name: Bed Warm Automations
+    view: no
+    entities:
+      - automation.bed_auto_on_evening
+      - automation.bed_timer_s
+      - automation.bed_timer_m
+      - automation.bed_timer_st
+      - automation.bed_timer_d
+      - automation.bed_s_off
+      - automation.bed_m_off
+      - automation.bed_st_off
+      - automation.bed_d_off
+      - automation.bed_s_auto_off
+      - automation.bed_m_auto_off
+      - automation.bed_st_auto_off
+      - automation.bed_d_auto_off
+  
+
+#################################################################
+#                                                               #
 #                       Input Number                            #
 #                                                               #
 #################################################################
@@ -52,48 +119,15 @@ input_number:
     
 #################################################################
 #                                                               #
-#                            Sensors                            #
+#                  Binary Sensors                               #
 #                                                               #
 #################################################################
 
-sensor:
+binary_sensor:
 
 ####################################################
 #                                                  #
-#                Sensor - Darksky Sensor           #
-#                                                  #
-####################################################
-
-  - platform: darksky
-    api_key: !secret darksky_token
-    forecast:
-      - 0
-      - 1
-    monitored_conditions:
-      - summary
-      - precip_probability
-      - wind_speed
-      - cloud_cover
-      - icon
-      - temperature_low
-      - temperature_high
-      - daily_summary
-      - hourly_summary
-      - precip_intensity
-      - precip_accumulation
-      - precip_type
-      - temperature
-      - apparent_temperature
-      - wind_bearing
-      - humidity
-      - pressure
-      - uv_index 
-    scan_interval:
-      minutes: 5
-
-####################################################
-#                                                  #
-#                Sensor - Warm Beds                #
+#        Binary Sensor - Warm Beds                #
 #                                                  #
 ####################################################
 
@@ -299,6 +333,8 @@ script:
         entity_id: 
           - switch.simon_blanket
           - input_boolean.bed_s
+      - service: timer.cancel
+        entity_id: timer.bed_s_timer
 
   bed_m_off:
     sequence:
@@ -306,6 +342,9 @@ script:
         entity_id: 
           - switch.megan_blanket
           - input_boolean.bed_m
+      - service: timer.cancel
+        entity_id: timer.bed_m_timer
+
 
   bed_st_off:
     sequence:
@@ -313,6 +352,9 @@ script:
         entity_id: 
           - switch.staci_blanket
           - input_boolean.bed_st
+      - service: timer.cancel
+        entity_id: timer.bed_st_timer
+
 
   bed_d_off:
     sequence:
@@ -320,6 +362,9 @@ script:
         entity_id: 
           - switch.delia_blanket
           - input_boolean.bed_d
+      - service: timer.cancel
+        entity_id: timer.bed_d_timer
+
 
 #################################################################
 #                                                               #
@@ -387,6 +432,50 @@ automation:
     action:
       - service: script.turn_on
         entity_id: script.bed_d_on_t
+
+####################################################
+#                                                  #
+#                automation - turn off beds switch #
+# flagged off - turn off and timer
+#                                                  #
+####################################################
+
+  - alias: bed_s_off
+    trigger:
+      - platform: state
+        entity_id: input_boolean.bed_s
+        to: 'off'
+    action:
+      - service: script.turn_on
+        entity_id: script.bed_s_off
+
+  - alias: bed_m_off
+    trigger:
+      - platform: state
+        entity_id: input_boolean.bed_m
+        to: 'off'
+    action:
+      - service: script.turn_on
+        entity_id: script.bed_m_off
+
+  - alias: bed_st_off
+    trigger:
+      - platform: state
+        entity_id: input_boolean.bed_st
+        to: 'off'
+    action:
+      - service: script.turn_on
+        entity_id: script.bed_st_off
+
+  - alias: bed_d_off
+    trigger:
+      - platform: state
+        entity_id: input_boolean.bed_d
+        to: 'off'
+    action:
+      - service: script.turn_on
+        entity_id: script.bed_d_off
+
 
 ####################################################
 #                                                  #

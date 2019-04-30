@@ -6,6 +6,28 @@
 
 #################################################################
 #                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  bus_times_e:
+    name: Bus Time Entities
+    view: no
+    entities:
+      - sensor.home_to_tugg_79_ej
+      - sensor.home_to_tugg_79_is
+      - sensor.home_to_tugg_78_is
+      - sensor.home_to_city_r5_out
+      - sensor.tugg_to_city_r4
+      - sensor.home_to_tugg_79_ej_format
+      - sensor.home_to_tugg_79_is_format
+      - sensor.home_to_tugg_78_is_format
+      - sensor.home_to_city_r5_out_format
+      - sensor.tugg_to_city_r4_format
+      
+#################################################################
+#                                                               #
 #                       Sensors                                 #
 #                                                               #
 #################################################################

@@ -6,6 +6,30 @@
 
 #################################################################
 #                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  timedate_e:
+    name: Time & Date Entities
+    view: no
+    entities:
+      - binary_sensor.workday_sensor
+      - sensor.time
+      - sensor.date
+      - sensor.date_time
+      - sensor.time_date
+      - sensor.time_utc
+      - sensor.internet_time
+      - sensor.london_time
+      - sensor.lesley_time
+      - sensor.home_time
+      - sensor.america_eastern_time
+      - sensor.america_pacific_time
+
+#################################################################
+#                                                               #
 #                       Binary Sensors                          #
 #                                                               #
 #################################################################

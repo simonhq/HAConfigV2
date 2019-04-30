@@ -20,13 +20,17 @@ Standard Home Assistant Components
 
 * [Timers](https://www.home-assistant.io/components/timer/)
 
-Weather Tracking *move this to weather*
+Hardware
+
+* [TP-Link Switches](https://www.tp-link.com/au/) Switches
+
+House_Modes Package
+
+* The House modes used to determine current state of the house
+
+Weather Package
 
 * [Dark Sky Sensor](https://www.home-assistant.io/components/sensor.darksky/)
-
-Mode Tracking
-
-* The House modes used to determine current state
 
 <h4 align="left">Package Automations:</h4>
 

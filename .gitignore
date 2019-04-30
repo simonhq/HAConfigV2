@@ -30,8 +30,10 @@
 !packages/bed_warming/
 !packages/bus_times/
 !packages/date_time/
+!packages/devices/
 !packages/house_modes/
 !packages/system_monitor/
+!packages/weather/
 !www/
 !www/icons/
 !www/icons/dark_sky/

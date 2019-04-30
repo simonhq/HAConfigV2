@@ -30,11 +30,7 @@ dependant upon each other, I plan on moving to a package system to keep things t
 
 Here is a Todo list of packages:
 
-* Date/Time
-* GTFS (Bus)
-* Weather
 * Presence
-* Modes
 * Cooking
 * Motion Lights
 * Bed Warming

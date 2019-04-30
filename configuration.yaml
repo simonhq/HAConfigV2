@@ -36,6 +36,9 @@ updater:
 frontend:
   themes: !include themes.yaml
 
+lovelace:
+  mode: yaml
+
 # uncomment when using SSL
 # http:
 #   base_url: !secret HA_URL
@@ -105,8 +108,6 @@ custom_updater:
 #
 ###########################################################################
 
-# Track the sun
-sun:
 
 # track devices 
 device_tracker:
@@ -130,14 +131,6 @@ device_tracker:
   #- platform: trackr
   #  username: !secret trackr_username
   #  password: !secret trackr_password
-
-
-
-# Sensors
-sensor:
-  # Weather prediction
-  - platform: yr
-
 
 group: !include groups.yaml
 script: !include scripts.yaml

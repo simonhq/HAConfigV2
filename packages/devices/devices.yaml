@@ -1,0 +1,492 @@
+#################################################################
+#                                                               #
+#                     Packages/System Monitor                   #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  hub_e:
+    name: Hub Network Entities
+    view: no
+    entities:
+      - device_tracker.bond_hub
+      - device_tracker.harmonyhublan
+      - device_tracker.hue_hub
+      - device_tracker.kevo_bridge
+      - device_tracker.myq_hub
+      - device_tracker.smartthings_wifi
+
+  hub_s:
+    name: Hub System
+    view: no
+    entities:
+      - binary_sensor.hubs_system
+      - binary_sensor.bond
+      - binary_sensor.harmony
+      - binary_sensor.hue
+      - binary_sensor.kevo
+      - binary_sensor.myq
+      - binary_sensor.smart
+
+  network_e:
+    name: Network Entities
+    view: no
+    entities:
+      - device_tracker.orbi_kitchen
+      - device_tracker.orbi_lounge
+      - device_tracker.xubuntu_laptop
+      - device_tracker.epson_printer
+      
+  network_s:
+    name: Network System
+    view: no
+    entities:
+      - binary_sensor.net_system
+      - binary_sensor.wifi_kitchen
+      - binary_sensor.wifi_lounge
+      - binary_sensor.epson
+      - binary_sensor.hass_lt
+
+  media_e:
+    name: Media Entities
+    view: no
+    entities:
+      - device_tracker.kitchen_home_speaker
+      - device_tracker.ensuite_mini_speaker
+      - device_tracker.lounge_mini_speaker
+      - device_tracker.lounge_chromecast
+      - device_tracker.gaming_chromecast
+      - device_tracker.fetch_tv
+      - device_tracker.sony_ps4
+      
+  media_s:
+    name: Media System
+    view: no
+    entities:
+      - binary_sensor.media_system
+      - binary_sensor.sp_kitchen
+      - binary_sensor.sp_lounge
+      - binary_sensor.sp_ensuite
+      - binary_sensor.sp_ltv
+      - binary_sensor.sp_gtv
+      - binary_sensor.fetchtv
+      - binary_sensor.sonyps4
+
+  app_e:
+    name: Appliance Entities
+    view: no
+    entities:
+      - device_tracker.samsung_washer
+      - device_tracker.samsung_dryer
+      
+  app_s:
+    name: Appliance System
+    view: no
+    entities:
+      - binary_sensor.app_system
+      - binary_sensor.samwash
+      - binary_sensor.samdry
+  
+  sw_e:
+    name: Switch Entities
+    view: no
+    entities:
+      - device_tracker.printer_switch
+      - device_tracker.tv_switch
+      - device_tracker.chairs_switch
+      - device_tracker.iron_switch
+      
+  sw_s:
+    name: Switch System
+    view: no
+    entities:
+      - binary_sensor.sw_system
+      - binary_sensor.sw_study
+      - binary_sensor.sw_tv
+      - binary_sensor.sw_chairs
+      - binary_sensor.sw_iron
+
+
+  swbed_e:
+    name: Bed Switch Entities
+    view: no
+    entities:
+      - device_tracker.simon_blanket
+      - device_tracker.megan_blanket
+      - device_tracker.staci_blanket
+      - device_tracker.delia_blanket
+      
+  swbed_s:
+    name: Bed Switch System
+    view: no
+    entities:
+      - binary_sensor.swbed_system
+      - binary_sensor.sw_sb
+      - binary_sensor.sw_mb
+      - binary_sensor.sw_stb
+      - binary_sensor.sw_db
+
+  hometab_e:
+    name: HomeTab Entities
+    view: no
+    entities:
+      - device_tracker.hometab_study
+      - device_tracker.hometab_kitchen
+      - device_tracker.hometab_hall
+      - device_tracker.hometab_lounge
+      
+  hometab_s:
+    name: HomeTab System
+    view: no
+    entities:
+      - binary_sensor.ht_system
+      - binary_sensor.ht_study
+      - binary_sensor.ht_kitchen
+      - binary_sensor.ht_lounge
+      - binary_sensor.ht_hall
+
+  protect_e:
+    name: Protect Entities
+    view: no
+    entities:
+      - device_tracker.protect_back_hall
+      - device_tracker.protect_front_hall
+      
+  protect_s:
+    name: Protect System
+    view: no
+    entities:
+      - binary_sensor.nest_system
+      - binary_sensor.hallway_nest_protect_online
+      - binary_sensor.back_hall_nest_protect_online
+      
+  pdevices_e:
+    name: Personal Devices Entities
+    view: no
+    entities:
+      - device_tracker.simon_watch
+      - device_tracker.simon_tablet
+      - device_tracker.simon_desktop
+      - device_tracker.simon_surface
+      - device_tracker.meg_desktop
+      - device_tracker.meg_ipad
+      - device_tracker.meg_fitbit
+      - device_tracker.megan_work_surface
+      #- device_tracker. meg_surface
+      - device_tracker.staci_surface
+      - device_tracker.delia_surface
+      #- device_tracker. delia_chromebook
+      
+  
+#################################################################
+#                                                               #
+#                   Binary Sensors                              #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#                Binary Sensor - hubs              #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      hubs_system:
+        value_template: "{{ is_state('binary_sensor.bond', 'on') and is_state('binary_sensor.harmony', 'on') and is_state('binary_sensor.hue', 'on') and is_state('binary_sensor.kevo', 'on') and is_state('binary_sensor.myq', 'on') and is_state('binary_sensor.smart', 'on') }}"
+        friendly_name: 'Hubs'
+        device_class: connectivity
+        icon_template: mdi:battlenet
+      bond:
+        value_template: "{{ is_state('device_tracker.bond_hub', 'home') }}"
+        friendly_name: 'Fan Hub'
+        device_class: connectivity
+        icon_template: mdi:fan
+      harmony:
+        value_template: "{{ is_state('device_tracker.harmonyhublan', 'home') }}"
+        friendly_name: 'Remote Hub'
+        device_class: connectivity
+        icon_template: mdi:remote
+      hue:
+        value_template: "{{ is_state('device_tracker.hue_hub', 'home') }}"
+        friendly_name: 'Lights Hub'
+        device_class: connectivity
+        icon_template: mdi:ceiling-light
+      kevo:
+        value_template: "{{ is_state('device_tracker.kevo_bridge', 'home') }}"
+        friendly_name: 'Locks Hub'
+        device_class: connectivity
+        icon_template: mdi:home-lock
+      myq:
+        value_template: "{{ is_state('device_tracker.myq_hub', 'home') }}"
+        friendly_name: 'Garage Door Hub'
+        device_class: connectivity
+        icon_template: mdi:garage
+      smart:
+        value_template: "{{ is_state('device_tracker.smartthings_wifi', 'home') }}"
+        friendly_name: 'Smartthings Hub'
+        device_class: connectivity
+        icon_template: mdi:home-circle
+
+####################################################
+#                                                  #
+#                Binary Sensor - network           #
+#                                                  #
+####################################################
+
+
+  - platform: template
+    sensors:
+      net_system:
+        value_template: "{{ is_state('binary_sensor.wifi_lounge', 'on') and is_state('binary_sensor.wifi_kitchen', 'on') and is_state('binary_sensor.epson', 'on') and is_state('binary_sensor.hass_lt', 'on') }}"
+        friendly_name: 'Wifi'
+        device_class: connectivity
+        icon_template: mdi:orbit
+      wifi_lounge:
+        value_template: "{{ is_state('device_tracker.orbi_lounge', 'home') }}"
+        friendly_name: 'Wifi Lounge/Satelite'
+        device_class: connectivity
+        icon_template: mdi:orbit
+      wifi_kitchen:
+        value_template: "{{ is_state('device_tracker.orbi_kitchen', 'home') }}"
+        friendly_name: 'Wifi Kitchen/Router'
+        device_class: connectivity
+        icon_template: mdi:orbit
+      epson:
+        value_template: "{{ is_state('device_tracker.epson_printer', 'home') }}"
+        friendly_name: 'Printer'
+        device_class: connectivity
+        icon_template: mdi:printer
+      hass_lt:
+        value_template: "{{ is_state('device_tracker.xubuntu_laptop', 'home') }}"
+        friendly_name: 'Hassio Server'
+        device_class: connectivity
+        icon_template: mdi:home-assistant
+
+
+####################################################
+#                                                  #
+#                Binary Sensor - media             #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      media_system:
+        value_template: "{{ is_state('binary_sensor.sp_kitchen', 'on') and is_state('binary_sensor.sp_lounge', 'on') and is_state('binary_sensor.sp_bathroom', 'on') and is_state('binary_sensor.sp_ltv', 'on') and is_state('binary_sensor.sp_gtv', 'on') and is_state('binary_sensor.fetchtv', 'on') and is_state('binary_sensor.sonyps4', 'on') }}"
+        friendly_name: 'Speaker/Chromecasts'
+        device_class: connectivity
+        icon_template: mdi:speaker
+      sp_kitchen:
+        value_template: "{{ is_state('device_tracker.kitchen_home_speaker', 'home') }}"
+        friendly_name: 'Kitchen Home'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/googlehome.jpg
+        icon_template: mdi:google-home 
+      sp_lounge:
+        value_template: "{{ is_state('device_tracker.lounge_mini_speaker', 'home') }}"
+        friendly_name: 'Lounge Mini'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/googlemini.jpg 
+        icon_template: mdi:google-home
+      sp_ensuite:
+        value_template: "{{ is_state('device_tracker.ensuite_mini_speaker', 'home') }}"
+        friendly_name: 'Ensuite Mini'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/googlemini.jpg 
+        icon_template: mdi:google-home
+      sp_ltv:
+        value_template: "{{ is_state('device_tracker.lounge_chromecast', 'home') }}"
+        friendly_name: 'Lounge TV'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/googlecast.jpg 
+        icon_template: mdi:google-chrome
+      sp_gtv:
+        value_template: "{{ is_state('device_tracker.gaming_chromecast', 'home') }}"
+        friendly_name: 'Gaming TV'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/googlecast.jpg 
+        icon_template: mdi:google-chrome
+      fetchtv:
+        value_template: "{{ is_state('device_tracker.fetch_tv', 'home') }}"
+        friendly_name: 'Fetch TV'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/fetchtv.jpg
+        icon_template: mdi:television-box
+      sonyps4:
+        value_template: "{{ is_state('device_tracker.sony_ps4', 'home') }}"
+        friendly_name: 'PS4 Console'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/ps4.jpg 
+        icon_template: mdi:playstation
+
+####################################################
+#                                                  #
+#                Binary Sensor - Appliance         #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      app_system:
+        value_template: "{{ is_state('binary_sensor.samwash', 'on') and is_state('binary_sensor.samdry', 'on') }}"
+        friendly_name: 'Appliances'
+        device_class: connectivity
+        icon_template: mdi:dishwasher
+      samwash:
+        value_template: "{{ is_state('device_tracker.samsung_washer', 'home') }}"
+        friendly_name: 'Washing Machine'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/swasher.jpg 
+        icon_template: mdi:washing-machine
+      samdry:
+        value_template: "{{ is_state('device_tracker.samsung_dryer', 'home') }}"
+        friendly_name: 'Clothes Dryer'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/sdryer.jpg 
+        icon_template: mdi:tumble-dryer
+      # samwash_sw:
+      #   value_template: "{{ is_state('switch.washing_machine', 'on') }}"
+      #   friendly_name: 'Washing Machine'
+      #   device_class: connectivity
+      #   icon_template: mdi:washing-machine
+      # samdry_sw:
+      #   value_template: "{{ is_state('switch.tumble_dryer', 'on') }}"
+      #   friendly_name: 'Clothes Dryer'
+      #   device_class: connectivity
+      #   icon_template: mdi:tumble-dryer
+
+####################################################
+#                                                  #
+#                Binary Sensor - Switches          #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      sw_system:
+        value_template: "{{ is_state('binary_sensor.sw_study', 'on') and is_state('binary_sensor.sw_tv', 'on') and is_state('binary_sensor.sw_chairs', 'on') and is_state('binary_sensor.sw_iron', 'on') }}"
+        friendly_name: 'Switches'
+        device_class: connectivity
+        icon_template: mdi:dip-switch
+      sw_study:
+        value_template: "{{ is_state('device_tracker.printer_switch', 'home') }}"
+        friendly_name: 'Study'
+        device_class: connectivity
+        icon_template: mdi:toggle-switch
+      sw_tv:
+        value_template: "{{ is_state('device_tracker.tv_switch', 'home') }}"
+        friendly_name: 'Lounge TV'
+        device_class: connectivity
+        icon_template: mdi:toggle-switch
+      sw_chairs:
+        value_template: "{{ is_state('device_tracker.chairs_switch', 'home') }}"
+        friendly_name: 'Lounge Chairs'
+        device_class: connectivity
+        icon_template: mdi:toggle-switch
+      sw_iron:
+        value_template: "{{ is_state('device_tracker.iron_switch', 'home') }}"
+        friendly_name: 'Iron'
+        device_class: connectivity
+        icon_template: mdi:toggle-switch
+
+####################################################
+#                                                  #
+#                Binary Sensor - Bed Switches      #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      swbed_system:
+        value_template: "{{ is_state('binary_sensor.sw_sb', 'on') and is_state('binary_sensor.sw_mb', 'on') and is_state('binary_sensor.sw_stb', 'on') and is_state('binary_sensor.sw_db', 'on') }}"
+        friendly_name: 'Switches'
+        device_class: connectivity
+        icon_template: mdi:dip-switch
+      sw_sb:
+        value_template: "{{ is_state('device_tracker.simon_blanket', 'home') }}"
+        friendly_name: 'Simon Blanket'
+        device_class: connectivity
+        icon_template: mdi:hotel
+      sw_mb:
+        value_template: "{{ is_state('device_tracker.megan_blanket', 'home') }}"
+        friendly_name: 'Megan Blanket'
+        device_class: connectivity
+        icon_template: mdi:hotel
+      sw_stb:
+        value_template: "{{ is_state('device_tracker.staci_blanket', 'home') }}"
+        friendly_name: 'Staci Blanket'
+        device_class: connectivity
+        icon_template: mdi:hotel
+      sw_db:
+        value_template: "{{ is_state('device_tracker.delia_blanket', 'home') }}"
+        friendly_name: 'Delia Blanket'
+        device_class: connectivity
+        icon_template: mdi:hotel
+
+####################################################
+#                                                  #
+#                Binary Sensor - HomeTabs          #
+#                                                  #
+####################################################
+
+
+  - platform: template
+    sensors:
+      ht_study:
+        value_template: "{{ is_state('device_tracker.hometab_study', 'home') }}"
+        friendly_name: 'Study'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/nexus7.jpg 
+        icon_template: mdi:desktop-classic
+      ht_kitchen:
+        value_template: "{{ is_state('device_tracker.hometab_kitchen', 'home') }}"
+        friendly_name: 'Kitchen'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/nexus7.jpg 
+        icon_template: mdi:fridge-outline
+      ht_hall:
+        value_template: "{{ is_state('device_tracker.hometab_hall', 'home') }}"
+        friendly_name: 'Back Hall'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/nexus7.jpg 
+        icon_template: mdi:door-closed
+      ht_lounge:
+        value_template: "{{ is_state('device_tracker.hometab_lounge', 'home') }}"
+        friendly_name: 'Lounge'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/nexus7.jpg 
+        icon_template: mdi:sofa
+      ht_system:
+        value_template: "{{ is_state('binary_sensor.ht_lounge', 'on') and is_state('binary_sensor.ht_hall', 'on') and is_state('binary_sensor.ht_kitchen', 'on') and is_state('binary_sensor.ht_study', 'on') }}"
+        friendly_name: 'HomeTabs'
+        device_class: connectivity
+        #entity_picture_template: /local/pics/nexus7.jpg 
+        icon_template: mdi:tab
+
+####################################################
+#                                                  #
+#                Binary Sensor - Nest Protect      #
+#                                                  #
+####################################################
+
+# - platform: template
+#   sensors:
+#     nest_system:
+#       value_template: "{{ is_state('binary_sensor.hallway_nest_protect_online', 'on') and is_state('binary_sensor.back_hall_nest_protect_online', 'on') }}"
+#       friendly_name: 'Nest Protects'
+#       device_class: connectivity
+#       icon_template: mdi:smoke-detector
+      
+
+
+
+

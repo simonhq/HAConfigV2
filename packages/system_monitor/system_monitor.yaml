@@ -6,6 +6,26 @@
 
 #################################################################
 #                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  system_monitor_e:
+    name: System Monitor Entities
+    view: no
+    entities:
+      - sensor.disk_use_percent
+      - sensor.memory_use_percent
+      - sensor.processor_use
+      - sensor.last_boot
+      - input_number.disk_alert
+      - input_number.cpu_alert
+      - binary_sensor.disk_alert
+      - binary_sensor.cpu_alert
+      
+#################################################################
+#                                                               #
 #                       Sensors                                 #
 #                                                               #
 #################################################################
