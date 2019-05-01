@@ -1,0 +1,757 @@
+#################################################################
+#                                                               #
+#                     Packages/Motion                           #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  motion_e:
+    name: Motion Entities
+    view: no
+    entities:
+      - timer.bathroom_timer
+      - timer.ensuite_timer
+      - timer.laundry_timer
+      - timer.garage_timer
+      - timer.toilet_timer
+      - input_select.bshower
+      - input_select.eshower
+      - input_select.lon
+      - input_select.gon
+      - input_select.ton
+      - input_boolean.motion_in_bathroom
+      - input_boolean.motion_in_laundry
+      - input_boolean.motion_in_garage
+      - input_boolean.motion_in_ensuite
+      - input_boolean.motion_in_toilet
+      # hue motion sensors 
+      
+      - sensor.bathroom_sensor_light_level
+      - sensor.bathroom_sensor_temperature
+      - binary_sensor.bathroom_sensor_motion
+
+      - sensor.ensuite_sensor_light_level
+      - sensor.ensuite_sensor_temperature
+      - binary_sensor.ensuite_sensor_motion
+
+      - sensor.laundry_sensor_light_level
+      - sensor.laundry_sensor_temperature
+      - binary_sensor.laundry_sensor_motion
+
+      - sensor.garage_sensor_light_level
+      - sensor.garage_sensor_temperature
+      - binary_sensor.garage_sensor_motion
+
+      # smartthings motion sensors
+      - binary_sensor.toilet_motion_motion
+      #- sensor.
+      #- sensor.
+      #- sensor.
+      #- sensor.
+      #- sensor.
+
+
+  motion_a:
+    name: Motion Automations
+    view: no
+    entities:
+      - automation.motion_bathroom_motion
+      - automation.motion_bathroom_no_motion_timer_on
+      - automation.motion_bathroom_timer_done
+      - automation.motion_bathroom_on_motion
+      - automation.motion_bathroom_on_motion_night
+      - automation.motion_bathroom_off_light
+      - automation.motion_ensuite_motion
+      - automation.motion_ensuite_no_motion_timer_on
+      - automation.motion_ensuite_timer_done
+      - automation.motion_ensuite_on_motion
+      - automation.motion_ensuite_on_motion_night
+      - automation.motion_ensuite_off_light
+      - automation.motion_ensuite_on_motion_morning
+      - automation.motion_laundry_motion
+      - automation.motion_laundry_no_motion_timer_on
+      - automation.motion_laundry_timer_done
+      - automation.motion_laundry_on_motion
+      - automation.motion_laundry_on_motion_night
+      - automation.motion_laundry_off_light
+      - automation.motion_garage_motion
+      - automation.motion_garage_no_motion_timer_on
+      - automation.motion_garage_timer_done
+      - automation.motion_garage_on_motion
+      - automation.motion_garage_on_motion_night
+      - automation.motion_garage_off_light
+      - automation.motion_toilet_motion
+      - automation.motion_toilet_no_motion_timer_on
+      - automation.motion_toilet_timer_done
+      - automation.motion_toilet_on_motion
+      - automation.motion_toilet_on_motion_night
+      - automation.motion_toilet_off_light
+
+
+#################################################################
+#                                                               #
+#                       Timer                                   #
+#                                                               #
+#################################################################
+
+timer:
+
+####################################################
+#                                                  #
+#            Timer - Motion Light Timers           #
+#                                                  #
+#################################################### 
+
+  bathroom_timer:
+    duration: '00:05:00'
+
+  ensuite_timer:
+    duration: '00:05:00'
+
+  laundry_timer:
+    duration: '00:00:20'
+
+  garage_timer:
+    duration: '00:05:00'
+
+  toilet_timer:
+    duration: '00:05:00'
+
+#################################################################
+#                                                               #
+#                       Input Boolean                           #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#            Input Boolean - motion sensors        #
+#                                                  #
+#################################################### 
+
+  motion_in_bathroom:
+      name: Motion in the bathroom
+      initial: off
+      icon: mdi:run
+
+  motion_in_laundry:
+      name: Motion in the Laundry
+      initial: off
+      icon: mdi:run
+
+  motion_in_garage:
+      name: Motion in the Garage
+      initial: off
+      icon: mdi:run
+
+  motion_in_ensuite:
+      name: Motion in the Ensuite
+      initial: off
+      icon: mdi:run
+
+  motion_in_toilet:
+      name: Motion in the Toilet
+      initial: off
+      icon: mdi:run
+ 
+
+#################################################################
+#                                                               #
+#                       Input Select                            #
+#                                                               #
+#################################################################
+
+input_select:
+
+####################################################
+#                                                  #
+#                Input Select - motion light mode  #
+#                                                  #
+####################################################
+
+  bshower:
+    name: Bathroom Mode
+    options:
+      - Motion
+      - Bathroom On
+      - Bathroom Off
+    initial: Motion
+    icon: mdi:vanish
+
+  eshower:
+    name: Ensuite Mode
+    options:
+      - Motion
+      - Ensuite On
+      - Ensuite Off
+    initial: Motion
+    icon: mdi:vanish
+
+  lon:
+    name: Laundry Mode
+    options:
+      - Motion
+      - Laundry On
+      - Laundry Off
+    initial: Motion
+    icon: mdi:vanish
+
+  gon:
+    name: Garage Mode
+    options:
+      - Motion
+      - Garage On
+      - Garage Off
+    initial: Motion
+    icon: mdi:vanish
+
+  ton:
+    name: Toilet Mode
+    options:
+      - Motion
+      - Toilet On
+      - Toilet Off
+    initial: Motion
+    icon: mdi:vanish
+ 
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see appdaemon
+
+automation:
+
+#################
+# Bathroom
+#################
+# turn on flag when motion, reset timer
+  - alias: motion_bathroom_motion
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.bathroom_sensor_motion
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: input_select.bshower
+      state: 'Motion'
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.motion_in_bathroom
+      - service: timer.cancel
+        entity_id: timer.bathroom_timer
+# when no motion turn on timer
+  - alias: motion_bathroom_no_motion_timer_on
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.bathroom_sensor_motion
+      to: 'off'
+    action:
+      - service: timer.start
+        entity_id: timer.bathroom_timer
+# when timer finishes, turn off bool
+  - alias: motion_bathroom_timer_done
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.bathroom_timer
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.motion_in_bathroom      
+# bathroom day motion
+  - alias: motion_bathroom_on_motion
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_bathroom
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.bathroom_sensor_light_level
+          below: '60'
+        - condition: state
+          entity_id:  input_select.bshower
+          state: 'Motion'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Day'
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Morning'
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Evening'
+    action:
+      - service: light.turn_on
+        entity_id: light.bathroom_2
+        data:
+          brightness: 255
+# bathroom night motion
+  - alias: motion_bathroom_on_motion_night
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_bathroom
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_select.time_mode
+        state: 'Night'
+      - condition: state
+        entity_id: input_select.bshower
+        state: 'Motion'
+    action:
+      - service: light.turn_on
+        entity_id: light.bathroom_2
+        data:
+          brightness: 100
+# when flag goes off, turn off light
+  - alias: motion_bathroom_off_light
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_bathroom
+      to: 'off'
+    condition:
+      condition: state
+      entity_id: input_select.bshower
+      state: 'Motion'
+    action:
+      - service: light.turn_off
+        entity_id: light.bathroom_2
+
+#################
+# Ensuite
+#################
+# when motion turn on bool
+  - alias: motion_ensuite_motion
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.ensuite_sensor_motion
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: input_select.eshower
+      state: 'Motion'
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.motion_in_ensuite
+      - service: timer.cancel
+        entity_id: timer.ensuite_timer
+# when no motion turn on timer
+  - alias: motion_ensuite_no_motion_timer_on
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.ensuite_sensor_motion
+      to: 'off'
+    action:
+      - service: timer.start
+        entity_id: timer.ensuite_timer
+# when timer finishes, turn off bool
+  - alias: motion_ensuite_timer_done
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.ensuite_timer
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.motion_in_ensuite        
+# ensuite day motion
+  - alias: motion_ensuite_on_motion
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_ensuite
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.ensuite_sensor_light_level
+          below: '60'
+        - condition: state
+          entity_id: input_select.eshower
+          state: 'Motion'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Day'
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Morning'
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Evening'
+    action:
+      - service: light.turn_on
+        entity_id: 
+          - light.ensuite_3
+        data:
+          brightness: 255  
+# ensuite night motion
+  - alias: motion_ensuite_on_motion_night
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_ensuite
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_select.time_mode
+        state: 'Night'
+      - condition: state
+        entity_id: input_select.eshower
+        state: 'Motion'
+    action:
+      - service: light.turn_on
+        entity_id: 
+          - light.ensuite
+        data:
+          brightness: 100
+# when flag goes off, turn off light
+  - alias: motion_ensuite_off_light
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_ensuite
+      to: 'off'
+    condition:
+      condition: state
+      entity_id: input_select.eshower
+      state: 'Motion'
+    action:
+      - service: light.turn_off
+        entity_id: 
+          - light.ensuite_3
+###############################################
+# special morning for ensuite
+###############################################
+  - alias: motion_ensuite_on_motion_morning
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.ensuite_sensor_motion
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: input_select.eshower
+          state: 'Ensuite On'
+        - condition: state
+          entity_id: input_select.time_mode
+          state: 'Morning'
+    action:
+      - service: light.turn_on
+        entity_id: 
+          - light.ensuite_3
+        data:
+          brightness: 255  
+
+#################
+# Laundry
+#################
+
+# when motion turn on bool
+  - alias: motion_laundry_motion
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.laundry_sensor_motion
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: input_select.lon
+      state: 'Motion'
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.motion_in_laundry
+      - service: timer.cancel
+        entity_id: timer.laundry_timer
+# when no motion turn on timer
+  - alias: motion_laundry_no_motion_timer_on
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.laundry_sensor_motion
+      to: 'off'
+    action:
+      - service: timer.start
+        entity_id: timer.laundry_timer
+# when timer finishes, turn off bool
+  - alias: motion_laundry_timer_done
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.laundry_timer
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.motion_in_laundry        
+# laundry on
+  - alias: motion_laundry_on_motion
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_laundry
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.laundry_sensor_light_level
+          below: '60'
+        - condition: state
+          entity_id: input_select.lon
+          state: 'Motion'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Day'
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Morning'
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Evening'
+    action:
+      - service: light.turn_on
+        entity_id: light.laundry_2
+        data:
+          brightness: 255
+# laundry night motion
+  - alias: motion_laundry_on_motion_night
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_laundry
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_select.time_mode
+        state: 'Night'
+      - condition: state
+        entity_id: input_select.lon
+        state: 'Motion'
+    action:
+      - service: light.turn_on
+        entity_id: light.laundry_2
+        data:
+          brightness: 100
+# when flag goes off, turn off light
+  - alias: motion_laundry_off_light
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_laundry
+      to: 'off'
+    condition:
+      condition: state
+      entity_id: input_select.lon
+      state: 'Motion'
+    action:
+      - service: light.turn_off
+        entity_id: light.laundry_2
+
+#################
+# Garage
+#################
+
+# when motion turn on bool
+  - alias: motion_garage_motion
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.garage_sensor_motion
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: input_select.gon
+      state: 'Motion'
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.motion_in_garage
+      - service: timer.cancel
+        entity_id: timer.garage_timer
+# when no motion turn on timer
+  - alias: motion_garage_no_motion_timer_on
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.garage_sensor_motion
+      to: 'off'
+    action:
+      - service: timer.start
+        entity_id: timer.garage_timer
+# when timer finishes, turn off bool
+  - alias: motion_garage_timer_done
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.garage_timer
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.motion_in_garage       
+# bathroom day motion
+  - alias: motion_garage_on_motion
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_garage
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.garage_sensor_light_level
+          below: '60'
+        - condition: state
+          entity_id: input_select.gon
+          state: 'Motion'
+    action:
+      - service: light.turn_on
+        entity_id: light.garage_2
+        data:
+          brightness: 255
+# when flag goes off, turn off light
+  - alias: motion_garage_off_light
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_garage
+      to: 'off'
+    condition:
+      condition: state
+      entity_id: input_select.gon
+      state: 'Motion'
+    action:
+      - service: light.turn_off
+        entity_id: light.garage_2
+
+#################
+# toilet - uses a smartthings motion sensor - so binary_sensor
+# requieres
+# sensor.toilet_motion (motion sensor)
+# input_select.ton (motion, on, off)
+# input_boolean.motion_in_toilet
+# timer.toilet_timer 
+#################
+# turn on flag when motion, reset timer
+  - alias: motion_toilet_motion
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.toilet_motion_motion  
+      to: 'on'
+    condition:
+      condition: state
+      entity_id: input_select.ton
+      state: 'Motion'
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.motion_in_toilet
+      - service: timer.cancel
+        entity_id: timer.toilet_timer
+# when no motion turn on timer
+  - alias: motion_toilet_no_motion_timer_on
+    trigger: 
+      platform: state
+      entity_id: binary_sensor.toilet_motion_motion 
+      to: 'off'
+    action:
+      - service: timer.start
+        entity_id: timer.toilet_timer
+# when timer finishes, turn off bool
+  - alias: motion_toilet_timer_done
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.toilet_timer
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.motion_in_toilet
+# toilet day motion
+  - alias: motion_toilet_on_motion
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_toilet
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.bathroom_sensor_light_level
+          below: '60'
+        - condition: state
+          entity_id:  input_select.ton
+          state: 'Motion'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Day'
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Morning'
+            - condition: state
+              entity_id: input_select.time_mode
+              state: 'Evening'
+    action:
+      - service: light.turn_on
+        entity_id: light.toilet_2
+        data:
+          brightness: 255
+# toilet night motion
+  - alias: motion_toilet_on_motion_night
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_toilet
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_select.time_mode
+        state: 'Night'
+      - condition: state
+        entity_id: input_select.ton
+        state: 'Motion'
+    action:
+      - service: light.turn_on
+        entity_id: light.toilet_2
+        data:
+          brightness: 100
+# when flag goes off, turn off light
+  - alias: motion_toilet_off_light
+    trigger:
+      platform: state
+      entity_id: input_boolean.motion_in_toilet
+      to: 'off'
+    condition:
+      condition: state
+      entity_id: input_select.ton
+      state: 'Motion'
+    action:
+      - service: light.turn_off
+        entity_id: light.toilet_2
+  

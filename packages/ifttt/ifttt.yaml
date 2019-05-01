@@ -1,0 +1,60 @@
+#################################################################
+#                                                               #
+#                     Packages/IFTTT                            #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  #ifttt_e:
+  #  name: IFTTT Entities
+  #  view: no
+  #  entities:
+  #    - 
+
+  ifttt_a:
+    name: IFTTT Automations
+    view: no
+    entities:
+      - automation.ifttt_trigger
+      
+#################################################################
+#                                                               #
+#                Cover - MyQ Connection                         #
+#                                                               #
+#################################################################
+
+#for sending to ifttt - receiving uses the integration
+ifttt:
+  key: !secret ifttt_webhooks
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+automation:
+
+####################################################
+#                                                  #
+#            automation - receiving webhooks       #
+#                                                  #
+#################################################### 
+
+
+  - alias: ifttt trigger
+    trigger:
+      platform: event
+      event_type: ifttt_webhook_received
+      event_data:
+        action: call_service
+    action:
+      service_template: '{{ trigger.event.data.service }}'
+      data_template:
+        entity_id: '{{ trigger.event.data.entity_id }}'  

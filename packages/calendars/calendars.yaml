@@ -1,0 +1,102 @@
+#################################################################
+#                                                               #
+#                     Packages/Calendars                        #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  calendars_e:
+    name: Calendars Entities
+    view: no
+    entities:
+      - sensor.hass_calendar
+      - sensor.dandd_calendar
+      - sensor.cleaner_calendar
+      - sensor.bin_calendar
+      - sensor.recycling_calendar
+      - sensor.greenwaste_calendar
+      - sensor.skipbin_calendar
+      - sensor.morning_calendar
+      - sensor.tv_calendar
+      - sensor.cook_calendar
+      - sensor.guest_calendar
+      
+  # calendars_a:
+  #   name: Calendars Automations
+  #   view: no
+  #   entities:
+  #     - automation.
+  #     - automation.
+  #     - automation.
+  #     - automation.
+
+ 
+#################################################################
+#                                                               #
+#                       Sensor                                  #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#           sensor - calendars                     #
+#                                                  #
+####################################################      
+
+  - platform: template
+    sensors:
+      hass_calendar:
+        friendly_name: Hassio Calendar
+        value_template: '{{ states.calendar.hassiothompsonhqnet.attributes.message }} at {{ as_timestamp(states.calendar.hassiothompsonhqnet.attributes.start_time) | timestamp_custom("%a %d/%m %I:%M") }}'
+      dandd_calendar:
+        friendly_name: Next Playing Date
+        value_template: '{{ as_timestamp(states.calendar.dandd.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      cleaner_calendar:
+        friendly_name: Cleaner next comes on
+        value_template: '{{ as_timestamp(states.calendar.cleaner.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      bin_calendar:
+        friendly_name: Next Bin pickup
+        value_template: '{{ as_timestamp(states.calendar.bin.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      recycling_calendar:
+        friendly_name: Next Recycling pickup
+        value_template: '{{ as_timestamp(states.calendar.recycling.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      greenwaste_calendar:
+        friendly_name: Next Greenwaste pickup
+        value_template: '{{ as_timestamp(states.calendar.greenwaste.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      skipbin_calendar:
+        friendly_name: Next Skipbin pickup
+        value_template: '{{ as_timestamp(states.calendar.skipbin.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      morning_calendar:
+        friendly_name: Turn on Morning at
+        value_template: '{{ as_timestamp(states.calendar.morning.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      tv_calendar:
+        friendly_name: Turn on TV at
+        value_template: '{{ states.calendar.tv.attributes.message }} {{ as_timestamp(states.calendar.tv.attributes.start_time) | timestamp_custom("%a %d/%m %I:%M") }}'
+      cook_calendar:
+        friendly_name: Person cooking next
+        value_template: '{{ states.calendar.cook.attributes.message }}'
+      guest_calendar:
+        friendly_name: Guest staying from
+        value_template: '{{ states.calendar.guest.attributes.message }} {{ as_timestamp(states.calendar.guest.attributes.start_time) | timestamp_custom("%a %d/%m %I:%M") }}'
+
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see appdaemon
+
+automation:
+
+
+  

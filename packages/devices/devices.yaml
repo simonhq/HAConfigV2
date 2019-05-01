@@ -93,46 +93,7 @@ group:
       - binary_sensor.app_system
       - binary_sensor.samwash
       - binary_sensor.samdry
-  
-  sw_e:
-    name: Switch Entities
-    view: no
-    entities:
-      - device_tracker.printer_switch
-      - device_tracker.tv_switch
-      - device_tracker.chairs_switch
-      - device_tracker.iron_switch
-      
-  sw_s:
-    name: Switch System
-    view: no
-    entities:
-      - binary_sensor.sw_system
-      - binary_sensor.sw_study
-      - binary_sensor.sw_tv
-      - binary_sensor.sw_chairs
-      - binary_sensor.sw_iron
-
-
-  swbed_e:
-    name: Bed Switch Entities
-    view: no
-    entities:
-      - device_tracker.simon_blanket
-      - device_tracker.megan_blanket
-      - device_tracker.staci_blanket
-      - device_tracker.delia_blanket
-      
-  swbed_s:
-    name: Bed Switch System
-    view: no
-    entities:
-      - binary_sensor.swbed_system
-      - binary_sensor.sw_sb
-      - binary_sensor.sw_mb
-      - binary_sensor.sw_stb
-      - binary_sensor.sw_db
-
+         
   hometab_e:
     name: HomeTab Entities
     view: no
@@ -152,20 +113,7 @@ group:
       - binary_sensor.ht_lounge
       - binary_sensor.ht_hall
 
-  protect_e:
-    name: Protect Entities
-    view: no
-    entities:
-      - device_tracker.protect_back_hall
-      - device_tracker.protect_front_hall
-      
-  protect_s:
-    name: Protect System
-    view: no
-    entities:
-      - binary_sensor.nest_system
-      - binary_sensor.hallway_nest_protect_online
-      - binary_sensor.back_hall_nest_protect_online
+  
       
   pdevices_e:
     name: Personal Devices Entities
@@ -184,7 +132,35 @@ group:
       - device_tracker.delia_surface
       #- device_tracker. delia_chromebook
       
-  
+#################################################################
+#                                                               #
+#                  Device Trackers                              #
+#                                                               #
+#################################################################
+
+# track devices 
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 
+      - 192.168.1.0/24
+    interval_seconds: 15
+    consider_home: 120
+    exclude:
+     - !secret hass_wired
+    new_device_defaults:
+      track_new_devices: yes
+      hide_if_away: False
+  - platform: netgear
+    password: !secret netgear_pass
+    port: 80
+
+#other device tracking - to be turned on when ready
+  #- platform: gpslogger
+  #- platform: huesensor
+  #- platform: trackr
+  #  username: !secret trackr_username
+  #  password: !secret trackr_password
+
 #################################################################
 #                                                               #
 #                   Binary Sensors                              #
@@ -371,74 +347,6 @@ binary_sensor:
 
 ####################################################
 #                                                  #
-#                Binary Sensor - Switches          #
-#                                                  #
-####################################################
-
-  - platform: template
-    sensors:
-      sw_system:
-        value_template: "{{ is_state('binary_sensor.sw_study', 'on') and is_state('binary_sensor.sw_tv', 'on') and is_state('binary_sensor.sw_chairs', 'on') and is_state('binary_sensor.sw_iron', 'on') }}"
-        friendly_name: 'Switches'
-        device_class: connectivity
-        icon_template: mdi:dip-switch
-      sw_study:
-        value_template: "{{ is_state('device_tracker.printer_switch', 'home') }}"
-        friendly_name: 'Study'
-        device_class: connectivity
-        icon_template: mdi:toggle-switch
-      sw_tv:
-        value_template: "{{ is_state('device_tracker.tv_switch', 'home') }}"
-        friendly_name: 'Lounge TV'
-        device_class: connectivity
-        icon_template: mdi:toggle-switch
-      sw_chairs:
-        value_template: "{{ is_state('device_tracker.chairs_switch', 'home') }}"
-        friendly_name: 'Lounge Chairs'
-        device_class: connectivity
-        icon_template: mdi:toggle-switch
-      sw_iron:
-        value_template: "{{ is_state('device_tracker.iron_switch', 'home') }}"
-        friendly_name: 'Iron'
-        device_class: connectivity
-        icon_template: mdi:toggle-switch
-
-####################################################
-#                                                  #
-#                Binary Sensor - Bed Switches      #
-#                                                  #
-####################################################
-
-  - platform: template
-    sensors:
-      swbed_system:
-        value_template: "{{ is_state('binary_sensor.sw_sb', 'on') and is_state('binary_sensor.sw_mb', 'on') and is_state('binary_sensor.sw_stb', 'on') and is_state('binary_sensor.sw_db', 'on') }}"
-        friendly_name: 'Switches'
-        device_class: connectivity
-        icon_template: mdi:dip-switch
-      sw_sb:
-        value_template: "{{ is_state('device_tracker.simon_blanket', 'home') }}"
-        friendly_name: 'Simon Blanket'
-        device_class: connectivity
-        icon_template: mdi:hotel
-      sw_mb:
-        value_template: "{{ is_state('device_tracker.megan_blanket', 'home') }}"
-        friendly_name: 'Megan Blanket'
-        device_class: connectivity
-        icon_template: mdi:hotel
-      sw_stb:
-        value_template: "{{ is_state('device_tracker.staci_blanket', 'home') }}"
-        friendly_name: 'Staci Blanket'
-        device_class: connectivity
-        icon_template: mdi:hotel
-      sw_db:
-        value_template: "{{ is_state('device_tracker.delia_blanket', 'home') }}"
-        friendly_name: 'Delia Blanket'
-        device_class: connectivity
-        icon_template: mdi:hotel
-
-####################################################
-#                                                  #
 #                Binary Sensor - HomeTabs          #
 #                                                  #
 ####################################################
@@ -477,19 +385,7 @@ binary_sensor:
         #entity_picture_template: /local/pics/nexus7.jpg 
         icon_template: mdi:tab
 
-####################################################
-#                                                  #
-#                Binary Sensor - Nest Protect      #
-#                                                  #
-####################################################
 
-# - platform: template
-#   sensors:
-#     nest_system:
-#       value_template: "{{ is_state('binary_sensor.hallway_nest_protect_online', 'on') and is_state('binary_sensor.back_hall_nest_protect_online', 'on') }}"
-#       friendly_name: 'Nest Protects'
-#       device_class: connectivity
-#       icon_template: mdi:smoke-detector
       
 
 

@@ -1,0 +1,102 @@
+#################################################################
+#                                                               #
+#                     Packages/Smoke Detectors                  #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  smoke_detectors_e:
+    name: Smoke Detectors Entities
+    view: no
+    entities:
+      - binary_sensor.hallway_nest_protect_online
+      - binary_sensor.back_hall_nest_protect_online
+      - sensor.back_hall_nest_protect_battery_health
+      - sensor.hallway_nest_protect_battery_health
+      
+      - sensor.hallway_nest_protect_co_status
+      - sensor.hallway_nest_protect_color_status
+      - sensor.hallway_nest_protect_smoke_status
+      - sensor.back_hall_nest_protect_co_status
+      - sensor.back_hall_nest_protect_color_status
+      - sensor.back_hall_nest_protect_smoke_status
+
+  protect_e:
+    name: Protect Entities
+    view: no
+    entities:
+      - device_tracker.protect_back_hall
+      - device_tracker.protect_front_hall
+      
+  protect_s:
+    name: Protect System
+    view: no
+    entities:
+      - binary_sensor.nest_system
+      - binary_sensor.hallway_nest_protect_online
+      - binary_sensor.back_hall_nest_protect_online
+
+
+  # smoke_detectors_a:
+  #   name: Smoke Detectors Automations
+  #   view: no
+  #   entities:
+  #     - automation.
+  #     - automation.
+  #     - automation.
+  #     - automation.
+
+
+#################################################################
+#                                                               #
+#                       Nest                                    #
+#                                                               #
+#################################################################
+
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#                Binary Sensor - Nest Protect      #
+#                                                  #
+####################################################
+
+ - platform: template
+   sensors:
+     nest_system:
+       value_template: "{{ is_state('binary_sensor.hallway_nest_protect_online', 'on') and is_state('binary_sensor.back_hall_nest_protect_online', 'on') }}"
+       friendly_name: 'Nest Protects'
+       device_class: connectivity
+       icon_template: mdi:smoke-detector
+
+
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see appdaemon
+
+automation:
+
+
+  

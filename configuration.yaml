@@ -109,28 +109,7 @@ custom_updater:
 ###########################################################################
 
 
-# track devices 
-device_tracker:
-  - platform: nmap_tracker
-    hosts: 
-      - 192.168.1.0/24
-    interval_seconds: 15
-    consider_home: 120
-    exclude:
-     - !secret hass_wired
-    new_device_defaults:
-      track_new_devices: yes
-      hide_if_away: False
-  - platform: netgear
-    password: !secret netgear_pass
-    port: 80
 
-#other device tracking - to be turned on when ready
-  #- platform: gpslogger
-  #- platform: huesensor
-  #- platform: trackr
-  #  username: !secret trackr_username
-  #  password: !secret trackr_password
 
 group: !include groups.yaml
 script: !include scripts.yaml

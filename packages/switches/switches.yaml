@@ -1,0 +1,270 @@
+#################################################################
+#                                                               #
+#                     Packages/Switches                         #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  sw_e:
+    name: Switch Entities
+    view: no
+    entities:
+      - device_tracker.printer_switch
+      - device_tracker.tv_switch
+      - device_tracker.chairs_switch
+      - device_tracker.iron_switch
+  
+  swbed_e:
+    name: Bed Switch Entities
+    view: no
+    entities:
+      - device_tracker.simon_blanket
+      - device_tracker.megan_blanket
+      - device_tracker.staci_blanket
+      - device_tracker.delia_blanket
+
+  sw_s:
+    name: Switch System
+    view: no
+    entities:
+      - binary_sensor.sw_system
+      - binary_sensor.sw_study
+      - binary_sensor.sw_tv
+      - binary_sensor.sw_chairs
+      - binary_sensor.sw_iron
+
+  swbed_s:
+    name: Bed Switch System
+    view: no
+    entities:
+      - binary_sensor.swbed_system
+      - binary_sensor.sw_sb
+      - binary_sensor.sw_mb
+      - binary_sensor.sw_stb
+      - binary_sensor.sw_db
+
+  switch_e:
+    name: Switch Statistics
+    view: no
+    entities:
+      - sensor.dri_current_w
+      - sensor.dri_current_a
+      - sensor.dri_today_kwh
+      - sensor.dri_total_kwh
+      - sensor.dri_voltage
+      - sensor.ltv_current_w
+      - sensor.ltv_current_a
+      - sensor.ltv_today_kwh
+      - sensor.ltv_total_kwh
+      - sensor.ltv_voltage
+      - sensor.sps_current_w
+      - sensor.sps_current_a
+      - sensor.sps_today_kwh
+      - sensor.sps_total_kwh
+      - sensor.sps_voltage
+      - sensor.lch_current_w
+      - sensor.lch_current_a
+      - sensor.lch_today_kwh
+      - sensor.lch_total_kwh
+      - sensor.lch_voltage
+     
+  # calendars_a:
+  #   name: Calendars Automations
+  #   view: no
+  #   entities:
+  #     - automation.
+  #     - automation.
+  #     - automation.
+  #     - automation.
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#                Binary Sensor - Switches          #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      sw_system:
+        value_template: "{{ is_state('binary_sensor.sw_study', 'on') and is_state('binary_sensor.sw_tv', 'on') and is_state('binary_sensor.sw_chairs', 'on') and is_state('binary_sensor.sw_iron', 'on') }}"
+        friendly_name: 'Switches'
+        device_class: connectivity
+        icon_template: mdi:dip-switch
+      sw_study:
+        value_template: "{{ is_state('device_tracker.printer_switch', 'home') }}"
+        friendly_name: 'Study'
+        device_class: connectivity
+        icon_template: mdi:toggle-switch
+      sw_tv:
+        value_template: "{{ is_state('device_tracker.tv_switch', 'home') }}"
+        friendly_name: 'Lounge TV'
+        device_class: connectivity
+        icon_template: mdi:toggle-switch
+      sw_chairs:
+        value_template: "{{ is_state('device_tracker.chairs_switch', 'home') }}"
+        friendly_name: 'Lounge Chairs'
+        device_class: connectivity
+        icon_template: mdi:toggle-switch
+      sw_iron:
+        value_template: "{{ is_state('device_tracker.iron_switch', 'home') }}"
+        friendly_name: 'Iron'
+        device_class: connectivity
+        icon_template: mdi:toggle-switch
+
+####################################################
+#                                                  #
+#                Binary Sensor - Bed Switches      #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      swbed_system:
+        value_template: "{{ is_state('binary_sensor.sw_sb', 'on') and is_state('binary_sensor.sw_mb', 'on') and is_state('binary_sensor.sw_stb', 'on') and is_state('binary_sensor.sw_db', 'on') }}"
+        friendly_name: 'Switches'
+        device_class: connectivity
+        icon_template: mdi:dip-switch
+      sw_sb:
+        value_template: "{{ is_state('device_tracker.simon_blanket', 'home') }}"
+        friendly_name: 'Simon Blanket'
+        device_class: connectivity
+        icon_template: mdi:hotel
+      sw_mb:
+        value_template: "{{ is_state('device_tracker.megan_blanket', 'home') }}"
+        friendly_name: 'Megan Blanket'
+        device_class: connectivity
+        icon_template: mdi:hotel
+      sw_stb:
+        value_template: "{{ is_state('device_tracker.staci_blanket', 'home') }}"
+        friendly_name: 'Staci Blanket'
+        device_class: connectivity
+        icon_template: mdi:hotel
+      sw_db:
+        value_template: "{{ is_state('device_tracker.delia_blanket', 'home') }}"
+        friendly_name: 'Delia Blanket'
+        device_class: connectivity
+        icon_template: mdi:hotel        
+
+#################################################################
+#                                                               #
+#                       Sensor                                  #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#           sensor - phone batteries               #
+#                                                  #
+####################################################      
+
+  - platform: template
+    sensors:
+      dri_current_w:
+        friendly_name: Iron Switch Current Watts
+        value_template: '{{ states.switch.dining_room_iron.attributes.current_power_w }}'
+        unit_of_measurement: 'W'
+      dri_current_a:
+        friendly_name: Iron Switch Current Amps
+        value_template: '{{ states.switch.dining_room_iron.attributes.current_a }}'
+        unit_of_measurement: 'A'
+      dri_today_kwh:
+        friendly_name: Iron Switch Today Energy Kwh
+        value_template: '{{ states.switch.dining_room_iron.attributes.today_energy_kwh }}'
+        unit_of_measurement: 'kW'
+      dri_total_kwh:
+        friendly_name: Iron Switch Total Energy Kwh
+        value_template: '{{ states.switch.dining_room_iron.attributes.total_energy_kwh }}'
+        unit_of_measurement: 'kW'
+      dri_voltage:
+        friendly_name: Iron Switch Voltage
+        value_template: '{{ states.switch.dining_room_iron.attributes.voltage }}'
+        unit_of_measurement: 'V'
+      ltv_current_w:
+        friendly_name: Lounge TV Switch Current Watts
+        value_template: '{{ states.switch.lounge_tv.attributes.current_power_w }}'
+        unit_of_measurement: 'W'
+      ltv_current_a:
+        friendly_name: Lounge TV Switch Current Amps
+        value_template: '{{ states.switch.lounge_tv.attributes.current_a }}'
+        unit_of_measurement: 'A'
+      ltv_today_kwh:
+        friendly_name: Lounge TV Switch Today Energy Kwh
+        value_template: '{{ states.switch.lounge_tv.attributes.today_energy_kwh }}'
+        unit_of_measurement: 'kW'
+      ltv_total_kwh:
+        friendly_name: Lounge TV Switch Total Energy Kwh
+        value_template: '{{ states.switch.lounge_tv.attributes.total_energy_kwh }}'
+        unit_of_measurement: 'kW'
+      ltv_voltage:
+        friendly_name: Lounge TV Switch Voltage
+        value_template: '{{ states.switch.lounge_tv.attributes.voltage }}'
+        unit_of_measurement: 'V'
+      sps_current_w:
+        friendly_name: Study Printer Switch Current Watts
+        value_template: '{{ states.switch.study_printer.attributes.current_power_w }}'
+        unit_of_measurement: 'W'
+      sps_current_a:
+        friendly_name: Study Printer Switch Current Amps
+        value_template: '{{ states.switch.study_printer.attributes.current_a }}'
+        unit_of_measurement: 'A'
+      sps_today_kwh:
+        friendly_name: Study Printer Switch Today Energy Kwh
+        value_template: '{{ states.switch.study_printer.attributes.today_energy_kwh }}'
+        unit_of_measurement: 'kW'
+      sps_total_kwh:
+        friendly_name: Study Printer Switch Total Energy Kwh
+        value_template: '{{ states.switch.study_printer.attributes.total_energy_kwh }}'
+        unit_of_measurement: 'kW'
+      sps_voltage:
+        friendly_name: Study Printer Switch Voltage
+        value_template: '{{ states.switch.study_printer.attributes.voltage }}'
+        unit_of_measurement: 'V'
+      lch_current_w:
+        friendly_name: Lounge Chairs Current Watts
+        value_template: '{{ states.switch.lounge_chairs.attributes.current_power_w }}'
+        unit_of_measurement: 'W'
+      lch_current_a:
+        friendly_name: Lounge Chairs Switch Current Amps
+        value_template: '{{ states.switch.lounge_chairs.attributes.current_a }}'
+        unit_of_measurement: 'A'
+      lch_today_kwh:
+        friendly_name: Lounge Chairs Switch Today Energy Kwh
+        value_template: '{{ states.switch.lounge_chairs.attributes.today_energy_kwh }}'
+        unit_of_measurement: 'kW'
+      lch_total_kwh:
+        friendly_name: Lounge Chairs Switch Total Energy Kwh
+        value_template: '{{ states.switch.lounge_chairs.attributes.total_energy_kwh }}'
+        unit_of_measurement: 'kW'
+      lch_voltage:
+        friendly_name: Lounge Chairs Switch Voltage
+        value_template: '{{ states.switch.lounge_chairs.attributes.voltage }}'
+        unit_of_measurement: 'V'
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see appdaemon
+
+automation:
+
+
+  

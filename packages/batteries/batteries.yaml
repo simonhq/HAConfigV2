@@ -19,7 +19,7 @@ group:
       - binary_sensor.megan_batt_low
       - binary_sensor.staci_batt_low
       - binary_sensor.delia_batt_low
-      - input_number.batt_notify_system
+      - input_number.batt_alert
       - input_boolean.batt_notify_system
       - sensor.sphone_battery
       - sensor.mphone_battery
@@ -31,6 +31,10 @@ group:
       - sensor.ensuite_motion_batt
       - sensor.garage_motion_batt
       - sensor.laundry_motion_batt
+      - sensor.bathroom_motion_sensor_battery_level
+      - sensor.ensuite_motion_sensor_battery_level
+      - sensor.laundry_motion_sensor_battery_level
+      - sensor.garage_motion_sensor_battery_level
       #- sensor.
       #- sensor.
       #- sensor.
@@ -157,6 +161,41 @@ sensor:
         friendly_name: Delia Phone Battery
         value_template: '{{ states.device_tracker.dphone.attributes.battery }}'
         unit_of_measurement: '%'
+
+####################################################
+#                                                  #
+#           sensor - hue motion sensors            #
+#                                                  #
+####################################################      
+
+  - platform: rest
+    resource: !secret hue_bth_temp
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Bathroom Motion Sensor Battery Level'
+
+  - platform: rest
+    resource: !secret hue_ens_temp
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Ensuite Motion Sensor Battery Level'
+
+  - platform: rest
+    resource: !secret hue_lnd_temp
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Laundry Motion Sensor Battery Level'
+
+  - platform: rest
+    resource: !secret hue_gar_temp
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Garage Motion Sensor Battery Level'
+
 
 ####################################################
 #                                                  #

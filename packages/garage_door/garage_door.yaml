@@ -1,0 +1,53 @@
+#################################################################
+#                                                               #
+#                     Packages/Garage Door                      #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  garage_door_e:
+    name: Garage Door Entities
+    view: no
+    entities:
+      - cover.near_garage_door
+
+  # garage_door_a:
+  #   name: Garage Door Automations
+  #   view: no
+  #   entities:
+  #     - automation.
+  #     - automation.
+  #     - automation.
+  #     - automation.
+
+#################################################################
+#                                                               #
+#                Cover - MyQ Connection                         #
+#                                                               #
+#################################################################
+
+cover:
+  - platform: myq
+    username: !secret myq_username
+    password: !secret myq_password
+    type: chamberlain
+
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see appdaemon
+
+automation:
+
+
+  

@@ -19,6 +19,7 @@ group:
       - sensor.season
       - weather.dark_sky
       - camera.bom_canberra_radar
+      - sensor.inside_now
 
   weather_bom_e:
     name: Weather BOM Entities
@@ -111,6 +112,18 @@ weather:
 #################################################################
 
 sensor:
+
+####################################################
+#                                                  #
+#                Season                            #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      inside_now:
+        friendly_name: Temp Inside
+        value_template: '{{ states.sensor.bathroom_sensor_temperature.temperature }}'
 
 ####################################################
 #                                                  #

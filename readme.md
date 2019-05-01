@@ -30,13 +30,50 @@ dependant upon each other, I plan on moving to a package system to keep things t
 
 Here is a Todo list of packages:
 
-* Presence
-* Cooking
-* Motion Lights
-* Bed Warming
-* Hubs
-* Travel
+* Fans
+* Bus Travel
+* Harmony Remote
+* GPS?
+* Hue Remotes
+* External IP/Duckdns
 * Interface
+* Integrations
+* Appdaemon Automations 
+
+## Packages Done (1st draft)
+
+* Batteries
+* Bed Warming
+* Bus Times
+* Calendars
+* Car Times
+* Cooking
+* Date/Time
+* Devices
+* Garage Door
+* House Modes (Time)
+* IFTTT
+* Mode Actions (Time & Presence)
+* Motion Sensors/Lights
+* Notifiers
+* Pi-Hole
+* Presence
+* Printer
+* Switches
+* System Monitor
+* Travel Control
+* Weather
+
+## Integrations
+
+* Hue Lights
+* Smartthings
+* TP-Link Switches
+* Nest
+* IFTTT
+* GPS Logger
+* Google Cast
+* Google Hangouts
 
 ## Installation
 
