@@ -37,6 +37,7 @@
 !packages/devices/
 !packages/garage_door/
 !packages/house_modes/
+!packages/hue_remotes/
 !packages/ifttt/
 !packages/motion/
 !packages/notifiers/

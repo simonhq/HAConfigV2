@@ -123,7 +123,7 @@ sensor:
     sensors:
       inside_now:
         friendly_name: Temp Inside
-        value_template: '{{ states.sensor.bathroom_sensor_temperature.temperature }}'
+        value_template: "{{ states('sensor.bathroom_sensor_temperature') }}"
 
 ####################################################
 #                                                  #

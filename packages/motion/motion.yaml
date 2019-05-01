@@ -84,7 +84,6 @@ group:
       - automation.motion_garage_no_motion_timer_on
       - automation.motion_garage_timer_done
       - automation.motion_garage_on_motion
-      - automation.motion_garage_on_motion_night
       - automation.motion_garage_off_light
       - automation.motion_toilet_motion
       - automation.motion_toilet_no_motion_timer_on

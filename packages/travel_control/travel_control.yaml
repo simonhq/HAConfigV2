@@ -52,7 +52,7 @@ group:
     view: no
     entities:
       - automation.transport_megan_enter_northquarter
-      #- automation.
+      - automation.mode_set_returning
       #- automation.
       #- automation.
 

@@ -27,6 +27,9 @@ group:
       - sensor.back_hall_nest_protect_color_status
       - sensor.back_hall_nest_protect_smoke_status
 
+      - binary_sensor.rushbrook_overlook_away
+      - sensor.rushbrook_overlook_eta
+
   protect_e:
     name: Protect Entities
     view: no

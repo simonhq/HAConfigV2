@@ -27,10 +27,6 @@ group:
       - sensor.dphone_battery
       - sensor.bed_remote_batt
       - sensor.live_remote_batt
-      - sensor.bath_motion_batt
-      - sensor.ensuite_motion_batt
-      - sensor.garage_motion_batt
-      - sensor.laundry_motion_batt
       - sensor.bathroom_motion_sensor_battery_level
       - sensor.ensuite_motion_sensor_battery_level
       - sensor.laundry_motion_sensor_battery_level
@@ -212,22 +208,6 @@ sensor:
       live_remote_batt:
         friendly_name: Living Remote Battery
         value_template: '{{ states.sensor.remote.attributes.battery }}'
-        unit_of_measurement: '%'
-      bath_motion_batt:
-        friendly_name: Bathroom Motion Battery
-        value_template: '{{ states.binary_sensor.bathroom_motion_sensor.attributes.battery }}'
-        unit_of_measurement: '%'
-      ensuite_motion_batt:
-        friendly_name: Ensuite Motion Battery
-        value_template: '{{ states.binary_sensor.ensuite_motion_sensor.attributes.battery }}'
-        unit_of_measurement: '%'
-      garage_motion_batt:
-        friendly_name: Garage Motion Battery
-        value_template: '{{ states.binary_sensor.garage_motion_sensor.attributes.battery }}'
-        unit_of_measurement: '%'
-      laundry_motion_batt:
-        friendly_name: Laundry Motion Battery
-        value_template: '{{ states.binary_sensor.laundry_motion_sensor.attributes.battery }}'
         unit_of_measurement: '%'
 
 
