@@ -1,0 +1,369 @@
+#################################################################
+#                                                               #
+#                     Packages/Travel Control                   #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  travel_control_e:
+    name: Travel Control Entities
+    view: no
+    entities:
+      - binary_sensor.simon_meg_car
+      - binary_sensor.simon_staci_car
+      - binary_sensor.simon_delia_car
+      - binary_sensor.megan_staci_car
+      - binary_sensor.megan_delia_car
+      - binary_sensor.simon_car
+      - binary_sensor.simon_walkbus
+      - binary_sensor.megan_car
+      - binary_sensor.megan_walkbus
+      - binary_sensor.staci_car
+      - binary_sensor.staci_walkbus
+      - binary_sensor.delia_car
+      - binary_sensor.delia_walkbus
+      - input_select.trav_staci
+      - input_select.trans_staci
+      - input_select.trav_simon
+      - input_select.trans_simon
+      - input_select.trav_megan
+      - input_select.trans_megan
+      - input_select.trav_delia
+      - input_select.trans_delia
+      - input_boolean.car_meg_city
+      - proximity.home_meg
+      - proximity.home_simon
+      - proximity.home_delia
+      - proximity.home_staci
+      - sensor.m_travel_direction
+      - sensor.s_travel_direction
+      - sensor.st_travel_direction
+      - sensor.d_travel_direction
+      
+  travel_control_a:
+    name: Travel Control Automations
+    view: no
+    entities:
+      - automation.transport_megan_enter_northquarter
+      #- automation.
+      #- automation.
+      #- automation.
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+
+####################################################
+#                                                  #
+#            Binary Sensors - Car Modes            #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      simon_meg_car:
+        friendly_name: Simon/Meg Car
+        value_template: "{{ (not is_state('group.simon', 'home') and not is_state('group.megan', 'home')) and (is_state('binary_sensor.drive_meg','on') or is_state('binary_sensor.drive_simon','on')) and states('sensor.waze_meg_to_simon')|float < 5 }}"
+        icon_template: mdi:car-connected
+      simon_staci_car:
+        friendly_name: Simon/Staci Car
+        value_template: "{{ (not is_state('group.simon', 'home') and not is_state('group.staci', 'home')) and is_state('binary_sensor.drive_simon','on') and states('sensor.waze_simon_to_staci')|float < 5 }}"
+        icon_template: mdi:car-connected
+      simon_delia_car:
+        friendly_name: Simon/Delia Car
+        value_template: "{{ (not is_state('group.simon', 'home') and not is_state('group.delia', 'home')) and is_state('binary_sensor.drive_simon','on') and states('sensor.waze_simon_to_delia')|float < 5 }}"
+        icon_template: mdi:car-connected
+      megan_staci_car:
+        friendly_name: Megan/Staci Car
+        value_template: "{{ (not is_state('group.megan', 'home') and not is_state('group.staci', 'home')) and is_state('binary_sensor.drive_meg','on') and states('sensor.waze_meg_to_staci')|float < 5 }}"
+        icon_template: mdi:car-connected
+      megan_delia_car:
+        friendly_name: Megan/Delia Car
+        value_template: "{{ (not is_state('group.megan', 'home') and not is_state('group.delia', 'home')) and is_state('binary_sensor.drive_meg','on') and states('sensor.waze_meg_to_delia')|float < 5 }}"
+        icon_template: mdi:car-connected
+
+      simon_car:
+        friendly_name: Simon Car
+        value_template: "{{ is_state('binary_sensor.drive_simon', 'on') or (not is_state('group.simon', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
+        icon_template: mdi:car-wash
+      simon_walkbus:
+        friendly_name: Simon Walk/Bus
+        value_template: "{{ not is_state('group.simon', 'home') and is_state('binary_sensor.simon_car', 'off') }}"
+        icon_template: mdi:walk
+      megan_car:
+        friendly_name: Meg Car
+        value_template: "{{ is_state('binary_sensor.drive_meg', 'on') or (not is_state('group.megan', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
+        icon_template: mdi:car-wash
+      megan_walkbus:
+        friendly_name: Meg Walk/Bus
+        value_template: "{{ not is_state('group.megan', 'home') and is_state('binary_sensor.megan_car', 'off') }}"
+        icon_template: mdi:walk
+      staci_car:
+        friendly_name: Staci Car
+        value_template: "{{ (not is_state('group.staci', 'home') and is_state('binary_sensor.simon_staci_car','on')) or (not is_state('group.staci', 'home') and is_state('binary_sensor.megan_staci_car','on')) }}"
+        icon_template: mdi:car-wash
+      staci_walkbus:
+        friendly_name: Staci Walk/Bus
+        value_template: "{{ not is_state('group.staci', 'home') and is_state('binary_sensor.staci_car', 'off') }}"
+        icon_template: mdi:walk
+      delia_car:
+        friendly_name: Delia Car
+        value_template: "{{ (not is_state('group.delia', 'home') and is_state('binary_sensor.simon_delia_car','on')) or (not is_state('group.delia', 'home') and is_state('binary_sensor.megan_delia_car','on')) }}"
+        icon_template: mdi:car-wash
+      delia_walkbus:
+        friendly_name: Delia Walk/Bus
+        value_template: "{{ not is_state('group.delia', 'home') and is_state('binary_sensor.delia_car', 'off') }}"
+        icon_template: mdi:walk
+
+
+#################################################################
+#                                                               #
+#                       Input Boolean                           #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#            Input boolean - Meg walking to car    #
+#                                                  #
+#################################################### 
+
+  car_meg_city:
+    name: Meg might be on heading to the car
+    initial: off
+
+#################################################################
+#                                                               #
+#                       Input Select                            #
+#                                                               #
+#################################################################
+
+input_select:
+
+####################################################
+#                                                  #
+#            Input Select - travel guess           #
+#                                                  #
+#################################################### 
+
+# travel type
+  trav_staci:
+    name: Staci Travel Type
+    options:
+      - Home
+      - Walk
+      - Car
+    icon: mdi:train-car
+
+# transport option
+  trans_staci:
+    name: Staci Transport Type
+    options:
+      - 'Nil'
+      - '3'
+      - '66'
+      - '67'
+      - '300C'
+      - '300W'
+      - '300H'
+    initial: 'Nil'
+    icon: mdi:car-connected
+
+# travel type
+  trav_delia:
+    name: Delia Travel Type
+    options:
+      - Home
+      - Walk
+      - Car
+    icon: mdi:train-car
+
+# transport option
+  trans_delia:
+    name: Delia Transport
+    options:
+      - 'Nil'
+      - 'Bus'
+    initial: 'Nil'
+    icon: mdi:car-connected
+
+# travel type
+  trav_megan:
+    name: Megan Travel Type
+    options:
+      - Home
+      - Walk
+      - Car
+    icon: mdi:train-car
+
+# transport option
+  trans_megan:
+    name: Megan Transport
+    options:
+      - 'Nil'
+      - 'Bus'
+      - '300W'  
+      - '300C'
+      - 'Car'
+    initial: 'Nil'
+    icon: mdi:car-connected
+
+# travel type
+  trav_simon:
+    name: Simon Travel Type
+    options:
+      - Home
+      - Walk
+      - Car
+    icon: mdi:train-car
+
+# transport option
+  trans_simon:
+    name: Simon Transport Type
+    options:
+      - 'Nil'
+      - '171'
+      - '300'
+      - '300W'
+      - 'Bus'
+    initial: 'Nil'
+    icon: mdi:car-connected
+
+#################################################################
+#                                                               #
+#                       Proximity                               #
+#                                                               #
+#################################################################
+
+proximity:
+
+####################################################
+#                                                  #
+#           proximity - distance to home           #
+#                                                  #
+#################################################### 
+
+  home_meg: 
+    zone: Home
+    ignored_zones:
+      - DJSB_Mort
+      - SouthPort
+    devices:
+      - device_tracker.mphone
+    tolerance: 50  
+
+  home_simon: 
+    zone: Home
+    ignored_zones:
+      - ANU
+      - SouthPort
+    devices:
+      - device_tracker.sphone
+    tolerance: 50  
+
+  home_delia: 
+    zone: Home
+    ignored_zones:
+      - Tugg_college
+      - SouthPort
+    devices:
+      - device_tracker.dphone
+    tolerance: 50  
+
+  home_staci: 
+    zone: Home
+    ignored_zones:
+      - Bruce_CIT
+      - SouthPort
+    devices:
+      - device_tracker.stphone
+    tolerance: 50  
+
+#################################################################
+#                                                               #
+#                       Sensor                                  #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#           sensor - proximity travel direction    #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      m_travel_direction:
+        value_template: '{{ states.proximity.home_meg.attributes.dir_of_travel }}'
+      s_travel_direction:
+        value_template: '{{ states.proximity.home_simon.attributes.dir_of_travel }}'
+      st_travel_direction:
+        value_template: '{{ states.proximity.home_staci.attributes.dir_of_travel }}'
+      d_travel_direction:
+        value_template: '{{ states.proximity.home_delia.attributes.dir_of_travel }}'
+
+#################################################################
+#                                                               #
+#                       Zone                                    #
+#                                                               #
+#################################################################
+
+zone: 
+
+####################################################
+#                                                  #
+#           zone - car connect                     #
+#                                                  #
+#    where Meg parks for work                      #
+#                                                  #
+####################################################   
+
+  - name: NorthQuarter
+    latitude: -35.278375 
+    longitude: 149.133718
+    radius: 150
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see automation/house_mode.yaml
+
+automation:
+ 
+####################################################
+#                                                  #
+#           automation -                           #
+#                                                  #
+#    Meg is heading to the carpark                 #
+#                                                  #
+####################################################
+  
+  - alias: transport_megan_enter_northquarter
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.NorthQuarter
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"Car"}}'

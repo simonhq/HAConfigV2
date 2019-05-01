@@ -1,0 +1,331 @@
+#################################################################
+#                                                               #
+#                     Packages/Car Times                        #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  car_times_e:
+    name: Car Times Entities
+    view: no
+    entities:
+      - binary_sensor.drive_meg
+      - binary_sensor.drive_simon
+      - input_boolean.presence_holiday
+      - input_boolean.outback_just
+      - input_boolean.simon_outback
+      - input_boolean.simon_outback_home
+      - input_boolean.megan_outback
+      - input_boolean.megan_outback_home
+      - input_boolean.staci_outback
+      - input_boolean.staci_outback_home
+      - input_boolean.delia_outback
+      - input_boolean.delia_outback_home
+      - timer.outback_just
+      - sensor.waze_meg_time_to_work
+      - sensor.waze_simon_time_to_uni
+      - sensor.waze_meg_time_to_home
+      - sensor.waze_simon_time_to_home
+      - sensor.waze_meg_to_staci
+      - sensor.waze_meg_to_delia
+      - sensor.waze_meg_to_simon
+      - sensor.waze_simon_to_delia
+      - sensor.waze_simon_to_staci
+      - sensor.waze_staci_to_delia
+      - sensor.m_to_h_route
+      - sensor.s_to_h_route
+      - sensor.m_to_w_route
+      - sensor.m_to_s_route
+      - sensor.m_to_st_route
+      - sensor.m_to_d_route
+      - sensor.s_to_w_route
+      - sensor.s_to_st_route
+      - sensor.s_to_d_route
+      - sensor.st_to_d_route
+      
+  car_times_a:
+    name: Car Times Automations
+    view: no
+    entities:
+      - automation.transport_car_connect_timer_start
+      - automation.transport_car_connect_timer_done
+      
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors - Car Connect          #
+# Tasker sends to IFTTT                            #
+# IFTTT sets this when bluetooth connects to the car
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      drive_meg:
+        friendly_name: Meg Drive
+        value_template: "{{ is_state('input_boolean.megan_outback', 'on') }}"
+        icon_template: mdi:car
+      drive_simon:
+        friendly_name: Simon Drive
+        value_template: "{{ is_state('input_boolean.simon_outback', 'on') }}"
+        icon_template: mdi:car-key
+      #drive_staci: need to create the input_boolean if you need this
+      #  friendly_name: Staci Drive
+      #  value_template: "{{ is_state('input_boolean.staci_outback', 'on') }}"
+      #  icon_template: mdi:car
+      #drive_delia: need to create the input_boolean if you need this
+      #  friendly_name: Delia Drive
+      #  value_template: "{{ is_state('input_boolean.delia_outback', 'on') }}"
+      #  icon_template: mdi:car
+
+#################################################################
+#                                                               #
+#                       Input Boolean                           #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#            Input Boolean - Car away              #
+#                                                  #
+#################################################### 
+
+  presence_holiday:
+    name: Car Away
+    initial: off
+    icon: mdi:airplane-takeoff
+
+####################################################
+#                                                  #
+#            Input Boolean - Car connections       #
+#                                                  #
+#################################################### 
+
+  outback_just:
+    name: Someone has just connected to the outback
+    icon: mdi:car-connected
+
+  simon_outback:
+    name: Simon is connected to the Outback
+    icon: mdi:car-connected
+
+  simon_outback_home:
+    name: Simon is within 200m of home
+    icon: mdi:car-connected
+
+  megan_outback:
+    name: Meg is connected to the Outback
+    icon: mdi:car-connected
+
+  megan_outback_home:
+    name: Megan is within 200m of home
+    icon: mdi:car-connected
+
+######### NOT USED - here for completeness
+
+  staci_outback: #requires tasker - not being used
+    name: Staci is connected to the Outback
+    icon: mdi:car-connected
+    
+  staci_outback_home: #requires tasker - not being used
+    name: Staci is within 200m of home
+    icon: mdi:car-connected
+      
+  delia_outback: #requires tasker - not being used
+    name: Delia is connected to the Outback
+    icon: mdi:car-connected
+      
+  delia_outback_home: #requires tasker - not being used
+    name: Delia is within 200m of home
+    icon: mdi:car-connected
+
+#################################################################
+#                                                               #
+#                       Timer                                   #
+#                                                               #
+#################################################################
+
+timer: 
+
+####################################################
+#                                                  #
+#           timer - car connect                    #
+#                                                  #
+#    don't open the door for the first 5 mins      #
+#                                                  #
+####################################################   
+
+  outback_just:
+    duration: '00:05:00'
+
+
+#################################################################
+#                                                               #
+#                       Sensor                                  #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#           sensor - waze travel times             #
+#                                                  #
+#################################################### 
+
+  - platform: waze_travel_time
+    name: Waze Meg time to work
+    origin: device_tracker.mphone
+    destination: zone.NorthQuarter
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: Waze Simon time to uni
+    origin: device_tracker.sphone
+    destination: zone.CityWestBus
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: Waze Meg time to home
+    origin: device_tracker.mphone
+    destination: zone.Home
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: Waze Simon time to home
+    origin: device_tracker.sphone
+    destination: zone.Home
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: Waze Meg to Staci
+    origin: device_tracker.mphone
+    destination: device_tracker.stphone
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: Waze Meg to Delia
+    origin: device_tracker.mphone
+    destination: device_tracker.dphone
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: Waze Meg to Simon
+    origin: device_tracker.mphone
+    destination: device_tracker.sphone
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: Waze Simon to Delia
+    origin: device_tracker.sphone
+    destination: device_tracker.dphone
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: Waze Simon to Staci
+    origin: device_tracker.sphone
+    destination: device_tracker.stphone
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: Waze Staci to Delia
+    origin: device_tracker.dphone
+    destination: device_tracker.stphone
+    region: 'EU'
+
+####################################################
+#                                                  #
+#           sensor - waze travel routes            #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      m_to_h_route:
+        value_template: '{{ states.sensor.waze_meg_time_to_home.attributes.route }}'
+      s_to_h_route:
+        value_template: '{{ states.sensor.waze_simon_time_to_home.attributes.route }}'
+      m_to_w_route:
+        value_template: '{{ states.sensor.waze_meg_time_to_work.attributes.route }}'
+      m_to_s_route:
+        value_template: '{{ states.sensor.waze_meg_to_simon.attributes.route }}'
+      m_to_st_route:
+        value_template: '{{ states.sensor.waze_meg_to_staci.attributes.route }}'
+      m_to_d_route:
+        value_template: '{{ states.sensor.waze_meg_to_delia.attributes.route }}'
+      s_to_w_route:
+        value_template: '{{ states.sensor.waze_simon_time_to_uni.attributes.route }}'
+      s_to_st_route:
+        value_template: '{{ states.sensor.waze_simon_to_staci.attributes.route }}'
+      s_to_d_route:
+        value_template: '{{ states.sensor.waze_simon_to_delia.attributes.route }}'
+      st_to_d_route:
+        value_template: '{{ states.sensor.waze_staci_to_delia.attributes.route }}'
+
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see automation/house_mode.yaml
+
+automation:
+
+####################################################
+#                                                  #
+#           automation - car connect               #
+#                                                  #
+#    don't open the door for the first 5 mins      #
+#                                                  #
+#################################################### 
+
+  # turn on flag when someone starts car 
+  - alias: transport_car_connect_timer_start
+    trigger:
+      - platform: state
+        entity_id: input_boolean.simon_outback
+        to: 'on'
+      - platform: state
+        entity_id: input_boolean.megan_outback
+        to: 'on'
+      - platform: state
+        entity_id: input_boolean.staci_outback
+        to: 'on'
+      - platform: state
+        entity_id: input_boolean.delia_outback
+        to: 'on'
+    action:
+      - service: timer.start
+        entity_id: timer.outback_just
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.outback_just
+
+  # turn off flag after timer runs out
+  - alias: transport_car_connect_timer_done
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.outback_just
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.outback_just      
+

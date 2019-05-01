@@ -21,6 +21,11 @@ Netgear Device Tracker - [Netgear](https://www.home-assistant.io/components/devi
 
 Binary Sensor - [Binary Sensor](https://www.home-assistant.io/components/binary_sensor.template/)
 
+Other Packages
+
+Pi_hole - to check if the network ad-blocking is connected
+
+
 <h4 align="left">Package Automations:</h4>
 
 

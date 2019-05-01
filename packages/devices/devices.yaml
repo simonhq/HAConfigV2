@@ -52,6 +52,7 @@ group:
       - binary_sensor.wifi_lounge
       - binary_sensor.epson
       - binary_sensor.hass_lt
+      - binary_sensor.pi_hole
 
   media_e:
     name: Media Entities
@@ -246,7 +247,7 @@ binary_sensor:
   - platform: template
     sensors:
       net_system:
-        value_template: "{{ is_state('binary_sensor.wifi_lounge', 'on') and is_state('binary_sensor.wifi_kitchen', 'on') and is_state('binary_sensor.epson', 'on') and is_state('binary_sensor.hass_lt', 'on') }}"
+        value_template: "{{ is_state('binary_sensor.wifi_lounge', 'on') and is_state('binary_sensor.wifi_kitchen', 'on') and is_state('binary_sensor.epson', 'on') and is_state('binary_sensor.hass_lt', 'on') and is_state('binary_sensor.pi_hole', 'on')  }}"
         friendly_name: 'Wifi'
         device_class: connectivity
         icon_template: mdi:orbit
@@ -270,7 +271,11 @@ binary_sensor:
         friendly_name: 'Hassio Server'
         device_class: connectivity
         icon_template: mdi:home-assistant
-
+      pi_hole:
+        value_template: "{{ states('sensor.pi_hole_dns_unique_clients')|float > 0 }}"
+        friendly_name: 'Pi Hole'
+        device_class: connectivity
+        icon_template: mdi:fire
 
 ####################################################
 #                                                  #

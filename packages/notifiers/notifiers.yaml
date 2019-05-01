@@ -1,0 +1,187 @@
+#################################################################
+#                                                               #
+#                     Packages/Notifiers                        #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  notifiers_e:
+    name: Notifiers Entities
+    view: no
+    entities:
+      - binary_sensor.mess_hang
+      - binary_sensor.mess_push
+      - binary_sensor.mess_discord
+      - binary_sensor.mess_webhook
+      - input_select.message_flag
+      
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors - Notifiers            #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      mess_hang:
+        friendly_name: Hangouts
+        value_template: "{{ is_state('input_select.message_flag', 'Hangouts') }}"
+        icon_template: mdi:google-hangouts
+        device_class: connectivity
+      mess_push:
+        friendly_name: Pushbullet
+        value_template: "{{ is_state('input_select.message_flag', 'Pushbullet') }}"
+        icon_template: mdi:bullet
+        device_class: connectivity
+      mess_discord:
+        friendly_name: Discord
+        value_template: "{{ is_state('input_select.message_flag', 'Discord') }}"
+        icon_template: mdi:discord
+        device_class: connectivity
+      mess_webhook:
+        friendly_name: Discord Webhook
+        value_template: "{{ is_state('input_select.message_flag', 'Webhook') }}"
+        icon_template: mdi:discord
+        device_class: connectivity
+
+#################################################################
+#                                                               #
+#                       Input Select                            #
+#                                                               #
+#################################################################
+
+input_select:
+
+####################################################
+#                                                  #
+#            Input Select - Notifiers              #
+#                                                  #
+#################################################### 
+
+  message_flag:
+    name: Message Platform
+    options:
+      - Discord
+      - Hangouts
+      - Pushbullet
+      - Webhook
+    initial: Webhook
+    icon: mdi:message
+
+#################################################################
+#                                                               #
+#                       Notify                                  #
+#                                                               #
+#################################################################
+
+notify:
+
+####################################################
+#                                                  #
+#            Notify - Pushbullet                   #
+#                                                  #
+#################################################### 
+
+  - name: push_simon
+    platform: pushbullet
+    api_key: !secret simon_pushbullet_api_key
+
+  - name: push_megan
+    platform: pushbullet
+    api_key: !secret megan_pushbullet_api_key
+
+  - name: push_staci
+    platform: pushbullet
+    api_key: !secret staci_pushbullet_api_key
+
+  - name: push_delia
+    platform: pushbullet
+    api_key: !secret delia_pushbullet_api_key
+
+  - name: push_hassio
+    platform: pushbullet
+    api_key: !secret hassio_pushbullet_api_key
+
+####################################################
+#                                                  #
+#            Notify - Hangouts                     #
+#                                                  #
+#################################################### 
+
+#  - name: hang_home
+#    platform: hangouts
+#    default_conversations:
+#      - id: !secret hangout_id
+
+####################################################
+#                                                  #
+#            Notify - Discord                      #
+#                                                  #
+#################################################### 
+
+#  - platform: discord
+#    name: discord_thompson
+#    token: !secret discord_token
+
+####################################################
+#                                                  #
+#            Notify - Discord Webhook              #
+#                                                  #
+#################################################### 
+
+  - name: discord_webhook
+    platform: rest
+    method: POST
+    message_param_name: content
+    title_param_name: username
+    data:
+      username: Home Assistant
+    resource: !secret discord_webhook
+
+####################################################
+#                                                  #
+#            Notify - D&D Email                    #
+#                                                  #
+#################################################### 
+
+  - name: email_dd
+    platform: smtp
+    server: smtp.gmail.com
+    port: 587
+    timeout: 15
+    sender: !secret hassio_email
+    encryption: starttls
+    username: !secret hassio_email
+    password: !secret hassio_pass
+    recipient:
+      - !secret simon
+      - !secret siobhan
+      - !secret martino
+      - !secret brian
+      - !secret wenche
+      - !secret michael
+      - !secret megan
+    sender_name: Thompson-HQ Home Assistant
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see appdaemon
+

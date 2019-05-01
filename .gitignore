@@ -29,10 +29,15 @@
 !packages/
 !packages/bed_warming/
 !packages/bus_times/
+!packages/car_times/
+!packages/cooking/
 !packages/date_time/
 !packages/devices/
 !packages/house_modes/
+!packages/notifiers/
+!packages/pi_hole/
 !packages/system_monitor/
+!packages/travel_control/
 !packages/weather/
 !www/
 !www/icons/

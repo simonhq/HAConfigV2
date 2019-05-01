@@ -1,0 +1,94 @@
+#################################################################
+#                                                               #
+#                     Packages/Cooking                          #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  cooking_e:
+    name: House Mode Entities
+    view: no
+    entities:
+      - binary_sensor.cook_simon
+      - binary_sensor.cook_megan
+      - binary_sensor.cook_staci
+      - binary_sensor.cook_delia
+      - binary_sensor.cook_other
+      - input_select.cooking
+      
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors - Cooking              #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      cook_simon:
+        friendly_name: Simon cook
+        value_template: "{{ is_state('input_select.cooking', 'Simon') }}"
+        icon_template: mdi:pot-mix
+      cook_megan:
+        friendly_name: Meg cook
+        value_template: "{{ is_state('input_select.cooking', 'Megan') }}"
+        icon_template: mdi:pot
+      cook_staci:
+        friendly_name: Staci cook
+        value_template: "{{ is_state('input_select.cooking', 'Staci') }}"
+        icon_template: mdi:cat
+      cook_delia:
+        friendly_name: Delia cook
+        value_template: "{{ is_state('input_select.cooking', 'Delia') }}"
+        icon_template: mdi:dog
+      cook_other:
+        friendly_name: Easy dinner
+        value_template: "{{ is_state('binary_sensor.cook_simon', 'off') and is_state('binary_sensor.cook_megan', 'off') and is_state('binary_sensor.cook_staci', 'off') and is_state('binary_sensor.cook_delia', 'off') }}"
+        icon_template: mdi:food
+
+#################################################################
+#                                                               #
+#                       Input Select                            #
+#                                                               #
+#################################################################
+
+input_select:
+
+####################################################
+#                                                  #
+#            Input Select - Cooking                #
+#                                                  #
+#################################################### 
+
+  cooking:
+    name: Cooking
+    options:
+      - Easy
+      - Going Out
+      - Simon
+      - Megan
+      - Staci
+      - Delia
+    icon: mdi:silverware-spoon
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see appdaemon
+
