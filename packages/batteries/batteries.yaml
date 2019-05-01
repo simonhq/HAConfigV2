@@ -1,0 +1,206 @@
+#################################################################
+#                                                               #
+#                     Packages/Batteries                        #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  batteries_e:
+    name: Batteries Entities
+    view: no
+    entities:
+      - binary_sensor.simon_batt_low
+      - binary_sensor.megan_batt_low
+      - binary_sensor.staci_batt_low
+      - binary_sensor.delia_batt_low
+      - input_number.batt_notify_system
+      - input_boolean.batt_notify_system
+      - sensor.sphone_battery
+      - sensor.mphone_battery
+      - sensor.stphone_battery
+      - sensor.dphone_battery
+      - sensor.bed_remote_batt
+      - sensor.live_remote_batt
+      - sensor.bath_motion_batt
+      - sensor.ensuite_motion_batt
+      - sensor.garage_motion_batt
+      - sensor.laundry_motion_batt
+      #- sensor.
+      #- sensor.
+      #- sensor.
+      #- sensor.
+      #- sensor.
+
+# toilet battery? - smartthings integration?
+# door batteries?
+
+  # batteries_a:
+  #   name: Batteries Automations
+  #   view: no
+  #   entities:
+  #     - automation.
+  #     - automation.
+  #     - automation.
+  #     - automation.
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors - Phone Batteries      #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      simon_batt_low:
+        friendly_name: Simon Battery Low
+        value_template: "{{ states('sensor.sphone_battery')|float < states('input_number.batt_alert')|float }}"
+        icon_template: mdi:battery-10
+      megan_batt_low:
+        friendly_name: Megan Battery Low
+        value_template: "{{ states('sensor.mphone_battery')|float < states('input_number.batt_alert')|float }}"
+        icon_template: mdi:battery-10
+      staci_batt_low:
+        friendly_name: Staci Battery Low
+        value_template: "{{ states('sensor.stphone_battery')|float < states('input_number.batt_alert')|float }}"
+        icon_template: mdi:battery-10
+      delia_batt_low: 
+        friendly_name: Delia Battery Low
+        value_template: "{{ states('sensor.dphone_battery')|float < states('input_number.batt_alert')|float }}"
+        icon_template: mdi:battery-10
+ 
+
+#################################################################
+#                                                               #
+#                       Input Boolean                           #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#            Input Boolean - battery Notify system     #
+#                                                  #
+#################################################### 
+
+  batt_notify_system:
+    name: Battery Message
+    initial: off
+    icon: mdi:battery-10
+ 
+
+#################################################################
+#                                                               #
+#                       Input Number                            #
+#                                                               #
+#################################################################
+
+input_number:
+
+####################################################
+#                                                  #
+#                Input Numbers - ink message       #
+#                                                  #
+####################################################
+
+  batt_alert:
+    min: 0
+    max: 100
+    name: 'Battery Notify at'
+    #initial: 15
+    unit_of_measurement: '%'
+    icon: mdi:alarm-bell
+ 
+#################################################################
+#                                                               #
+#                       Sensor                                  #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#           sensor - phone batteries               #
+#                                                  #
+####################################################      
+
+  - platform: template
+    sensors:
+      sphone_battery:
+        friendly_name: Simon Phone Battery
+        value_template: '{{ states.device_tracker.sphone.attributes.battery }}'
+        unit_of_measurement: '%'
+      mphone_battery:
+        friendly_name: Megan Phone Battery
+        value_template: '{{ states.device_tracker.mphone.attributes.battery }}'
+        unit_of_measurement: '%'
+      stphone_battery:
+        friendly_name: Staci Phone Battery
+        value_template: '{{ states.device_tracker.stphone.attributes.battery }}'
+        unit_of_measurement: '%'
+      dphone_battery:
+        friendly_name: Delia Phone Battery
+        value_template: '{{ states.device_tracker.dphone.attributes.battery }}'
+        unit_of_measurement: '%'
+
+####################################################
+#                                                  #
+#           sensor - other batteries               #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      bed_remote_batt:
+        friendly_name: Bedroom Remote Battery
+        value_template: '{{ states.sensor.bedroom_remote.attributes.battery }}'
+        unit_of_measurement: '%'
+      live_remote_batt:
+        friendly_name: Living Remote Battery
+        value_template: '{{ states.sensor.remote.attributes.battery }}'
+        unit_of_measurement: '%'
+      bath_motion_batt:
+        friendly_name: Bathroom Motion Battery
+        value_template: '{{ states.binary_sensor.bathroom_motion_sensor.attributes.battery }}'
+        unit_of_measurement: '%'
+      ensuite_motion_batt:
+        friendly_name: Ensuite Motion Battery
+        value_template: '{{ states.binary_sensor.ensuite_motion_sensor.attributes.battery }}'
+        unit_of_measurement: '%'
+      garage_motion_batt:
+        friendly_name: Garage Motion Battery
+        value_template: '{{ states.binary_sensor.garage_motion_sensor.attributes.battery }}'
+        unit_of_measurement: '%'
+      laundry_motion_batt:
+        friendly_name: Laundry Motion Battery
+        value_template: '{{ states.binary_sensor.laundry_motion_sensor.attributes.battery }}'
+        unit_of_measurement: '%'
+
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see appdaemon
+
+automation:
+
+
+  

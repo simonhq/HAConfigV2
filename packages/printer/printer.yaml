@@ -1,0 +1,162 @@
+#################################################################
+#                                                               #
+#                     Packages/Printer                          #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  printer_e:
+    name: Printer Entities
+    view: no
+    entities:
+      - binary_sensor.ink_black_alert
+      - binary_sensor.ink_cyan_alert
+      - binary_sensor.ink_magenta_alert
+      - binary_sensor.ink_yellow_alert
+      - input_number.ink_alert
+      - input_boolean.ink_notify_system
+      - sensor.epson_ink_level_black
+      - sensor.epson_ink_level_cyan
+      - sensor.epson_ink_level_magenta
+      - sensor.epson_ink_level_yellow
+     
+  # printer_a:
+  #   name: Printer Automations
+  #   view: no
+  #   entities:
+  #     - automation.
+  #     - automation.
+  #     - automation.
+  #     - automation.
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors - Ink levels           #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      ink_black_alert:
+        friendly_name: Black Ink Alert
+        value_template: "{{ states('sensor.epson_ink_level_black')|float < states('input_number.ink_alert')|float }}"
+        icon_template: mdi:cup-water
+      ink_cyan_alert:
+        friendly_name: Cyan Ink Alert
+        value_template: "{{ states('sensor.epson_ink_level_cyan')|float < states('input_number.ink_alert')|float }}"
+        icon_template: mdi:cup-water
+      ink_magenta_alert:
+        friendly_name: Magenta Ink Alert
+        value_template: "{{ states('sensor.epson_ink_level_magenta')|float < states('input_number.ink_alert')|float }}"
+        icon_template: mdi:cup-water
+      ink_yellow_alert:
+        friendly_name: Yellow Ink Alert
+        value_template: "{{ states('sensor.epson_ink_level_yellow')|float < states('input_number.ink_alert')|float }}"
+        icon_template: mdi:cup-water
+
+#################################################################
+#                                                               #
+#                       Input Boolean                           #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#            Input Boolean - Ink Notify system     #
+#                                                  #
+#################################################### 
+
+  ink_notify_system:
+    name: Printer Ink Message
+    initial: off
+    icon: mdi:printer-alert
+  
+
+#################################################################
+#                                                               #
+#                       Input Number                            #
+#                                                               #
+#################################################################
+
+input_number:
+
+####################################################
+#                                                  #
+#                Input Numbers - ink message       #
+#                                                  #
+####################################################
+
+  ink_alert:
+    min: 0
+    max: 100
+    name: 'Ink Notify at'
+    #initial: 20
+    unit_of_measurement: '%'
+    icon: mdi:alarm-bell
+
+#################################################################
+#                                                               #
+#                       Sensor                                  #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#           sensor - printer ink sensor            #
+#                                                  #
+####################################################      
+
+  - platform: command_line
+    name: Epson Ink Level Black
+    command: /usr/bin/curl -s --insecure -X GET https://192.168.1.28/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_K.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 120
+
+  - platform: command_line
+    name: Epson Ink Level Magenta
+    command: /usr/bin/curl -s --insecure -X GET https://192.168.1.28/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_M.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 120
+
+  - platform: command_line
+    name: Epson Ink Level Yellow
+    command: /usr/bin/curl -s --insecure -X GET https://192.168.1.28/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_Y.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 120
+
+  - platform: command_line
+    name: Epson Ink Level Cyan
+    command: /usr/bin/curl -s --insecure -X GET https://192.168.1.28/PRESENTATION/HTML/TOP/PRTINFO.HTML | awk -F"'" '/Ink_C.PNG/ && $6+0 == $6 { printf "%.0f\n", $6 / 50 * 100 }'
+    unit_of_measurement: '%'
+    scan_interval: 120
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see appdaemon
+
+automation:
+
+
+  

@@ -37,6 +37,7 @@ group:
       - input_select.trav_delia
       - input_select.trans_delia
       - input_boolean.car_meg_city
+      - input_boolean.mode_return_home
       - proximity.home_meg
       - proximity.home_simon
       - proximity.home_delia
@@ -140,6 +141,11 @@ input_boolean:
 #            Input boolean - Meg walking to car    #
 #                                                  #
 #################################################### 
+
+  mode_return_home:
+    name: People are travelling home
+    initial: off
+    icon: mdi:satellite-variant
 
   car_meg_city:
     name: Meg might be on heading to the car
@@ -367,3 +373,54 @@ automation:
         data_template:
           entity_id: input_select.trans_megan
           option: '{{"Car"}}'
+
+####################################################
+#                                                  #
+#           automation - everyone home             #
+#                                                  #
+####################################################
+
+  - alias: presence_set_all_home
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.presence_allhome
+        to: 'on'
+    action:
+      - service: homeassistant.turn_off
+        entity_id: 
+          - input_boolean.mode_return_home
+
+####################################################
+#                                                  #
+#           automation - turn on travelling flag when someone not home             #
+#                                                  #
+####################################################
+
+  - alias: mode_set_returning
+    trigger:
+      - platform: time
+        at: '15:00:00'
+      - platform: state
+        entity_id: input_select.time_mode
+        to: 'Night'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.presence_holiday
+        state: 'off' 
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: input_select.presence_mode
+          state: 'Someone Home'
+        - condition: state
+          entity_id: input_select.presence_mode
+          state: 'All Away'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: 
+          - input_boolean.mode_return_home
+      - service: homeassistant.turn_off
+        entity_id: 
+          - input_boolean.send_message

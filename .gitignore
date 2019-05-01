@@ -27,6 +27,7 @@
 !appdaemon/apps/travel/
 !appdaemon/apps/pykevoplus/
 !packages/
+!packages/batteries/
 !packages/bed_warming/
 !packages/bus_times/
 !packages/car_times/
@@ -36,6 +37,7 @@
 !packages/house_modes/
 !packages/notifiers/
 !packages/pi_hole/
+!packages/printer/
 !packages/system_monitor/
 !packages/travel_control/
 !packages/weather/
