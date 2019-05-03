@@ -1,6 +1,6 @@
-# Pi-Hole
+# Remote Control
 
-### This package creates the sensors to see how the ad-blocking pi-hole is running on the network
+### This package allows sending harmony remote control codes to turn on/off the av equipment
 
 <hr --- </hr> 
 
@@ -14,8 +14,14 @@ Me
 
 Standard Home Assistant Components
 
-* [Pi-hole](https://www.home-assistant.io/components/sensor.pi_hole/)
+* Harmony - 
+
+* Input Select - 
+
+* Sensor - 
 
 <h4 align="left">Package Automations:</h4>
+
+* Automation (appdaemon) to notify about low battery levels
 
 <hr --- </hr>

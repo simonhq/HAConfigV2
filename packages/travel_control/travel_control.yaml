@@ -29,13 +29,9 @@ group:
       - binary_sensor.delia_car
       - binary_sensor.delia_walkbus
       - input_select.trav_staci
-      - input_select.trans_staci
       - input_select.trav_simon
-      - input_select.trans_simon
       - input_select.trav_megan
-      - input_select.trans_megan
       - input_select.trav_delia
-      - input_select.trans_delia
       - input_boolean.car_meg_city
       - input_boolean.mode_return_home
       - proximity.home_meg
@@ -174,20 +170,6 @@ input_select:
       - Car
     icon: mdi:train-car
 
-# transport option
-  trans_staci:
-    name: Staci Transport Type
-    options:
-      - 'Nil'
-      - '3'
-      - '66'
-      - '67'
-      - '300C'
-      - '300W'
-      - '300H'
-    initial: 'Nil'
-    icon: mdi:car-connected
-
 # travel type
   trav_delia:
     name: Delia Travel Type
@@ -196,15 +178,6 @@ input_select:
       - Walk
       - Car
     icon: mdi:train-car
-
-# transport option
-  trans_delia:
-    name: Delia Transport
-    options:
-      - 'Nil'
-      - 'Bus'
-    initial: 'Nil'
-    icon: mdi:car-connected
 
 # travel type
   trav_megan:
@@ -215,18 +188,6 @@ input_select:
       - Car
     icon: mdi:train-car
 
-# transport option
-  trans_megan:
-    name: Megan Transport
-    options:
-      - 'Nil'
-      - 'Bus'
-      - '300W'  
-      - '300C'
-      - 'Car'
-    initial: 'Nil'
-    icon: mdi:car-connected
-
 # travel type
   trav_simon:
     name: Simon Travel Type
@@ -236,17 +197,6 @@ input_select:
       - Car
     icon: mdi:train-car
 
-# transport option
-  trans_simon:
-    name: Simon Transport Type
-    options:
-      - 'Nil'
-      - '171'
-      - '300'
-      - '300W'
-      - 'Bus'
-    initial: 'Nil'
-    icon: mdi:car-connected
 
 #################################################################
 #                                                               #

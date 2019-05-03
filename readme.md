@@ -30,11 +30,7 @@ dependant upon each other, I plan on moving to a package system to keep things t
 
 Here is a Todo list of packages:
 
-* Fans
-* Bus Travel
-* Harmony Remote
-* GPS?
-* Hue Remotes
+
 * External IP/Duckdns
 * Interface
 * Integrations
@@ -45,14 +41,22 @@ Here is a Todo list of packages:
 * Batteries
 * Bed Warming
 * Bus Times
+* Bus Travel
 * Calendars
 * Car Times
+* Climate
 * Cooking
 * Date/Time
 * Devices
+* Doors
+* Fans
 * Garage Door
+* GPS
+* Harmony Remote
 * House Modes (Time)
+* Hue Remotes
 * IFTTT
+* Lights
 * Mode Actions (Time & Presence)
 * Motion Sensors/Lights
 * Notifiers

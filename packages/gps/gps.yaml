@@ -1,0 +1,73 @@
+#################################################################
+#                                                               #
+#                     Packages/GPS                              #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  gps_e:
+    name: GPS Entities
+    view: no
+    entities:
+      - sensor.sphone_gps_up
+      - sensor.mphone_gps_up
+      - sensor.stphone_gps_up
+      - sensor.dphone_gps_up
+      - sensor.sphone_type
+      - sensor.mphone_type
+      - sensor.stphone_type
+      - sensor.dphone_type
+
+      
+#################################################################
+#                                                               #
+#                            Sensors                            #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#                Last updated                      #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      sphone_gps_up:
+        friendly_name: Simon Phone GPS
+        value_template: '{{ states.device_tracker.sphone.last_updated }}'
+      mphone_gps_up:
+        friendly_name: Megan Phone GPS
+        value_template: '{{ states.device_tracker.mphone.last_updated }}'
+      stphone_gps_up:
+        friendly_name: Staci Phone GPS
+        value_template: '{{ states.device_tracker.stphone.last_updated }}'
+      dphone_gps_up:
+        friendly_name: Delia Phone GPS
+        value_template: '{{ states.device_tracker.dphone.last_updated }}'
+
+####################################################
+#                                                  #
+#              Last thing to update person         #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      sphone_type:
+        value_template: '{{ states.person.simon.attributes.source }}'
+      mphone_type:
+        value_template: '{{ states.person.megan.attributes.source }}'
+      stphone_type:
+        value_template: '{{ states.person.staci.attributes.source }}'
+      dphone_type:
+        value_template: '{{ states.person.delia.attributes.source }}'
+      

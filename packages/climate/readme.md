@@ -1,6 +1,6 @@
-# Pi-Hole
+# Climate
 
-### This package creates the sensors to see how the ad-blocking pi-hole is running on the network
+### This package uses weather and internal sensors to determine the usage of heating/cooling options 
 
 <hr --- </hr> 
 
@@ -14,8 +14,18 @@ Me
 
 Standard Home Assistant Components
 
-* [Pi-hole](https://www.home-assistant.io/components/sensor.pi_hole/)
+* Binary Sensor
+
+* Input Number
+
+Other Packages
+
+* Weather
+
+* Sensor
 
 <h4 align="left">Package Automations:</h4>
+
+Messaging from appdaemon
 
 <hr --- </hr>

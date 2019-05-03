@@ -1,6 +1,6 @@
-# Pi-Hole
+# Bus Travel
 
-### This package creates the sensors to see how the ad-blocking pi-hole is running on the network
+### This package tries to determine what bus people are on, to help decide changes and messages
 
 <hr --- </hr> 
 
@@ -14,8 +14,16 @@ Me
 
 Standard Home Assistant Components
 
-* [Pi-hole](https://www.home-assistant.io/components/sensor.pi_hole/)
+* Zone - 
+
+* Timer -
+
+* Input Select -
+
+* Sensor - 
 
 <h4 align="left">Package Automations:</h4>
+
+* Automation (appdaemon) to notify about decisions
 
 <hr --- </hr>

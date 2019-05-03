@@ -1,0 +1,16 @@
+
+################################################################################
+# All Automation ON/OFF
+################################################################################
+
+auto_on:
+  sequence:
+    - service: homeassistant.turn_on
+      entity_id: 
+        - group.all_automations
+        
+auto_off:
+  sequence:
+    - service: homeassistant.turn_off
+      entity_id: 
+        - group.all_automations

@@ -1,0 +1,1091 @@
+#################################################################
+#                                                               #
+#                     Packages/Bus Travel                       #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  bus_travel_e:
+    name: Bus Travel Entities
+    view: no
+    entities:
+      - zone.Home
+      - zone.AISKCricket
+      - zone.Tugg_College
+      - zone.Bruce_CIT
+      - zone.SouthPort
+      - zone.DJSB_Mort
+      - zone.ANU
+      - zone.SarahHouse
+      - zone.MackenzieHouse
+      - zone.AccerlatePhysio
+      - zone.HaydonDr
+      - zone.CalHospital
+      - zone.CanHospital
+      - zone.CityBus
+      - zone.CityWestBus
+      - zone.ANUBus
+      - zone.TuggBus
+      - zone.WodenBus
+      - zone.IsaCalBus
+      - zone.IsaShops
+      - zone.CommBridge
+      - zone.OutBus
+      - input_select.trans_staci
+      - input_select.trans_simon
+      - input_select.trans_megan
+      - input_select.trans_delia
+      - timer.r4_r5_st
+      - timer.r4_r5_s
+      - timer.r4_r5_m
+      - timer.r4_r5_d
+
+  bus_travel_a:
+    name: Bus Travel Automations
+    view: no
+    entities:
+      - automation.transport_simon_leave_citywest
+      - automation.transport_simon_leave_anubus
+      - automation.transport_simon_leave_citybus
+      - automation.transport_simon_arrive_woden_r4
+      - automation.transport_simon_arrive_woden_r5
+      - automation.transport_simon_leave_tuggbus_7x
+      - automation.transport_simon_leave_tuggbus_tx
+      - automation.transport_simon_leave_calwell_r5
+      - automation.transport_simon_leave_calwell_home
+      - automation.transport_simon_leave_home
+      
+      - automation.transport_staci_leave_haydondr
+      - automation.transport_staci_leave_citybus
+      - automation.transport_staci_arrive_woden_r4
+      - automation.transport_staci_arrive_woden_r5
+      - automation.transport_staci_leave_tuggbus_7x
+      - automation.transport_staci_leave_tuggbus_tx
+      - automation.transport_staci_leave_calwell_r5
+      - automation.transport_staci_leave_calwell_home
+      - automation.transport_staci_home
+      
+      - automation.transport_megan_leave_citybus
+      - automation.transport_megan_arrive_woden_r4
+      - automation.transport_megan_arrive_woden_r5
+      - automation.transport_megan_leave_tuggbus_7x
+      - automation.transport_megan_leave_tuggbus_tx
+      - automation.transport_megan_leave_calwell_r5
+      - automation.transport_megan_leave_calwell_home
+      - automation.transport_megan_home
+
+      - automation.transport_delia_leave_citybus
+      - automation.transport_delia_arrive_woden_r4
+      - automation.transport_delia_arrive_woden_r5
+      - automation.transport_delia_leave_tuggbus_7x
+      - automation.transport_delia_leave_tuggbus_tx
+      - automation.transport_delia_leave_calwell_r5
+      - automation.transport_delia_leave_calwell_home
+      - automation.transport_delia_home
+
+#################################################################
+#                                                               #
+#                Timer                                          #
+#                                                               #
+#################################################################
+
+timer:
+
+####################################################
+#                                                  #
+#            R4 or R5 route timer                  #
+#                                                  #
+#################################################### 
+
+# if on the leg between city and woden, if the timer is stopped when they arrive, then R4 else R5
+  r4_r5_st:
+    duration: '00:20:00'
+
+  r4_r5_s:
+    duration: '00:20:00'
+
+  r4_r5_m:
+    duration: '00:20:00'
+
+  r4_r5_d:
+    duration: '00:20:00'
+
+#################################################################
+#                                                               #
+#                Zone                                           #
+#                                                               #
+#################################################################
+
+zone:
+
+####################################################
+#                                                  #
+#            places of interest                    #
+#                                                  #
+#################################################### 
+
+  #home
+  - name: Home
+    latitude: -35.4310
+    longitude: 149.0958
+    radius: 100
+    icon: mdi:castle
+
+  #cricket
+  - name: AISKCricket
+    latitude: -35.394864
+    longitude: 149.068013
+    radius: 150
+    icon: mdi:stadium
+
+  #delia school
+  - name: Tugg_College
+    latitude: -35.413548
+    longitude: 149.068264
+    radius: 150
+    icon: mdi:book-open-page-variant
+
+  #staci school
+  - name: Bruce_CIT
+    latitude: -35.249476
+    longitude: 149.095763
+    radius: 150
+    icon: mdi:stethoscope
+
+  #tugg shops
+  - name: SouthPort
+    latitude: -35.416359
+    longitude: 149.066924
+    radius: 200
+    icon: mdi:store
+
+  #meg work
+  - name: DJSB_Mort
+    latitude: -35.276788
+    longitude: 149.131119
+    radius: 100
+    icon: mdi:city
+
+  #simon uni
+  - name: ANU
+    latitude: -35.277112 
+    longitude: 149.123496
+    radius: 100
+    icon: mdi:school
+
+  #delia friend Sarah
+  - name: SarahHouse
+    latitude: -35.426576
+    longitude: 149.099650
+    radius: 50
+
+  #delia friend Mackenzie
+  - name: MackenzieHouse
+    latitude: -35.454362
+    longitude: 149.087526
+    radius: 50
+
+  #meg physio
+  - name: AccerlatePhysio
+    latitude: -35.342095
+    longitude: 149.108284
+    radius: 50
+    icon: mdi:hand
+
+
+####################################################
+#                                                  #
+#            bus stops                             #
+#                                                  #
+####################################################   
+
+  #cit
+  - name: HaydonDr
+    latitude: -35.249276
+    longitude: 149.090256
+    radius: 50
+
+  #calvary hospital
+  - name: CalHospital
+    latitude: -35.253486
+    longitude: 149.090932
+    radius: 200
+
+  #canberra hospital
+  - name: CanHospital
+    latitude: -35.345924 
+    longitude: 149.101365
+    radius: 250
+  
+  #city bus 
+  - name: CityBus
+    latitude: -35.279437
+    longitude: 149.130565
+    radius: 50
+
+  #city west bus
+  - name: CityWestBus
+    latitude: -35.279129
+    longitude: 149.125513
+    radius: 50
+
+  #ANU Rimmer
+  - name: ANUBus
+    latitude: -35.276309
+    longitude: 149.125934
+    radius: 50
+
+  #Tugg bus 
+  - name: TuggBus
+    latitude: -35.414607
+    longitude: 149.065512
+    radius: 80
+
+  #Woden bus
+  - name: WodenBus
+    latitude: -35.344244 
+    longitude: 149.087836
+    radius: 150
+
+  #Bus E&J
+  - name: IsaCalBus
+    latitude: -35.433854
+    longitude: 149.094592
+    radius: 50
+
+  #Isabella Shops
+  - name: IsaShops
+    latitude: -35.428366
+    longitude: 149.091705
+    radius: 100
+
+  #Commonwealth Bridge
+  - name: CommBridge
+    latitude: -35.291006
+    longitude: 149.127823
+    radius: 300
+
+  #Commonwealth Bridge
+  - name: OutBus
+    latitude: -35.435692
+    longitude: 149.098516
+    radius: 50
+
+#################################################################
+#                                                               #
+#                       Input Select                            #
+#                                                               #
+#################################################################
+
+input_select:
+
+####################################################
+#                                                  #
+#            Input Select - travel guess           #
+#                                                  #
+#################################################### 
+
+# transport option
+  trans_staci:
+    name: Staci Transport Type
+    options:
+      - 'Nil'
+      - 'R234'
+      - 'R6'
+      - 'RC'
+      - 'R4W'
+      - 'R5W'
+      - 'R5T'
+      - '7X'
+      - 'TX'
+      - 'Cal'
+      - 'Car'
+    initial: 'Nil'
+    icon: mdi:car-connected
+
+    # transport option
+  trans_delia:
+    name: Delia Transport
+    options:
+      - 'Nil'
+      - '7X'
+      - 'TX'
+      - 'R5T'
+      - 'Cal'
+      - 'Car'
+    initial: 'Nil'
+    icon: mdi:car-connected
+
+
+    # transport option
+  trans_megan:
+    name: Megan Transport
+    options:
+      - 'Nil'
+      - 'RC'
+      - 'R4W'  
+      - 'R5W'
+      - 'R5T'
+      - '7X'
+      - 'TX'
+      - 'Cal'
+      - 'Car'
+    initial: 'Nil'
+    icon: mdi:car-connected
+
+    # transport option
+  trans_simon:
+    name: Simon Transport Type
+    options:
+      - 'Nil'
+      - 'R5CW'
+      - 'R4CW'
+      - 'RC'
+      - 'R5W'
+      - 'R4W'
+      - 'R5T'
+      - 'R4T'
+      - '7X'
+      - 'TX'
+      - 'Cal'
+      - 'Car'
+    initial: 'Nil'
+    icon: mdi:car-connected
+
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+automation:
+
+####################################################
+#                                                  #
+#            automation -  Simon Travel
+#                                                  #
+#################################################### 
+
+## Simon Leaving City West -> R5CW (Simon on R5 South)
+## Simon Leaving City ANU -> R4CW (Simon on R4 South)
+## Simon Leaving City -> RC + R_Timer (Simon leaving City), if R4CW or R5CW, don't change
+## Simon Arrving Woden + R_Timer Running, or R4CW -> R4W (Simon - On R4, 79 for X, Change for R5 for X)
+## Simon Arrving Woden + R_Timer Stopped, or R5CW -> R5W (Simon - On R5 for X, Change for 79 for X)
+## Simon Leaving Tugg + R4W/R5W -> 7X (Simon on 7X Home from Tugg)
+## Simon Leaving Tugg + NOT R4W/R5W -> TX (Simon leaving Tugg)
+## Simon Leaving Outtrim + Nil -> R5T (Simon on R5 North from Calwell)
+## Simon Leaving Outtrim + R5W -> Cal (Simon walking home from Calwell)
+## Simon Arrive Home -> Nil
+
+## Simon Leaving City West -> R5CW (Simon on R5 South)
+  - alias: transport_simon_leave_citywest
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.CityWestBus
+        event: leave
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"R5CW"}}'
+
+## Simon Leaving City ANU -> R4CW (Simon on R4 South)
+  - alias: transport_simon_leave_anubus
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.ANUBus
+        event: leave
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"R4CW"}}'
+
+## Simon Leaving City -> RC + R_Timer (Simon leaving City), if R4CW or R5CW, don't change
+  - alias: transport_simon_leave_citybus
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.CityBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ not is_state('input_select.trans_simon', 'R4CW') and not is_state('input_select.trans_simon', 'R4CW') }}"
+    action:
+      - service: timer.start
+        entity_id: timer.r4_r5_s
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"RC"}}'
+
+## Simon Arrving Woden + R_Timer Running, or R4CW -> R4W (Simon - On R4, 79 for X, Change for R5 for X)
+  - alias: transport_simon_arrive_woden_r4
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.WodenBus
+        event: enter
+    condition:
+      - condition: or 
+        conditions:
+        - condition: and 
+          conditions:
+          - condition: state
+            entity_id: timer.r4_r5_s
+            state: 'active'
+          - condition: state
+            entity_id: input_select.trans_simon
+            state: 'RC'
+        - condition: state
+          entity_id: input_select.trans_simon
+          state: 'R4CW'
+    action:
+      - service: timer.cancel
+        entity_id: timer.r4_r5_s
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"R4W"}}'
+
+## Simon Arrving Woden + R_Timer Stopped, or R5CW -> R5W (Simon - On R5 for X, Change for 79 for X)
+  - alias: transport_simon_arrive_woden_r5
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.WodenBus
+        event: enter
+    condition:
+      - condition: or 
+        conditions:
+        - condition: and 
+          conditions:
+          - condition: state
+            entity_id: timer.r4_r5_s
+            state: 'idle'
+          - condition: state
+            entity_id: input_select.trans_simon
+            state: 'RC'
+        - condition: state
+          entity_id: input_select.trans_simon
+          state: 'R5CW'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"R5W"}}'
+
+## Simon Leaving Tugg + R4W/R5W -> 7X (Simon on 7X Home from Tugg)
+  - alias: transport_simon_leave_tuggbus_7x
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.TuggBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_simon', 'R4W') or is_state('input_select.trans_simon', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"7X"}}'
+
+## Simon Leaving Tugg + NOT R4W/R5W -> TX (Simon leaving Tugg)
+  - alias: transport_simon_leave_tuggbus_tx
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.TuggBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ not is_state('input_select.trans_simon', 'R4W') and not is_state('input_select.trans_simon', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"TX"}}'
+
+## Simon Leaving Outtrim + Nil -> R5T (Simon on R5 North from Calwell)
+  - alias: transport_simon_leave_calwell_r5
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.OutBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_simon', 'Nil') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"R5T"}}'
+
+## Simon Leaving Outtrim + R5W -> Nil (Simon walking home from Calwell)
+  - alias: transport_simon_leave_calwell_home
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.OutBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_simon', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"Cal"}}'
+
+## Simon Arrive Home -> Nil
+  - alias: transport_simon_home
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.Home
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"Nil"}}'
+
+####################################################
+#                                                  #
+#            automation -  Staci Travel
+#                                                  #
+#################################################### 
+
+## Staci Leaving Haydon Drive -> R234 (Staci heading to city - 15min)
+## Staci Leaving City -> RC + R_Timer (Staci leaving City), if R234 don't change
+## Staci Arrving Woden + R_Timer Running, or R234 -> R4W (Staci - On R4, 79 for X, Change for R5 for X)
+## Staci Arrving Woden + R_Timer Stopped -> R5W (Staci - On R5 for X, Change for 79 for X)
+## Staci Leaving Tugg + R4W/R5W -> 7X (Staci on 7X Home from Tugg)
+## Staci Leaving Tugg + NOT R4W/R5W -> TX (Staci leaving Tugg)
+## Staci Leaving Outtrim + Nil -> R5T (Staci on R5 North from Calwell)
+## Staci Leaving Outtrim + R5W -> Cal (Staci walking home from Calwell)
+## Staci Arrive Home -> Nil
+
+## Staci Leaving Haydon Drive -> R234 (Staci heading to city - 15min)
+  - alias: transport_staci_leave_haydondr
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.HaydonDr
+        event: leave
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"R234"}}'
+
+## Staci Leaving City -> RC + R_Timer (Staci leaving City), if R234 don't change
+  - alias: transport_staci_leave_citybus
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.CityBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ not is_state('input_select.trans_simon', 'R234') }}"
+    action:
+      - service: timer.start
+        entity_id: timer.r4_r5_st
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"RC"}}'
+
+## Staci Arrving Woden + R_Timer Running, or R234 -> R4W (Staci - On R4, 79 for X, Change for R5 for X)
+  - alias: transport_staci_arrive_woden_r4
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.WodenBus
+        event: enter
+    condition:
+      - condition: or 
+        conditions:
+        - condition: and 
+          conditions:
+          - condition: state
+            entity_id: timer.r4_r5_st
+            state: 'active'
+          - condition: state
+            entity_id: input_select.trans_staci
+            state: 'RC'
+        - condition: state
+          entity_id: input_select.trans_staci
+          state: 'R234'
+    action:
+      - service: timer.cancel
+        entity_id: timer.r4_r5_st
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"R4W"}}'
+
+## Staci Arrving Woden + R_Timer Stopped -> R5W (Staci - On R5 for X, Change for 79 for X)
+  - alias: transport_staci_arrive_woden_r5
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.WodenBus
+        event: enter
+    condition:
+      - condition: and 
+        conditions:
+        - condition: state
+          entity_id: timer.r4_r5_st
+          state: 'idle'
+        - condition: state
+          entity_id: input_select.trans_staci
+          state: 'RC'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"R5W"}}'
+
+## Staci Leaving Tugg + R4W/R5W -> 7X (Staci on 7X Home from Tugg)
+  - alias: transport_staci_leave_tuggbus_7x
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.TuggBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_staci', 'R4W') or is_state('input_select.trans_staci', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"7X"}}'
+
+## Staci Leaving Tugg + NOT R4W/R5W -> TX (Staci leaving Tugg)
+  - alias: transport_staci_leave_tuggbus_tx
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.TuggBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ not is_state('input_select.trans_staci', 'R4W') and not is_state('input_select.trans_staci', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"TX"}}'
+
+## Staci Leaving Outtrim + Nil -> R5T (Staci on R5 North from Calwell)
+  - alias: transport_staci_leave_calwell_r5
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.OutBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_staci', 'Nil') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"R5T"}}'
+
+## Staci Leaving Outtrim + R5W -> Cal (Staci walking home from Calwell)
+  - alias: transport_staci_leave_calwell_home
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.OutBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_staci', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"Cal"}}'
+
+## Staci Arrive Home -> Nil
+  - alias: transport_staci_home
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.Home
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"Nil"}}'
+
+####################################################
+#                                                  #
+#            automation -  Staci Travel Hospital
+#                                                  #
+#################################################### 
+
+
+# leaving canberra hospital - day
+
+  - alias: transport_staci_leave_canhospital_67
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.CanHospital
+        event: leave
+    #condition:
+    #  - condition: time
+    #    before: '20:00:00'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"67"}}'
+
+
+####################################################
+#                                                  #
+#            automation -  Megan Travel
+#                                                  #
+#################################################### 
+
+## Megan Leaving City -> RC + R_Timer (Megan leaving City)
+## Megan Arrving Woden + R_Timer Running -> R4W (Megan - On R4, 79 for X, Change for R5 for X)
+## Megan Arrving Woden + R_Timer Stopped -> R5W (Megan - On R5 for X, Change for 79 for X)
+## Megan Leaving Tugg + R4W/R5W -> 7X (Megan on 7X Home from Tugg)
+## Megan Leaving Tugg + NOT R4W/R5W -> TX (Megan leaving Tugg)
+## Megan Leaving Outtrim + Nil -> R5T (Megan on R5 North from Calwell)
+## Megan Leaving Outtrim + R5W -> Nil (Megan walking home from Calwell)
+## Megan Arrive Home -> Nil
+
+
+## Megan Leaving City -> RC + R_Timer (Megan leaving City)
+  - alias: transport_megan_leave_citybus
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.CityBus
+        event: leave
+    action:
+      - service: timer.start
+        entity_id: timer.r4_r5_m
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"RC"}}'
+
+## Megan Arrving Woden + R_Timer Running -> R4W (Megan - On R4, 79 for X, Change for R5 for X)
+  - alias: transport_megan_arrive_woden_r4
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.WodenBus
+        event: enter
+    condition:
+      - condition: and 
+        conditions:
+        - condition: state
+          entity_id: timer.r4_r5_m
+          state: 'active'
+        - condition: state
+          entity_id: input_select.trans_megan
+          state: 'RC'
+    action:
+      - service: timer.cancel
+        entity_id: timer.r4_r5_m
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"R4W"}}'
+
+## Megan Arrving Woden + R_Timer Stopped -> R5W (Megan - On R5 for X, Change for 79 for X)
+  - alias: transport_megan_arrive_woden_r5
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.WodenBus
+        event: enter
+    condition:
+      - condition: and 
+        conditions:
+        - condition: state
+          entity_id: timer.r4_r5_m
+          state: 'idle'
+        - condition: state
+          entity_id: input_select.trans_megan
+          state: 'RC'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"R5W"}}'
+
+## Megan Leaving Tugg + R4W/R5W -> 7X (Megan on 7X Home from Tugg)
+  - alias: transport_megan_leave_tuggbus_7x
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.TuggBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_megan', 'R4W') or is_state('input_select.trans_megan', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"7X"}}'
+
+## Megan Leaving Tugg + NOT R4W/R5W -> TX (Megan leaving Tugg)
+  - alias: transport_megan_leave_tuggbus_tx
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.TuggBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ not is_state('input_select.trans_megan', 'R4W') and not is_state('input_select.trans_megan', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"TX"}}'
+
+## Megan Leaving Outtrim + Nil -> R5T (Megan on R5 North from Calwell)
+  - alias: transport_megan_leave_calwell_r5
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.OutBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_megan', 'Nil') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"R5T"}}'
+
+## Megan Leaving Outtrim + R5W -> Cal (Megan walking home from Calwell)
+  - alias: transport_megan_leave_calwell_home
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.OutBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_megan', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"Cal"}}'
+
+## Megan Arrive Home -> Nil
+  - alias: transport_megan_home
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.Home
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"Nil"}}'
+
+
+
+####################################################
+#                                                  #
+#            automation -  Delia Travel
+#                                                  #
+#################################################### 
+
+## Delia Leaving City -> RC + R_Timer (Delia leaving City)
+## Delia Arrving Woden + R_Timer Running -> R4W (Delia - On R4, 79 for X, Change for R5 for X)
+## Delia Arrving Woden + R_Timer Stopped -> R5W (Delia - On R5 for X, Change for 79 for X)
+## Delia Leaving Tugg + R4W/R5W -> 7X (Delia on 7X Home from Tugg)
+## Delia Leaving Tugg + NOT R4W/R5W -> TX (Delia leaving Tugg)
+## Delia Leaving Outtrim + Nil -> R5T (Delia on R5 North from Calwell)
+## Delia Leaving Outtrim + R5W -> Cal (Delia walking home from Calwell)
+## Delia Arrive Home -> Nil
+
+
+## Delia Leaving City -> RC + R_Timer (Delia leaving City)
+  - alias: transport_delia_leave_citybus
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.dphone
+        zone: zone.CityBus
+        event: leave
+    action:
+      - service: timer.start
+        entity_id: timer.r4_r5_d
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"RC"}}'
+
+## Delia Arrving Woden + R_Timer Running -> R4W (Delia - On R4, 79 for X, Change for R5 for X)
+  - alias: transport_delia_arrive_woden_r4
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.dphone
+        zone: zone.WodenBus
+        event: enter
+    condition:
+      - condition: and 
+        conditions:
+        - condition: state
+          entity_id: timer.r4_r5_d
+          state: 'active'
+        - condition: state
+          entity_id: input_select.trans_delia
+          state: 'RC'
+    action:
+      - service: timer.cancel
+        entity_id: timer.r4_r5_d
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"R4W"}}'
+
+## Delia Arrving Woden + R_Timer Stopped -> R5W (Delia - On R5 for X, Change for 79 for X)
+  - alias: transport_delia_arrive_woden_r5
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.dphone
+        zone: zone.WodenBus
+        event: enter
+    condition:
+      - condition: and 
+        conditions:
+        - condition: state
+          entity_id: timer.r4_r5_d
+          state: 'idle'
+        - condition: state
+          entity_id: input_select.trans_delia
+          state: 'RC'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"R5W"}}'
+
+## Delia Leaving Tugg + R4W/R5W -> 7X (Delia on 7X Home from Tugg)
+  - alias: transport_delia_leave_tuggbus_7x
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.dphone
+        zone: zone.TuggBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_delia', 'R4W') or is_state('input_select.trans_delia', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"7X"}}'
+
+## Delia Leaving Tugg + NOT R4W/R5W -> TX (Delia leaving Tugg)
+  - alias: transport_delia_leave_tuggbus_tx
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.dphone
+        zone: zone.TuggBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ not is_state('input_select.trans_delia', 'R4W') and not is_state('input_select.trans_delia', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"TX"}}'
+
+## Delia Leaving Outtrim + Nil -> R5T (Delia on R5 North from Calwell)
+  - alias: transport_delia_leave_calwell_r5
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.dphone
+        zone: zone.OutBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_delia', 'Nil') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"R5T"}}'
+
+## Delia Leaving Outtrim + R5W -> Cal (Delia walking home from Calwell)
+  - alias: transport_delia_leave_calwell_home
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.dphone
+        zone: zone.OutBus
+        event: leave
+    condition:
+      - condition: template
+        value_template: "{{ is_state('input_select.trans_delia', 'R5W') }}"
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"Cal"}}'
+
+## Delia Arrive Home -> Nil
+  - alias: transport_delia_home
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.dphone
+        zone: zone.Home
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"Nil"}}'
+
+
+  
+
+  
+
+
+  
+
+  
+  
+      
+  
+
+  
+
+
+  
+  

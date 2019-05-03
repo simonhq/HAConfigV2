@@ -1,6 +1,6 @@
-# Pi-Hole
+# Fans
 
-### This package creates the sensors to see how the ad-blocking pi-hole is running on the network
+### This package allows sending IR messages through IFTTT and the Bond.io platform to control the fans
 
 <hr --- </hr> 
 
@@ -14,8 +14,14 @@ Me
 
 Standard Home Assistant Components
 
-* [Pi-hole](https://www.home-assistant.io/components/sensor.pi_hole/)
+* Bond - 
+
+* Input Select - 
+
+* Sensor - 
 
 <h4 align="left">Package Automations:</h4>
+
+* Automation (appdaemon) to notify about low battery levels
 
 <hr --- </hr>

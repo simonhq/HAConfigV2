@@ -1,0 +1,144 @@
+#################################################################
+#                                                               #
+#                     Packages/Lights                           #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  lights_e:
+    name: Light Entities
+    view: no
+    entities:
+      - light.back_hall  
+      - light.bathroom
+      - light.delia_s_lamp
+      - light.dining_1
+      - light.dining_2
+      - light.dining_3
+      - light.dining_4
+      - light.ensuite     #spot
+      - light.ensuite_2   #normal
+      - light.front_door
+      - light.front_garage
+      - light.front_hall
+      - light.garage
+      - light.kitchen_1
+      - light.kitchen_2
+      - light.kitchen_3
+      - light.kitchen_4
+      - light.laundry
+      - light.living_1
+      - light.living_2
+      - light.living_3
+      - light.living_4
+      - light.lounge_lamp
+      - light.lounge_light
+      - light.lounge_lightstrip
+      - light.master_lightstrip
+      - light.staci_s_lamp
+      - light.staci_s_light
+      - light.study
+      - light.toilet
+      - binary_sensor.lights_on
+      - binary_sensor.lights_off
+
+  light_groups_e:
+    name: Light Group Entities
+    view: no
+    entities:
+      - light.bathroom_2  
+      - light.delias
+      - light.dining          #dining_1, _2, _3, _4
+      - light.ensuite_3       #ensuite, ensuite_2 #spot, light
+      - light.front_hall_2    #front_hall
+      - light.front_light     #front_door, front_garage
+      - light.garage_2        #garage
+      - light.girls_hall      #back_hall
+      - light.kitchen         #kitchen_1, _2, _3, _4
+      - light.laundry_2       #laundry
+      - light.living_room     #living_1, _2, _3, _4
+      - light.lounge_room     #lounge_lamp, _light
+      - light.lounge_tv       #lounge_lightstrip
+      - light.master_bedroom  #master_lightstrip
+      - light.stacis          #stacis_lamp, _light
+      - light.study_2         #study
+      - light.toilet_2        #toilet
+      - light.bathroom_2      #bathroom
+     
+  ensuite:
+    name: Ensuite Light Entities
+    view: no
+    entities:
+      - light.ensuite #spot
+      - light.ensuite_2 #normal
+
+  kitchen_prep_lights:
+    name: Kitchen Preping Entities
+    view: no
+    entities:
+      - light.kitchen_2
+      - light.kitchen_4
+
+  kitchen_cook_lights:
+    name: Cooking Lights Entities
+    view: no
+    entities:
+      - light.kitchen_1
+      - light.kitchen_3
+
+  family_lights:
+    name: Family Lights Entities
+    view: no
+    entities:
+      - light.front_light
+      - light.dining
+      - light.kitchen
+      - light.living_room
+      - light.lounge_room
+      - light.girls_hall
+      - light.front_hall_2
+      - light.study_2
+      - light.laundry_2
+      - light.garage_2
+      
+  wetroom_lights:
+    name: Wetroom Light Entities
+    view: no
+    entities:
+      - light.laundry_2         #laundry_2
+      - light.toilet_2          #toilet_2
+      - light.ensuite_3         #ensuite_spot, ensuite_2
+      - light.bathroom_2        #bathroom_2
+      - light.garage_2          #garage_2
+
+#################################################################
+#                                                               #
+#                            Binary Sensor                      #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#                lights                            #
+#                                                  #
+####################################################
+
+    - platform: template
+      sensors:
+        lights_on:
+          friendly_name: Lights On
+          value_template: "{{ is_state('group.all_lights', 'on') }}"
+          icon_template: mdi:lightbulb-on-outline
+        lights_off:
+          friendly_name: Lights Off
+          value_template: "{{ is_state('group.all_lights', 'off') }}"
+          icon_template: mdi:lightbulb-outline
+          device_class: motion

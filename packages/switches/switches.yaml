@@ -19,6 +19,8 @@ group:
       - device_tracker.tv_switch
       - device_tracker.chairs_switch
       - device_tracker.iron_switch
+      - binary_sensor.switches_on
+      - binary_sensor.switches_off
   
   swbed_e:
     name: Bed Switch Entities
@@ -158,6 +160,24 @@ binary_sensor:
         friendly_name: 'Delia Blanket'
         device_class: connectivity
         icon_template: mdi:hotel        
+
+####################################################
+#                                                  #
+#                Binary Sensor - interface         #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      switches_on:
+        friendly_name: Switches On
+        value_template: "{{ is_state('group.all_switches', 'on') }}"
+        icon_template: mdi:toggle-switch
+      switches_off:
+        friendly_name: Switches Off
+        value_template: "{{ is_state('group.all_switches', 'off') }}"
+        icon_template: mdi:toggle-switch-off-outline
+        device_class: motion
 
 #################################################################
 #                                                               #
