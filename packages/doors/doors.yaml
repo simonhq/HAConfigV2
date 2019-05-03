@@ -1,0 +1,161 @@
+#################################################################
+#                                                               #
+#                     Packages/Doors                            #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  doors_e:
+    name: Door Entities
+    view: no
+    entities:
+      - input_boolean.fdoor
+      - input_boolean.gdoor
+      - binary_sensor.front_door_state_contact
+      - binary_sensor.back_door_state_contact
+      - binary_sensor.fdoor_lock
+      - binary_sensor.fdoor_unlock
+      - binary_sensor.fdoor_close
+      - binary_sensor.fdoor_open
+      - binary_sensor.bdoor_close
+      - binary_sensor.bdoor_open
+      - binary_sensor.gdoor_lock
+      - binary_sensor.gdoor_unlock
+
+      - binary_sensor.fdoor_door
+      - binary_sensor.bdoor_door
+      - binary_sensor.fdoor
+      - binary_sensor.gdoor
+      #smartthings
+      - binary_sensor.back_door_state_acceleration
+      - binary_sensor.front_door_state_acceleration
+      # not used
+      - sensor.front_door_state_z_coordinate
+      - sensor.front_door_state_x_coordinate
+      - sensor.front_door_state_y_coordinate
+      - sensor.back_door_state_z_coordinate
+      - sensor.back_door_state_x_coordinate
+      - sensor.back_door_state_y_coordinate
+
+#################################################################
+#                                                               #
+#                            Input Boolean                      #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#                Front & Garage Entry doors        #
+#                                                  #
+####################################################
+
+  fdoor:
+      name: Front Door
+      icon: mdi:key-variant
+
+  gdoor:
+      name: Garage Entry
+      icon: mdi:key-variant
+      
+#################################################################
+#                                                               #
+#                            Binary Sensor                      #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#                Front & Garage Entry doors        #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      fdoor_lock:
+        friendly_name: Front Lock
+        value_template: "{{ is_state('input_boolean.fdoor', 'on') and is_state('binary_sensor.front_door_state_contact', 'off') }}"
+        icon_template: mdi:lock
+        device_class: connectivity
+      fdoor_unlock:
+        friendly_name: Front Unlock
+        value_template: "{{ is_state('input_boolean.fdoor', 'off') }}"
+        icon_template: mdi:lock-open-outline
+        device_class: lock
+      fdoor_close:
+        friendly_name: Front Closed
+        value_template: "{{ is_state('binary_sensor.front_door_state_contact', 'off') }}"
+        icon_template: mdi:door
+        device_class: connectivity
+      fdoor_open:
+        friendly_name: Front Open
+        value_template: "{{ is_state('binary_sensor.front_door_state_contact', 'on') }}"
+        icon_template: mdi:door-open
+        device_class: door
+      bdoor_close:
+        friendly_name: Back Closed
+        value_template: "{{ is_state('binary_sensor.back_door_state_contact', 'off') }}"
+        icon_template: mdi:glassdoor
+        device_class: connectivity
+      bdoor_open:
+        friendly_name: Back Open
+        value_template: "{{ is_state('binary_sensor.back_door_state_contact', 'on') }}"
+        icon_template: mdi:door-open
+        device_class: door
+      gdoor_lock:
+        friendly_name: GE Lock
+        value_template: "{{ is_state('input_boolean.gdoor', 'on') }}"
+        icon_template: mdi:lock
+        device_class: connectivity
+      gdoor_unlock:
+        friendly_name: GE Unlock
+        value_template: "{{ is_state('input_boolean.gdoor', 'off') }}"
+        icon_template: mdi:lock-open-outline
+        device_class: lock
+
+####################################################
+#                                                  #
+#                Front & Garage Entry doors        #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+    #physical doors
+      fdoor_door:
+        value_template: "{{ is_state('binary_sensor.front_door_state_contact', 'on') }}"
+        friendly_name: 'Front Door'
+        device_class: door
+        icon_template: mdi:door-open
+      bdoor_door:  
+        value_template: "{{ is_state('binary_sensor.back_door_state_contact', 'on') }}"
+        friendly_name: 'Back Sliding Door'
+        device_class: door
+        icon_template: mdi:door-open
+      #gdoor:
+      #  value_template: "{{ is_state('input_boolean.gdoor', 'off') }}"
+      #  friendly_name: 'Garage Entry'
+      #  device_class: lock
+      #  icon_template: mdi:lock
+    #lock status
+      fdoor:
+        value_template: "{{ is_state('input_boolean.fdoor', 'off') or is_state('binary_sensor.front_door_state_contact', 'on') }}"
+        friendly_name: 'Front Door'
+        device_class: lock
+        #entity_picture_template: /local/pics/kevolock.jpg 
+        icon_template: mdi:lock
+      gdoor:
+        value_template: "{{ is_state('input_boolean.gdoor', 'off') }}"
+        friendly_name: 'Garage Entry'
+        device_class: lock
+        #entity_picture_template: /local/pics/kevolock.jpg 
+        icon_template: mdi:lock

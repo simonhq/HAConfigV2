@@ -20,6 +20,9 @@ group:
       - sensor.home_to_tugg_78_is
       - sensor.home_to_city_r5_out
       - sensor.tugg_to_city_r4
+      - sensor.tugg_to_home_79
+      - sensor.woden_to_home_R5
+      - sensor.woden_to_tugg_R4
       - sensor.home_to_tugg_79_ej_format
       - sensor.home_to_tugg_79_is_format
       - sensor.home_to_tugg_78_is_format
@@ -207,7 +210,7 @@ sensor:
             {% set departure = departure.split(' ') %}
             {% set arrival = arrival.split(' ') %}
             {% set hms = departure[1].split(':') %}
-            {% set ahms = arrvial[1].split(':') %}
+            {% set ahms = arrival[1].split(':') %}
             Dep {{hms[0]}}:{{hms[1]}}, Tugg by {{ahms[0]}}:{{ahms[1]}}
           {% else %}
             unknown
@@ -226,7 +229,7 @@ sensor:
             {% set departure = departure.split(' ') %}
             {% set arrival = arrival.split(' ') %}
             {% set hms = departure[1].split(':') %}
-            {% set ahms = arrvial[1].split(':') %}
+            {% set ahms = arrival[1].split(':') %}
             Dep {{hms[0]}}:{{hms[1]}}, Home by {{ahms[0]}}:{{ahms[1]}}
           {% else %}
             unknown
@@ -244,7 +247,7 @@ sensor:
             {% set departure = departure.split(' ') %}
             {% set arrival = arrival.split(' ') %}
             {% set hms = departure[1].split(':') %}
-            {% set ahms = arrvial[1].split(':') %}
+            {% set ahms = arrival[1].split(':') %}
             Dep {{hms[0]}}:{{hms[1]}}, Home by {{ahms[0]}}:{{ahms[1]}}
           {% else %}
             unknown

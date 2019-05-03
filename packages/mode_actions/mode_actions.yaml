@@ -1,0 +1,431 @@
+#################################################################
+#                                                               #
+#                     Packages/Presence                         #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+
+#  mode_action_e:
+#    name: Mode Action Entities
+#    view: no
+#    entities:
+      
+  mode_action_a:
+    name: Mode Action Automations
+    view: no
+    entities:
+      - automation.presence_all_away_day
+      - automation.presence_all_away_evening
+      - automation.presence_all_someone_home
+      - automation.presence_all_someone_home_evening
+      - automation.mode_settings_morning
+      - automation.mode_settings_day
+      - automation.mode_settings_evening
+      - automation.mode_settings_night
+      - automation.mode_settings_night_bedroom_dim
+      
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors -          #
+#                                                  #
+#################################################### 
+
+ 
+#################################################################
+#                                                               #
+#                       Input Boolean                           #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#            Input Boolean - presence Modes        #
+#                                                  #
+#################################################### 
+
+ 
+
+#################################################################
+#                                                               #
+#                       Input Select                            #
+#                                                               #
+#################################################################
+
+input_select:
+
+####################################################
+#                                                  #
+#            Input Select - presence Modes         #
+#                                                  #
+#################################################### 
+
+ 
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see automation/house_mode.yaml
+
+automation:
+
+####################################################
+#                                                  #
+#           automation - All Away                  #
+#                                                  #
+#################################################### 
+
+  # turn off everything, lock the doors if it is day time and everyone is out  
+  - alias: presence_all_away_day
+    trigger:
+      - platform: state
+        entity_id: input_select.presence_mode
+        to: 'All Away'
+    condition:
+      - condition: time
+        before: '18:00:00'
+    action:
+      - service: light.turn_off               # turn off all lights
+        entity_id: group.all_lights
+      - service: homeassistant.turn_on         # lock front door
+        entity_id: 
+          - input_boolean.fdoor
+      - service: homeassistant.turn_off        # turn off tv
+        entity_id: 
+          - remote.harmony_hub
+      - delay: '00:00:10'                       # delay 10 seconds
+      - service: homeassistant.turn_off         # turn off switches
+        entity_id: 
+          - switch.dining_room_iron
+          - switch.study_printer
+          - switch.lounge_tv
+          - switch.lounge_chairs
+      - service: cover.close_cover            # close garage
+        entity_id:
+          - cover.near_garage_door
+      - service: script.turn_on               # turn off fans
+        entity_id: script.fans_off
+      - service: notify.push_hassio           # turn off screens on tablets
+        data: 
+          message: 'Away'
+      - service: input_select.select_option     # set Day mode
+        data_template:
+          entity_id: input_select.time_mode
+          option: '{{"Day"}}'
+      - service: hangouts.send_message        # send message saying everything is off
+        data: 
+          target:
+            - id: !secret hangout_id
+          message:
+            - text: "Everyone's Away, turning everything off and locking the front door"
+      
+  # switch to evening mode if it is after 6pm time and everyone is out  
+  - alias: presence_all_away_evening
+    trigger:
+      - platform: state
+        entity_id: input_select.presence_mode
+        to: 'All Away'
+    condition:
+      - condition: time
+        after: '18:00:00'
+    action:
+      - service: light.turn_off               # turn off all lights
+        entity_id: group.all_lights
+      - service: light.turn_on                # turn on front light
+        entity_id: light.front_light
+      - service: homeassistant.turn_on        # lock front door
+        entity_id: 
+          - input_boolean.fdoor
+      - service: homeassistant.turn_off       # turn off tv
+        entity_id: 
+          - remote.harmony_hub
+      - delay: '00:00:10'                     # delay 10 seconds
+      - service: homeassistant.turn_off       # turn off switches
+        entity_id: 
+          - switch.dining_room_iron
+          - switch.study_printer
+          - switch.lounge_tv
+          - switch.lounge_chairs
+      - service: script.turn_on               # turn off fans
+        entity_id: script.fans_off
+      - service: cover.close_cover            # close garage
+        entity_id:
+          - cover.near_garage_door
+      - service: notify.push_hassio           # turn off screens
+        data: 
+          message: 'Away'
+      - service: hangouts.send_message        # send message
+        data: 
+          target:
+            - id: !secret hangout_id
+          message:
+            - text: "Everyone's Away, turning everything off, locking the front door and putting on the front lights"  
+
+####################################################
+#                                                  #
+#           automation - someone home              #
+#                                                  #
+#################################################### 
+
+  # Someone gets home at night, push the screens to turn on, turn on then off some lights
+  - alias: presence_all_someone_home_evening
+    trigger:
+      - platform: state
+        entity_id: input_select.presence_mode
+        to: 'Someone Home'
+        from: 'All Away'
+      - platform: state
+        entity_id: input_select.presence_mode
+        to: 'All Home'
+    condition:
+      - condition: time
+        after: '22:00:00'
+    action:
+      - service: light.turn_on
+        entity_id: 
+          - light.front_light
+          - light.front_hall_2
+          - light.Kitchen
+      - delay: '00:10:00'
+      - service: light.turn_off
+        entity_id: 
+          - light.front_light
+          - light.front_hall_2
+          - light.kitchen
+      - service: homeassistant.turn_on
+        entity_id: 
+          - switch.study_printer
+          - switch.lounge_tv
+          - switch.lounge_chairs
+      - service: notify.push_hassio
+        data: 
+          message: 'Home'
+
+  # before night, just turn on the screens, and the tv
+  - alias: presence_all_someone_home
+    trigger:
+      - platform: state
+        entity_id: input_select.presence_mode
+        to: 'Someone Home'
+        from: 'All Away'
+      - platform: state
+        entity_id: input_select.presence_mode
+        to: 'All Home'
+        from: 'All Away'
+    condition:
+      - condition: time
+        before: '22:00:00'
+    action:
+      - service: notify.push_hassio
+        data: 
+          message: 'Home'
+      - service: homeassistant.turn_on
+        entity_id: 
+          - switch.study_printer
+          - switch.lounge_tv
+          - switch.lounge_chairs
+
+####################################################
+#                                                  #
+#           automation - Morning                   #
+#                                                  #
+#################################################### 
+
+  - alias: mode_settings_morning
+    trigger:
+      - platform: state
+        entity_id: input_select.time_mode
+        to: 'Morning'
+    action:
+      - service: light.turn_on
+        entity_id: light.ensuite
+        data:
+            brightness: 100
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.eshower
+          option: '{{"Ensuite On"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.bshower
+          option: '{{"Bathroom On"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.lon
+          option: '{{"Motion"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.ton
+          option: '{{"Motion"}}'
+      - service: homeassistant.turn_off
+        entity_id: 
+          - input_boolean.mode_return_home
+          - input_boolean.send_message
+      - service: light.turn_on
+        entity_id: 
+          - group.kitchen_prep_lights
+          - light.living_room
+      - service: light.turn_off
+        entity_id: 
+          - light.ensuite_2
+      - service: homeassistant.turn_off
+        entity_id: 
+          - switch.simon_blanket
+          - switch.megan_blanket
+          - switch.staci_blanket
+          - switch.delia_blanket
+
+
+####################################################
+#                                                  #
+#           automation - Day                       #
+#                                                  #
+#################################################### 
+
+  - alias: mode_settings_day
+    trigger:
+      - platform: state
+        entity_id: input_select.time_mode
+        to: 'Day'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.eshower
+          option: '{{"Motion"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.bshower
+          option: '{{"Motion"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.lon
+          option: '{{"Motion"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.ton
+          option: '{{"Motion"}}'
+      - service: homeassistant.turn_off
+        entity_id: 
+          - group.all_lights
+          - switch.dining_room_iron
+          - switch.simon_blanket
+          - switch.megan_blanket
+          - switch.staci_blanket
+          - switch.delia_blanket
+
+####################################################
+#                                                  #
+#           automation - Evening                   #
+#                                                  #
+#################################################### 
+
+  - alias: mode_settings_evening
+    trigger:
+      - platform: state
+        entity_id: input_select.time_mode
+        to: 'Evening'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.eshower
+          option: '{{"Motion"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.bshower
+          option: '{{"Bathroom On"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.lon
+          option: '{{"Motion"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.ton
+          option: '{{"Motion"}}'
+      - service: light.turn_on
+        entity_id: 
+          - light.front_light
+          - light.kitchen
+          - light.living_room
+          - light.dining
+          - light.lounge_lightstrip
+      - service: light.turn_on
+        entity_id: light.master_lightstrip
+        data:
+            brightness: 200
+
+####################################################
+#                                                  #
+#           automation - Night                     #
+#                                                  #
+#################################################### 
+
+  - alias: mode_settings_night
+    trigger:
+      - platform: state
+        entity_id: input_select.time_mode
+        to: 'Night'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.eshower
+          option: '{{"Motion"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.bshower
+          option: '{{"Motion"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.lon
+          option: '{{"Motion"}}'
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.ton
+          option: '{{"Motion"}}'
+      - service: light.turn_off
+        entity_id: 
+          - group.family_lights
+      - service: homeassistant.turn_off #turn off the beds for night mode
+        entity_id: 
+          - switch.simon_blanket
+          - switch.megan_blanket
+          - switch.staci_blanket
+          - switch.delia_blanket
+
+####################################################
+#                                                  #
+#           automation - Night   dim lightstrip if on    #
+#                                                  #
+#################################################### 
+
+  - alias: mode_settings_night_bedroom_dim
+    trigger:
+      - platform: state
+        entity_id: input_select.time_mode
+        to: 'Night'
+    condition:
+      - condition: state
+        entity_id: light.master_lightstrip
+        state: 'on'
+    action:
+      - service: light.turn_on
+        entity_id: light.master_lightstrip
+        data:
+            brightness: 80

@@ -32,6 +32,14 @@ group:
       - binary_sensor.climate_optimal
       - binary_sensor.climate_hot_outside_on_fan
       - binary_sensor.climate_cool_outside_off_fan
+      # internal temps
+      - sensor.back_door_state_temperature_measurement
+      - sensor.front_door_state_temperature_measurement
+      - sensor.toilet_motion_temperature_measurement
+      - sensor.bathroom_sensor_temperature
+      - sensor.ensuite_sensor_temperature
+      - sensor.laundry_sensor_temperature
+      - sensor.garage_sensor_temperature
       
 #################################################################
 #                                                               #

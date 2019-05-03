@@ -59,7 +59,7 @@ group:
       - automation.transport_simon_leave_tuggbus_tx
       - automation.transport_simon_leave_calwell_r5
       - automation.transport_simon_leave_calwell_home
-      - automation.transport_simon_leave_home
+      - automation.transport_simon_home
       
       - automation.transport_staci_leave_haydondr
       - automation.transport_staci_leave_citybus

@@ -31,31 +31,17 @@ group:
       - input_boolean.motion_in_ensuite
       - input_boolean.motion_in_toilet
       # hue motion sensors 
-      
       - sensor.bathroom_sensor_light_level
-      - sensor.bathroom_sensor_temperature
       - binary_sensor.bathroom_sensor_motion
-
       - sensor.ensuite_sensor_light_level
-      - sensor.ensuite_sensor_temperature
       - binary_sensor.ensuite_sensor_motion
-
       - sensor.laundry_sensor_light_level
-      - sensor.laundry_sensor_temperature
       - binary_sensor.laundry_sensor_motion
-
       - sensor.garage_sensor_light_level
-      - sensor.garage_sensor_temperature
       - binary_sensor.garage_sensor_motion
-
       # smartthings motion sensors
       - binary_sensor.toilet_motion_motion
-      #- sensor.
-      #- sensor.
-      #- sensor.
-      #- sensor.
-      #- sensor.
-
+      
 
   motion_a:
     name: Motion Automations

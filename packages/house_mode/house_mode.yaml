@@ -1,0 +1,148 @@
+#################################################################
+#                                                               #
+#                     Packages/House Mode                       #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  house_mode_e:
+    name: House Mode Entities
+    view: no
+    entities:
+      - binary_sensor.mode_day
+      - binary_sensor.mode_evening
+      - binary_sensor.mode_night
+      - binary_sensor.mode_morning
+      - input_select.time_mode
+      
+  house_mode_a:
+    name: House Mode Automations
+    view: no
+    entities:
+      - automation.mode_set_morning
+      - automation.mode_set_day
+      - automation.mode_set_evening
+      - automation.mode_set_night
+
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors - Time Modes           #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      mode_day:
+        friendly_name: Day
+        value_template: "{{ is_state('input_select.time_mode', 'Day') }}"
+        icon_template: mdi:weather-sunny
+      mode_evening:
+        friendly_name: Evening
+        value_template: "{{ is_state('input_select.time_mode', 'Evening') }}"
+        icon_template: mdi:weather-sunset
+      mode_night:
+        friendly_name: Night
+        value_template: "{{ is_state('input_select.time_mode', 'Night') }}"
+        icon_template: mdi:weather-night
+      mode_morning:
+        friendly_name: Morning
+        value_template: "{{ is_state('input_select.time_mode', 'Morning') }}"
+        icon_template: mdi:weather-sunset-up
+
+#################################################################
+#                                                               #
+#                       Input Select                            #
+#                                                               #
+#################################################################
+
+input_select:
+
+####################################################
+#                                                  #
+#            Input Select - Time Modes             #
+#                                                  #
+#################################################### 
+
+  time_mode:
+    name: Time Mode
+    options:
+      - Morning
+      - Day
+      - Evening
+      - Night
+    #initial: Day
+    icon: mdi:sync
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see automation/house_mode.yaml
+
+automation:
+
+####################################################
+#                                                  #
+#           automation - Time Modes                #
+#                                                  #
+#################################################### 
+
+  - alias: mode_set_morning
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: '00:00:00'
+      - platform: time
+        at: '06:00:00'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.time_mode
+          option: '{{"Morning"}}'
+      
+  - alias: mode_set_day
+    trigger:
+      - platform: time
+        at: '09:00:00'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.time_mode
+          option: '{{"Day"}}'
+      
+  - alias: mode_set_evening
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '-00:30:00'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.time_mode
+          option: '{{"Evening"}}'
+      
+  - alias: mode_set_night
+    trigger:
+      - platform: time
+        at: '22:00:00'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.time_mode
+          option: '{{"Night"}}'

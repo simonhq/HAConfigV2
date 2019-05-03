@@ -31,9 +31,10 @@ group:
       - sensor.ensuite_motion_sensor_battery_level
       - sensor.laundry_motion_sensor_battery_level
       - sensor.garage_motion_sensor_battery_level
-      #- sensor.
-      #- sensor.
-      #- sensor.
+      # smartthings
+      - sensor.back_door_state_battery
+      - sensor.front_door_state_battery
+      - sensor.toilet_motion_battery
       #- sensor.
       #- sensor.
 

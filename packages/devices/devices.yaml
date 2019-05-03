@@ -85,7 +85,18 @@ group:
     entities:
       - device_tracker.samsung_washer
       - device_tracker.samsung_dryer
-      
+      #smartthings
+      - switch.washer_samsung
+      - sensor.washer_samsung_washer_job_state
+      - sensor.washer_samsung_washer_machine_state
+      - sensor.washer_samsung_washer_completion_time
+      - sensor.washer_samsung_washer_mode
+      - switch.tumble_dryer
+      - sensor.tumble_dryer_dryer_mode
+      - sensor.tumble_dryer_dryer_job_state
+      - sensor.tumble_dryer_dryer_machine_state
+      - sensor.tumble_dryer_dryer_completion_time
+
   app_s:
     name: Appliance System
     view: no

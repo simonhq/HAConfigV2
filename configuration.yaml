@@ -23,6 +23,14 @@ homeassistant:
 #
 ###########################################################################
 
+# uncomment when using SSL
+http:
+   base_url: !secret HA_URL
+   ssl_certificate: /ssl/fullchain.pem
+   ssl_key: /ssl/privkey.pem
+   ip_ban_enabled: true
+   login_attempts_threshold: 5
+
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
@@ -38,14 +46,6 @@ frontend:
 
 lovelace:
   mode: yaml
-
-# uncomment when using SSL
-# http:
-#   base_url: !secret HA_URL
-#   ssl_certificate: /ssl/fullchain.pem
-#   ssl_key: /ssl/privkey.pem
-#   ip_ban_enabled: true
-#   login_attempts_threshold: 5
 
 # Discover some devices automatically
 discovery:

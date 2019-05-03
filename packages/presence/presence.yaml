@@ -1,0 +1,280 @@
+#################################################################
+#                                                               #
+#                     Packages/Presence                         #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  presence_e:
+    name: Presence Entities
+    view: no
+    entities:
+      - binary_sensor.presence_away
+      - binary_sensor.presence_home
+      - binary_sensor.presence_allhome
+      - input_boolean.presence_away
+      - input_boolean.presence_guest
+      - input_select.presence_mode
+      # from smartthings
+      - binary_sensor.simon_thompson_s_spixel_presence #no long used
+
+  family: #used in presence automation below
+    name: Family
+    view: no
+    entities:
+      - person.simon
+      - person.megan
+      - person.staci
+      - person.delia
+    
+  people_e:
+    name: People
+    view: no
+    entities:
+      - person.simon
+      - person.megan
+      - person.staci
+      - person.delia
+      - device_tracker.sphone_net
+      - device_tracker.sphone
+      - device_tracker.mphone_net
+      - device_tracker.mphone
+      - device_tracker.stphone_net
+      - device_tracker.stphone
+      - device_tracker.dphone_net
+      - device_tracker.dphone
+
+  presence_a:
+    name: Presence Automations
+    view: no
+    entities:
+      - automation.presence_set_someone_home
+      - automation.presence_set_all_home
+      - automation.presence_set_all_away
+      
+#################################################################
+#                                                               #
+#                       Binary Sensors                          #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+####################################################
+#                                                  #
+#            Binary Sensors -          #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      presence_away:
+        friendly_name: Away
+        value_template: "{{ is_state('input_select.presence_mode', 'All Away') }}"
+        icon_template: mdi:account-off
+        device_class: sound
+      presence_home:
+        friendly_name: Home
+        value_template: "{{ is_state('binary_sensor.presence_away', 'off') }}"
+        icon_template: mdi:account
+        device_class: connectivity
+      presence_allhome:
+        friendly_name: All Home
+        value_template: "{{ is_state('input_select.presence_mode', 'All Home') }}"
+        icon_template: mdi:account
+        device_class: connectivity
+
+#################################################################
+#                                                               #
+#                       Input Boolean                           #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#            Input Boolean - presence Modes        #
+#                                                  #
+#################################################### 
+
+  presence_away:
+    name: Someone away for the night
+    initial: off
+    icon: mdi:account-remove
+
+  presence_guest:
+    name: Guest visiting (Someone home)
+    initial: off
+    icon: mdi:account-star
+
+#################################################################
+#                                                               #
+#                       Input Select                            #
+#                                                               #
+#################################################################
+
+input_select:
+
+####################################################
+#                                                  #
+#            Input Select - presence Modes         #
+#                                                  #
+#################################################### 
+
+  presence_mode:
+    name: Presence Mode
+    options:
+      - All Away
+      - Someone Home
+      - All Home
+    #initial: All Away
+    icon: mdi:account-location
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+# please see automation/house_mode.yaml
+
+automation:
+
+####################################################
+#                                                  #
+#           automation - someone home              #
+#                                                  #
+#################################################### 
+
+  - alias: presence_set_someone_home
+    trigger:
+      - platform: state
+        entity_id: person.simon
+      - platform: state
+        entity_id: person.megan
+      - platform: state
+        entity_id: person.staci
+      - platform: state
+        entity_id: person.delia
+      - platform: state
+        entity_id: input_boolean.presence_guest
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: group.family
+          state: 'home'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: person.simon
+              state: 'not_home'
+            - condition: state
+              entity_id: person.megan
+              state: 'not_home'
+            - condition: state
+              entity_id: person.staci
+              state: 'not_home'
+            - condition: state
+              entity_id: person.delia
+              state: 'not_home'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.presence_mode
+          option: '{{"Someone Home"}}'
+
+####################################################
+#                                                  #
+#           automation - All Away                  #
+#                                                  #
+#################################################### 
+
+  - alias: presence_set_all_away
+    trigger:
+      - platform: state
+        entity_id: person.simon
+        to: 'not_home'
+      - platform: state
+        entity_id: person.megan
+        to: 'not_home'
+      - platform: state
+        entity_id: person.staci
+        to: 'not_home'
+      - platform: state
+        entity_id: person.delia
+        to: 'not_home'
+      - platform: state
+        entity_id: input_boolean.presence_guest
+        to: 'off'
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: group.family
+          state: 'not_home'
+        - condition: state
+          entity_id: input_boolean.presence_guest
+          state: 'off'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.presence_mode
+          option: '{{"All Away"}}'
+
+####################################################
+#                                                  #
+#           automation - All Home                  #
+#                                                  #
+#################################################### 
+
+  - alias: presence_set_all_home
+    trigger:
+      - platform: state
+        entity_id: person.simon
+        to: 'home'
+      - platform: state
+        entity_id: person.megan
+        to: 'home'
+      - platform: state
+        entity_id: person.staci
+        to: 'home'
+      - platform: state
+        entity_id: person.delia
+        to: 'home'
+      - platform: state
+        entity_id: input_boolean.presence_away
+        to: 'on'
+    condition:
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: input_boolean.presence_away
+            state: 'on'
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: person.simon
+                state: 'home'
+              - condition: state
+                entity_id: person.megan
+                state: 'home'
+              - condition: state
+                entity_id: person.staci
+                state: 'home'
+              - condition: state
+                entity_id: person.delia
+                state: 'home'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.presence_mode
+          option: '{{"All Home"}}'
+      

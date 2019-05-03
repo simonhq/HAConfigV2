@@ -30,11 +30,7 @@ dependant upon each other, I plan on moving to a package system to keep things t
 
 Here is a Todo list of packages:
 
-
-* External IP/Duckdns
-* Interface
-* Integrations
-* Appdaemon Automations 
+* Interface/Lovelace
 
 ## Packages Done (1st draft)
 
@@ -70,6 +66,7 @@ Here is a Todo list of packages:
 
 ## Integrations
 
+* External IP/Duckdns
 * Hue Lights
 * Smartthings
 * TP-Link Switches
@@ -77,6 +74,10 @@ Here is a Todo list of packages:
 * IFTTT
 * GPS Logger
 * Google Cast
+* Discord Webhook
+* Appdaemon Automations 
+
+#### Errors
 * Google Hangouts
 
 ## Installation
