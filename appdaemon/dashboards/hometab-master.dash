@@ -12,10 +12,12 @@ global_parameters:
     use_hass_icon: 1
 
 layout:
-    - time_select (2x1),                    clock (2x1),                           spacer,        fd_select,        fdoor
-    - presence_select (2x1),                myweather (2x2),                       spacer(2x1),                     bdoor
-    - guest_bool,           away_bool,                                             ens_select,    l_ensuite,        l_master       
-    - bool_returning,       spacer,         sensor.dark_sky_daily_summary (2x1),   fan_select,        sw_s_blanket,     sw_m_blanket               
+    - time_select (2x1),                    clock (2x1),                           l_ensuite,         fd_select,        fdoor
+    - presence_select (2x1),                myweather (2x2),                       ens_select,        fan_select,       bdoor
+    - guest_bool,           away_bool,                                             l_master,          sim_b_bool,       meg_b_bool
+    - bool_returning,       spacer,         sensor.dark_sky_daily_summary (2x1),   spacer,            sw_s_blanket,     sw_m_blanket               
+
+
 
 clock:
     widget_type: clock
@@ -33,7 +35,7 @@ l_master:
 
 l_ensuite:
     widget_type: light
-    entity: light.ensuite
+    entity: light.ensuite_3
     title: Ensuite Lights
     icon_on: mdi-lightbulb-on
     icon_off: mdi-lightbulb-off-outline
@@ -101,3 +103,13 @@ fan_select:
     widget_type: input_select
     title: Fan
     entity: input_select.master_fan_flag
+
+meg_b_bool:
+    widget_type: input_boolean
+    title: Meg Heat 1hr
+    entity: input_boolean.bed_m
+
+sim_b_bool:
+    widget_type: input_boolean
+    title: Sim Heat 1hr
+    entity: input_boolean.bed_s

@@ -71,56 +71,56 @@ binary_sensor:
     sensors:
       simon_meg_car:
         friendly_name: Simon/Meg Car
-        value_template: "{{ (not is_state('group.simon', 'home') and not is_state('group.megan', 'home')) and (is_state('binary_sensor.drive_meg','on') or is_state('binary_sensor.drive_simon','on')) and states('sensor.waze_meg_to_simon')|float < 5 }}"
+        value_template: "{{ (not is_state('person.simon', 'home') and not is_state('person.megan', 'home')) and (is_state('binary_sensor.drive_meg','on') or is_state('binary_sensor.drive_simon','on')) and states('sensor.waze_meg_to_simon')|float < 5 }}"
         icon_template: mdi:car-connected
       simon_staci_car:
         friendly_name: Simon/Staci Car
-        value_template: "{{ (not is_state('group.simon', 'home') and not is_state('group.staci', 'home')) and is_state('binary_sensor.drive_simon','on') and states('sensor.waze_simon_to_staci')|float < 5 }}"
+        value_template: "{{ (not is_state('person.simon', 'home') and not is_state('person.staci', 'home')) and is_state('binary_sensor.drive_simon','on') and states('sensor.waze_simon_to_staci')|float < 5 }}"
         icon_template: mdi:car-connected
       simon_delia_car:
         friendly_name: Simon/Delia Car
-        value_template: "{{ (not is_state('group.simon', 'home') and not is_state('group.delia', 'home')) and is_state('binary_sensor.drive_simon','on') and states('sensor.waze_simon_to_delia')|float < 5 }}"
+        value_template: "{{ (not is_state('person.simon', 'home') and not is_state('person.delia', 'home')) and is_state('binary_sensor.drive_simon','on') and states('sensor.waze_simon_to_delia')|float < 5 }}"
         icon_template: mdi:car-connected
       megan_staci_car:
         friendly_name: Megan/Staci Car
-        value_template: "{{ (not is_state('group.megan', 'home') and not is_state('group.staci', 'home')) and is_state('binary_sensor.drive_meg','on') and states('sensor.waze_meg_to_staci')|float < 5 }}"
+        value_template: "{{ (not is_state('person.megan', 'home') and not is_state('person.staci', 'home')) and is_state('binary_sensor.drive_meg','on') and states('sensor.waze_meg_to_staci')|float < 5 }}"
         icon_template: mdi:car-connected
       megan_delia_car:
         friendly_name: Megan/Delia Car
-        value_template: "{{ (not is_state('group.megan', 'home') and not is_state('group.delia', 'home')) and is_state('binary_sensor.drive_meg','on') and states('sensor.waze_meg_to_delia')|float < 5 }}"
+        value_template: "{{ (not is_state('person.megan', 'home') and not is_state('person.delia', 'home')) and is_state('binary_sensor.drive_meg','on') and states('sensor.waze_meg_to_delia')|float < 5 }}"
         icon_template: mdi:car-connected
 
       simon_car:
         friendly_name: Simon Car
-        value_template: "{{ is_state('binary_sensor.drive_simon', 'on') or (not is_state('group.simon', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
+        value_template: "{{ is_state('binary_sensor.drive_simon', 'on') or (not is_state('person.simon', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
         icon_template: mdi:car-wash
       simon_walkbus:
         friendly_name: Simon Walk/Bus
-        value_template: "{{ not is_state('group.simon', 'home') and is_state('binary_sensor.simon_car', 'off') }}"
+        value_template: "{{ not is_state('person.simon', 'home') and is_state('binary_sensor.simon_car', 'off') }}"
         icon_template: mdi:walk
       megan_car:
         friendly_name: Meg Car
-        value_template: "{{ is_state('binary_sensor.drive_meg', 'on') or (not is_state('group.megan', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
+        value_template: "{{ is_state('binary_sensor.drive_meg', 'on') or (not is_state('person.megan', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
         icon_template: mdi:car-wash
       megan_walkbus:
         friendly_name: Meg Walk/Bus
-        value_template: "{{ not is_state('group.megan', 'home') and is_state('binary_sensor.megan_car', 'off') }}"
+        value_template: "{{ not is_state('person.megan', 'home') and is_state('binary_sensor.megan_car', 'off') }}"
         icon_template: mdi:walk
       staci_car:
         friendly_name: Staci Car
-        value_template: "{{ (not is_state('group.staci', 'home') and is_state('binary_sensor.simon_staci_car','on')) or (not is_state('group.staci', 'home') and is_state('binary_sensor.megan_staci_car','on')) }}"
+        value_template: "{{ (not is_state('person.staci', 'home') and is_state('binary_sensor.simon_staci_car','on')) or (not is_state('person.staci', 'home') and is_state('binary_sensor.megan_staci_car','on')) }}"
         icon_template: mdi:car-wash
       staci_walkbus:
         friendly_name: Staci Walk/Bus
-        value_template: "{{ not is_state('group.staci', 'home') and is_state('binary_sensor.staci_car', 'off') }}"
+        value_template: "{{ not is_state('person.staci', 'home') and is_state('binary_sensor.staci_car', 'off') }}"
         icon_template: mdi:walk
       delia_car:
         friendly_name: Delia Car
-        value_template: "{{ (not is_state('group.delia', 'home') and is_state('binary_sensor.simon_delia_car','on')) or (not is_state('group.delia', 'home') and is_state('binary_sensor.megan_delia_car','on')) }}"
+        value_template: "{{ (not is_state('person.delia', 'home') and is_state('binary_sensor.simon_delia_car','on')) or (not is_state('person.delia', 'home') and is_state('binary_sensor.megan_delia_car','on')) }}"
         icon_template: mdi:car-wash
       delia_walkbus:
         friendly_name: Delia Walk/Bus
-        value_template: "{{ not is_state('group.delia', 'home') and is_state('binary_sensor.delia_car', 'off') }}"
+        value_template: "{{ not is_state('person.delia', 'home') and is_state('binary_sensor.delia_car', 'off') }}"
         icon_template: mdi:walk
 
 

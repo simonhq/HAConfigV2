@@ -15,20 +15,31 @@ group:
     name: Fan Entities
     view: no
     entities:
-      - remote.harmony_hub
-      - input_select.harmony
-      - input_select.channel
+      - input_select.master_fan_flag
+      - input_select.staci_fan_flag
+      - input_select.delia_fan_flag
       - binary_sensor.fans_on
       - binary_sensor.fans_off
+      - device_tracker.bond_hub
 
   fans_a:
     name: Fan Automations
     view: no
     entities:
-      - automation.harmony_state_change
-      - automation.harmony_activity_select
-      - automation.harmony_tv_off_lightstrip_off
-      - automation.harmony_tv_on_lightstrip_on
+      - script.fans_off
+      - script.fans_on
+      - automation.master_fan_off
+      - automation.master_fan_1
+      - automation.master_fan_2
+      - automation.master_fan_3
+      - automation.staci_fan_off
+      - automation.staci_fan_1
+      - automation.staci_fan_2
+      - automation.staci_fan_3
+      - automation.delia_fan_off
+      - automation.delia_fan_1
+      - automation.delia_fan_2
+      - automation.delia_fan_3
 
 #################################################################
 #                                                               #

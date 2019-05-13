@@ -41,6 +41,20 @@ group:
       - binary_sensor.garage_sensor_motion
       # smartthings motion sensors
       - binary_sensor.toilet_motion_motion
+      # rest sensors
+      - sensor.bathroom_motion
+      - sensor.ensuite_motion
+      - sensor.garage_motion
+      - sensor.laundry_motion
+      - sensor.bathroom_lux
+      - sensor.ensuite_lux
+      - sensor.garage_lux
+      - sensor.laundry_lux
+      - sensor.bathroom_temperature
+      - sensor.ensuite_temperature
+      - sensor.garage_temperature
+      - sensor.laundry_temperature
+
       
 
   motion_a:
@@ -77,6 +91,124 @@ group:
       - automation.motion_toilet_on_motion
       - automation.motion_toilet_on_motion_night
       - automation.motion_toilet_off_light
+
+#################################################################
+#                                                               #
+#                       rest sensors                            #
+#                                                               #
+#################################################################
+
+sensor:
+
+####################################################
+#                                                  #
+#               rest motion sensors                #
+#                                                  #
+####################################################
+
+  #bathroom
+  - platform: rest
+    resource: !secret hue_bth_lux
+    value_template: '{{ value_json.state.lightlevel }}'
+    unit_of_measurement: Lux
+    name: 'Bathroom Lux'
+      
+  - platform: rest
+    resource: !secret hue_bth_temp
+    value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Bathroom Temperature'
+
+  - platform: rest
+    resource: !secret hue_bth_motion
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: 'Bathroom Motion'
+
+  - platform: rest
+    resource: !secret hue_bth_temp
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Bathroom Motion Sensor Battery Level'
+
+  #ensuite
+  - platform: rest
+    resource: !secret hue_ens_lux
+    value_template: '{{ value_json.state.lightlevel }}'
+    unit_of_measurement: Lux
+    name: 'Ensuite Lux'
+
+  - platform: rest
+    resource: !secret hue_ens_temp
+    value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Ensuite Temperature'
+
+  - platform: rest
+    resource: !secret hue_ens_motion
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: 'Ensuite Motion'
+
+  - platform: rest
+    resource: !secret hue_ens_temp
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Ensuite Motion Sensor Battery Level'
+
+  #laundry
+  - platform: rest
+    resource: !secret hue_lnd_lux
+    value_template: '{{ value_json.state.lightlevel }}'
+    unit_of_measurement: Lux
+    name: 'Laundry Lux'
+
+  - platform: rest
+    resource: !secret hue_lnd_temp
+    value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Laundry Temperature'
+
+  - platform: rest
+    resource: !secret hue_lnd_motion
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: 'Laundry Motion'
+
+  - platform: rest
+    resource: !secret hue_lnd_temp
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Laundry Motion Sensor Battery Level'
+
+  #garage
+  - platform: rest
+    resource: !secret hue_gar_lux
+    value_template: '{{ value_json.state.lightlevel }}'
+    unit_of_measurement: Lux
+    name: 'Garage Lux'
+
+  - platform: rest
+    resource: !secret hue_gar_temp
+    value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Garage Temperature'
+
+  - platform: rest
+    resource: !secret hue_gar_motion
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
+    name: 'Garage Motion'
+
+  - platform: rest
+    resource: !secret hue_gar_temp
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Garage Motion Sensor Battery Level'
 
 
 #################################################################
@@ -225,8 +357,10 @@ automation:
   - alias: motion_bathroom_motion
     trigger: 
       platform: state
-      entity_id: binary_sensor.bathroom_sensor_motion
-      to: 'on'
+      #entity_id: binary_sensor.bathroom_sensor_motion
+      entity_id: sensor.bathroom_motion
+      #to: 'on'
+      to: 'True'
     condition:
       condition: state
       entity_id: input_select.bshower
@@ -241,8 +375,10 @@ automation:
   - alias: motion_bathroom_no_motion_timer_on
     trigger: 
       platform: state
-      entity_id: binary_sensor.bathroom_sensor_motion
-      to: 'off'
+      #entity_id: binary_sensor.bathroom_sensor_motion
+      entity_id: sensor.bathroom_motion
+      #to: 'off'
+      to: 'False'
     action:
       - service: timer.start
         entity_id: timer.bathroom_timer
@@ -329,8 +465,10 @@ automation:
   - alias: motion_ensuite_motion
     trigger: 
       platform: state
-      entity_id: binary_sensor.ensuite_sensor_motion
-      to: 'on'
+      #entity_id: binary_sensor.ensuite_sensor_motion
+      entity_id: sensor.ensuite_motion
+      #to: 'on'
+      to: 'True'
     condition:
       condition: state
       entity_id: input_select.eshower
@@ -345,8 +483,10 @@ automation:
   - alias: motion_ensuite_no_motion_timer_on
     trigger: 
       platform: state
-      entity_id: binary_sensor.ensuite_sensor_motion
-      to: 'off'
+      #entity_id: binary_sensor.ensuite_sensor_motion
+      entity_id: sensor.ensuite_motion
+      #to: 'off'
+      to: 'False'
     action:
       - service: timer.start
         entity_id: timer.ensuite_timer
@@ -434,8 +574,10 @@ automation:
   - alias: motion_ensuite_on_motion_morning
     trigger: 
       platform: state
-      entity_id: binary_sensor.ensuite_sensor_motion
-      to: 'on'
+      #entity_id: binary_sensor.ensuite_sensor_motion
+      entity_id: sensor.ensuite_motion
+      #to: 'on'
+      to: 'True'
     condition:
       condition: and
       conditions:
@@ -460,8 +602,10 @@ automation:
   - alias: motion_laundry_motion
     trigger: 
       platform: state
-      entity_id: binary_sensor.laundry_sensor_motion
-      to: 'on'
+      #entity_id: binary_sensor.laundry_sensor_motion
+      entity_id: sensor.laundry_motion
+      #to: 'on'
+      to: 'True'
     condition:
       condition: state
       entity_id: input_select.lon
@@ -476,8 +620,10 @@ automation:
   - alias: motion_laundry_no_motion_timer_on
     trigger: 
       platform: state
-      entity_id: binary_sensor.laundry_sensor_motion
-      to: 'off'
+      #entity_id: binary_sensor.laundry_sensor_motion
+      entity_id: sensor.laundry_motion
+      #to: 'off'
+      to: 'False'
     action:
       - service: timer.start
         entity_id: timer.laundry_timer
@@ -565,8 +711,10 @@ automation:
   - alias: motion_garage_motion
     trigger: 
       platform: state
-      entity_id: binary_sensor.garage_sensor_motion
-      to: 'on'
+      #entity_id: binary_sensor.garage_sensor_motion
+      entity_id: sensor.garage_motion
+      #to: 'on'
+      to: 'True'
     condition:
       condition: state
       entity_id: input_select.gon
@@ -581,8 +729,10 @@ automation:
   - alias: motion_garage_no_motion_timer_on
     trigger: 
       platform: state
-      entity_id: binary_sensor.garage_sensor_motion
-      to: 'off'
+      #entity_id: binary_sensor.garage_sensor_motion
+      entity_id: sensor.garage_motion
+      #to: 'off'
+      to: 'False'
     action:
       - service: timer.start
         entity_id: timer.garage_timer
@@ -739,4 +889,159 @@ automation:
     action:
       - service: light.turn_off
         entity_id: light.toilet_2
-  
+
+#################################################################
+#                                                               #
+#                       Automation  for on/off of motion setting #
+#                                                               #
+#################################################################
+
+  ###################################
+  ##  bathroom Mode control
+  ###################################
+
+  - alias: mode_set_bathroom_motion_off
+    trigger:
+      - platform: state
+        entity_id: input_select.bshower
+        to: 'Motion'
+      - platform: state
+        entity_id: input_select.bshower
+        to: 'Bathroom Off'
+    action:
+      - service: light.turn_off
+        entity_id: light.bathroom_2
+
+  - alias: mode_set_bathroom_on
+    trigger:
+      - platform: state
+        entity_id: input_select.bshower
+        to: 'Bathroom On'
+    action:
+      - service: light.turn_on
+        entity_id: light.bathroom_2
+
+  ###################################
+  ##  toilet Mode control
+  ###################################
+
+  - alias: mode_set_toilet_motion_off
+    trigger:
+      - platform: state
+        entity_id: input_select.ton
+        to: 'Motion'
+      - platform: state
+        entity_id: input_select.ton
+        to: 'Toilet Off'
+    action:
+      - service: light.turn_off
+        entity_id: light.toilet_2
+
+  - alias: mode_set_toilet_on
+    trigger:
+      - platform: state
+        entity_id: input_select.ton
+        to: 'Toilet On'
+    action:
+      - service: light.turn_on
+        entity_id: light.toilet_2
+
+  ###################################
+  ##  ensuite Mode control
+  ###################################
+
+  - alias: mode_set_ensuite_motion_off
+    trigger:
+      - platform: state
+        entity_id: input_select.eshower
+        to: 'Motion'
+      - platform: state
+        entity_id: input_select.eshower
+        to: 'Ensuite Off'
+    action:
+      - service: light.turn_off
+        entity_id: group.ensuite_3
+
+  - alias: mode_set_ensuite_on
+    trigger:
+      - platform: state
+        entity_id: input_select.eshower
+        to: 'Ensuite On'
+    action:
+      - service: light.turn_on
+        entity_id: group.ensuite_3
+
+  ###################################
+  ##  laundry Mode control
+  ###################################
+
+  - alias: mode_set_laundry_motion_off
+    trigger:
+      - platform: state
+        entity_id: input_select.lon
+        to: 'Motion'
+      - platform: state
+        entity_id: input_select.lon
+        to: 'Laundry Off'
+    action:
+      - service: light.turn_off
+        entity_id: light.laundry_2
+
+  - alias: mode_set_laundry_on
+    trigger:
+      - platform: state
+        entity_id: input_select.lon
+        to: 'Laundry On'
+    action:
+      - service: light.turn_on
+        entity_id: light.laundry_2
+
+  ###################################
+  ##  garage Mode control
+  ###################################
+
+  - alias: mode_set_garage_motion_off
+    trigger:
+      - platform: state
+        entity_id: input_select.gon
+        to: 'Motion'
+      - platform: state
+        entity_id: input_select.gon
+        to: 'Garage Off'
+    action:
+      - service: light.turn_off
+        entity_id: light.garage_2
+
+  - alias: mode_set_garage_on
+    trigger:
+      - platform: state
+        entity_id: input_select.gon
+        to: 'Garage On'
+    action:
+      - service: light.turn_on
+        entity_id: light.garage_2
+
+  ###################################
+  ##  toilet Mode control
+  ###################################
+
+  - alias: mode_set_toilet_motion_off
+    trigger:
+      - platform: state
+        entity_id: input_select.ton
+        to: 'Motion'
+      - platform: state
+        entity_id: input_select.ton
+        to: 'Toilet Off'
+    action:
+      - service: light.turn_off
+        entity_id: light.toilet_2
+
+  - alias: mode_set_toilet_on
+    trigger:
+      - platform: state
+        entity_id: input_select.ton
+        to: 'Toilet On'
+    action:
+      - service: light.turn_on
+        entity_id: light.toilet_2

@@ -195,15 +195,15 @@ time_select:
 
 bus_ej:
     widget_type: sensor
-    title: To Tugg (E&J)
-    entity: sensor.home_to_tugg_hour
+    title: To Tugg (79 E&J)
+    entity: sensor.home_to_tugg_79_ej_format
 
 bus_eg:
     widget_type: sensor
-    title: To Tugg (E&G)
-    entity: sensor.grove_to_tugg_hour
+    title: To Tugg (78 Shops)
+    entity: sensor.home_to_tugg_78_is_format
 
 bus_city_ej:
     widget_type: sensor
-    title: To City (E&J)
-    entity: sensor.home_to_city_hour
+    title: To City (Out)
+    entity: sensor.home_to_city_r5_out_format

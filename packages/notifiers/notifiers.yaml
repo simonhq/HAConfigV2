@@ -20,6 +20,7 @@ group:
       - binary_sensor.mess_discord
       - binary_sensor.mess_webhook
       - input_select.message_flag
+      - input_boolean.send_message
       
 #################################################################
 #                                                               #
@@ -202,5 +203,15 @@ notify:
 #                                                               #
 #################################################################
 
-# please see appdaemon
+automation:
 
+# please see appdaemon for actual sending, this is just the tigger
+
+  - alias: notify_morning
+    trigger:
+      - platform: time
+        at: '07:00:00'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.send_message
+        

@@ -155,7 +155,7 @@ device_tracker:
     hosts: 
       - 192.168.1.0/24
     interval_seconds: 15
-    consider_home: 120
+    consider_home: 240
     exclude:
      - !secret hass_wired
     new_device_defaults:
@@ -166,7 +166,7 @@ device_tracker:
     port: 80
 
 #other device tracking - to be turned on when ready
-  #- platform: gpslogger
+  - platform: gpslogger
   #- platform: huesensor
   #- platform: trackr
   #  username: !secret trackr_username

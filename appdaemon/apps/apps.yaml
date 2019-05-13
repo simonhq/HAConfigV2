@@ -48,14 +48,14 @@ transport-messages:
     - secrets
 
 # car
-travel:
-  module: travel
-  class: Travel_Messages
-  dependencies: 
-    - messaging
-  global_dependencies:
-    - globals
-    - secrets
+# travel:
+#   module: travel
+#   class: Travel_Messages
+#   dependencies: 
+#     - messaging
+#   global_dependencies:
+#     - globals
+#     - secrets
 
 # turn back on in September - update
 #climate:

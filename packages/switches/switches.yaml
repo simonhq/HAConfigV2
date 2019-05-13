@@ -21,6 +21,14 @@ group:
       - device_tracker.iron_switch
       - binary_sensor.switches_on
       - binary_sensor.switches_off
+      - switch.lounge_chairs
+      - switch.dining_room_iron
+      - switch.lounge_tv
+      - switch.study_printer
+      - switch.delia_blanket
+      - switch.megan_blanket
+      - switch.simon_blanket
+      - switch.staci_blanket
   
   swbed_e:
     name: Bed Switch Entities
