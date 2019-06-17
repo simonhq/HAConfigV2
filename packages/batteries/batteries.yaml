@@ -144,19 +144,19 @@ sensor:
     sensors:
       sphone_battery:
         friendly_name: Simon Phone Battery
-        value_template: '{{ states.device_tracker.sphone.attributes.battery }}'
+        value_template: '{{ states.device_tracker.sphone.attributes.battery_level }}'
         unit_of_measurement: '%'
       mphone_battery:
         friendly_name: Megan Phone Battery
-        value_template: '{{ states.device_tracker.mphone.attributes.battery }}'
+        value_template: '{{ states.device_tracker.mphone.attributes.battery_level }}'
         unit_of_measurement: '%'
       stphone_battery:
         friendly_name: Staci Phone Battery
-        value_template: '{{ states.device_tracker.stphone.attributes.battery }}'
+        value_template: '{{ states.device_tracker.stphone.attributes.battery_level }}'
         unit_of_measurement: '%'
       dphone_battery:
         friendly_name: Delia Phone Battery
-        value_template: '{{ states.device_tracker.dphone.attributes.battery }}'
+        value_template: '{{ states.device_tracker.dphone.attributes.battery_level }}'
         unit_of_measurement: '%'
 
 ####################################################
@@ -220,7 +220,7 @@ sensor:
 
 # please see appdaemon
 
-automation:
+
 
 
   

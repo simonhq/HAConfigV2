@@ -13,7 +13,7 @@ class DoorLock(hass.Hass):
     sname = ""
 
     def initialize(self):
-            
+             
         #create and set instance variables
         self.lock = globals.get_arg(self.args, "lock_id")
         self.kuser = globals.get_arg(self.args, "k_user")

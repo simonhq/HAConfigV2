@@ -21,8 +21,12 @@ group:
       - input_boolean.presence_away
       - input_boolean.presence_guest
       - input_select.presence_mode
+      - binary_sensor.home_meg
+      - binary_sensor.home_simon
+      - binary_sensor.home_staci
+      - binary_sensor.home_delia
       # from smartthings
-      - binary_sensor.simon_thompson_s_spixel_presence #no long used
+      #- binary_sensor.simon_thompson_s_spixel_presence #no long used
 
   family: #used in presence automation below
     name: Family
@@ -87,6 +91,26 @@ binary_sensor:
       presence_allhome:
         friendly_name: All Home
         value_template: "{{ is_state('input_select.presence_mode', 'All Home') }}"
+        icon_template: mdi:account
+        device_class: connectivity
+      home_meg:
+        friendly_name: Meg Home
+        value_template: "{{ is_state('person.megan', 'home') }}"
+        icon_template: mdi:account
+        device_class: connectivity
+      home_simon:
+        friendly_name: Simon Home
+        value_template: "{{ is_state('person.simon', 'home') }}"
+        icon_template: mdi:account
+        device_class: connectivity
+      home_staci:
+        friendly_name: Staci Home
+        value_template: "{{ is_state('person.staci', 'home') }}"
+        icon_template: mdi:account
+        device_class: connectivity
+      home_delia:
+        friendly_name: Delia Home
+        value_template: "{{ is_state('person.delia', 'home') }}"
         icon_template: mdi:account
         device_class: connectivity
 

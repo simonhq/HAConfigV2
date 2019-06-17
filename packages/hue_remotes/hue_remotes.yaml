@@ -21,6 +21,8 @@ group:
       - binary_sensor.ensuite_motion_sensor
       - binary_sensor.laundry_motion_sensor
       - binary_sensor.garage_motion_sensor
+      - sensor.bedroom_button_press
+      - sensor.living_button_press
 
   hue_remote_a:
     name: Hue Remote Automations
@@ -45,29 +47,13 @@ group:
 
 hue:
   bridges:
-    - host: 192.168.1.23
+    - host: 10.0.0.23
       allow_unreachable: true
       allow_hue_groups: true
 
 #################################################################
 #                                                               #
-#                      Binary Sensor                            #
-#                                                               #
-#################################################################
-
-binary_sensor:
-
-####################################################
-#                                                  #
-#             custom component                     #
-#                                                  #
-####################################################   
-
-  - platform: huesensor
-
-#################################################################
-#                                                               #
-#                       Sensor                                  #
+#                       rest sensors                            #
 #                                                               #
 #################################################################
 
@@ -75,27 +61,29 @@ sensor:
 
 ####################################################
 #                                                  #
-#            sensor - custom component             #
+#               rest motion sensors                #
 #                                                  #
-####################################################   
-
-  - platform: huesensor
-
-#################################################################
-#                                                               #
-#                       Device Tracker                          #
-#                                                               #
-#################################################################
-
-device_tracker:
-
+#
+# each button (1000, 2000, 3000, 4000)
+# short press (1002)
+# long press (1003)
+# repeat (1001)
+# initial (1000)
 ####################################################
-#                                                  #
-#            custom component                      #
-#                                                  #
-####################################################   
 
-  - platform: huesensor
+  #bathroom
+  - platform: rest
+    resource: !secret hue_rem_bed
+    value_template: '{{ value_json.state.buttonevent }}'
+    name: 'Bedroom Button Press'
+    scan_interval: 15
+      
+  - platform: rest
+    resource: !secret hue_rem_liv
+    value_template: '{{ value_json.state.buttonevent }}'
+    name: 'Living Button Press'
+    scan_interval: 15
+
 
 #################################################################
 #                                                               #
@@ -114,8 +102,8 @@ automation:
   - alias: bed_remote_megan_lamp_toggle
     trigger:
       - platform: state
-        entity_id: sensor.bedroom_remote
-        to: '1_click'
+        entity_id: sensor.bedroom_button_press
+        to: '1002'
     action:
       - service: light.toggle
         entity_id: light.master_lightstrip
@@ -123,8 +111,8 @@ automation:
   - alias: bed_remote_toggle_ensuite
     trigger:
       - platform: state
-        entity_id: sensor.bedroom_remote
-        to: '2_click'
+        entity_id: sensor.bedroom_button_press
+        to: '2002'
     action:
       - service: light.toggle
         entity_id: light.ensuite_3
@@ -132,8 +120,8 @@ automation:
   - alias: bed_remote_toggle_lightstrip
     trigger:
       - platform: state
-        entity_id: sensor.bedroom_remote
-        to: '3_click'
+        entity_id: sensor.bedroom_button_press
+        to: '3002'
     action:
       - service: light.toggle
         entity_id: light.master_lightstrip
@@ -141,8 +129,8 @@ automation:
   - alias: bed_remote_simon_lamp_toggle
     trigger:
       - platform: state
-        entity_id: sensor.bedroom_remote
-        to: '4_click'
+        entity_id: sensor.bedroom_button_press
+        to: '4002'
     action:
       - service: light.toggle
         entity_id: light.master_lightstrip
@@ -157,8 +145,8 @@ automation:
   - alias: bed_remote_set_night_all_off
     trigger:
       - platform: state
-        entity_id: sensor.bedroom_remote
-        to: '2_hold'
+        entity_id: sensor.bedroom_button_press
+        to: '2003'
     action:
       - service: homeassistant.turn_off
         entity_id: 
@@ -186,8 +174,8 @@ automation:
   - alias: remote_set_evening
     trigger:
       - platform: state
-        entity_id: sensor.remote
-        to: '1_click'
+        entity_id: sensor.living_button_press
+        to: '1002'
     action:
       - service: input_select.select_option
         data_template:
@@ -197,8 +185,8 @@ automation:
   - alias: remote_set_day
     trigger:
       - platform: state
-        entity_id: sensor.remote
-        to: '2_click'
+        entity_id: sensor.living_button_press
+        to: '2002'
     action:
       - service: input_select.select_option
         data_template:
@@ -208,8 +196,8 @@ automation:
   - alias: remote_set_morning
     trigger:
       - platform: state
-        entity_id: sensor.remote
-        to: '3_click'
+        entity_id: sensor.living_button_press
+        to: '3002'
     action:
       - service: input_select.select_option
         data_template:
@@ -219,8 +207,8 @@ automation:
   - alias: remote_set_night
     trigger:
       - platform: state
-        entity_id: sensor.remote
-        to: '4_click'
+        entity_id: sensor.living_button_press
+        to: '4002'
     action:
       - service: input_select.select_option
         data_template:
@@ -237,8 +225,8 @@ automation:
   - alias: remote_set_night_all_off
     trigger:
       - platform: state
-        entity_id: sensor.remote
-        to: '4_hold'
+        entity_id: sensor.living_button_press
+        to: '4003'
     action:
       - service: homeassistant.turn_off
         entity_id: 

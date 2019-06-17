@@ -7,13 +7,13 @@
 ###########################################################################
 
 homeassistant:
-  name: !secret HA_NAME
-  latitude: !secret HA_LAT
-  longitude: !secret HA_LONG
-  elevation: !secret HA_ELE
-  unit_system: metric
-  #temperature_unit: C
-  time_zone: !secret HA_TZ
+#  name: !secret HA_NAME
+#  latitude: !secret HA_LAT
+#  longitude: !secret HA_LONG
+#  elevation: !secret HA_ELE
+#  unit_system: metric
+#  #temperature_unit: C
+#  time_zone: !secret HA_TZ
   packages: !include_dir_named packages
   customize: !include customize.yaml
 
@@ -49,6 +49,8 @@ lovelace:
 
 # Discover some devices automatically
 discovery:
+ssdp:
+zeroconf:
 
 # Text to speech
 tts:
@@ -86,21 +88,8 @@ logger:
 #
 ###########################################################################
 
-# enables custom card updating & tracking
-custom_updater:
-  #mode: yaml
-  hide_sensor: false
-  show_installable: true
-  track:
-    - cards
-    - components
-    #- python scripts
-  component_urls:
-    - https://raw.githubusercontent.com/robmarkcole/Hue-sensors-HASS/master/custom_updater.json
-  card_urls:
-    - https://raw.githubusercontent.com/ljmerza/waze-card/master/updater.json
-  #python_urls:
-    #-
+hacs:
+  token: !secret hacs_token
 
 ###########################################################################
 # 

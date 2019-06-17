@@ -15,10 +15,10 @@ group:
     name: Hub Network Entities
     view: no
     entities:
-      - device_tracker.bond_hub
-      - device_tracker.harmonyhublan
-      - device_tracker.hue_hub
-      - device_tracker.kevo_bridge
+      - device_tracker.fan_hub
+      - device_tracker.harmonyhub
+      - device_tracker.philips_hue
+      - device_tracker.kevo_hub
       - device_tracker.myq_hub
       - device_tracker.smartthings_wifi
 
@@ -33,6 +33,8 @@ group:
       - binary_sensor.kevo
       - binary_sensor.myq
       - binary_sensor.smart
+      - binary_sensor.epson
+      - binary_sensor.hass_lt
 
   network_e:
     name: Network Entities
@@ -50,8 +52,6 @@ group:
       - binary_sensor.net_system
       - binary_sensor.wifi_kitchen
       - binary_sensor.wifi_lounge
-      - binary_sensor.epson
-      - binary_sensor.hass_lt
       - binary_sensor.pi_hole
 
   media_e:
@@ -64,7 +64,7 @@ group:
       - device_tracker.lounge_chromecast
       - device_tracker.gaming_chromecast
       - device_tracker.fetch_tv
-      - device_tracker.sony_ps4
+      - device_tracker.ps4
       
   media_s:
     name: Media System
@@ -112,7 +112,6 @@ group:
       - device_tracker.hometab_study
       - device_tracker.hometab_kitchen
       - device_tracker.hometab_hall
-      - device_tracker.hometab_lounge
       
   hometab_s:
     name: HomeTab System
@@ -121,10 +120,7 @@ group:
       - binary_sensor.ht_system
       - binary_sensor.ht_study
       - binary_sensor.ht_kitchen
-      - binary_sensor.ht_lounge
       - binary_sensor.ht_hall
-
-  
       
   pdevices_e:
     name: Personal Devices Entities
@@ -137,11 +133,11 @@ group:
       - device_tracker.meg_desktop
       - device_tracker.meg_ipad
       - device_tracker.meg_fitbit
-      - device_tracker.megan_work_surface
-      #- device_tracker. meg_surface
+      - device_tracker.meg_work_surface
+      - device_tracker.meg_surface
       - device_tracker.staci_surface
       - device_tracker.delia_surface
-      #- device_tracker. delia_chromebook
+      - device_tracker.delia_chromebook
       
 #################################################################
 #                                                               #
@@ -151,23 +147,32 @@ group:
 
 # track devices 
 device_tracker:
-  - platform: nmap_tracker
-    hosts: 
-      - 192.168.1.0/24
-    interval_seconds: 15
-    consider_home: 240
-    exclude:
-     - !secret hass_wired
-    new_device_defaults:
-      track_new_devices: yes
-      hide_if_away: False
+  #- platform: nmap_tracker
+  #  hosts: 
+  #    - 192.168.1.0/24
+  #  interval_seconds: 15
+  #  consider_home: 180
+  #  exclude:
+  #   - !secret hass_wired
+  #  new_device_defaults:
+  #    track_new_devices: yes
+  #    hide_if_away: False
   - platform: netgear
-    password: !secret netgear_pass
+    host: 10.0.0.1
     port: 80
+    accesspoints: 
+      - 78:D2:94:AA:52:44
+      - 78:D2:94:AA:76:0C
+    username: !secret netgear_user
+    password: !secret netgear_pass
+    interval_seconds: 10
+    consider_home: 180
+    new_device_defaults:
+      track_new_devices: true
+      hide_if_away: false
 
 #other device tracking - to be turned on when ready
-  - platform: gpslogger
-  #- platform: huesensor
+  #- platform: gpslogger
   #- platform: trackr
   #  username: !secret trackr_username
   #  password: !secret trackr_password
@@ -189,27 +194,27 @@ binary_sensor:
   - platform: template
     sensors:
       hubs_system:
-        value_template: "{{ is_state('binary_sensor.bond', 'on') and is_state('binary_sensor.harmony', 'on') and is_state('binary_sensor.hue', 'on') and is_state('binary_sensor.kevo', 'on') and is_state('binary_sensor.myq', 'on') and is_state('binary_sensor.smart', 'on') }}"
+        value_template: "{{ is_state('binary_sensor.bond', 'on') and is_state('binary_sensor.harmony', 'on') and is_state('binary_sensor.hue', 'on') and is_state('binary_sensor.kevo', 'on') and is_state('binary_sensor.myq', 'on') and is_state('binary_sensor.smart', 'on') and is_state('binary_sensor.epson', 'on') and is_state('binary_sensor.hass_lt', 'on') }}"
         friendly_name: 'Hubs'
         device_class: connectivity
         icon_template: mdi:battlenet
       bond:
-        value_template: "{{ is_state('device_tracker.bond_hub', 'home') }}"
+        value_template: "{{ is_state('device_tracker.fan_hub', 'home') }}"
         friendly_name: 'Fan Hub'
         device_class: connectivity
         icon_template: mdi:fan
       harmony:
-        value_template: "{{ is_state('device_tracker.harmonyhublan', 'home') }}"
+        value_template: "{{ is_state('device_tracker.harmonyhub', 'home') }}"
         friendly_name: 'Remote Hub'
         device_class: connectivity
         icon_template: mdi:remote
       hue:
-        value_template: "{{ is_state('device_tracker.hue_hub', 'home') }}"
+        value_template: "{{ is_state('device_tracker.philips_hue', 'home') }}"
         friendly_name: 'Lights Hub'
         device_class: connectivity
         icon_template: mdi:ceiling-light
       kevo:
-        value_template: "{{ is_state('device_tracker.kevo_bridge', 'home') }}"
+        value_template: "{{ is_state('device_tracker.kevo_hub', 'home') }}"
         friendly_name: 'Locks Hub'
         device_class: connectivity
         icon_template: mdi:home-lock
@@ -223,6 +228,16 @@ binary_sensor:
         friendly_name: 'Smartthings Hub'
         device_class: connectivity
         icon_template: mdi:home-circle
+      epson:
+        value_template: "{{ is_state('device_tracker.epson_printer', 'home') }}"
+        friendly_name: 'Printer'
+        device_class: connectivity
+        icon_template: mdi:printer
+      hass_lt:
+        value_template: "{{ is_state('device_tracker.xubuntu_laptop', 'home') }}"
+        friendly_name: 'Hassio Server'
+        device_class: connectivity
+        icon_template: mdi:home-assistant
 
 ####################################################
 #                                                  #
@@ -234,7 +249,7 @@ binary_sensor:
   - platform: template
     sensors:
       net_system:
-        value_template: "{{ is_state('binary_sensor.wifi_lounge', 'on') and is_state('binary_sensor.wifi_kitchen', 'on') and is_state('binary_sensor.epson', 'on') and is_state('binary_sensor.hass_lt', 'on') and is_state('binary_sensor.pi_hole', 'on')  }}"
+        value_template: "{{ is_state('binary_sensor.wifi_lounge', 'on') and is_state('binary_sensor.wifi_kitchen', 'on')  }}"
         friendly_name: 'Wifi'
         device_class: connectivity
         icon_template: mdi:orbit
@@ -248,21 +263,23 @@ binary_sensor:
         friendly_name: 'Wifi Kitchen/Router'
         device_class: connectivity
         icon_template: mdi:orbit
-      epson:
-        value_template: "{{ is_state('device_tracker.epson_printer', 'home') }}"
-        friendly_name: 'Printer'
-        device_class: connectivity
-        icon_template: mdi:printer
-      hass_lt:
-        value_template: "{{ is_state('device_tracker.xubuntu_laptop', 'home') }}"
-        friendly_name: 'Hassio Server'
+      
+
+      hass_lt_w:
+        value_template: "{{ is_state('device_tracker.xubuntu_laptop_w', 'home') }}"
+        friendly_name: 'Hassio Server via Wifi'
         device_class: connectivity
         icon_template: mdi:home-assistant
-      pi_hole:
-        value_template: "{{ states('sensor.pi_hole_dns_unique_clients')|float > 0 }}"
-        friendly_name: 'Pi Hole'
+      pi_server:
+        value_template: "{{ is_state('device_tracker.pi_server', 'home') }}"
+        friendly_name: 'Pi Server'
         device_class: connectivity
-        icon_template: mdi:fire
+        icon_template: mdi:raspberry-pi
+      # pi_hole:
+      #   value_template: "{{ states('sensor.pi_hole_dns_unique_clients')|float > 0 }}"
+      #   friendly_name: 'Pi Hole'
+      #   device_class: connectivity
+      #   icon_template: mdi:fire
 
 ####################################################
 #                                                  #
@@ -281,43 +298,36 @@ binary_sensor:
         value_template: "{{ is_state('device_tracker.kitchen_home_speaker', 'home') }}"
         friendly_name: 'Kitchen Home'
         device_class: connectivity
-        #entity_picture_template: /local/pics/googlehome.jpg
         icon_template: mdi:google-home 
       sp_lounge:
         value_template: "{{ is_state('device_tracker.lounge_mini_speaker', 'home') }}"
         friendly_name: 'Lounge Mini'
         device_class: connectivity
-        #entity_picture_template: /local/pics/googlemini.jpg 
         icon_template: mdi:google-home
       sp_ensuite:
-        value_template: "{{ is_state('device_tracker.ensuite_mini_speaker', 'home') }}"
+        value_template: "{{ is_state('device_tracker.home_mini_bathroom', 'home') }}"
         friendly_name: 'Ensuite Mini'
         device_class: connectivity
-        #entity_picture_template: /local/pics/googlemini.jpg 
         icon_template: mdi:google-home
       sp_ltv:
         value_template: "{{ is_state('device_tracker.lounge_chromecast', 'home') }}"
         friendly_name: 'Lounge TV'
         device_class: connectivity
-        #entity_picture_template: /local/pics/googlecast.jpg 
         icon_template: mdi:google-chrome
       sp_gtv:
         value_template: "{{ is_state('device_tracker.gaming_chromecast', 'home') }}"
         friendly_name: 'Gaming TV'
         device_class: connectivity
-        #entity_picture_template: /local/pics/googlecast.jpg 
         icon_template: mdi:google-chrome
       fetchtv:
         value_template: "{{ is_state('device_tracker.fetch_tv', 'home') }}"
         friendly_name: 'Fetch TV'
         device_class: connectivity
-        #entity_picture_template: /local/pics/fetchtv.jpg
         icon_template: mdi:television-box
       sonyps4:
-        value_template: "{{ is_state('device_tracker.sony_ps4', 'home') }}"
+        value_template: "{{ is_state('device_tracker.ps4', 'home') }}"
         friendly_name: 'PS4 Console'
         device_class: connectivity
-        #entity_picture_template: /local/pics/ps4.jpg 
         icon_template: mdi:playstation
 
 ####################################################
@@ -337,13 +347,11 @@ binary_sensor:
         value_template: "{{ is_state('device_tracker.samsung_washer', 'home') }}"
         friendly_name: 'Washing Machine'
         device_class: connectivity
-        #entity_picture_template: /local/pics/swasher.jpg 
         icon_template: mdi:washing-machine
       samdry:
         value_template: "{{ is_state('device_tracker.samsung_dryer', 'home') }}"
         friendly_name: 'Clothes Dryer'
         device_class: connectivity
-        #entity_picture_template: /local/pics/sdryer.jpg 
         icon_template: mdi:tumble-dryer
       # samwash_sw:
       #   value_template: "{{ is_state('switch.washing_machine', 'on') }}"
@@ -369,31 +377,21 @@ binary_sensor:
         value_template: "{{ is_state('device_tracker.hometab_study', 'home') }}"
         friendly_name: 'Study'
         device_class: connectivity
-        #entity_picture_template: /local/pics/nexus7.jpg 
         icon_template: mdi:desktop-classic
       ht_kitchen:
         value_template: "{{ is_state('device_tracker.hometab_kitchen', 'home') }}"
         friendly_name: 'Kitchen'
         device_class: connectivity
-        #entity_picture_template: /local/pics/nexus7.jpg 
         icon_template: mdi:fridge-outline
       ht_hall:
         value_template: "{{ is_state('device_tracker.hometab_hall', 'home') }}"
         friendly_name: 'Back Hall'
         device_class: connectivity
-        #entity_picture_template: /local/pics/nexus7.jpg 
         icon_template: mdi:door-closed
-      ht_lounge:
-        value_template: "{{ is_state('device_tracker.hometab_lounge', 'home') }}"
-        friendly_name: 'Lounge'
-        device_class: connectivity
-        #entity_picture_template: /local/pics/nexus7.jpg 
-        icon_template: mdi:sofa
       ht_system:
-        value_template: "{{ is_state('binary_sensor.ht_lounge', 'on') and is_state('binary_sensor.ht_hall', 'on') and is_state('binary_sensor.ht_kitchen', 'on') and is_state('binary_sensor.ht_study', 'on') }}"
+        value_template: "{{ is_state('binary_sensor.ht_hall', 'on') and is_state('binary_sensor.ht_kitchen', 'on') and is_state('binary_sensor.ht_study', 'on') }}"
         friendly_name: 'HomeTabs'
         device_class: connectivity
-        #entity_picture_template: /local/pics/nexus7.jpg 
         icon_template: mdi:tab
 
 

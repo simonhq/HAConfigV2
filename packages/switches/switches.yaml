@@ -15,7 +15,7 @@ group:
     name: Switch Entities
     view: no
     entities:
-      - device_tracker.printer_switch
+      - device_tracker.study_switch
       - device_tracker.tv_switch
       - device_tracker.chairs_switch
       - device_tracker.iron_switch
@@ -115,7 +115,7 @@ binary_sensor:
         device_class: connectivity
         icon_template: mdi:dip-switch
       sw_study:
-        value_template: "{{ is_state('device_tracker.printer_switch', 'home') }}"
+        value_template: "{{ is_state('device_tracker.study_switch', 'home') }}"
         friendly_name: 'Study'
         device_class: connectivity
         icon_template: mdi:toggle-switch
@@ -145,7 +145,7 @@ binary_sensor:
     sensors:
       swbed_system:
         value_template: "{{ is_state('binary_sensor.sw_sb', 'on') and is_state('binary_sensor.sw_mb', 'on') and is_state('binary_sensor.sw_stb', 'on') and is_state('binary_sensor.sw_db', 'on') }}"
-        friendly_name: 'Switches'
+        friendly_name: 'Bed Switches'
         device_class: connectivity
         icon_template: mdi:dip-switch
       sw_sb:
@@ -292,7 +292,6 @@ sensor:
 
 # please see appdaemon
 
-automation:
 
 
   

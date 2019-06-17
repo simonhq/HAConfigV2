@@ -17,16 +17,18 @@ group:
     entities:
       - binary_sensor.drive_meg
       - binary_sensor.drive_simon
+      - binary_sensor.drive_staci
+      - binary_sensor.drive_delia
       - input_boolean.presence_holiday
       - input_boolean.outback_just
       - input_boolean.simon_outback
-      - input_boolean.simon_outback_home
+      #- input_boolean.simon_outback_home
       - input_boolean.megan_outback
-      - input_boolean.megan_outback_home
+      #- input_boolean.megan_outback_home
       - input_boolean.staci_outback
-      - input_boolean.staci_outback_home
+      #- input_boolean.staci_outback_home
       - input_boolean.delia_outback
-      - input_boolean.delia_outback_home
+      #- input_boolean.delia_outback_home
       - timer.outback_just
       - sensor.waze_meg_time_to_work
       - sensor.waze_simon_time_to_uni
@@ -82,14 +84,14 @@ binary_sensor:
         friendly_name: Simon Drive
         value_template: "{{ is_state('input_boolean.simon_outback', 'on') }}"
         icon_template: mdi:car-key
-      #drive_staci: need to create the input_boolean if you need this
-      #  friendly_name: Staci Drive
-      #  value_template: "{{ is_state('input_boolean.staci_outback', 'on') }}"
-      #  icon_template: mdi:car
-      #drive_delia: need to create the input_boolean if you need this
-      #  friendly_name: Delia Drive
-      #  value_template: "{{ is_state('input_boolean.delia_outback', 'on') }}"
-      #  icon_template: mdi:car
+      drive_staci: 
+        friendly_name: Staci Drive
+        value_template: "{{ is_state('input_boolean.staci_outback', 'on') }}"
+        icon_template: mdi:car
+      drive_delia: 
+        friendly_name: Delia Drive
+        value_template: "{{ is_state('input_boolean.delia_outback', 'on') }}"
+        icon_template: mdi:car
 
 #################################################################
 #                                                               #
@@ -124,17 +126,17 @@ input_boolean:
     name: Simon is connected to the Outback
     icon: mdi:car-connected
 
-  simon_outback_home:
-    name: Simon is within 200m of home
-    icon: mdi:car-connected
+  # simon_outback_home:
+  #   name: Simon is within 200m of home
+  #   icon: mdi:car-connected
 
   megan_outback:
     name: Meg is connected to the Outback
     icon: mdi:car-connected
 
-  megan_outback_home:
-    name: Megan is within 200m of home
-    icon: mdi:car-connected
+  # megan_outback_home:
+  #   name: Megan is within 200m of home
+  #   icon: mdi:car-connected
 
 ######### NOT USED - here for completeness
 
@@ -142,17 +144,17 @@ input_boolean:
     name: Staci is connected to the Outback
     icon: mdi:car-connected
     
-  staci_outback_home: #requires tasker - not being used
-    name: Staci is within 200m of home
-    icon: mdi:car-connected
+  # staci_outback_home: #requires tasker - not being used
+  #   name: Staci is within 200m of home
+  #   icon: mdi:car-connected
       
   delia_outback: #requires tasker - not being used
     name: Delia is connected to the Outback
     icon: mdi:car-connected
       
-  delia_outback_home: #requires tasker - not being used
-    name: Delia is within 200m of home
-    icon: mdi:car-connected
+  # delia_outback_home: #requires tasker - not being used
+  #   name: Delia is within 200m of home
+  #   icon: mdi:car-connected
 
 #################################################################
 #                                                               #

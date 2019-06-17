@@ -88,8 +88,10 @@ class Transport_Messages(hass.Hass):
             elif new == "R4CW":
                 self.notifier.notify(self.smess_anu)
             elif new == "R4W":
+                self.smess_woden_4 = "Simon on R4, Tugg79 " + self.get_state("sensor.tugg_to_home_79_homecheck") + " or change R5 " + self.get_state("sensor.woden_to_home_r5_homecheck")
                 self.notifier.notify(self.smess_woden_4)
             elif new == "R5W":
+                self.smess_woden_5 = "Simon on R5 " + self.get_state("sensor.woden_to_home_r5_homecheck") + " or change R4 to Tugg79 " + self.get_state("sensor.tugg_to_home_79_homecheck")
                 self.notifier.notify(self.smess_woden_5)
             elif new == "7X":
                 self.notifier.notify(self.smess_tugg_home)
@@ -101,8 +103,10 @@ class Transport_Messages(hass.Hass):
     def transport_delia(self, entity, attribute, old, new, kwargs):
         if self.get_state("input_boolean.mode_return_home") == "on":
             if new == "R4W":
+                self.dmess_woden_4 = "Delia on R4, Tugg79 " + self.get_state("sensor.tugg_to_home_79_homecheck") + " or change R5 " + self.get_state("sensor.woden_to_home_r5_homecheck")
                 self.notifier.notify(self.dmess_woden_4)
             elif new == "R5W":
+                self.dmess_woden_5 = "Delia on R5 " + self.get_state("sensor.woden_to_home_r5_homecheck") + " or change R4 to Tugg79 " + self.get_state("sensor.tugg_to_home_79_homecheck")
                 self.notifier.notify(self.dmess_woden_5)
             elif new == "7X":
                 self.notifier.notify(self.dmess_tugg_home)
@@ -114,8 +118,10 @@ class Transport_Messages(hass.Hass):
     def transport_megan(self, entity, attribute, old, new, kwargs):
         if self.get_state("input_boolean.mode_return_home") == "on":
             if new == "R4W":
+                self.mmess_woden_4 = "Megan on R4, Tugg79 " + self.get_state("sensor.tugg_to_home_79_homecheck") + " or change R5 " + self.get_state("sensor.woden_to_home_r5_homecheck")
                 self.notifier.notify(self.mmess_woden_4)
             elif new == "R5W":
+                self.mmess_woden_5 = "Megan on R5 " + self.get_state("sensor.woden_to_home_r5_homecheck") + " or change R4 to Tugg79 " + self.get_state("sensor.tugg_to_home_79_homecheck")
                 self.notifier.notify(self.mmess_woden_5)
             elif new == "7X":
                 self.notifier.notify(self.mmess_tugg_home)
@@ -131,8 +137,10 @@ class Transport_Messages(hass.Hass):
             if new == "R234":
                 self.notifier.notify(self.stmess_cit)
             elif new == "R4W":
+                self.stmess_woden_4 = "Staci on R4, Tugg79 " + self.get_state("sensor.tugg_to_home_79_homecheck") + " or change R5 " + self.get_state("sensor.woden_to_home_r5_homecheck")
                 self.notifier.notify(self.stmess_woden_4)
             elif new == "R5W":
+                self.stmess_woden_5 = "Staci on R5 " + self.get_state("sensor.woden_to_home_r5_homecheck") + " or change R4 to Tugg79 " + self.get_state("sensor.tugg_to_home_79_homecheck")
                 self.notifier.notify(self.stmess_woden_5)
             elif new == "7X":
                 self.notifier.notify(self.stmess_tugg_home)
