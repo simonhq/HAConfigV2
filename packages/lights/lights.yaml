@@ -22,8 +22,8 @@ group:
       - light.dining_2
       - light.dining_3
       - light.dining_4
-      - light.ensuite     #spot
-      - light.ensuite_2   #normal
+      - light.ensuite_spot     #spot
+      - light.ensuite_light   #normal
       - light.front_door
       - light.front_garage
       - light.front_hall
@@ -55,7 +55,7 @@ group:
       - light.bathroom_2  
       - light.delias
       - light.dining          #dining_1, _2, _3, _4
-      - light.ensuite_3       #ensuite, ensuite_2 #spot, light
+      - light.ensuite         #ensuite, ensuite_2 #spot, light
       - light.front_hall_2    #front_hall
       - light.front_light     #front_door, front_garage
       - light.garage_2        #garage
@@ -75,8 +75,8 @@ group:
     name: Ensuite Light Entities
     view: no
     entities:
-      - light.ensuite #spot
-      - light.ensuite_2 #normal
+      - light.ensuite_spot #spot
+      - light.ensuite_light #normal
 
   kitchen_prep_lights:
     name: Kitchen Preping Entities
@@ -113,7 +113,7 @@ group:
     entities:
       - light.laundry_2         #laundry_2
       - light.toilet_2          #toilet_2
-      - light.ensuite_3         #ensuite_spot, ensuite_2
+      - light.ensuite         #ensuite_spot, ensuite_2
       - light.bathroom_2        #bathroom_2
       - light.garage_2          #garage_2
 

@@ -530,7 +530,7 @@ automation:
     action:
       - service: light.turn_on
         entity_id: 
-          - light.ensuite_3
+          - light.ensuite
         data:
           brightness: 255  
 # ensuite night motion
@@ -551,7 +551,7 @@ automation:
     action:
       - service: light.turn_on
         entity_id: 
-          - light.ensuite
+          - light.ensuite_spot
         data:
           brightness: 100
 # when flag goes off, turn off light
@@ -567,7 +567,7 @@ automation:
     action:
       - service: light.turn_off
         entity_id: 
-          - light.ensuite_3
+          - light.ensuite
 ###############################################
 # special morning for ensuite
 ###############################################
@@ -590,7 +590,7 @@ automation:
     action:
       - service: light.turn_on
         entity_id: 
-          - light.ensuite_3
+          - light.ensuite
         data:
           brightness: 255  
 

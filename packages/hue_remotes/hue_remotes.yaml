@@ -63,6 +63,9 @@ sensor:
 #                                                  #
 #               rest motion sensors                #
 #                                                  #
+# goto http://ip address/debug/clip.html
+# /api/token from secrets/sensors
+# GET
 #
 # each button (1000, 2000, 3000, 4000)
 # short press (1002)
@@ -76,7 +79,7 @@ sensor:
     resource: !secret hue_rem_bed
     value_template: '{{ value_json.state.buttonevent }}'
     name: 'Bedroom Button Press'
-    scan_interval: 15
+    scan_interval: 3
       
   - platform: rest
     resource: !secret hue_rem_liv
@@ -99,41 +102,76 @@ automation:
 #                                                  #
 #################################################### 
 
-  - alias: bed_remote_megan_lamp_toggle
+  - alias: bed_remote_megan_blanket_on
+    trigger:
+      - platform: state
+        entity_id: sensor.bedroom_button_press
+        to: '1003'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.bed_m
+  
+  - alias: bed_remote_megan_blanket_off
     trigger:
       - platform: state
         entity_id: sensor.bedroom_button_press
         to: '1002'
+      - platform: state
+        entity_id: sensor.bedroom_button_press
+        to: '1001'
     action:
-      - service: light.toggle
-        entity_id: light.master_lightstrip
-      
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.bed_m
+      - service: homeassistant.turn_off
+        entity_id: switch.megan_blanket
+
   - alias: bed_remote_toggle_ensuite
     trigger:
       - platform: state
         entity_id: sensor.bedroom_button_press
         to: '2002'
+      - platform: state
+        entity_id: sensor.bedroom_button_press
+        to: '2001'
     action:
       - service: light.toggle
-        entity_id: light.ensuite_3
+        entity_id: light.ensuite
         
   - alias: bed_remote_toggle_lightstrip
     trigger:
       - platform: state
         entity_id: sensor.bedroom_button_press
         to: '3002'
+      - platform: state
+        entity_id: sensor.bedroom_button_press
+        to: '3001'
     action:
       - service: light.toggle
         entity_id: light.master_lightstrip
         
-  - alias: bed_remote_simon_lamp_toggle
+  - alias: bed_remote_simon_blanket_on
+    trigger:
+      - platform: state
+        entity_id: sensor.bedroom_button_press
+        to: '4003'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.bed_s
+  
+  - alias: bed_remote_simon_blanket_off
     trigger:
       - platform: state
         entity_id: sensor.bedroom_button_press
         to: '4002'
+      - platform: state
+        entity_id: sensor.bedroom_button_press
+        to: '4001'
     action:
-      - service: light.toggle
-        entity_id: light.master_lightstrip
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.bed_s
+      - service: homeassistant.turn_off
+        entity_id: switch.simon_blanket
+
 
   ###################################
   ##

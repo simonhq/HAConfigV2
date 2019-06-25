@@ -15,16 +15,6 @@ group:
     name: Bus Travel Entities
     view: no
     entities:
-      - zone.Home
-      - zone.AISKCricket
-      - zone.Tugg_College
-      - zone.Bruce_CIT
-      - zone.SouthPort
-      - zone.DJSB_Mort
-      - zone.ANU
-      - zone.SarahHouse
-      - zone.MackenzieHouse
-      - zone.AccerlatePhysio
       - zone.HaydonDr
       - zone.CalHospital
       - zone.CanHospital
@@ -123,81 +113,6 @@ timer:
 #################################################################
 
 zone:
-
-####################################################
-#                                                  #
-#            places of interest                    #
-#                                                  #
-#################################################### 
-
-  #home
-  - name: Home
-    latitude: -35.4310
-    longitude: 149.0958
-    radius: 100
-    icon: mdi:castle
-
-  #cricket
-  - name: AISKCricket
-    latitude: -35.394864
-    longitude: 149.068013
-    radius: 150
-    icon: mdi:stadium
-
-  #delia school
-  - name: Tugg_College
-    latitude: -35.413548
-    longitude: 149.068264
-    radius: 150
-    icon: mdi:book-open-page-variant
-
-  #staci school
-  - name: Bruce_CIT
-    latitude: -35.249476
-    longitude: 149.095763
-    radius: 150
-    icon: mdi:stethoscope
-
-  #tugg shops
-  - name: SouthPort
-    latitude: -35.416359
-    longitude: 149.066924
-    radius: 200
-    icon: mdi:store
-
-  #meg work
-  - name: DJSB_Mort
-    latitude: -35.276788
-    longitude: 149.131119
-    radius: 100
-    icon: mdi:city
-
-  #simon uni
-  - name: ANU
-    latitude: -35.277112 
-    longitude: 149.123496
-    radius: 100
-    icon: mdi:school
-
-  #delia friend Sarah
-  - name: SarahHouse
-    latitude: -35.426576
-    longitude: 149.099650
-    radius: 50
-
-  #delia friend Mackenzie
-  - name: MackenzieHouse
-    latitude: -35.454362
-    longitude: 149.087526
-    radius: 50
-
-  #meg physio
-  - name: AccerlatePhysio
-    latitude: -35.342095
-    longitude: 149.108284
-    radius: 50
-    icon: mdi:hand
-
 
 ####################################################
 #                                                  #

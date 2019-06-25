@@ -212,6 +212,18 @@ sensor:
         unit_of_measurement: '%'
 
 
+  - platform: rest
+    resource: !secret hue_rem_bed
+    value_template: '{{ value_json.config.battery }}'
+    name: 'Bedroom Remote Battery'
+    scan_interval: 3
+      
+  - platform: rest
+    resource: !secret hue_rem_liv
+    value_template: '{{ value_json.config.battery }}'
+    name: 'Living Remote Battery'
+    scan_interval: 15
+
 #################################################################
 #                                                               #
 #                       Automation                              #
