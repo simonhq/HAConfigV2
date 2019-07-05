@@ -91,6 +91,9 @@ logger:
 hacs:
   token: !secret hacs_token
 
+# controlled through hacs
+breaking_changes:
+
 ###########################################################################
 # 
 # Setup Configuration

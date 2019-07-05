@@ -63,7 +63,7 @@ group:
       - device_tracker.lounge_mini_speaker
       - device_tracker.lounge_chromecast
       - device_tracker.gaming_chromecast
-      - device_tracker.fetch_tv
+      - device_tracker.sharp_tv
       - device_tracker.ps4
       
   media_s:
@@ -290,7 +290,7 @@ binary_sensor:
   - platform: template
     sensors:
       media_system:
-        value_template: "{{ is_state('binary_sensor.sp_kitchen', 'on') and is_state('binary_sensor.sp_lounge', 'on') and is_state('binary_sensor.sp_bathroom', 'on') and is_state('binary_sensor.sp_ltv', 'on') and is_state('binary_sensor.sp_gtv', 'on') and is_state('binary_sensor.fetchtv', 'on') and is_state('binary_sensor.sonyps4', 'on') }}"
+        value_template: "{{ is_state('binary_sensor.sp_kitchen', 'on') and is_state('binary_sensor.sp_lounge', 'on') and is_state('binary_sensor.sp_bathroom', 'on') and is_state('binary_sensor.sp_ltv', 'on') and is_state('binary_sensor.sp_gtv', 'on') and is_state('binary_sensor.sharptv', 'on') and is_state('binary_sensor.sonyps4', 'on') }}"
         friendly_name: 'Speaker/Chromecasts'
         device_class: connectivity
         icon_template: mdi:speaker
@@ -319,9 +319,9 @@ binary_sensor:
         friendly_name: 'Gaming TV'
         device_class: connectivity
         icon_template: mdi:google-chrome
-      fetchtv:
-        value_template: "{{ is_state('device_tracker.fetch_tv', 'home') }}"
-        friendly_name: 'Fetch TV'
+      sharptv:
+        value_template: "{{ is_state('device_tracker.sharp_tv', 'home') }}"
+        friendly_name: 'Sharp TV'
         device_class: connectivity
         icon_template: mdi:television-box
       sonyps4:

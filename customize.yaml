@@ -73,20 +73,22 @@ proximity.home_delia:
   friendly_name: 'Delia from Home'
 # routes
 sensor.waze_meg_time_to_work:
-  friendly_name: 'Meg to City'
+  friendly_name: 'City'
 sensor.waze_meg_time_to_home:
-  friendly_name: 'Meg to Home'
+  friendly_name: 'Home'
 sensor.waze_meg_to_simon:
   friendly_name: 'Meg to Simon'
 sensor.waze_simon_time_to_uni:
-  friendly_name: 'Simon to City West'
+  friendly_name: 'City West'
 sensor.waze_simon_time_to_home:
-  friendly_name: 'Simon to Home'
+  friendly_name: 'Home'
 sensor.waze_meg_to_staci:
-  friendly_name: 'Meg to Staci'
+  friendly_name: 'Staci'
 sensor.waze_meg_to_delia:
-  friendly_name: 'Meg to Delia'
+  friendly_name: 'Delia'
 sensor.waze_simon_to_staci:
-  friendly_name: 'Simon to Staci'
+  friendly_name: 'Staci'
 sensor.waze_simon_to_delia:
-  friendly_name: 'Simon to Delia'
+  friendly_name: 'Delia'
+sensor.waze_staci_to_delia:
+  friendly_name: 'Staci to Delia'

@@ -1,7 +1,7 @@
 #
 #The aim of this is to control the travel functions for individuals
 
-# Version 3 - July 2019
+# Version 2 - March 2019
 
 import appdaemon.plugins.hass.hassapi as hass
 import time
@@ -52,8 +52,8 @@ class Travel_Messages(hass.Hass):
         
 
         # tasker proximity code - trial
-        #self.listen_state(self.arr_task, "input_boolean.simon_outback_home")
-        #self.listen_state(self.arr_task, "input_boolean.megan_outback_home")
+        self.listen_state(self.arr_task, "input_boolean.simon_outback_home")
+        self.listen_state(self.arr_task, "input_boolean.megan_outback_home")
         #these maybe needed if the girls starting driving - not implemented now
         #self.listen_state(self.arr_task, "input_boolean.staci_outback_home")
         #self.listen_state(self.arr_task, "input_boolean.delia_outback_home")
@@ -154,23 +154,23 @@ class Travel_Messages(hass.Hass):
     #   watches the tasker proximity for Simon & Megan and if they are in the car, open the garage door
     ###
     
-    # def arr_task(self, entity, attribute, old, new, kwargs):
+    def arr_task(self, entity, attribute, old, new, kwargs):
  
-    #     self.sendmess = ""
+        self.sendmess = ""
 
-    #     # arriving home - open garage door
-    #     if entity == "input_boolean.simon_outback_home" and new == "on": #simon coming home via tasker
-    #         if self.get_state("binary_sensor.drive_simon") == "on" and self.get_state("input_boolean.outback_just") == "off": #is driving and not just started the car
-    #             self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
-    #             self.sendmess = "Opening the Garage Door for Simon arriving by car (Tasker/Proximity)"
-    #     elif entity == "input_boolean.megan_outback_home" and new == "on": #simon coming home via tasker
-    #         if self.get_state("binary_sensor.drive_meg") == "on" and self.get_state("input_boolean.outback_just") == "off": #is driving and not just started the car
-    #             self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
-    #             self.sendmess = "Opening the Garage Door for Megan arriving by car (Tasker/Proximity)"
+        # arriving home - open garage door
+        if entity == "input_boolean.simon_outback_home" and new == "on": #simon coming home via tasker
+            if self.get_state("binary_sensor.drive_simon") == "on" and self.get_state("input_boolean.outback_just") == "off": #is driving and not just started the car
+                self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
+                self.sendmess = "Opening the Garage Door for Simon arriving by car (Tasker/Proximity)"
+        elif entity == "input_boolean.megan_outback_home" and new == "on": #simon coming home via tasker
+            if self.get_state("binary_sensor.drive_meg") == "on" and self.get_state("input_boolean.outback_just") == "off": #is driving and not just started the car
+                self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
+                self.sendmess = "Opening the Garage Door for Megan arriving by car (Tasker/Proximity)"
                         
-    #     #send the message
-    #     if self.sendmess != "":
-    #         self.notifier.notify(self.sendmess)
+        #send the message
+        if self.sendmess != "":
+            self.notifier.notify(self.sendmess)
 
     ###
     #   watches the connection to the car and send the appropriate message
@@ -240,13 +240,13 @@ class Travel_Messages(hass.Hass):
             if self.get_state("input_select.trav_megan") == "Car":
                 # arrived by car
                 # unlock the garage rear entry door
-                #self.turn_off("input_boolean.gdoor")
-                self.sendmess = 'Welcome home Megan, returning via car.' 
+                self.turn_off("input_boolean.gdoor")
+                self.sendmess = 'Welcome home Megan, I am ensuring the garage entry door is unlocked for you.' 
             elif self.get_state("input_select.trav_megan") == "Walk":
                 # arrived by walking
                 # unlock the front door
-                #self.turn_off("input_boolean.fdoor")
-                self.sendmess = 'Welcome home Megan, returning via foot.'
+                self.turn_off("input_boolean.fdoor")
+                self.sendmess = 'Welcome home Megan, I am ensuring the front door is unlocked for you.'
 
             # set Megan to being at home
             self.set_state("input_select.trav_megan", state="Home")
@@ -267,7 +267,7 @@ class Travel_Messages(hass.Hass):
         if self.sendmess != "":
             self.notifier.notify(self.sendmess)
         
-    def meg_walk(self, kwargs):
+    def meg_walk():
 
         if self.get_state("input_select.trav_megan") != 'Home' and self.get_state("binary_sensor.megan_walkbus") == 'on':
             # set Megan to being walking
@@ -285,13 +285,13 @@ class Travel_Messages(hass.Hass):
             if self.get_state("input_select.trav_simon") == "Car":
                 # arrived by car
                 # unlock the garage rear entry door
-                #self.turn_off("input_boolean.gdoor")
-                self.sendmess = 'Welcome home Simon, returning via car.' 
+                self.turn_off("input_boolean.gdoor")
+                self.sendmess = 'Welcome home Simon, I am ensuring the garage entry door is unlocked for you.' 
             elif self.get_state("input_select.trav_simon") == "Walk":
                 # arrived by walking
                 # unlock the front door
-                #self.turn_off("input_boolean.fdoor")
-                self.sendmess = 'Welcome home Simon, returning via foot.' 
+                self.turn_off("input_boolean.fdoor")
+                self.sendmess = 'Welcome home Simon, I am ensuring the front door is unlocked for you.' 
 
             # set Simon to being at home
             self.set_state("input_select.trav_simon", state="Home")
@@ -312,7 +312,7 @@ class Travel_Messages(hass.Hass):
         if self.sendmess != "":
             self.notifier.notify(self.sendmess)
       
-    def sim_walk(self, kwargs):
+    def sim_walk():
 
         if self.get_state("input_select.trav_simon") != 'Home' and self.get_state("binary_sensor.simon_walkbus") == 'on':
             # set Simon to being walking
@@ -330,12 +330,12 @@ class Travel_Messages(hass.Hass):
                 # arrived by car
                 # unlock the garage rear entry door
                 #self.turn_off("input_boolean.gdoor")
-                self.sendmess = 'Welcome home Staci, returning via car.' 
+                self.sendmess = 'Welcome home Staci, you have come by car, so I am assuming the doors will be unlocked by another person.' 
             elif self.get_state("input_select.trav_staci") == "Walk":
                 # arrived by walking
                 # unlock the front door
-                #self.turn_off("input_boolean.fdoor")
-                self.sendmess = 'Welcome home Staci, returning via foot.' 
+                self.turn_off("input_boolean.fdoor")
+                self.sendmess = 'Welcome home Staci, I am ensuring the front door is unlocked for you.' 
 
             # set Staci to being at home
             self.set_state("input_select.trav_staci", state="Home")
@@ -370,12 +370,12 @@ class Travel_Messages(hass.Hass):
                 # arrived by car
                 # unlock the garage rear entry door
                 #self.turn_off("input_boolean.gdoor")
-                self.sendmess = 'Welcome home Delia, returning via car.' 
+                self.sendmess = 'Welcome home Delia, you have come by car, so I am assuming the doors will be unlocked by another person.' 
             elif self.get_state("input_select.trav_delia") == "Walk":
                 # arrived by walking
                 # unlock the front door
-                #self.turn_off("input_boolean.fdoor")
-                self.sendmess = 'Welcome home Delia, returning via foot.' 
+                self.turn_off("input_boolean.fdoor")
+                self.sendmess = 'Welcome home Delia, I am ensuring the front door is unlocked for you.' 
 
             # set Delia to being at home
             self.set_state("input_select.trav_delia", state="Home")

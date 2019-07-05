@@ -38,6 +38,7 @@
 !packages/doors/
 !packages/fans/
 !packages/garage_door/
+!packages/google_assitant/
 !packages/gps/
 !packages/house_mode/
 !packages/hue_remotes/

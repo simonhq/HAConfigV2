@@ -22,12 +22,14 @@ class Transport_Messages(hass.Hass):
     stmess_tugg_home = "Staci just left Tuggeranong travelling home" #7X
     stmess_tugg = "Staci just left Tuggeranong Interchange" #TX
     stmess_cal = "Staci just arrived in Calwell" #Cal
+    stmess_ctr = "Staci just arrived at Central in Sydney" #Syd
 
     dmess_woden_4 = "" #R4W
     dmess_woden_5 = "" #R5W
     dmess_tugg_home = "Delia just left Tuggeranong travelling home" #7X
     dmess_tugg = "Delia just left Tuggeranong Interchange" #TX
     dmess_cal = "Delia just arrived in Calwell" #Cal
+    dmess_ctr = "Delia just arrived at Central in Sydney" #Syd
 
     mmess_woden_4 = "" #R4W
     mmess_woden_5 = "" #R5W
@@ -114,6 +116,8 @@ class Transport_Messages(hass.Hass):
                 self.notifier.notify(self.dmess_tugg)
             elif new == "Cal":
                 self.notifier.notify(self.dmess_cal)
+            elif new == "Central":
+                self.notifier.notify(self.dmess_ctr)
               
     def transport_megan(self, entity, attribute, old, new, kwargs):
         if self.get_state("input_boolean.mode_return_home") == "on":
@@ -148,6 +152,8 @@ class Transport_Messages(hass.Hass):
                 self.notifier.notify(self.stmess_tugg)
             elif new == "Cal":
                 self.notifier.notify(self.stmess_cal)
+            elif new == "Central":
+                self.notifier.notify(self.stmess_ctr)
 
 
 

@@ -23,7 +23,31 @@ group:
       - input_number.cpu_alert
       - binary_sensor.disk_alert
       - binary_sensor.cpu_alert
-      
+      - sensor.laptop_battery_state
+      - sensor.external_ip
+      - sensor.cpu_temp
+      - sensor.current_version
+      - sensor.latest_available_version
+      - sensor.ha_uptime
+      - sensor.uptime
+      - sensor.hacs
+      - sensor.speedtest_ping
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      - sensor.count_zones
+      - sensor.count_devices
+      - sensor.count_device_trackers
+
+
+#################################################################
+#                                                               #
+#                  Internet     Speedtest                       #
+#                                                               #
+#################################################################
+
+speedtestdotnet:
+
+
 #################################################################
 #                                                               #
 #                       Sensors                                 #
@@ -47,6 +71,206 @@ sensor:
       - type: memory_use_percent
       - type: processor_use
       - type: last_boot
+
+# this will get the current state of the battery - should be 'charging'
+  - platform: command_line
+    name: "Laptop Battery State"
+    command: "cat /sys/class/power_supply/BAT1/status"
+
+  # the current external ip
+  - platform: dnsip
+
+  # - platform: rest
+  #   resource: https://api.ipify.org?format=json
+  #   name: External IP
+  #   value_template: '{{ value_json.ip }}'
+  #   scan_interval: 10  
+
+# sensor.current_version
+  - platform: version
+
+# latest available version
+  - platform: version
+    name: Latest Available Version
+    beta: false
+    image: default
+    source: hassio
+
+# CPU Temperature
+  - platform: command_line
+    name: CPU Temp
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) | round(0) }}'
+
+#component counts
+  - platform: template
+    sensors:
+
+    #----- Count Automations
+      count_automations:
+        friendly_name: Automations
+        icon_template: mdi:arrow-decision-auto
+        entity_id: sensor.date
+        value_template: "{{ states.automation | list | length }}"
+
+    #----- Count Scripts
+      count_scripts:
+        friendly_name: Scripts
+        icon_template: mdi:script
+        entity_id: sensor.date
+        value_template: "{{ states.script| list | length }}"
+
+      count_auto_scripts:
+        friendly_name: Automations & Scripts
+        icon_template: mdi:robot
+        value_template: "{{ states('sensor.count_scripts') | int + states('sensor.count_automations') | int }}"
+
+    #----- Count Device Trackers
+      count_device_trackers:
+        friendly_name: Device Trackers
+        icon_template: mdi:radar
+        entity_id: sensor.date
+        value_template: "{{ states.device_tracker | list | length }}"
+
+    #------ as the router creates an entry for each satelite +1 (main, router 1, router 2) - so divide by 3
+      count_devices:
+        friendly_name: Devices
+        icon_template: mdi:cellphone-link
+        value_template: "{{ states('sensor.count_device_trackers') | int / 3 | int }}"
+
+    #----- Count Binary Sensors
+      count_binary_sensors:
+        friendly_name: Binary Sensors
+        icon_template: mdi:electric-switch
+        entity_id: sensor.date
+        value_template: "{{ states.binary_sensor| list | length }}"
+
+    #----- Count Sensors
+      count_sensors:
+        friendly_name: Sensors
+        icon_template: mdi:leak
+        entity_id: sensor.date
+        value_template: "{{ states.sensor | list | length }}"
+
+    #----- Count Switches
+      count_switches:
+        friendly_name: Switches
+        icon_template: mdi:toggle-switch-off-outline
+        entity_id: sensor.date
+        value_template: "{{ states.switch | list | length }}"
+
+      count_sensor_control:
+        friendly_name: Sensors & Controls
+        icon_template: mdi:gauge
+        value_template: "{{ states('sensor.count_binary_sensors') | int + states('sensor.count_sensors') | int + states('sensor.count_switches') | int }}"
+
+    #----- Count Zones
+      count_zones:
+        friendly_name: Zones
+        icon_template: mdi:map-marker-radius
+        entity_id: sensor.date
+        value_template: "{{ states.zone | list | length }}"
+
+    #----- Count Timers
+      count_timers:
+        friendly_name: Timers
+        icon_template: mdi:timer
+        entity_id: sensor.date
+        value_template: "{{ states.timer | list | length }}"
+
+      count_zone_timers:
+        friendly_name: Zones & Timers
+        icon_template: mdi:map-clock
+        value_template: "{{ states('sensor.count_zones') | int + states('sensor.count_timers') | int }}"
+
+    #----- Input Booleans
+      count_input_booleans:
+        friendly_name: Input Booleans
+        icon_template: mdi:video-input-component
+        entity_id: sensor.date
+        value_template: "{{ states.input_boolean | list | length }}"
+
+    #----- Input Numbers
+      count_input_numbers:
+        friendly_name: Input Numbers
+        icon_template: mdi:counter
+        entity_id: sensor.date
+        value_template: "{{ states.input_number | list | length }}"
+
+    #----- Input Texts
+      count_input_texts:
+        friendly_name: Input Texts
+        icon_template: mdi:signature-text
+        entity_id: sensor.date
+        value_template: "{{ states.input_text | list | length }}"
+
+    #----- Input Selects
+      count_input_selects:
+        friendly_name: Input Selects
+        icon_template: mdi:inbox-arrow-down
+        entity_id: sensor.date
+        value_template: "{{ states.input_select | list | length }}"
+
+    #----- Input Date Times
+      count_input_datetimes:
+        friendly_name: Input Date Times
+        icon_template: mdi:calendar-range
+        entity_id: sensor.date
+        value_template: "{{ states.input_datetime | list | length }}"
+
+      count_inputs:
+        friendly_name: Input Controls
+        icon_template: mdi:textbox
+        value_template: "{{ states('sensor.count_input_booleans') | int + states('sensor.count_input_numbers') | int + states('sensor.count_input_texts') | int + states('sensor.count_input_selects') | int + states('sensor.count_input_datetimes') | int }}"
+
+# How long HA is been running
+  - platform: uptime
+
+  - platform: template
+    sensors:
+
+      #==========================
+      #=== Home Assistant uptime
+      #==========================
+      ha_uptime:
+        friendly_name: HA Uptime
+        value_template: >
+          {% if states('sensor.uptime') == '0.0' %} 
+            Just restarted...
+          {% else %}
+            {% macro phrase(value, name) %}
+            {%- set value = value | int %}
+            {%- set end = 's' if value > 1 else '' %}
+            {{- '{} {}{}'.format(value, name, end) if value | int > 0 else '' }}
+            {%- endmacro %}
+            
+            {% set weeks = (states('sensor.uptime') | int / 7) | int %}
+            {% set days = (states('sensor.uptime') | int) - (weeks * 7) %}
+            {% set hours = (states('sensor.uptime') | float - states('sensor.uptime') | int) * 24 %}
+            {% set minutes = (hours - hours | int) * 60 %}
+
+            {{ [ phrase(weeks, 'week'), phrase(days, 'day'), phrase(hours, 'hr'), phrase(minutes, 'min') ] | select('!=','') | list | join(', ') }}
+          {% endif %}
+
+  #=========================================
+      last_boot_date_time:
+        friendly_name: Last Boot
+        value_template: >
+          {% set date = as_timestamp(states('sensor.last_boot')) | timestamp_custom('%d') %}
+          {% set date = '{:01}'.format(date | int) %}
+          {% if date in ('1', '21', '31') %}
+            {% set date = date ~ 'st' %}
+          {% elif date in ('2', '22') %}
+            {% set date = date ~ 'nd' %}
+          {% elif date in ('3', '23') %}
+            {% set date = date ~ 'rd' %}
+          {% else %}
+            {% set date = date ~ 'th' %}
+          {% endif %}
+
+          {{ as_timestamp(states('sensor.last_boot')) | timestamp_custom('%H:%M on %a') }} {{ date }} {{ as_timestamp(states('sensor.last_boot')) | timestamp_custom('%b %Y') }}
+
 
 #################################################################
 #                                                               #
@@ -102,3 +326,67 @@ binary_sensor:
         friendly_name: CPU Alert
         value_template: "{{ states('sensor.processor_use')|float > states('input_number.cpu_alert')|float }}"
         icon_template: mdi:gauge-full
+      on_power: #this shows in the disconnect hubs view - so it is negative e.g. opposite
+        friendly_name: Hassio on Battery
+        value_template: "{{ not is_state('sensor.laptop_battery_state', 'Discharging') }}"
+        icon_template: mdi:battery-negative
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+automation:
+
+####################################################
+#                                                  #
+#            New device on network                 #
+#                                                  #
+#################################################### 
+
+  - alias: Hassio New Device Tracked
+    trigger:
+      platform: event
+      event_type: device_tracker_new_device
+    action:
+      - service: notify.discord_webhook
+        data_template:
+          title: 'New device tracked'
+          message: >
+            {{trigger.event.data.host_name}} 
+            ({{trigger.event.data.entity_id}})
+
+####################################################
+#                                                  #
+#            No power to laptop - on battery       #
+#                                                  #
+#################################################### 
+
+  - alias: laptop_running_on_battery
+    trigger:
+      - platform: state
+        entity_id: sensor.laptop_battery_state
+        to: 'Discharging'
+    action:
+      - service: notify.discord_webhook
+        data_template:
+          message: >
+            Hassio Laptop is running on battery
+
+####################################################
+#                                                  #
+#            power to laptop - on charging         #
+#                                                  #
+#################################################### 
+
+  - alias: laptop_running_on_power
+    trigger:
+      - platform: state
+        entity_id: sensor.laptop_battery_state
+        from: 'Discharging'
+    action:
+      - service: notify.discord_webhook
+        data_template:
+          message: >
+            Hassio Laptop is running on power

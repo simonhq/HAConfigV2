@@ -52,7 +52,6 @@ group:
     name: Light Group Entities
     view: no
     entities:
-      - light.bathroom_2  
       - light.delias
       - light.dining          #dining_1, _2, _3, _4
       - light.ensuite         #ensuite, ensuite_2 #spot, light

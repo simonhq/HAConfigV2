@@ -18,14 +18,15 @@ group:
       - zone.HaydonDr
       - zone.CalHospital
       - zone.CanHospital
-      - zone.CityBus
+      - zone.CityBus_2
+      - zone.CityBus_4
       - zone.CityWestBus
       - zone.ANUBus
       - zone.TuggBus
       - zone.WodenBus
       - zone.IsaCalBus
       - zone.IsaShops
-      - zone.CommBridge
+      - zone.SydCentral
       - zone.OutBus
       - input_select.trans_staci
       - input_select.trans_simon
@@ -139,15 +140,26 @@ zone:
     radius: 250
   
   #city bus 
-  - name: CityBus
-    latitude: -35.279437
-    longitude: 149.130565
+  - name: CityBus_4
+    latitude: -35.278479 
+    longitude: 149.130329
+    radius: 50
+
+  - name: CityBus_2
+    latitude: -35.278558 
+    longitude: 149.130136
     radius: 50
 
   #city west bus
   - name: CityWestBus
     latitude: -35.279129
     longitude: 149.125513
+    radius: 50
+
+  #city light rail stop 
+  - name: LR_Alinga
+    latitude: -35.277953
+    longitude: 149.129342
     radius: 50
 
   #ANU Rimmer
@@ -180,17 +192,25 @@ zone:
     longitude: 149.091705
     radius: 100
 
-  #Commonwealth Bridge
-  - name: CommBridge
-    latitude: -35.291006
-    longitude: 149.127823
-    radius: 300
+  # #Commonwealth Bridge
+  # - name: CommBridge
+  #   latitude: -35.291006
+  #   longitude: 149.127823
+  #   radius: 300
 
-  #Commonwealth Bridge
+  #Outtrim Avenue
   - name: OutBus
     latitude: -35.435692
     longitude: 149.098516
     radius: 50
+
+
+  #Sydney Central
+  - name: SydCentral
+    latitude: -33.882463
+    longitude: 151.206420
+    radius: 50
+
 
 #################################################################
 #                                                               #
@@ -211,6 +231,7 @@ input_select:
     name: Staci Transport Type
     options:
       - 'Nil'
+      - 'Central'
       - 'R234'
       - 'R6'
       - 'RC'
@@ -229,6 +250,7 @@ input_select:
     name: Delia Transport
     options:
       - 'Nil'
+      - 'Central'
       - 'RC'
       - 'R4W'  
       - 'R5W'
@@ -245,6 +267,7 @@ input_select:
     name: Megan Transport
     options:
       - 'Nil'
+      - 'Central'
       - 'RC'
       - 'R4W'  
       - 'R5W'
@@ -261,6 +284,7 @@ input_select:
     name: Simon Transport Type
     options:
       - 'Nil'
+      - 'Central'
       - 'R5CW'
       - 'R4CW'
       - 'RC'
@@ -332,7 +356,11 @@ automation:
     trigger:
       - platform: zone
         entity_id: device_tracker.sphone
-        zone: zone.CityBus
+        zone: zone.CityBus_2
+        event: leave
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.CityBus_4
         event: leave
     condition:
       - condition: template
@@ -512,7 +540,11 @@ automation:
     trigger:
       - platform: zone
         entity_id: device_tracker.stphone
-        zone: zone.CityBus
+        zone: zone.CityBus_2
+        event: leave
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.CityBus_4
         event: leave
     condition:
       - condition: template
@@ -662,20 +694,20 @@ automation:
 
 # leaving canberra hospital - day
 
-  - alias: transport_staci_leave_canhospital_67
-    trigger:
-      - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.CanHospital
-        event: leave
-    #condition:
-    #  - condition: time
-    #    before: '20:00:00'
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_staci
-          option: '{{"67"}}'
+  # - alias: transport_staci_leave_canhospital_67
+  #   trigger:
+  #     - platform: zone
+  #       entity_id: device_tracker.stphone
+  #       zone: zone.CanHospital
+  #       event: leave
+  #   #condition:
+  #   #  - condition: time
+  #   #    before: '20:00:00'
+  #   action:
+  #     - service: input_select.select_option
+  #       data_template:
+  #         entity_id: input_select.trans_staci
+  #         option: '{{"67"}}'
 
 
 ####################################################
@@ -699,7 +731,11 @@ automation:
     trigger:
       - platform: zone
         entity_id: device_tracker.mphone
-        zone: zone.CityBus
+        zone: zone.CityBus_2
+        event: leave
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.CityBus_4
         event: leave
     action:
       - service: timer.start
@@ -855,7 +891,11 @@ automation:
     trigger:
       - platform: zone
         entity_id: device_tracker.dphone
-        zone: zone.CityBus
+        zone: zone.CityBus_2
+        event: leave
+      - platform: zone
+        entity_id: device_tracker.dphone
+        zone: zone.CityBus_4
         event: leave
     action:
       - service: timer.start
@@ -988,15 +1028,59 @@ automation:
           entity_id: input_select.trans_delia
           option: '{{"Nil"}}'
 
-
+####################################################
+#                                                  #
+#            automation -  Sydney Central          #
+#                                                  #
+#################################################### 
   
-
+  - alias: transport_delia_central
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.dphone
+        zone: zone.SydCentral
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"Central"}}'
   
+  - alias: transport_staci_central
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.stphone
+        zone: zone.SydCentral
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"Central"}}'
 
+  - alias: transport_simon_central
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sphone
+        zone: zone.SydCentral
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"Central"}}'  
 
-  
-
-  
+  - alias: transport_megan_central
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.mphone
+        zone: zone.SydCentral
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"Central"}}'
   
       
   

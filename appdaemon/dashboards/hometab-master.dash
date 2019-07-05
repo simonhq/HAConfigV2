@@ -35,7 +35,7 @@ l_master:
 
 l_ensuite:
     widget_type: light
-    entity: light.ensuite_3
+    entity: light.ensuite
     title: Ensuite Lights
     icon_on: mdi-lightbulb-on
     icon_off: mdi-lightbulb-off-outline

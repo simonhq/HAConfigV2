@@ -85,12 +85,15 @@ automation:
         data_template:
           entity_id: input_select.time_mode
           option: '{{"Day"}}'
-      - service: hangouts.send_message        # send message saying everything is off
-        data: 
-          target:
-            - id: !secret hangout_id
-          message:
-            - text: "Everyone's Away, turning everything off and locking the front door"
+      - service: notify.discord_webhook  # send message saying everything is off
+        data:
+          message: "Everyone's Away, turning everything off"
+      # - service: hangouts.send_message       
+      #   data: 
+      #     target:
+      #       - id: !secret hangout_id
+      #     message:
+      #       - text: 
       
   # switch to evening mode if it is after 6pm time and everyone is out  
   - alias: presence_all_away_evening
@@ -127,12 +130,15 @@ automation:
       - service: notify.push_hassio           # turn off screens
         data: 
           message: 'Away'
-      - service: hangouts.send_message        # send message
-        data: 
-          target:
-            - id: !secret hangout_id
-          message:
-            - text: "Everyone's Away, turning everything off, locking the front door and putting on the front lights"  
+      - service: notify.discord_webhook  # send message saying everything is off
+        data:
+          message: "Everyone's Away, turning everything off"
+      # - service: hangouts.send_message        # send message
+      #   data: 
+      #     target:
+      #       - id: !secret hangout_id
+      #     message:
+      #       - text: "Everyone's Away, turning everything off, locking the front door and putting on the front lights"  
 
 ####################################################
 #                                                  #

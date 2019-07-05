@@ -77,6 +77,9 @@ Here is a Todo list of packages:
 * Discord Webhook
 * Appdaemon Automations 
 
+## Add-ons
+* Google Drive backup [https://github.com/sabeechen/hassio-google-drive-backup]
+
 #### Errors
 * Google Hangouts
 

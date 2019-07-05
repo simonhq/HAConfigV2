@@ -20,6 +20,7 @@ group:
       - binary_sensor.simon_delia_car
       - binary_sensor.megan_staci_car
       - binary_sensor.megan_delia_car
+      - binary_sensor.staci_delia_car
       - binary_sensor.simon_car
       - binary_sensor.simon_walkbus
       - binary_sensor.megan_car
@@ -88,6 +89,10 @@ binary_sensor:
       megan_delia_car:
         friendly_name: Megan/Delia Car
         value_template: "{{ (not is_state('person.megan', 'home') and not is_state('person.delia', 'home')) and is_state('binary_sensor.drive_meg','on') and states('sensor.waze_meg_to_delia')|float < 5 }}"
+        icon_template: mdi:car-connected
+      staci_delia_car:
+        friendly_name: Staci/Delia Car
+        value_template: "{{ (not is_state('person.staci', 'home') and not is_state('person.delia', 'home')) and (is_state('binary_sensor.drive_staci','on') or is_state('binary_sensor.drive_delia','on')) and states('sensor.waze_staci_to_delia')|float < 5 }}"
         icon_template: mdi:car-connected
 
       simon_car:
