@@ -12,6 +12,7 @@
 !*.png
 !*.dash
 !*.js
+!*.json
 !images/
 !custom_components/
 !custom_components/gtfs/
@@ -62,6 +63,7 @@
 !www/pics/
 !www/plugins/
 !www/plugins/waze-card/
+!node-red/
 
 # Ignore folders.
 .storage
