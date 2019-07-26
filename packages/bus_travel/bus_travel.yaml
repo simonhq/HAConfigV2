@@ -204,6 +204,17 @@ zone:
     longitude: 149.098516
     radius: 50
 
+  #UC Blding 7
+  - name: UC7
+    latitude: -35.236525
+    longitude: 149.083143
+    radius: 50
+
+  #UC Bus
+  - name: UCBus
+    latitude: -35.242448
+    longitude: 149.086077
+    radius: 50
 
   #Sydney Central
   - name: SydCentral

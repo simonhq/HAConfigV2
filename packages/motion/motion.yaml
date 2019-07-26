@@ -30,19 +30,11 @@ group:
       - input_boolean.motion_in_garage
       - input_boolean.motion_in_ensuite
       - input_boolean.motion_in_toilet
-      # hue motion sensors 
-      - sensor.bathroom_sensor_light_level
-      - binary_sensor.bathroom_sensor_motion
-      - sensor.ensuite_sensor_light_level
-      - binary_sensor.ensuite_sensor_motion
-      - sensor.laundry_sensor_light_level
-      - binary_sensor.laundry_sensor_motion
-      - sensor.garage_sensor_light_level
-      - binary_sensor.garage_sensor_motion
       # smartthings motion sensors
       - binary_sensor.toilet_motion_motion
+      - binary_sensor.bathroom_motion_motion
       # rest sensors
-      - sensor.bathroom_motion
+      #- sensor.bathroom_motion
       - sensor.ensuite_motion
       - sensor.garage_motion
       - sensor.laundry_motion
@@ -50,11 +42,20 @@ group:
       - sensor.ensuite_lux
       - sensor.garage_lux
       - sensor.laundry_lux
-      - sensor.bathroom_temperature
+      #- sensor.bathroom_temperature
       - sensor.ensuite_temperature
       - sensor.garage_temperature
       - sensor.laundry_temperature
-
+      # custom hue motion sensors 
+      #- sensor.bathroom_sensor_light_level
+      #- binary_sensor.bathroom_sensor_motion
+      #- sensor.ensuite_sensor_light_level
+      #- binary_sensor.ensuite_sensor_motion
+      #- sensor.laundry_sensor_light_level
+      #- binary_sensor.laundry_sensor_motion
+      #- sensor.garage_sensor_light_level
+      #- binary_sensor.garage_sensor_motion
+      
       
 
   motion_a:
@@ -107,30 +108,30 @@ sensor:
 ####################################################
 
   #bathroom
-  - platform: rest
-    resource: !secret hue_bth_lux
-    value_template: '{{ value_json.state.lightlevel }}'
-    unit_of_measurement: Lux
-    name: 'Bathroom Lux'
+  # - platform: rest
+  #   resource: !secret hue_bth_lux
+  #   value_template: '{{ value_json.state.lightlevel }}'
+  #   unit_of_measurement: Lux
+  #   name: 'Bathroom Lux'
       
-  - platform: rest
-    resource: !secret hue_bth_temp
-    value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
-    unit_of_measurement: °C
-    name: 'Bathroom Temperature'
+  # - platform: rest
+  #   resource: !secret hue_bth_temp
+  #   value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
+  #   unit_of_measurement: °C
+  #   name: 'Bathroom Temperature'
 
-  - platform: rest
-    resource: !secret hue_bth_motion
-    value_template: '{{ value_json.state.presence }}'
-    scan_interval: 2
-    name: 'Bathroom Motion'
+  # - platform: rest
+  #   resource: !secret hue_bth_motion
+  #   value_template: '{{ value_json.state.presence }}'
+  #   scan_interval: 2
+  #   name: 'Bathroom Motion'
 
-  - platform: rest
-    resource: !secret hue_bth_temp
-    value_template: '{{ value_json.config.battery }}'
-    unit_of_measurement: '%'
-    scan_interval: 1800
-    name: 'Bathroom Motion Sensor Battery Level'
+  # - platform: rest
+  #   resource: !secret hue_bth_temp
+  #   value_template: '{{ value_json.config.battery }}'
+  #   unit_of_measurement: '%'
+  #   scan_interval: 1800
+  #   name: 'Bathroom Motion Sensor Battery Level'
 
   #ensuite
   - platform: rest
@@ -358,7 +359,7 @@ automation:
     trigger: 
       platform: state
       #entity_id: binary_sensor.bathroom_sensor_motion
-      entity_id: sensor.bathroom_motion
+      entity_id: binary_sensor.bathroom_motion_motion
       #to: 'on'
       to: 'True'
     condition:
@@ -376,7 +377,7 @@ automation:
     trigger: 
       platform: state
       #entity_id: binary_sensor.bathroom_sensor_motion
-      entity_id: sensor.bathroom_motion
+      entity_id: binary_sensor.bathroom_motion_motion
       #to: 'off'
       to: 'False'
     action:

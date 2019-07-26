@@ -76,7 +76,7 @@ sensor:
     name: home_to_city_r5_out
     offset: 600 # 10min
     origin: 1078 #outrim near
-    destination: 2709 #woden north
+    destination: 2710 #woden pt7 north
     scan_interval: 60 #1min
     data: action.zip
 
@@ -102,7 +102,7 @@ sensor:
   - platform: gtfs
     name: woden_to_home_R5
     offset: 60 # 1min
-    origin: 2706 #woden pt6
+    origin: 2705 #woden pt3
     destination: 1077 #home out
     scan_interval: 60 #1min
     data: action.zip

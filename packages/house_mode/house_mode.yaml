@@ -19,6 +19,7 @@ group:
       - binary_sensor.mode_evening
       - binary_sensor.mode_night
       - binary_sensor.mode_morning
+      - binary_sensor.mode_late
       - input_select.time_mode
       
   house_mode_a:
@@ -28,6 +29,7 @@ group:
       - automation.mode_set_morning
       - automation.mode_set_day
       - automation.mode_set_evening
+      - automation.mode_set_late
       - automation.mode_set_night
 
 #################################################################
@@ -62,6 +64,10 @@ binary_sensor:
         friendly_name: Morning
         value_template: "{{ is_state('input_select.time_mode', 'Morning') }}"
         icon_template: mdi:weather-sunset-up
+      mode_late:
+        friendly_name: Late
+        value_template: "{{ is_state('input_select.time_mode', 'Late') }}"
+        icon_template: mdi:theme-light-dark
 
 #################################################################
 #                                                               #
@@ -83,6 +89,7 @@ input_select:
       - Morning
       - Day
       - Evening
+      - Late
       - Night
     #initial: Day
     icon: mdi:sync
@@ -136,7 +143,17 @@ automation:
         data_template:
           entity_id: input_select.time_mode
           option: '{{"Evening"}}'
-      
+
+  - alias: mode_set_late
+    trigger:
+      - platform: time
+        at: '20:30:00'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.time_mode
+          option: '{{"Late"}}'
+
   - alias: mode_set_night
     trigger:
       - platform: time

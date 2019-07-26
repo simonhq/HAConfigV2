@@ -109,7 +109,7 @@ class Travel_Messages(hass.Hass):
         
         self.sendmess = ""
         
-        if new != "not_set":
+        if new != "not set":
             # leaving/arriving canberra region
             if entity == "proximity.home_simon":
                 if self.get_state("input_select.trav_simon") == "Car":

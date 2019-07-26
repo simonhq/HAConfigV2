@@ -100,33 +100,49 @@ binary_sensor:
         value_template: "{{ is_state('binary_sensor.drive_simon', 'on') or (not is_state('person.simon', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
         icon_template: mdi:car-wash
       simon_walkbus:
-        friendly_name: Simon Walk/Bus
-        value_template: "{{ not is_state('person.simon', 'home') and is_state('binary_sensor.simon_car', 'off') }}"
+        friendly_name: Simon Walk
+        value_template: "{{ not is_state('person.simon', 'home') and is_state('binary_sensor.simon_car', 'off') and is_state('input_boolean.simon_bus', 'off') }}"
         icon_template: mdi:walk
+      simon_bus:
+        friendly_name: Simon Bus
+        value_template: "{{ not is_state('person.simon', 'home') and is_state('binary_sensor.simon_car', 'off') and is_state('input_boolean.simon_bus', 'on') }}"
+        icon_template: mdi:bus
       megan_car:
         friendly_name: Meg Car
         value_template: "{{ is_state('binary_sensor.drive_meg', 'on') or (not is_state('person.megan', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
         icon_template: mdi:car-wash
       megan_walkbus:
-        friendly_name: Meg Walk/Bus
-        value_template: "{{ not is_state('person.megan', 'home') and is_state('binary_sensor.megan_car', 'off') }}"
+        friendly_name: Meg Walk
+        value_template: "{{ not is_state('person.megan', 'home') and is_state('binary_sensor.megan_car', 'off') and is_state('input_boolean.megan_bus', 'off')}}"
         icon_template: mdi:walk
+      megan_bus:
+        friendly_name: Meg Bus
+        value_template: "{{ not is_state('person.megan', 'home') and is_state('binary_sensor.megan_car', 'off') and is_state('input_boolean.megan_bus', 'on')}}"
+        icon_template: mdi:bus
       staci_car:
         friendly_name: Staci Car
         value_template: "{{ (not is_state('person.staci', 'home') and is_state('binary_sensor.simon_staci_car','on')) or (not is_state('person.staci', 'home') and is_state('binary_sensor.megan_staci_car','on')) }}"
         icon_template: mdi:car-wash
       staci_walkbus:
-        friendly_name: Staci Walk/Bus
-        value_template: "{{ not is_state('person.staci', 'home') and is_state('binary_sensor.staci_car', 'off') }}"
+        friendly_name: Staci Walk
+        value_template: "{{ not is_state('person.staci', 'home') and is_state('binary_sensor.staci_car', 'off') and is_state('input_boolean.staci_bus', 'off') }}"
         icon_template: mdi:walk
+      staci_bus:
+        friendly_name: Staci Bus
+        value_template: "{{ not is_state('person.staci', 'home') and is_state('binary_sensor.staci_car', 'off') and is_state('input_boolean.staci_bus', 'on') }}"
+        icon_template: mdi:bus
       delia_car:
         friendly_name: Delia Car
         value_template: "{{ (not is_state('person.delia', 'home') and is_state('binary_sensor.simon_delia_car','on')) or (not is_state('person.delia', 'home') and is_state('binary_sensor.megan_delia_car','on')) }}"
         icon_template: mdi:car-wash
       delia_walkbus:
-        friendly_name: Delia Walk/Bus
-        value_template: "{{ not is_state('person.delia', 'home') and is_state('binary_sensor.delia_car', 'off') }}"
+        friendly_name: Delia Walk
+        value_template: "{{ not is_state('person.delia', 'home') and is_state('binary_sensor.delia_car', 'off')  and is_state('input_boolean.delia_bus', 'off') }}"
         icon_template: mdi:walk
+      delia_bus:
+        friendly_name: Delia Bus
+        value_template: "{{ not is_state('person.delia', 'home') and is_state('binary_sensor.delia_car', 'off')  and is_state('input_boolean.delia_bus', 'on') }}"
+        icon_template: mdi:bus
 
 
 #################################################################
@@ -152,6 +168,18 @@ input_boolean:
     name: Meg might be on heading to the car
     initial: off
 
+  simon_bus:
+    name: Simon on Bus
+  
+  megan_bus:
+    name: Megan on Bus
+
+  staci_bus:
+    name: Staci on Bus
+
+  delia_bus:
+    name: Delia on Bus
+
 #################################################################
 #                                                               #
 #                       Input Select                            #
@@ -172,6 +200,7 @@ input_select:
     options:
       - Home
       - Walk
+      - Bus
       - Car
     icon: mdi:train-car
 
@@ -181,6 +210,7 @@ input_select:
     options:
       - Home
       - Walk
+      - Bus
       - Car
     icon: mdi:train-car
 
@@ -190,6 +220,7 @@ input_select:
     options:
       - Home
       - Walk
+      - Bus
       - Car
     icon: mdi:train-car
 
@@ -199,6 +230,7 @@ input_select:
     options:
       - Home
       - Walk
+      - Bus
       - Car
     icon: mdi:train-car
 

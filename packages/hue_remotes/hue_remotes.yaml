@@ -28,11 +28,11 @@ group:
     name: Hue Remote Automations
     view: no
     entities:
-      - automation.bed_remote_megan_lamp_toggle
-      - automation.bed_remote_toggle_ensuite
-      - automation.bed_remote_toggle_lightstrip
-      - automation.bed_remote_simon_lamp_toggle
-      - automation.bed_remote_set_night_all_off
+  #     - automation.bed_remote_megan_lamp_toggle
+  #     - automation.bed_remote_toggle_ensuite
+  #     - automation.bed_remote_toggle_lightstrip
+  #     - automation.bed_remote_simon_lamp_toggle
+  #     - automation.bed_remote_set_night_all_off
       - automation.remote_set_evening
       - automation.remote_set_day
       - automation.remote_set_morning
@@ -79,14 +79,19 @@ sensor:
     resource: !secret hue_rem_bed
     value_template: '{{ value_json.state.buttonevent }}'
     name: 'Bedroom Button Press'
-    scan_interval: 3
+    scan_interval: 2
       
   - platform: rest
     resource: !secret hue_rem_liv
     value_template: '{{ value_json.state.buttonevent }}'
     name: 'Living Button Press'
-    scan_interval: 15
+    scan_interval: 5
 
+  - platform: rest
+    resource: !secret hue_rem_mbed
+    value_template: '{{ value_json.state.buttonevent }}'
+    name: 'Meg Bed Button Press'
+    scan_interval: 2
 
 #################################################################
 #                                                               #
@@ -94,192 +99,192 @@ sensor:
 #                                                               #
 #################################################################
 
-automation:
+# automation:
 
-####################################################
-#                                                  #
-#            automation -  bedroom                 #
-#                                                  #
-#################################################### 
+# ####################################################
+# #                                                  #
+# #            automation -  bedroom                 #
+# #                                                  #
+# #################################################### 
 
-  - alias: bed_remote_megan_blanket_on
-    trigger:
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '1003'
-    action:
-      - service: homeassistant.turn_on
-        entity_id: input_boolean.bed_m
+#   - alias: bed_remote_megan_blanket_on
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '1003'
+#     action:
+#       - service: homeassistant.turn_on
+#         entity_id: input_boolean.bed_m
   
-  - alias: bed_remote_megan_blanket_off
-    trigger:
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '1002'
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '1001'
-    action:
-      - service: homeassistant.turn_off
-        entity_id: input_boolean.bed_m
-      - service: homeassistant.turn_off
-        entity_id: switch.megan_blanket
+#   - alias: bed_remote_megan_blanket_off
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '1002'
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '1001'
+#     action:
+#       - service: homeassistant.turn_off
+#         entity_id: input_boolean.bed_m
+#       - service: homeassistant.turn_off
+#         entity_id: switch.megan_blanket
 
-  - alias: bed_remote_toggle_ensuite
-    trigger:
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '2002'
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '2001'
-    action:
-      - service: light.toggle
-        entity_id: light.ensuite
+#   - alias: bed_remote_toggle_ensuite
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '2002'
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '2001'
+#     action:
+#       - service: light.toggle
+#         entity_id: light.ensuite
         
-  - alias: bed_remote_toggle_lightstrip
-    trigger:
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '3002'
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '3001'
-    action:
-      - service: light.toggle
-        entity_id: light.master_lightstrip
+#   - alias: bed_remote_toggle_lightstrip
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '3002'
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '3001'
+#     action:
+#       - service: light.toggle
+#         entity_id: light.master_lightstrip
         
-  - alias: bed_remote_simon_blanket_on
-    trigger:
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '4003'
-    action:
-      - service: homeassistant.turn_on
-        entity_id: input_boolean.bed_s
+#   - alias: bed_remote_simon_blanket_on
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '4003'
+#     action:
+#       - service: homeassistant.turn_on
+#         entity_id: input_boolean.bed_s
   
-  - alias: bed_remote_simon_blanket_off
-    trigger:
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '4002'
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '4001'
-    action:
-      - service: homeassistant.turn_off
-        entity_id: input_boolean.bed_s
-      - service: homeassistant.turn_off
-        entity_id: switch.simon_blanket
+#   - alias: bed_remote_simon_blanket_off
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '4002'
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '4001'
+#     action:
+#       - service: homeassistant.turn_off
+#         entity_id: input_boolean.bed_s
+#       - service: homeassistant.turn_off
+#         entity_id: switch.simon_blanket
 
 
-  ###################################
-  ##
-  ##  remote control - long press
-  ## 
-  ###################################
+#   ###################################
+#   ##
+#   ##  remote control - long press
+#   ## 
+#   ###################################
 
-  # long press night time - shut down lights & tv etc.
-  - alias: bed_remote_set_night_all_off
-    trigger:
-      - platform: state
-        entity_id: sensor.bedroom_button_press
-        to: '2003'
-    action:
-      - service: homeassistant.turn_off
-        entity_id: 
-          - group.family_lights
-          - light.master_lightstrip
-          - light.ensuite_3
-          - remote.harmony_hub
-      - service: homeassistant.turn_on
-        entity_id: 
-          - input_boolean.fdoor
-      - delay: '00:00:10'
-      - service: homeassistant.turn_off
-        entity_id: 
-          - switch.dining_room_iron
-          - switch.study_printer
-          - switch.lounge_tv
-          - switch.lounge_chairs
+#   # long press night time - shut down lights & tv etc.
+#   - alias: bed_remote_set_night_all_off
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.bedroom_button_press
+#         to: '2003'
+#     action:
+#       - service: homeassistant.turn_off
+#         entity_id: 
+#           - group.family_lights
+#           - light.master_lightstrip
+#           - light.ensuite_3
+#           - remote.harmony_hub
+#       - service: homeassistant.turn_on
+#         entity_id: 
+#           - input_boolean.fdoor
+#       - delay: '00:00:10'
+#       - service: homeassistant.turn_off
+#         entity_id: 
+#           - switch.dining_room_iron
+#           - switch.study_printer
+#           - switch.lounge_tv
+#           - switch.lounge_chairs
 
-####################################################
-#                                                  #
-#            automation -  Living                  #
-#                                                  #
-#################################################### 
+# ####################################################
+# #                                                  #
+# #            automation -  Living                  #
+# #                                                  #
+# #################################################### 
 
-  - alias: remote_set_evening
-    trigger:
-      - platform: state
-        entity_id: sensor.living_button_press
-        to: '1002'
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.time_mode
-          option: '{{"Evening"}}'
+#   - alias: remote_set_evening
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.living_button_press
+#         to: '1002'
+#     action:
+#       - service: input_select.select_option
+#         data_template:
+#           entity_id: input_select.time_mode
+#           option: '{{"Evening"}}'
 
-  - alias: remote_set_day
-    trigger:
-      - platform: state
-        entity_id: sensor.living_button_press
-        to: '2002'
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.time_mode
-          option: '{{"Day"}}'
+#   - alias: remote_set_day
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.living_button_press
+#         to: '2002'
+#     action:
+#       - service: input_select.select_option
+#         data_template:
+#           entity_id: input_select.time_mode
+#           option: '{{"Day"}}'
 
-  - alias: remote_set_morning
-    trigger:
-      - platform: state
-        entity_id: sensor.living_button_press
-        to: '3002'
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.time_mode
-          option: '{{"Morning"}}'
+#   - alias: remote_set_morning
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.living_button_press
+#         to: '3002'
+#     action:
+#       - service: input_select.select_option
+#         data_template:
+#           entity_id: input_select.time_mode
+#           option: '{{"Morning"}}'
 
-  - alias: remote_set_night
-    trigger:
-      - platform: state
-        entity_id: sensor.living_button_press
-        to: '4002'
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.time_mode
-          option: '{{"Night"}}'
+#   - alias: remote_set_night
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.living_button_press
+#         to: '4002'
+#     action:
+#       - service: input_select.select_option
+#         data_template:
+#           entity_id: input_select.time_mode
+#           option: '{{"Night"}}'
 
-  ###################################
-  ##
-  ##  remote control - long press
-  ## 
-  ###################################
+#   ###################################
+#   ##
+#   ##  remote control - long press
+#   ## 
+#   ###################################
 
-  # long press night time - shut down lights & tv etc.
-  - alias: remote_set_night_all_off
-    trigger:
-      - platform: state
-        entity_id: sensor.living_button_press
-        to: '4003'
-    action:
-      - service: homeassistant.turn_off
-        entity_id: 
-          - group.family_lights
-          - remote.harmony_hub
-      - service: homeassistant.turn_on
-        entity_id: 
-          - input_boolean.fdoor
-      - delay: '00:00:10'
-      - service: homeassistant.turn_off
-        entity_id: 
-          - switch.dining_room_iron
-          - switch.study_printer
-          - switch.lounge_tv
-          - switch.lounge_chairs
+#   # long press night time - shut down lights & tv etc.
+#   - alias: remote_set_night_all_off
+#     trigger:
+#       - platform: state
+#         entity_id: sensor.living_button_press
+#         to: '4003'
+#     action:
+#       - service: homeassistant.turn_off
+#         entity_id: 
+#           - group.family_lights
+#           - remote.harmony_hub
+#       - service: homeassistant.turn_on
+#         entity_id: 
+#           - input_boolean.fdoor
+#       - delay: '00:00:10'
+#       - service: homeassistant.turn_off
+#         entity_id: 
+#           - switch.dining_room_iron
+#           - switch.study_printer
+#           - switch.lounge_tv
+#           - switch.lounge_chairs
 
 
 

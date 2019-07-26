@@ -27,7 +27,8 @@ group:
       - sensor.dphone_battery
       - sensor.bed_remote_batt
       - sensor.live_remote_batt
-      - sensor.bathroom_motion_sensor_battery_level
+      - sensor.mbed_remote_batt
+      #- sensor.bathroom_motion_sensor_battery_level
       - sensor.ensuite_motion_sensor_battery_level
       - sensor.laundry_motion_sensor_battery_level
       - sensor.garage_motion_sensor_battery_level
@@ -165,12 +166,12 @@ sensor:
 #                                                  #
 ####################################################      
 
-  - platform: rest
-    resource: !secret hue_bth_temp
-    value_template: '{{ value_json.config.battery }}'
-    unit_of_measurement: '%'
-    scan_interval: 1800
-    name: 'Bathroom Motion Sensor Battery Level'
+  # - platform: rest
+  #   resource: !secret hue_bth_temp
+  #   value_template: '{{ value_json.config.battery }}'
+  #   unit_of_measurement: '%'
+  #   scan_interval: 1800
+  #   name: 'Bathroom Motion Sensor Battery Level'
 
   - platform: rest
     resource: !secret hue_ens_temp
@@ -200,29 +201,39 @@ sensor:
 #                                                  #
 #################################################### 
 
-  - platform: template
-    sensors:
-      bed_remote_batt:
-        friendly_name: Bedroom Remote Battery
-        value_template: '{{ states.sensor.bedroom_remote.attributes.battery }}'
-        unit_of_measurement: '%'
-      live_remote_batt:
-        friendly_name: Living Remote Battery
-        value_template: '{{ states.sensor.remote.attributes.battery }}'
-        unit_of_measurement: '%'
+  # - platform: template
+  #   sensors:
+  #     bed_remote_batt:
+  #       friendly_name: Bedroom Remote Battery
+  #       value_template: '{{ states.sensor.bedroom_remote.attributes.battery }}'
+  #       unit_of_measurement: '%'
+  #     live_remote_batt:
+  #       friendly_name: Living Remote Battery
+  #       value_template: '{{ states.sensor.remote.attributes.battery }}'
+  #       unit_of_measurement: '%'
+  #     mbed_remote_batt:
+  #       friendly_name: mBedroom Remote Battery
+  #       value_template: '{{ states.sensor.mbedroom_remote.attributes.battery }}'
+  #       unit_of_measurement: '%'
 
 
   - platform: rest
     resource: !secret hue_rem_bed
     value_template: '{{ value_json.config.battery }}'
     name: 'Bedroom Remote Battery'
-    scan_interval: 3
+    scan_interval: 60
       
   - platform: rest
     resource: !secret hue_rem_liv
     value_template: '{{ value_json.config.battery }}'
     name: 'Living Remote Battery'
-    scan_interval: 15
+    scan_interval: 60
+
+  - platform: rest
+    resource: !secret hue_rem_mbed
+    value_template: '{{ value_json.config.battery }}'
+    name: 'MBed Remote Battery'
+    scan_interval: 60
 
 #################################################################
 #                                                               #

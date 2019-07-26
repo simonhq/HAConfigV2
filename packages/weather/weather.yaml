@@ -20,6 +20,7 @@ group:
       - weather.dark_sky
       - camera.bom_canberra_radar
       - sensor.inside_now
+      - input_boolean.weather_storms
 
   weather_bom_e:
     name: Weather BOM Entities
@@ -89,6 +90,24 @@ group:
 
 #################################################################
 #                                                               #
+#                      Input Boolean                            #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#                weather storms                    #
+#                                                  #
+####################################################
+
+  weather_storms:
+    name: Lightning around home
+    icon: mdi:weather-lightning
+
+#################################################################
+#                                                               #
 #                      Sun                                      #
 #                                                               #
 #################################################################
@@ -104,6 +123,18 @@ sun:
 weather:
   - platform: darksky
     api_key: !secret darksky_token
+
+#################################################################
+#                                                               #
+#                      Lightning strikes                        #
+#                                                               #
+#################################################################
+
+wwlln:
+  radius: 50
+  latitude: !secret HA_LAT
+  longitude: !secret HA_LONG
+
 
 #################################################################
 #                                                               #
@@ -123,7 +154,7 @@ sensor:
     sensors:
       inside_now:
         friendly_name: Temp Inside
-        value_template: "{{ states('sensor.bathroom_sensor_temperature') }}"
+        value_template: "{{ states('sensor.back_door_state_temperature_measurement') }}"
 
 ####################################################
 #                                                  #
@@ -132,6 +163,28 @@ sensor:
 ####################################################
 
   - platform: season
+
+####################################################
+#                                                  #
+#                BOM FTP Sensor                    #
+#                                                  #
+####################################################
+
+  - platform: bom_forecast
+    product_id: IDN60801
+    name: Isabella Plains
+    forecast_days: 6
+    rest_of_today: true
+    friendly: false
+    friendly_state_format: '{max}, {summary}'
+    monitored_conditions:
+      - 'max'
+      - 'min'
+      - 'chance_of_rain'
+      - 'possible_rainfall'
+      - 'summary'
+      - 'detailed_summary'
+      - 'icon'
 
 ####################################################
 #                                                  #
@@ -210,3 +263,39 @@ camera:
     location: Canberra
     filename: /config/www/images/canberraradar.gif
     #delta: 600
+
+
+#################################################################
+#                                                               #
+#                      Automation                               #
+#                                                               #
+#################################################################
+
+automation:
+
+####################################################
+#                                                  #
+#                Lightning in area                 #
+#                                                  #
+####################################################
+
+  - alias: weather_lightning_strikes_on
+    trigger:
+      platform: geo_location
+      source: wwlln
+      zone: zone.Home
+      event: enter  # or "leave"
+    action:
+      - service: home_assistant.turn_on
+        entity_id: input_boolean.weather_storms
+
+  - alias: weather_lightning_strikes_off
+    trigger:
+      platform: geo_location
+      source: wwlln
+      zone: zone.Home
+      event: leave
+    action:
+      - service: home_assistant.turn_off
+        entity_id: input_boolean.weather_storms
+        
