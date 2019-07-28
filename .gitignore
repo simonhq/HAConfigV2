@@ -64,6 +64,8 @@
 !www/plugins/
 !www/plugins/waze-card/
 !node-red/
+!esphome/
+!esphome/.esphome
 
 # Ignore folders.
 .storage
