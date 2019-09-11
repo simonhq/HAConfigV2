@@ -98,6 +98,15 @@ sensor:
     scan_interval: 60 #1min
     data: action.zip
 
+  # 79 home with no delay for Tugg
+  - platform: gtfs
+    name: tugg_to_home_79_now
+    offset: 60 # 1min
+    origin: 1803 #tugg pt3
+    destination: 1076 #home e&j
+    scan_interval: 60 #1min
+    data: action.zip
+
   # R5 home with no delay from Woden
   - platform: gtfs
     name: woden_to_home_R5
@@ -113,6 +122,61 @@ sensor:
     offset: 60 # 1min
     origin: 2706 #woden pt6
     destination: 13 #tugg
+    scan_interval: 60 #1min
+    data: action.zip
+
+  # City to UC (2,3,4)
+  - platform: gtfs
+    name: city_to_uc_rx
+    offset: 60 # 1min
+    origin: 3419 #city pt1
+    destination: 4972 #uc
+    scan_interval: 60 #1min
+    data: action.zip
+
+  # UC to city (2,3,4) 10 min offset
+  - platform: gtfs
+    name: uc_to_city_rx
+    offset: 360 # 10min
+    origin: 4979 #uc 
+    destination: 3418 #city
+    scan_interval: 60 #1min
+    data: action.zip
+
+  # UC Public Hospital to Bel(31)
+  - platform: gtfs
+    name: ucph_to_bel_31
+    offset: 60 # 1min
+    origin: 1737 #ucph 
+    destination: 5517 #bel
+    scan_interval: 60 #1min
+    data: action.zip
+
+  # Bel to UC Public Hospital (31)
+  - platform: gtfs
+    name: bel_to_ucph_31
+    offset: 60 # 1min
+    origin: 5513 #bel pt
+    destination: 1736 #uc
+    scan_interval: 60 #1min
+    data: action.zip
+
+
+  # R4 south
+  - platform: gtfs
+    name: anu_to_woden_r4
+    offset: 300 # 5min
+    origin: 4529 #anu->south
+    destination: 2706 #woden plt4
+    scan_interval: 60 #1min
+    data: action.zip
+
+  # R5 south
+  - platform: gtfs
+    name: citywest_to_woden_r5
+    offset: 300 # 5min
+    origin: 3409 #city pt4 ->south
+    destination: 2705 #woden plt3
     scan_interval: 60 #1min
     data: action.zip
 
@@ -216,8 +280,7 @@ sensor:
             unknown
           {% endif %}
 
-
-      # tugg_to_home with delay
+      # tugg_to_home with delay from woden
       tugg_to_home_79_homecheck:
         friendly_name: Tugg pt3 - 79
         icon_template: mdi:bus
@@ -235,7 +298,25 @@ sensor:
             unknown
           {% endif %}
 
-      # woden_to_home_R5 with delay
+      # tugg_to_home without delay
+      tugg_to_home_79_format_now:
+        friendly_name: Tugg pt3 - 79
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.tugg_to_home_79_now', 'origin_stop_departure_time') %}
+          {% set arrival = state_attr('sensor.tugg_to_home_79_now', 'destination_stop_arrival_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.tugg_to_home_79_now', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set arrival = arrival.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {% set ahms = arrival[1].split(':') %}
+            Dep {{hms[0]}}:{{hms[1]}}, Home by {{ahms[0]}}:{{ahms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
+
+      # woden_to_home_R5 without delay
       woden_to_home_r5_homecheck:
         friendly_name: Woden pt6 - R5(H)
         icon_template: mdi:bus
@@ -253,4 +334,78 @@ sensor:
             unknown
           {% endif %}
 
+      # city_to_uc_rx
+      city_to_uc_rx_format:
+        friendly_name: City pt1 - RX(N) 
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.city_to_uc_rx', 'origin_stop_departure_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.city_to_uc_rx', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {{ route }} at {{hms[0]}}:{{hms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
+
+      # city_to_uc_rx
+      uc_to_city_rx_format:
+        friendly_name: UC - RX(S) 
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.uc_to_city_rx', 'origin_stop_departure_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.uc_to_city_rx', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {{ route }} at {{hms[0]}}:{{hms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
+
+      # city_to_uc_rx
+      ucph_to_bel_31_format:
+        friendly_name: UCPH - 31(B) 
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.ucph_to_bel_31', 'origin_stop_departure_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.ucph_to_bel_31', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {{ route }} at {{hms[0]}}:{{hms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
+
+      # anu_to_woden_r4
+      anu_to_woden_r4_format:
+        friendly_name: ANU - R4(S) 
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.anu_to_woden_r4', 'origin_stop_departure_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.anu_to_woden_r4', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {{ route }} at {{hms[0]}}:{{hms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
+
+      # city_to_woden_r5
+      city_to_woden_r5_format:
+        friendly_name: City - R5(S) 
+        icon_template: mdi:bus
+        value_template: >-
+          {% set departure = state_attr('sensor.citywest_to_woden_r5', 'origin_stop_departure_time') %}
+          {% if departure != None %}
+            {% set route = state_attr('sensor.citywest_to_woden_r5', 'route_route_short_name') %}
+            {% set departure = departure.split(' ') %}
+            {% set hms = departure[1].split(':') %}
+            {{ route }} at {{hms[0]}}:{{hms[1]}}
+          {% else %}
+            unknown
+          {% endif %}
 

@@ -146,7 +146,7 @@ sensor:
 
 ####################################################
 #                                                  #
-#                Season                            #
+#                Indoor Temp                       #
 #                                                  #
 ####################################################
 
@@ -155,6 +155,21 @@ sensor:
       inside_now:
         friendly_name: Temp Inside
         value_template: "{{ states('sensor.back_door_state_temperature_measurement') }}"
+
+####################################################
+#                                                  #
+#                Air Quality                       #
+#                                                  #
+####################################################
+
+  - platform: airvisual
+    api_key: !secret air_vis_key
+    monitored_conditions:
+      - us
+    show_on_map: false
+    city: Macarthur
+    state: ACT
+    country: Australia
 
 ####################################################
 #                                                  #
@@ -170,21 +185,21 @@ sensor:
 #                                                  #
 ####################################################
 
-  - platform: bom_forecast
-    product_id: IDN60801
-    name: Isabella Plains
-    forecast_days: 6
-    rest_of_today: true
-    friendly: false
-    friendly_state_format: '{max}, {summary}'
-    monitored_conditions:
-      - 'max'
-      - 'min'
-      - 'chance_of_rain'
-      - 'possible_rainfall'
-      - 'summary'
-      - 'detailed_summary'
-      - 'icon'
+  # - platform: bom_forecast
+  #   product_id: IDN60801
+  #   name: Isabella Plains
+  #   forecast_days: 6
+  #   rest_of_today: true
+  #   friendly: false
+  #   friendly_state_format: '{max}, {summary}'
+  #   monitored_conditions:
+  #     - 'max'
+  #     - 'min'
+  #     - 'chance_of_rain'
+  #     - 'possible_rainfall'
+  #     - 'summary'
+  #     - 'detailed_summary'
+  #     - 'icon'
 
 ####################################################
 #                                                  #

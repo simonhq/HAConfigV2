@@ -1,0 +1,37 @@
+esphome:
+  name: camera_a
+  platform: ESP32
+  board: esp32dev
+
+wifi:
+  ssid: BB8
+  password: sCmtA9a7$
+  fast_connect: true
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  reboot_timeout: 0s
+
+ota:
+
+#3c:71:bf:fd:5b:a8
+
+# Example configuration entry
+esp32_camera:
+  external_clock:
+    pin: GPIO0
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO5, GPIO18, GPIO19, GPIO21, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+  power_down_pin: GPIO32
+
+  # Image settings
+  name: CameraA

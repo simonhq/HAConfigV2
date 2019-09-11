@@ -146,7 +146,8 @@ class CalendarNotifier(hass.Hass):
         
         sendmessage = False
         # check if the bin is tomorrow, if so send message
-        if calstr != "None":
+        self.log(calstr)
+        if calstr != "unknown":
             sdayw = self.splitcaldayw(calstr)
             sdayn = self.splitcaldayn(calstr)
             sdaym = self.splitcaldaym(calstr)

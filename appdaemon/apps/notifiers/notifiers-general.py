@@ -14,8 +14,8 @@ class General_Messages(hass.Hass):
     dryer = "Dryer stopped"
     batt = "'s phone is low on battery"
     printer = "'s printer ink is low"
-    disk = "Hassio Pi Server harddrive is almost full"
-    cpu = "Hassio Pi Server CPU is very high"
+    disk = "Laptop Server hard drive is almost full"
+    cpu = "Laptop Server CPU is very high"
     
     def initialize(self):
         

@@ -95,3 +95,9 @@ You then have to go into
 sudo chmod -R 777 /usr/share/hassio/homeassistant 
 
 (and again after known_devices.yaml has been created)
+
+to install a particular version of Hassio
+
+ssh in to the command line
+
+> hassio ha update --version=0.96.4

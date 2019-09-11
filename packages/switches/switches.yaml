@@ -22,7 +22,7 @@ group:
       - binary_sensor.switches_on
       - binary_sensor.switches_off
       - switch.lounge_chairs
-      - switch.dining_room_iron
+      #- switch.dining_room_iron
       - switch.lounge_tv
       - switch.study_printer
       - switch.delia_blanket
@@ -63,11 +63,11 @@ group:
     name: Switch Statistics
     view: no
     entities:
-      - sensor.dri_current_w
-      - sensor.dri_current_a
-      - sensor.dri_today_kwh
-      - sensor.dri_total_kwh
-      - sensor.dri_voltage
+      #- sensor.dri_current_w
+      #- sensor.dri_current_a
+      #- sensor.dri_today_kwh
+      #- sensor.dri_total_kwh
+      #- sensor.dri_voltage
       - sensor.ltv_current_w
       - sensor.ltv_current_a
       - sensor.ltv_today_kwh
@@ -110,7 +110,8 @@ binary_sensor:
   - platform: template
     sensors:
       sw_system:
-        value_template: "{{ is_state('binary_sensor.sw_study', 'on') and is_state('binary_sensor.sw_tv', 'on') and is_state('binary_sensor.sw_chairs', 'on') and is_state('binary_sensor.sw_iron', 'on') }}"
+        #value_template: "{{ is_state('binary_sensor.sw_study', 'on') and is_state('binary_sensor.sw_tv', 'on') and is_state('binary_sensor.sw_chairs', 'on') and is_state('binary_sensor.sw_iron', 'on') }}"
+        value_template: "{{ is_state('binary_sensor.sw_study', 'on') and is_state('binary_sensor.sw_tv', 'on') and is_state('binary_sensor.sw_chairs', 'on')  }}"
         friendly_name: 'Switches'
         device_class: connectivity
         icon_template: mdi:dip-switch
@@ -129,11 +130,11 @@ binary_sensor:
         friendly_name: 'Lounge Chairs'
         device_class: connectivity
         icon_template: mdi:toggle-switch
-      sw_iron:
-        value_template: "{{ is_state('device_tracker.iron_switch', 'home') }}"
-        friendly_name: 'Iron'
-        device_class: connectivity
-        icon_template: mdi:toggle-switch
+      # sw_iron:
+      #   value_template: "{{ is_state('device_tracker.iron_switch', 'home') }}"
+      #   friendly_name: 'Iron'
+      #   device_class: connectivity
+      #   icon_template: mdi:toggle-switch
 
 ####################################################
 #                                                  #
@@ -203,26 +204,26 @@ sensor:
 
   - platform: template
     sensors:
-      dri_current_w:
-        friendly_name: Iron Switch Current Watts
-        value_template: '{{ states.switch.dining_room_iron.attributes.current_power_w }}'
-        unit_of_measurement: 'W'
-      dri_current_a:
-        friendly_name: Iron Switch Current Amps
-        value_template: '{{ states.switch.dining_room_iron.attributes.current_a }}'
-        unit_of_measurement: 'A'
-      dri_today_kwh:
-        friendly_name: Iron Switch Today Energy Kwh
-        value_template: '{{ states.switch.dining_room_iron.attributes.today_energy_kwh }}'
-        unit_of_measurement: 'kW'
-      dri_total_kwh:
-        friendly_name: Iron Switch Total Energy Kwh
-        value_template: '{{ states.switch.dining_room_iron.attributes.total_energy_kwh }}'
-        unit_of_measurement: 'kW'
-      dri_voltage:
-        friendly_name: Iron Switch Voltage
-        value_template: '{{ states.switch.dining_room_iron.attributes.voltage }}'
-        unit_of_measurement: 'V'
+      # dri_current_w:
+      #   friendly_name: Iron Switch Current Watts
+      #   value_template: '{{ states.switch.dining_room_iron.attributes.current_power_w }}'
+      #   unit_of_measurement: 'W'
+      # dri_current_a:
+      #   friendly_name: Iron Switch Current Amps
+      #   value_template: '{{ states.switch.dining_room_iron.attributes.current_a }}'
+      #   unit_of_measurement: 'A'
+      # dri_today_kwh:
+      #   friendly_name: Iron Switch Today Energy Kwh
+      #   value_template: '{{ states.switch.dining_room_iron.attributes.today_energy_kwh }}'
+      #   unit_of_measurement: 'kW'
+      # dri_total_kwh:
+      #   friendly_name: Iron Switch Total Energy Kwh
+      #   value_template: '{{ states.switch.dining_room_iron.attributes.total_energy_kwh }}'
+      #   unit_of_measurement: 'kW'
+      # dri_voltage:
+      #   friendly_name: Iron Switch Voltage
+      #   value_template: '{{ states.switch.dining_room_iron.attributes.voltage }}'
+      #   unit_of_measurement: 'V'
       ltv_current_w:
         friendly_name: Lounge TV Switch Current Watts
         value_template: '{{ states.switch.lounge_tv.attributes.current_power_w }}'

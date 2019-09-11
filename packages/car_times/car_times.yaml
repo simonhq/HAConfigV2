@@ -122,6 +122,10 @@ input_boolean:
     name: Someone has just connected to the outback
     icon: mdi:car-connected
 
+  garage_just:
+    name: Someone has just opened the garage
+    icon: mdi:garage-alert
+
   simon_outback:
     name: Simon is connected to the Outback
     icon: mdi:car-connected
@@ -169,10 +173,13 @@ timer:
 #           timer - car connect                    #
 #                                                  #
 #    don't open the door for the first 5 mins      #
-#                                                  #
+#    don't open the door if you already have       #
 ####################################################   
 
   outback_just:
+    duration: '00:05:00'
+
+  garage_just:
     duration: '00:05:00'
 
 
@@ -331,3 +338,14 @@ automation:
         data:
           entity_id: input_boolean.outback_just      
 
+
+  # turn on flag when appdaemon opens the garage - node red will turn off
+  - alias: transport_garage_open_timer_start
+    trigger:
+      - platform: state
+        entity_id: input_boolean.garage_just
+        to: 'on'
+    action:
+      - service: timer.start
+        entity_id: timer.garage_just
+      

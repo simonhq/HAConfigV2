@@ -141,13 +141,13 @@ zone:
   
   #city bus 
   - name: CityBus_4
-    latitude: -35.278479 
-    longitude: 149.130329
+    latitude: -35.278486
+    longitude: 149.130062
     radius: 50
 
   - name: CityBus_2
-    latitude: -35.278558 
-    longitude: 149.130136
+    latitude: -35.278302 
+    longitude: 149.128485
     radius: 50
 
   #city west bus
@@ -204,12 +204,6 @@ zone:
     longitude: 149.098516
     radius: 50
 
-  #UC Blding 7
-  - name: UC7
-    latitude: -35.236525
-    longitude: 149.083143
-    radius: 50
-
   #UC Bus
   - name: UCBus
     latitude: -35.242448
@@ -222,6 +216,7 @@ zone:
     longitude: 151.206420
     radius: 50
 
+  
 
 #################################################################
 #                                                               #

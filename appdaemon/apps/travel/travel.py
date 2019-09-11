@@ -115,9 +115,11 @@ class Travel_Messages(hass.Hass):
                 if self.get_state("input_select.trav_simon") == "Car":
                     if int(self.get_state("proximity.home_simon")) <= 1:
                         if self.get_state("sensor.s_travel_direction") == "towards":
-                            # proximity under 1 kilometre, and arriving by car - open garage door
-                            self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
-                            self.sendmess = "Opening the Garage Door for Simon arriving by car (Proximity)"
+                            if self.get_state("input_boolean.garage_just") != "on":
+                                # proximity under 1 kilometre, and arriving by car - open garage door
+                                self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
+                                self.set_state("input_boolean.garage_just", state="on")
+                                self.sendmess = "Opening the Garage Door for Simon arriving by car (Proximity)"
                     #holiday
                     elif int(self.get_state("proximity.home_simon")) > 50:
                         if self.get_state("input_boolean.presence_holiday") == 'off':
@@ -132,9 +134,11 @@ class Travel_Messages(hass.Hass):
                 if self.get_state("input_select.trav_megan") == "Car":
                     if int(self.get_state("proximity.home_meg")) <= 1:
                         if self.get_state("sensor.m_travel_direction") == "towards":
-                            # proximity under 1 kilometre, and arriving by car - open garage door
-                            self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
-                            self.sendmess = "Opening the Garage Door for Megan arriving by car (Proximity)"
+                            if self.get_state("input_boolean.garage_just") != "on":
+                                # proximity under 1 kilometre, and arriving by car - open garage door
+                                self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
+                                self.set_state("input_boolean.garage_just", state="on")
+                                self.sendmess = "Opening the Garage Door for Megan arriving by car (Proximity)"
                     #holiday
                     elif int(self.get_state("proximity.home_meg")) > 50:
                         if self.get_state("input_boolean.presence_holiday") == 'off':
