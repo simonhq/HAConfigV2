@@ -29,6 +29,7 @@ class CalendarNotifier(hass.Hass):
     hotmessage = "It will be hot today, you may want to consider the cooling."
     omessage = ""
     mmessage = ""
+    emmessage = ""
     dtitle = ""
 
     def initialize(self):
@@ -66,6 +67,7 @@ class CalendarNotifier(hass.Hass):
         dayn = int(time.strftime("%d"))
         daym = int(time.strftime("%m"))
         self.omessage = ""
+        self.emmessage = ""
 
         #- sensor.bin_calendar
         if self.checker(self.get_state("sensor.bin_calendar"), dayw, dayn, daym, self.binc) == True:
@@ -90,8 +92,13 @@ class CalendarNotifier(hass.Hass):
         #- sensor.climate_warn_hot
         if self.get_state("binary_sensor.climate_warn_hot") == 'on':
             self.omessage += self.hotmessage + "\n"
-        
 
+        # build the emoticons
+        if float(self.get_state("sensor.dark_sky_precip_probability_0d")) >= 70.0:
+            self.emmessage += ":umbrella:" 
+        elif float(self.get_state("sensor.dark_sky_precip_probability_0d")) < 70.0 and float(self.get_state("sensor.dark_sky_precip_probability_0d")) >= 50.0:
+            self.emmessage += ":closed_umbrella:" 
+        
         #- sensor.dandd_calendar
         if self.checker(self.get_state("sensor.dandd_calendar"), dayw, dayn, daym, self.danddc) == True:
             self.dtitle = "Session " + self.get_state("sensor.dandd_calendar")
@@ -125,7 +132,8 @@ class CalendarNotifier(hass.Hass):
         return int(wday)
     
     def buildmorning(self):
-        self.mmessage = "Good Morning, \n\n"
+        self.mmessage = "Good Morning, \n"
+        self.mmessage += self.emmessage + "\n"
         self.mmessage += self.omessage
         self.mmessage += "Cooking Tonight: " + self.get_state("input_select.cooking") + "\n\n"        
         self.mmessage += "Weather today: \n"

@@ -111,25 +111,25 @@ binary_sensor:
       # todays high is higher than our hot, and the internal temp is higher than optimal and it is before evening
       climate_warn_hot:
         friendly_name: Warning to Cool (Day)
-        value_template: "{{ (states('sensor.dark_sky_daytime_high_temperature_0')|float > states('input_number.temp_ext_high')|float) and (states('sensor.inside_now')|float > states('input_number.temp_opt_high')|float) and (now().hour < 17) }}"
+        value_template: "{{ (states('sensor.dark_sky_daytime_high_temperature_0d')|float > states('input_number.temp_ext_high')|float) and (states('sensor.inside_now')|float > states('input_number.temp_opt_high')|float) and (now().hour < 17) }}"
         icon_template: mdi:air-conditioner
         device_class: heat
       # todays low is higher than our optimal, and the internal temp is higher than optimal and it is after evening
       climate_warn_hot_overnight:
         friendly_name: Warning to Cool (Night)
-        value_template: "{{ (states('sensor.dark_sky_overnight_low_temperature_0')|float > states('input_number.temp_opt_high')|float) and (states('sensor.inside_now')|float > states('input_number.temp_opt_high')|float) and (now().hour > 17) }}"
+        value_template: "{{ (states('sensor.dark_sky_overnight_low_temperature_0d')|float > states('input_number.temp_opt_high')|float) and (states('sensor.inside_now')|float > states('input_number.temp_opt_high')|float) and (now().hour > 17) }}"
         icon_template: mdi:air-conditioner
         device_class: heat
       # todays low is lower than our cold, and the internal temp is lower than optimal and it is after evening
       climate_warn_cold:
         friendly_name: Warning to Warm (Night)
-        value_template: "{{ (states('sensor.dark_sky_overnight_low_temperature_0')|float < states('input_number.temp_ext_low')|float) and (states('sensor.inside_now')|float < states('input_number.temp_opt_low')|float) and (now().hour > 17) }}"
+        value_template: "{{ (states('sensor.dark_sky_overnight_low_temperature_0d')|float < states('input_number.temp_ext_low')|float) and (states('sensor.inside_now')|float < states('input_number.temp_opt_low')|float) and (now().hour > 17) }}"
         icon_template: mdi:radiator
         device_class: cold
       # todays hign is lower than our optimal, and the internal temp is lower than optimal and it is before evening
       climate_warn_cold_overday:
         friendly_name: Warning to Warm (Day)
-        value_template: "{{ (states('sensor.dark_sky_daytime_high_temperature_0')|float < states('input_number.temp_opt_low')|float) and (states('sensor.inside_now')|float < states('input_number.temp_opt_low')|float) and (now().hour < 17) }}"
+        value_template: "{{ (states('sensor.dark_sky_daytime_high_temperature_0d')|float < states('input_number.temp_opt_low')|float) and (states('sensor.inside_now')|float < states('input_number.temp_opt_low')|float) and (now().hour < 17) }}"
         icon_template: mdi:radiator
         device_class: cold
 

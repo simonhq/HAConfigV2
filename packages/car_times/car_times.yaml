@@ -56,7 +56,8 @@ group:
     view: no
     entities:
       - automation.transport_car_connect_timer_start
-      - automation.transport_car_connect_timer_done
+      #- automation.transport_car_connect_timer_done
+      - automation.transport_garage_open_timer_start
       
 #################################################################
 #                                                               #
@@ -326,17 +327,17 @@ automation:
       - service: homeassistant.turn_on
         entity_id: input_boolean.outback_just
 
-  # turn off flag after timer runs out
-  - alias: transport_car_connect_timer_done
-    trigger:
-      platform: event
-      event_type: timer.finished
-      event_data:
-        entity_id: timer.outback_just
-    action:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.outback_just      
+  # turn off flag after timer runs out - moved to node-red
+  # - alias: transport_car_connect_timer_done
+  #   trigger:
+  #     platform: event
+  #     event_type: timer.finished
+  #     event_data:
+  #       entity_id: timer.outback_just
+  #   action:
+  #     - service: input_boolean.turn_off
+  #       data:
+  #         entity_id: input_boolean.outback_just      
 
 
   # turn on flag when appdaemon opens the garage - node red will turn off
