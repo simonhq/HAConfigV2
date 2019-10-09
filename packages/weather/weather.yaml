@@ -138,6 +138,31 @@ wwlln:
 
 #################################################################
 #                                                               #
+#                      UV                                       #
+#                                                               #
+#################################################################
+
+openuv:
+  api_key: !secret uv_key
+  binary_sensors:
+    monitored_conditions:
+      - uv_protection_window
+  sensors:
+    monitored_conditions:
+      - current_ozone_level
+      - current_uv_index
+      - current_uv_level
+      - max_uv_index
+      - safe_exposure_time_type_1
+      - safe_exposure_time_type_2
+      - safe_exposure_time_type_3
+      - safe_exposure_time_type_4
+      - safe_exposure_time_type_5
+      - safe_exposure_time_type_6
+
+
+#################################################################
+#                                                               #
 #                      Sensors                                  #
 #                                                               #
 #################################################################
@@ -313,4 +338,35 @@ automation:
     action:
       - service: home_assistant.turn_off
         entity_id: input_boolean.weather_storms
-        
+
+####################################################
+#                                                  #
+#               UV                                 #
+#                                                  #
+####################################################
+
+
+  - alias: Update OpenUV every 30 minutes while the sun is at least 10 degrees above the horizon
+    trigger:
+      platform: time_pattern
+      minutes: '/30'
+    condition:
+      condition: numeric_state
+      entity_id: sun.sun
+      value_template: '{{ state.attributes.elevation }}'
+      above: 10
+    action:
+      service: openuv.update_uv_index_data      
+
+  - alias: Update OpenUV protection window four times a day
+    trigger:
+      - platform: time
+        at: "06:12:00"
+      - platform: time
+        at: "10:12:00"
+      - platform: time
+        at: "15:12:00"
+      - platform: time
+        at: "19:12:00"
+    action:
+      service: openuv.update_protection_data    

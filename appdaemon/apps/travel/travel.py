@@ -39,16 +39,16 @@ class Travel_Messages(hass.Hass):
         self.listen_state(self.con_car, "binary_sensor.drive_simon")
         # megan car or walkbus
         self.listen_state(self.meg_trav, "binary_sensor.megan_car")
-        self.listen_state(self.meg_trav, "binary_sensor.megan_walkbus")
+        self.listen_state(self.meg_trav, "binary_sensor.megan_walk_bus")
         # simon car or walkbus
         self.listen_state(self.sim_trav, "binary_sensor.simon_car")
-        self.listen_state(self.sim_trav, "binary_sensor.simon_walkbus")
+        self.listen_state(self.sim_trav, "binary_sensor.simon_walk_bus")
         # staci car or walkbus
         self.listen_state(self.sta_trav, "binary_sensor.staci_car")
-        self.listen_state(self.sta_trav, "binary_sensor.staci_walkbus")
+        self.listen_state(self.sta_trav, "binary_sensor.staci_walk_bus")
         # delia car or walkbus
         self.listen_state(self.del_trav, "binary_sensor.delia_car")
-        self.listen_state(self.del_trav, "binary_sensor.delia_walkbus")
+        self.listen_state(self.del_trav, "binary_sensor.delia_walk_bus")
         
 
         # tasker proximity code - trial
@@ -262,7 +262,7 @@ class Travel_Messages(hass.Hass):
             self.set_state("input_select.trav_megan", state="Car")
 
         ### Showing walking or catching the bus, nothing specific here now 
-        elif self.get_state("binary_sensor.megan_walkbus") == 'on':
+        elif self.get_state("binary_sensor.megan_walk_bus") == 'on':
             
             #wait for a time to ensure not yet at home when you disconnect from the car
             self.handle = self.run_in(self.meg_walk, 180, **kwargs)
@@ -273,7 +273,7 @@ class Travel_Messages(hass.Hass):
         
     def meg_walk(self, kwargs):
 
-        if self.get_state("input_select.trav_megan") != 'Home' and self.get_state("binary_sensor.megan_walkbus") == 'on':
+        if self.get_state("input_select.trav_megan") != 'Home' and self.get_state("binary_sensor.megan_walk_bus") == 'on':
             # set Megan to being walking
             self.set_state("input_select.trav_megan", state="Walk")
 
@@ -307,7 +307,7 @@ class Travel_Messages(hass.Hass):
             self.set_state("input_select.trav_simon", state="Car")
 
         ### Showing walking or catching the bus, nothing specific here now 
-        elif self.get_state("binary_sensor.simon_walkbus") == 'on':
+        elif self.get_state("binary_sensor.simon_walk_bus") == 'on':
 
              #wait for a time to ensure not yet at home when you disconnect from the car
             self.handle = self.run_in(self.sim_walk, 180, **kwargs)
@@ -318,7 +318,7 @@ class Travel_Messages(hass.Hass):
       
     def sim_walk(self, kwargs):
 
-        if self.get_state("input_select.trav_simon") != 'Home' and self.get_state("binary_sensor.simon_walkbus") == 'on':
+        if self.get_state("input_select.trav_simon") != 'Home' and self.get_state("binary_sensor.simon_walk_bus") == 'on':
             # set Simon to being walking
             self.set_state("input_select.trav_simon", state="Walk")
 
@@ -351,7 +351,7 @@ class Travel_Messages(hass.Hass):
             self.set_state("input_select.trav_staci", state="Car")
 
         ### Showing walking or catching the bus, nothing specific here now 
-        elif self.get_state("binary_sensor.staci_walkbus") == 'on':
+        elif self.get_state("binary_sensor.staci_walk_bus") == 'on':
 
             # set Megan to being walking
             self.set_state("input_select.trav_staci", state="Walk")
@@ -391,7 +391,7 @@ class Travel_Messages(hass.Hass):
             self.set_state("input_select.trav_delia", state="Car")
 
         ### Showing walking or catching the bus, nothing specific here now 
-        elif self.get_state("binary_sensor.delia_walkbus") == 'on':
+        elif self.get_state("binary_sensor.delia_walk_bus") == 'on':
 
             # set Delia to being walking
             self.set_state("input_select.trav_delia", state="Walk")

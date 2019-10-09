@@ -21,14 +21,22 @@ group:
       - binary_sensor.megan_staci_car
       - binary_sensor.megan_delia_car
       - binary_sensor.staci_delia_car
+      - binary_sensor.simon_home
       - binary_sensor.simon_car
       - binary_sensor.simon_walkbus
+      - binary_sensor.simon_away
+      - binary_sensor.megan_home
       - binary_sensor.megan_car
       - binary_sensor.megan_walkbus
+      - binary_sensor.megan_away
+      - binary_sensor.staci_home
       - binary_sensor.staci_car
       - binary_sensor.staci_walkbus
+      - binary_sensor.staci_away
+      - binary_sensor.delia_home
       - binary_sensor.delia_car
       - binary_sensor.delia_walkbus
+      - binary_sensor.delia_away
       - input_select.trav_staci
       - input_select.trav_simon
       - input_select.trav_megan
@@ -95,54 +103,124 @@ binary_sensor:
         value_template: "{{ (not is_state('person.staci', 'home') and not is_state('person.delia', 'home')) and (is_state('binary_sensor.drive_staci','on') or is_state('binary_sensor.drive_delia','on')) and states('sensor.waze_staci_to_delia')|float < 5 }}"
         icon_template: mdi:car-connected
 
+
+      simon_home:
+        friendly_name: Simon
+        value_template: "{{ is_state('person.simon', 'home') and is_state('input_boolean.away_simon', 'off') }}"
+        icon_template: mdi:home-map-marker
       simon_car:
-        friendly_name: Simon Car
-        value_template: "{{ is_state('binary_sensor.drive_simon', 'on') or (not is_state('person.simon', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
-        icon_template: mdi:car-wash
-      simon_walkbus:
-        friendly_name: Simon Walk
-        value_template: "{{ not is_state('person.simon', 'home') and is_state('binary_sensor.simon_car', 'off') and is_state('input_boolean.simon_bus', 'off') }}"
+        friendly_name: Simon
+        value_template: "{{ (is_state('binary_sensor.drive_simon', 'on') or (not is_state('person.simon', 'home') and is_state('binary_sensor.simon_meg_car', 'on'))) and is_state('input_boolean.away_simon', 'off') }}"
+        icon_template: mdi:car
+      simon_walk_bus:
+        friendly_name: Simon
+        value_template: "{{ not is_state('person.simon', 'home') and is_state('binary_sensor.simon_car', 'off') and is_state('input_boolean.away_simon', 'off') }}"
         icon_template: mdi:walk
-      simon_bus:
-        friendly_name: Simon Bus
-        value_template: "{{ not is_state('person.simon', 'home') and is_state('binary_sensor.simon_car', 'off') and is_state('input_boolean.simon_bus', 'on') }}"
-        icon_template: mdi:bus
+      simon_far:
+        friendly_name: Simon
+        value_template: "{{ not is_state('person.simon', 'home') and is_state('input_boolean.away_simon', 'on') }}"
+        icon_template: mdi:airplane-takeoff
+
+      megan_home:
+        friendly_name: Megan
+        value_template: "{{ is_state('person.megan', 'home') and is_state('input_boolean.away_megan', 'off') }}"
+        icon_template: mdi:home-map-marker
       megan_car:
-        friendly_name: Meg Car
-        value_template: "{{ is_state('binary_sensor.drive_meg', 'on') or (not is_state('person.megan', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
-        icon_template: mdi:car-wash
-      megan_walkbus:
-        friendly_name: Meg Walk
-        value_template: "{{ not is_state('person.megan', 'home') and is_state('binary_sensor.megan_car', 'off') and is_state('input_boolean.megan_bus', 'off')}}"
+        friendly_name: Megan
+        value_template: "{{ (is_state('binary_sensor.drive_megan', 'on') or (not is_state('person.megan', 'home') and is_state('binary_sensor.simon_meg_car', 'on'))) and is_state('input_boolean.away_megan', 'off') }}"
+        icon_template: mdi:car
+      megan_walk_bus:
+        friendly_name: Megan
+        value_template: "{{ not is_state('person.megan', 'home') and is_state('binary_sensor.megan_car', 'off') and is_state('input_boolean.away_megan', 'off') }}"
         icon_template: mdi:walk
-      megan_bus:
-        friendly_name: Meg Bus
-        value_template: "{{ not is_state('person.megan', 'home') and is_state('binary_sensor.megan_car', 'off') and is_state('input_boolean.megan_bus', 'on')}}"
-        icon_template: mdi:bus
+      megan_far:
+        friendly_name: Megan
+        value_template: "{{ not is_state('person.megan', 'home') and is_state('input_boolean.away_megan', 'on') }}"
+        icon_template: mdi:airplane-takeoff
+
+      staci_home:
+        friendly_name: Staci
+        value_template: "{{ is_state('person.staci', 'home') and is_state('input_boolean.away_staci', 'off') }}"
+        icon_template: mdi:home-map-marker
       staci_car:
-        friendly_name: Staci Car
-        value_template: "{{ (not is_state('person.staci', 'home') and is_state('binary_sensor.simon_staci_car','on')) or (not is_state('person.staci', 'home') and is_state('binary_sensor.megan_staci_car','on')) }}"
-        icon_template: mdi:car-wash
-      staci_walkbus:
-        friendly_name: Staci Walk
-        value_template: "{{ not is_state('person.staci', 'home') and is_state('binary_sensor.staci_car', 'off') and is_state('input_boolean.staci_bus', 'off') }}"
+        friendly_name: Staci
+        value_template: "{{ (is_state('binary_sensor.drive_staci', 'on') or (not is_state('person.staci', 'home') and is_state('binary_sensor.simon_staci_car', 'on')) or (not is_state('person.staci', 'home') and is_state('binary_sensor.megan_staci_car', 'on'))) and is_state('input_boolean.away_staci', 'off') }}"
+        icon_template: mdi:car
+      staci_walk_bus:
+        friendly_name: Staci
+        value_template: "{{ not is_state('person.staci', 'home') and is_state('binary_sensor.staci_car', 'off') and is_state('input_boolean.away_staci', 'off') }}"
         icon_template: mdi:walk
-      staci_bus:
-        friendly_name: Staci Bus
-        value_template: "{{ not is_state('person.staci', 'home') and is_state('binary_sensor.staci_car', 'off') and is_state('input_boolean.staci_bus', 'on') }}"
-        icon_template: mdi:bus
+      staci_far:
+        friendly_name: Staci
+        value_template: "{{ not is_state('person.staci', 'home') and is_state('input_boolean.away_staci', 'on') }}"
+        icon_template: mdi:airplane-takeoff
+
+      delia_home:
+        friendly_name: Delia
+        value_template: "{{ is_state('person.delia', 'home') and is_state('input_boolean.away_delia', 'off') }}"
+        icon_template: mdi:home-map-marker
       delia_car:
-        friendly_name: Delia Car
-        value_template: "{{ (not is_state('person.delia', 'home') and is_state('binary_sensor.simon_delia_car','on')) or (not is_state('person.delia', 'home') and is_state('binary_sensor.megan_delia_car','on')) }}"
-        icon_template: mdi:car-wash
-      delia_walkbus:
-        friendly_name: Delia Walk
-        value_template: "{{ not is_state('person.delia', 'home') and is_state('binary_sensor.delia_car', 'off')  and is_state('input_boolean.delia_bus', 'off') }}"
+        friendly_name: Delia
+        value_template: "{{ (is_state('binary_sensor.drive_delia', 'on') or (not is_state('person.delia', 'home') and is_state('binary_sensor.simon_delia_car', 'on')) or (not is_state('person.delia', 'home') and is_state('binary_sensor.megan_delia_car', 'on'))) and is_state('input_boolean.away_delia', 'off') }}"
+        icon_template: mdi:car
+      delia_walk_bus:
+        friendly_name: Delia
+        value_template: "{{ not is_state('person.delia', 'home') and is_state('binary_sensor.delia_car', 'off') and is_state('input_boolean.away_delia', 'off') }}"
         icon_template: mdi:walk
-      delia_bus:
-        friendly_name: Delia Bus
-        value_template: "{{ not is_state('person.delia', 'home') and is_state('binary_sensor.delia_car', 'off')  and is_state('input_boolean.delia_bus', 'on') }}"
-        icon_template: mdi:bus
+      delia_far:
+        friendly_name: Delia
+        value_template: "{{ not is_state('person.delia', 'home') and is_state('input_boolean.away_delia', 'on') }}"
+        icon_template: mdi:airplane-takeoff
+
+
+      # simon_car:
+      #   friendly_name: Simon Car
+      #   value_template: "{{ is_state('binary_sensor.drive_simon', 'on') or (not is_state('person.simon', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
+      #   icon_template: mdi:car-wash
+      # simon_walkbus:
+      #   friendly_name: Simon Walk
+      #   value_template: "{{ not is_state('person.simon', 'home') and is_state('binary_sensor.simon_car', 'off') and is_state('input_boolean.simon_bus', 'off') }}"
+      #   icon_template: mdi:walk
+      # simon_bus:
+      #   friendly_name: Simon Bus
+      #   value_template: "{{ not is_state('person.simon', 'home') and is_state('binary_sensor.simon_car', 'off') and is_state('input_boolean.simon_bus', 'on') }}"
+      #   icon_template: mdi:bus
+      # megan_car:
+      #   friendly_name: Meg Car
+      #   value_template: "{{ is_state('binary_sensor.drive_meg', 'on') or (not is_state('person.megan', 'home') and is_state('binary_sensor.simon_meg_car', 'on')) }}"
+      #   icon_template: mdi:car-wash
+      # megan_walkbus:
+      #   friendly_name: Meg Walk
+      #   value_template: "{{ not is_state('person.megan', 'home') and is_state('binary_sensor.megan_car', 'off') and is_state('input_boolean.megan_bus', 'off')}}"
+      #   icon_template: mdi:walk
+      # megan_bus:
+      #   friendly_name: Meg Bus
+      #   value_template: "{{ not is_state('person.megan', 'home') and is_state('binary_sensor.megan_car', 'off') and is_state('input_boolean.megan_bus', 'on')}}"
+      #   icon_template: mdi:bus
+      # staci_car:
+      #   friendly_name: Staci Car
+      #   value_template: "{{ (not is_state('person.staci', 'home') and is_state('binary_sensor.simon_staci_car','on')) or (not is_state('person.staci', 'home') and is_state('binary_sensor.megan_staci_car','on')) }}"
+      #   icon_template: mdi:car-wash
+      # staci_walkbus:
+      #   friendly_name: Staci Walk
+      #   value_template: "{{ not is_state('person.staci', 'home') and is_state('binary_sensor.staci_car', 'off') and is_state('input_boolean.staci_bus', 'off') }}"
+      #   icon_template: mdi:walk
+      # staci_bus:
+      #   friendly_name: Staci Bus
+      #   value_template: "{{ not is_state('person.staci', 'home') and is_state('binary_sensor.staci_car', 'off') and is_state('input_boolean.staci_bus', 'on') }}"
+      #   icon_template: mdi:bus
+      # delia_car:
+      #   friendly_name: Delia Car
+      #   value_template: "{{ (not is_state('person.delia', 'home') and is_state('binary_sensor.simon_delia_car','on')) or (not is_state('person.delia', 'home') and is_state('binary_sensor.megan_delia_car','on')) }}"
+      #   icon_template: mdi:car-wash
+      # delia_walkbus:
+      #   friendly_name: Delia Walk
+      #   value_template: "{{ not is_state('person.delia', 'home') and is_state('binary_sensor.delia_car', 'off')  and is_state('input_boolean.delia_bus', 'off') }}"
+      #   icon_template: mdi:walk
+      # delia_bus:
+      #   friendly_name: Delia Bus
+      #   value_template: "{{ not is_state('person.delia', 'home') and is_state('binary_sensor.delia_car', 'off')  and is_state('input_boolean.delia_bus', 'on') }}"
+      #   icon_template: mdi:bus
 
 
 #################################################################

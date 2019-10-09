@@ -19,8 +19,8 @@ messaging:
 
 # calendars
 daily-messages:
-  module: notifiers
-  class: CalendarNotifier
+  module: notifiers-message
+  class: CalNotifier
   dependencies: 
     - messaging
   global_dependencies:

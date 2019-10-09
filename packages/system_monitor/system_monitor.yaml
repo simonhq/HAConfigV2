@@ -75,16 +75,16 @@ sensor:
 # this will get the current state of the battery - should be 'charging'
   - platform: command_line
     name: "Laptop Battery State"
-    command: "cat /sys/class/power_supply/BAT1/status"
+    command: "cat /sys/class/power_supply/BAT0/status"
 
   # the current external ip
-  - platform: dnsip
+  #- platform: dnsip
 
-  # - platform: rest
-  #   resource: https://api.ipify.org?format=json
-  #   name: External IP
-  #   value_template: '{{ value_json.ip }}'
-  #   scan_interval: 10  
+  - platform: rest
+    resource: https://api.ipify.org?format=json
+    name: External IP
+    value_template: '{{ value_json.ip }}'
+    scan_interval: 10  
 
 # sensor.current_version
   - platform: version

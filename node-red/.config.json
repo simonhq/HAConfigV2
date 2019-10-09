@@ -2,7 +2,7 @@
  "nodes": {
   "node-red": {
    "name": "node-red",
-   "version": "0.20.7",
+   "version": "0.20.8",
    "local": false,
    "nodes": {
     "inject": {
@@ -417,7 +417,7 @@
   },
   "node-red-contrib-cast": {
    "name": "node-red-contrib-cast",
-   "version": "0.2.9",
+   "version": "0.2.10",
    "local": false,
    "nodes": {
     "cast-to-client": {
@@ -891,7 +891,7 @@
   },
   "node-red-contrib-time-range-switch": {
    "name": "node-red-contrib-time-range-switch",
-   "version": "0.6.1",
+   "version": "0.6.3",
    "local": false,
    "nodes": {
     "time-range-switch": {
@@ -944,7 +944,7 @@
   },
   "node-red-dashboard": {
    "name": "node-red-dashboard",
-   "version": "2.16.2",
+   "version": "2.16.3",
    "local": false,
    "nodes": {
     "ui_base": {
@@ -1178,7 +1178,7 @@
   },
   "node-red-node-email": {
    "name": "node-red-node-email",
-   "version": "1.6.3",
+   "version": "1.7.0",
    "local": false,
    "nodes": {
     "email": {
@@ -1264,7 +1264,7 @@
   },
   "node-red-node-random": {
    "name": "node-red-node-random",
-   "version": "0.1.3",
+   "version": "0.1.4",
    "local": false,
    "nodes": {
     "random": {
@@ -1335,7 +1335,7 @@
   },
   "node-red-node-smooth": {
    "name": "node-red-node-smooth",
-   "version": "0.1.0",
+   "version": "0.1.2",
    "local": false,
    "nodes": {
     "smooth": {
@@ -1449,6 +1449,24 @@
      "file": "/config/node-red/node_modules/node-red-contrib-discord/discord/discordClient.js"
     }
    }
+  },
+  "node-red-contrib-google": {
+   "name": "node-red-contrib-google",
+   "version": "0.2.0",
+   "local": true,
+   "nodes": {
+    "google": {
+     "name": "google",
+     "types": [
+      "google-conn",
+      "google"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-google",
+     "file": "/config/node-red/node_modules/node-red-contrib-google/google.js"
+    }
+   }
   }
  },
  "users": {
@@ -1466,7 +1484,7 @@
    "menu-deploymenu-item-flow": true,
    "menu-deploymenu-item-full": false,
    "menu-deploymenu-item-node": false,
-   "menu-menu-item-sidebar": false
+   "menu-menu-item-sidebar": true
   }
  }
 }

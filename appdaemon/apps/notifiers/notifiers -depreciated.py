@@ -38,28 +38,29 @@ class CalendarNotifier(hass.Hass):
         self.notifier = self.get_app('messaging')
 
         #cooking
-        self.listen_state(self.cook_flag, "sensor.cook_calendar")
+        #self.listen_state(self.cook_flag, "sensor.cook_calendar")
         #messaging
         self.listen_state(self.messages, "input_boolean.send_message", new = "on")
         
    
-    def cook_flag(self, entity, attribute, old, new, kwargs):
-        v = self.get_state("sensor.cook_calendar")
-        #self.log(v)
-        cook = v[0:2]
-        #self.log(cook)
-        if cook == "Si" or cook == "si":
-            self.set_state("input_select.cooking", state="Simon")
-        elif cook == "Me" or cook == "me":
-            self.set_state("input_select.cooking", state="Megan")
-        elif cook == "St" or cook == "st":
-            self.set_state("input_select.cooking", state="Staci")
-        elif cook == "De" or cook == "de":
-            self.set_state("input_select.cooking", state="Delia")
-        elif cook == "Ea" or cook == "ea":
-            self.set_state("input_select.cooking", state="Easy")
-        elif cook == "Go" or cook == "go":
-            self.set_state("input_select.cooking", state="Going Out")
+    # moved to node-red
+    # def cook_flag(self, entity, attribute, old, new, kwargs):
+    #     v = self.get_state("sensor.cook_calendar")
+    #     #self.log(v)
+    #     cook = v[0:2]
+    #     #self.log(cook)
+    #     if cook == "Si" or cook == "si":
+    #         self.set_state("input_select.cooking", state="Simon")
+    #     elif cook == "Me" or cook == "me":
+    #         self.set_state("input_select.cooking", state="Megan")
+    #     elif cook == "St" or cook == "st":
+    #         self.set_state("input_select.cooking", state="Staci")
+    #     elif cook == "De" or cook == "de":
+    #         self.set_state("input_select.cooking", state="Delia")
+    #     elif cook == "Ea" or cook == "ea":
+    #         self.set_state("input_select.cooking", state="Easy")
+    #     elif cook == "Go" or cook == "go":
+    #         self.set_state("input_select.cooking", state="Going Out")
     
     def messages(self, entity, attribute, old, new, kwargs):
 

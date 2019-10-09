@@ -52,7 +52,7 @@ binary_sensor:
   - platform: template
     sensors:
       roller_close:
-        friendly_name: Garage Close
+        friendly_name: Garage Closed
         value_template: "{{ is_state('cover.near_garage_door', 'closed') }}"
         icon_template: mdi:garage
         device_class: motion

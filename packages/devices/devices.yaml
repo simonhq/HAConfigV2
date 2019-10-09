@@ -196,8 +196,8 @@ binary_sensor:
   - platform: template
     sensors:
       hubs_system:
-        #value_template: "{{ is_state('binary_sensor.bond', 'on') and is_state('binary_sensor.harmony', 'on') and is_state('binary_sensor.hue', 'on') and is_state('binary_sensor.kevo', 'on') and is_state('binary_sensor.myq', 'on') and is_state('binary_sensor.smart', 'on') and is_state('binary_sensor.epson', 'on') and is_state('binary_sensor.hass_lt', 'on') and is_state('binary_sensor.tradfri', 'on') }}"
-        value_template: "{{ is_state('binary_sensor.bond', 'on') and is_state('binary_sensor.harmony', 'on') and is_state('binary_sensor.hue', 'on') and is_state('binary_sensor.kevo', 'on') and is_state('binary_sensor.myq', 'on') and is_state('binary_sensor.smart', 'on') and is_state('binary_sensor.epson', 'on') and is_state('binary_sensor.hass_lt', 'on') }}"
+        #value_template: "{{ is_state('binary_sensor.bond', 'on') and is_state('binary_sensor.harmony', 'on') and is_state('binary_sensor.hue', 'on') and is_state('binary_sensor.kevo', 'on') and is_state('binary_sensor.myq', 'on') and is_state('binary_sensor.smart', 'on') and is_state('binary_sensor.epson', 'on') and is_state('binary_sensor.tradfri', 'on') }}"
+        value_template: "{{ is_state('binary_sensor.bond', 'on') and is_state('binary_sensor.harmony', 'on') and is_state('binary_sensor.hue', 'on') and is_state('binary_sensor.kevo', 'on') and is_state('binary_sensor.myq', 'on') and is_state('binary_sensor.smart', 'on') and is_state('binary_sensor.epson', 'on') }}"
         friendly_name: 'Hubs'
         device_class: connectivity
         icon_template: mdi:battlenet
@@ -236,11 +236,16 @@ binary_sensor:
         friendly_name: 'Printer'
         device_class: connectivity
         icon_template: mdi:printer
-      hass_lt:
-        value_template: "{{ is_state('device_tracker.xubuntu_laptop', 'home') }}"
+      ha_laptop:
+        value_template: "{{ is_state('device_tracker.ha_laptop', 'home') }}"
         friendly_name: 'Hassio Server'
         device_class: connectivity
         icon_template: mdi:home-assistant
+      # hass_lt:
+      #   value_template: "{{ is_state('device_tracker.xubuntu_laptop', 'home') }}"
+      #   friendly_name: 'Hassio Server'
+      #   device_class: connectivity
+      #   icon_template: mdi:home-assistant
       # tradfri:
       #   value_template: "{{ is_state('device_tracker.tradfri_hub', 'home') }}"
       #   friendly_name: 'Tradfri Hub'
