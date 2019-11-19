@@ -18,6 +18,7 @@ group:
       - light.back_hall  
       - light.bathroom
       - light.delia_s_lamp
+      - light.delia_lightstrip
       - light.dining_1
       - light.dining_2
       - light.dining_3

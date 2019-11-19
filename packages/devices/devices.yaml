@@ -181,6 +181,19 @@ device_tracker:
 
 #################################################################
 #                                                               #
+#                   Input Boolean                              #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+  button_pushed:
+    name: Meg button
+    initial: off
+    icon: mdi:button
+
+#################################################################
+#                                                               #
 #                   Binary Sensors                              #
 #                                                               #
 #################################################################
@@ -409,7 +422,31 @@ binary_sensor:
 
 
       
+####################################################
+#                                                  #
+#               button automation          #
+#                                                  #
+####################################################
 
+#Megs Button
+automation:
 
+  trigger:
+    platform: event
+    event_type: 'smartthings.button'
+    event_data:
+      device_id: 2dce0c5cd7e6426486e88ddc9bf508d5
+      value: 'pushed'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.button_pushed
 
-
+  trigger:
+    platform: event
+    event_type: 'smartthings.button'
+    event_data:
+      device_id: 2dce0c5cd7e6426486e88ddc9bf508d5
+      value: 'held'
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.button_pushed

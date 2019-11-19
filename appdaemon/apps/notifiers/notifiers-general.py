@@ -43,6 +43,8 @@ class General_Messages(hass.Hass):
         self.listen_state(self.washing_notify, "binary_sensor.samwash")
         self.listen_state(self.drying_notify, "binary_sensor.samdry")
 
+        self.listen_state(self.cook_flag, "sensor.cook_calendar")
+
         #self.listen_state(self.gps_notify, "device_tracker.sphone_net")
         #self.listen_state(self.gps_notify, "device_tracker.mphone_net")
         #self.listen_state(self.gps_notify, "device_tracker.stphone_net")
@@ -53,6 +55,24 @@ class General_Messages(hass.Hass):
         # self.listen_state(self.gps_notify, "sensor.stphone_gps_up")
         # self.listen_state(self.gps_notify, "sensor.dphone_gps_up")
 
+
+    def cook_flag(self, entity, attribute, old, new, kwargs):
+        v = self.get_state("sensor.cook_calendar")
+        #self.log(v)
+        cook = v[0:2]
+        #self.log(cook)
+        if cook == "Si" or cook == "si":
+            self.set_state("input_select.cooking", state="Simon")
+        elif cook == "Me" or cook == "me":
+            self.set_state("input_select.cooking", state="Megan")
+        elif cook == "St" or cook == "st":
+            self.set_state("input_select.cooking", state="Staci")
+        elif cook == "De" or cook == "de":
+            self.set_state("input_select.cooking", state="Delia")
+        elif cook == "Ea" or cook == "ea":
+            self.set_state("input_select.cooking", state="Easy")
+        elif cook == "Go" or cook == "go":
+            self.set_state("input_select.cooking", state="Going Out")
 
     def ink_set(self, entity, attribute, old, new, kwargs):
         if new == "on":

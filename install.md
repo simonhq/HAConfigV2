@@ -101,3 +101,8 @@ to install a particular version of Hassio
 ssh in to the command line
 
 > hassio ha update --version=0.96.4
+
+
+## Delete duplicate entities:
+
+Delete entitys in /config/.storage/core.entity_registry

@@ -58,10 +58,10 @@ group:
 #                                                               #
 #################################################################
 
-#google:
+google:
 
-  #client_id: !secret ha_cal_client_id
-  #client_secret: !secret ha_cal_client_secret
+  client_id: !secret ha_cal_client_id
+  client_secret: !secret ha_cal_client_secret
 
 #################################################################
 #                                                               #
@@ -176,21 +176,25 @@ binary_sensor:
 #                                                  #
 ####################################################      
 
+#the commented value template is for the node red calendar checking - not needed as the calendar component is working again.
   - platform: template
     sensors:
       cal_morn_on:
         entity_id: sensor.time
-        value_template: "{{ now().timestamp() == states.input_datetime.cal_mrn.attributes.timestamp | int  }}"
+        #value_template: "{{ now().timestamp() == states.input_datetime.cal_mrn.attributes.timestamp | int  }}"
+        value_template: "{{ is_state('calendar.morning', 'on') }}"
         friendly_name: 'Morning'
         icon_template: mdi:weather-sunset-up
       cal_guest_on:
         entity_id: sensor.time
-        value_template: "{{ now().timestamp() >= states.input_datetime.cal_guest_start.attributes.timestamp | int and now().timestamp() <= states.input_datetime.cal_guest_stop.attributes.timestamp | int }}"
+        #value_template: "{{ now().timestamp() >= states.input_datetime.cal_guest_start.attributes.timestamp | int and now().timestamp() <= states.input_datetime.cal_guest_stop.attributes.timestamp | int }}"
+        value_template: "{{ is_state('calendar.guest', 'on') }}"
         friendly_name: 'Guest'
         icon_template: mdi:account-check
       cal_tv_on:
         entity_id: sensor.time
-        value_template: "{{ now().timestamp() >= states.input_datetime.cal_tv_start.attributes.timestamp | int and now().timestamp() <= states.input_datetime.cal_tv_stop.attributes.timestamp | int }}"
+        #value_template: "{{ now().timestamp() >= states.input_datetime.cal_tv_start.attributes.timestamp | int and now().timestamp() <= states.input_datetime.cal_tv_stop.attributes.timestamp | int }}"
+        value_template: "{{ is_state('calendar.tv', 'on') }}"
         friendly_name: 'TV'
         icon_template: mdi:television-classic
 
@@ -204,32 +208,38 @@ binary_sensor:
     sensors:
       cal_cln_on:
         entity_id: sensor.time
-        value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_cln', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+        #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_cln', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+        value_template: "{{ is_state('calendar.cleaner', 'on') }}"
         friendly_name: 'Cleaner Today'
         icon_template: mdi:silverware-clean
       cal_bin_on:
         entity_id: sensor.time
-        value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_bin', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+        #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_bin', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+        value_template: "{{ is_state('calendar.bin', 'on') }}"
         friendly_name: 'Bin Pick Up Today'
         icon_template: mdi:delete
       cal_rec_on:
         entity_id: sensor.time
-        value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_rec', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+        #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_rec', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+        value_template: "{{ is_state('calendar.recycling', 'on') }}"
         friendly_name: 'Recycling Pick Up Today'
         icon_template: mdi:recycle
       cal_grw_on:
         entity_id: sensor.time
-        value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_grw', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+        #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_grw', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+        value_template: "{{ is_state('calendar.greenwaste', 'on') }}"
         friendly_name: 'Greenwaste Pick Up Today'
         icon_template: mdi:tree-outline
       cal_skp_on:
         entity_id: sensor.time
-        value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_skp', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True) }}"
+        #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_skp', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True) }}"
+        value_template: "{{ is_state('calendar.skipbin', 'on') }}"
         friendly_name: 'Skip Bin Pick Up Today'
         icon_template: mdi:truck-trailer
       cal_dnd_on:
         entity_id: sensor.time
-        value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_dnd', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True) }}"
+        #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_dnd', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True) }}"
+        value_template: "{{ is_state('calendar.dandd', 'on') }}"
         friendly_name: 'D&D Game Tonight'
         icon_template: mdi:sword-cross
        
@@ -248,42 +258,41 @@ sensor:
 #                                                  #
 ####################################################  
 
-  #- platform: template
-    #sensors:
-      #hass_calendar:
-      #  friendly_name: Hassio Calendar
-      #  value_template: '{{ states.calendar.hassiothompsonhqnet.attributes.message }} at {{ as_timestamp(states.calendar.hassiothompsonhqnet.attributes.start_time) | timestamp_custom("%a %d/%m %I:%M") }}'
-      #cook_calendar:
-      #  friendly_name: Person cooking next
-      #  value_template: '{{ states.calendar.cook.attributes.message }}'
-      # dandd_calendar:
-      #   friendly_name: Next Playing Date
-      #   value_template: '{{ as_timestamp(states.calendar.dandd.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
-      # cleaner_calendar:
-      #   friendly_name: Cleaner next comes on
-      #   value_template: '{{ as_timestamp(states.calendar.cleaner.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
-      # bin_calendar:
-      #   friendly_name: Next Bin pickup
-      #   value_template: '{{ as_timestamp(states.calendar.bin.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
-      # recycling_calendar:
-      #   friendly_name: Next Recycling pickup
-      #   value_template: '{{ as_timestamp(states.calendar.recycling.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
-      # greenwaste_calendar:
-      #   friendly_name: Next Greenwaste pickup
-      #   value_template: '{{ as_timestamp(states.calendar.greenwaste.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
-      
-#       skipbin_calendar:
-#         friendly_name: Next Skipbin pickup
-#         value_template: '{{ as_timestamp(states.calendar.skipbin.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
-#       morning_calendar:
-#         friendly_name: Turn on Morning at
-#         value_template: '{{ as_timestamp(states.calendar.morning.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
-#       tv_calendar:
-#         friendly_name: Turn on TV at
-#         value_template: '{{ states.calendar.tv.attributes.message }} {{ as_timestamp(states.calendar.tv.attributes.start_time) | timestamp_custom("%a %d/%m %I:%M") }}'
-#       guest_calendar:
-#         friendly_name: Guest staying from
-#         value_template: '{{ states.calendar.guest.attributes.message }} {{ as_timestamp(states.calendar.guest.attributes.start_time) | timestamp_custom("%a %d/%m %I:%M") }}'
+  - platform: template
+    sensors:
+      hass_calendar:
+        friendly_name: Hassio Calendar
+        value_template: '{{ states.calendar.hassiothompsonhqnet.attributes.message }} at {{ as_timestamp(states.calendar.hassiothompsonhqnet.attributes.start_time) | timestamp_custom("%a %d/%m %I:%M") }}'
+      cook_calendar:
+        friendly_name: Person cooking next
+        value_template: '{{ states.calendar.cook.attributes.message }}'
+      dandd_calendar:
+        friendly_name: Next Playing Date
+        value_template: '{{ as_timestamp(states.calendar.dandd.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      cleaner_calendar:
+        friendly_name: Cleaner next comes on
+        value_template: '{{ as_timestamp(states.calendar.cleaner.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      bin_calendar:
+        friendly_name: Next Bin pickup
+        value_template: '{{ as_timestamp(states.calendar.bin.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      recycling_calendar:
+        friendly_name: Next Recycling pickup
+        value_template: '{{ as_timestamp(states.calendar.recycling.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      greenwaste_calendar:
+        friendly_name: Next Greenwaste pickup
+        value_template: '{{ as_timestamp(states.calendar.greenwaste.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      skipbin_calendar:
+        friendly_name: Next Skipbin pickup
+        value_template: '{{ as_timestamp(states.calendar.skipbin.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      morning_calendar:
+        friendly_name: Turn on Morning at
+        value_template: '{{ as_timestamp(states.calendar.morning.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      tv_calendar:
+        friendly_name: Turn on TV at
+        value_template: '{{ states.calendar.tv.attributes.message }} {{ as_timestamp(states.calendar.tv.attributes.start_time) | timestamp_custom("%a %d/%m %I:%M") }}'
+      guest_calendar:
+        friendly_name: Guest staying from
+        value_template: '{{ states.calendar.guest.attributes.message }} {{ as_timestamp(states.calendar.guest.attributes.start_time) | timestamp_custom("%a %d/%m %I:%M") }}'
 
 
 #################################################################
@@ -301,18 +310,19 @@ automation:
   ##  this turns on the flag that then triggers the appdaemon code to send the messages if they are due
   ###################################
 
-  - alias: calendar_check_flags
-    trigger:
-      - platform: time
-        at: '05:00:00'
-      - platform: time
-        at: '17:00:00'
-      - platform: time
-        at: '23:00:00'
-    action:
-      - service: homeassistant.turn_on
-        entity_id:
-          - input_boolean.cal_trigger_cal
+  # this controls the node-red calendar code. - not needed at the moment
+  # - alias: calendar_check_flags
+  #   trigger:
+  #     - platform: time
+  #       at: '05:00:00'
+  #     - platform: time
+  #       at: '17:00:00'
+  #     - platform: time
+  #       at: '23:00:00'
+  #   action:
+  #     - service: homeassistant.turn_on
+  #       entity_id:
+  #         - input_boolean.cal_trigger_cal
 
   - alias: calendar_send_message
     trigger:
@@ -329,74 +339,74 @@ automation:
   ##  calendar control - morning time
   ###################################
 
-  # morning mode
-  # - alias: calendar_morning_mode_on
-  #   trigger:
-  #     - platform: state
-  #       entity_id: calendar.morning
-  #       to: 'on'
-  #   action:
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.time_mode
-  #         option: '{{"Morning"}}'
+  #morning mode
+  - alias: calendar_morning_mode_on
+    trigger:
+      - platform: state
+        entity_id: calendar.morning
+        to: 'on'
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.time_mode
+          option: '{{"Morning"}}'
 
   # ###################################
   # ##  calendar control - tv
   # ###################################
 
-  # # tv mode
-  # - alias: calendar_tv_on
-  #   trigger:
-  #     - platform: state
-  #       entity_id: calendar.tv
-  #       to: 'on'
-  #   action:
-  #     - service: homeassistant.turn_on
-  #       entity_id: 
-  #         - switch.lounge_tv
-  #     - delay: '00:00:10'
-  #     - service: remote.turn_on
-  #       entity_id: remote.harmony_hub
-  #       data_template:
-  #         activity: 28293269
+  # tv mode
+  - alias: calendar_tv_on
+    trigger:
+      - platform: state
+        entity_id: calendar.tv
+        to: 'on'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: 
+          - switch.lounge_tv
+      - delay: '00:00:10'
+      - service: remote.turn_on
+        entity_id: remote.harmony_hub
+        data_template:
+          activity: 28293269
 
-  # # tv mode
-  # - alias: calendar_tv_off
-  #   trigger:
-  #     - platform: state
-  #       entity_id: calendar.tv
-  #       to: 'off'
-  #   action:
-  #     - service: remote.turn_off
-  #       entity_id: remote.harmony_hub
-  #     - delay: '00:00:10'
-  #     - service: homeassistant.turn_off
-  #       entity_id: 
-  #         - switch.lounge_tv
+  # tv mode
+  - alias: calendar_tv_off
+    trigger:
+      - platform: state
+        entity_id: calendar.tv
+        to: 'off'
+    action:
+      - service: remote.turn_off
+        entity_id: remote.harmony_hub
+      - delay: '00:00:10'
+      - service: homeassistant.turn_off
+        entity_id: 
+          - switch.lounge_tv
         
 
   # ###################################
   # ##  calendar control - guest
   # ###################################
 
-  # # guest mode
-  # - alias: calendar_guest_on
-  #   trigger:
-  #     - platform: state
-  #       entity_id: calendar.guest
-  #       to: 'on'
-  #   action:
-  #     - service: homeassistant.turn_on
-  #       entity_id: input_boolean.presence_guest
+  # guest mode
+  - alias: calendar_guest_on
+    trigger:
+      - platform: state
+        entity_id: calendar.guest
+        to: 'on'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.presence_guest
 
-  # # guest mode
-  # - alias: calendar_guest_off
-  #   trigger:
-  #     - platform: state
-  #       entity_id: calendar.guest
-  #       to: 'off'
-  #   action:
-  #     - service: homeassistant.turn_off
-  #       entity_id: input_boolean.presence_guest
+  # guest mode
+  - alias: calendar_guest_off
+    trigger:
+      - platform: state
+        entity_id: calendar.guest
+        to: 'off'
+    action:
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.presence_guest
   
