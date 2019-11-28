@@ -179,3 +179,5 @@ binary_sensor:
         device_class: sound
 
       
+#binary_sensor.climate_hot_outside_on_fan
+#binary_sensor.climate_cool_outside_off_fan

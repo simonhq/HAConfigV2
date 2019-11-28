@@ -107,6 +107,16 @@ group:
       - binary_sensor.samwash
       - binary_sensor.samdry
          
+  water_e:
+    name: Leak Sensors
+    view: no
+    entities:
+      - binary_sensor.water_leak_yes
+      - binary_sensor.water_leak_no
+      - binary_sensor.kitchen_water_leak_sensor_water
+      - binary_sensor.dishwasher_water_leak_sensor_water
+      - binary_sensor.laundry_water_leak_sensor_water
+
   hometab_e:
     name: HomeTab Entities
     view: no
@@ -181,24 +191,30 @@ device_tracker:
 
 #################################################################
 #                                                               #
-#                   Input Boolean                              #
-#                                                               #
-#################################################################
-
-input_boolean:
-
-  button_pushed:
-    name: Meg button
-    initial: off
-    icon: mdi:button
-
-#################################################################
-#                                                               #
 #                   Binary Sensors                              #
 #                                                               #
 #################################################################
 
 binary_sensor:
+
+####################################################
+#                                                  #
+#                Binary Sensor - water leaks       #
+#                                                  #
+####################################################
+
+  - platform: template
+    sensors:
+      water_leak_yes:
+        value_template: "{{ is_state('binary_sensor.kitchen_water_leak_sensor_water', 'on') or is_state('binary_sensor.dishwasher_water_leak_sensor_water', 'on') or is_state('binary_sensor.laundry_water_leak_sensor_water', 'on') }}"
+        friendly_name: 'Water Leak!'
+        device_class: moisture
+        icon_template: mdi:water
+      water_leak_no:
+        value_template: "{{ is_state('binary_sensor.water_leak_yes', 'off') }}"
+        friendly_name: 'House Dry'
+        device_class: connectivity
+        icon_template: mdi:water-off
 
 ####################################################
 #                                                  #
@@ -425,28 +441,32 @@ binary_sensor:
 ####################################################
 #                                                  #
 #               button automation          #
-#                                                  #
+#                   
+#   three states - pushed, double, held                            
 ####################################################
 
 #Megs Button
-automation:
+# automation:
 
-  trigger:
-    platform: event
-    event_type: 'smartthings.button'
-    event_data:
-      device_id: 2dce0c5cd7e6426486e88ddc9bf508d5
-      value: 'pushed'
-  action:
-    - service: homeassistant.turn_on
-      entity_id: input_boolean.button_pushed
+#   - alias: a_mbutton_pushed
+#     trigger:
+#       platform: event
+#       event_type: "smartthings.button"
+#       event_data:
+#         device_id: "a16b7974-2253-4130-88ec-34a4d5a95796"
+#         value: "pushed"
+#     action:
+#       - service: homeassistant.turn_on
+#         entity_id: input_boolean.button_pushed
 
-  trigger:
-    platform: event
-    event_type: 'smartthings.button'
-    event_data:
-      device_id: 2dce0c5cd7e6426486e88ddc9bf508d5
-      value: 'held'
-  action:
-    - service: homeassistant.turn_off
-      entity_id: input_boolean.button_pushed
+#   - alias: a_mbutton_held
+#     trigger:
+#       platform: event
+#       event_type: "smartthings.button"
+#       event_data:
+#         device_id: "a16b7974-2253-4130-88ec-34a4d5a95796"
+#         #name: "Megs_button"
+#         value: "held"
+#     action:
+#       - service: homeassistant.turn_off
+#         entity_id: input_boolean.button_pushed

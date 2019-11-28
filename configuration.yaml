@@ -90,6 +90,8 @@ logger:
 
 hacs:
   token: !secret hacs_token
+  appdaemon: true
+  theme: true
 
 # controlled through hacs
 breaking_changes:

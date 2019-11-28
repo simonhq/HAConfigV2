@@ -1,5 +1,11 @@
 #
 #The aim of this is to do send messages about things in the house
+# cooking
+# washer
+# dryer
+# hassio laptop
+# phone batteries
+# printer
 #
 
 import appdaemon.plugins.hass.hassapi as hass

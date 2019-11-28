@@ -1,4 +1,7 @@
-
+#
+# This sends information notifications when triggered by home assistant
+#
+#
 
 
 import appdaemon.plugins.hass.hassapi as hass
@@ -87,6 +90,11 @@ class CalNotifier(hass.Hass):
             vgrw = self.get_state("input_datetime.cal_grw")
             vskp = self.get_state("input_datetime.cal_skp")
 
+            vsblanket = self.get_state("binary_sensor.sbed")
+            vmblanket = self.get_state("binary_sensor.mbed")
+            vstblanket = self.get_state("binary_sensor.stbed")
+            vdblanket = self.get_state("binary_sensor.dbed")
+
             #set the evening message
             self.basemessage = "Good Evening, \n\n"
                             
@@ -113,7 +121,23 @@ class CalNotifier(hass.Hass):
             if str(vskp) == str(onedaylead.date()):
                 self.basemessage += "Skip Bin pick up is tomorrow, go fill it up, please." + "\n"
                 tosend = 1
+# blankets
+            if vsblanket == 'on':
+                self.basemessage += "Simon's electric blanket will turn on tonight." + "\n"
+                tosend = 1
 
+            if vmblanket == 'on':
+                self.basemessage += "Megan's electric blanket will turn on tonight." + "\n"
+                tosend = 1
+
+            if vstblanket == 'on':
+                self.basemessage += "Staci's electric blanket will turn on tonight." + "\n"
+                tosend = 1
+
+            if vdblanket == 'on':
+                self.basemessage += "Delia's electric blanket will turn on tonight." + "\n"
+                tosend = 1
+# finish message
             #sign off
             self.basemessage += "\nHave a lovely night!"
 

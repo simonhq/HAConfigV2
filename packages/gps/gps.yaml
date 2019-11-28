@@ -24,7 +24,20 @@ group:
       - sensor.stphone_type
       - sensor.dphone_type
 
-      
+
+#################################################################
+#                                                               #
+#                   Input Boolean                              #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+  button_pushed:
+    name: GPS reset button
+    initial: off
+    icon: mdi:crosshairs-gps
+
 #################################################################
 #                                                               #
 #                            Sensors                            #
