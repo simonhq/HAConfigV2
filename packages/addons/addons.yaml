@@ -1,0 +1,95 @@
+#################################################################
+#                                                               #
+#                     Packages/addons                          #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  addons_e:
+    name: House Mode Entities
+    view: no
+    entities:
+      - input_boolean.restart_appdaemon
+      - input_boolean.restart_nodered
+      
+ 
+
+#################################################################
+#                                                               #
+#                       influxDB                                #
+#                                                               #
+#################################################################
+
+influxdb:
+  host: !secret influxdb_slug
+  port: 8086
+  database: homeassistant
+  username: homeassistant
+  password: !secret influxdb_pass
+  max_retries: 3
+  default_measurement: state
+
+
+#################################################################
+#                                                               #
+#                       Input Boolean                            #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#            restart add-ons                #
+#                                                  #
+#################################################### 
+
+  restart_appdaemon:
+    name: AppDaemon restart
+    initial: off
+    icon: mdi:language-python
+
+  restart_nodered:
+    name: Node-Red restart
+    initial: off
+    icon: mdi:resistor-nodes
+
+
+#################################################################
+#                                                               #
+#                       Automation                              #
+#                                                               #
+#################################################################
+
+
+automation:
+
+  - alias: addon_appdaemon_restart
+    trigger:
+      - platform: state
+        entity_id: input_boolean.restart_appdaemon
+        to: 'on'
+    action:
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.restart_appdaemon
+      - service: hassio.addon_restart
+        data:
+          addon: !secret appdaemon_slug
+
+  - alias: addon_nodered_restart
+    trigger:
+      - platform: state
+        entity_id: input_boolean.restart_nodered
+        to: 'on'
+    action:
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.restart_nodered
+      - service: hassio.addon_restart
+        data:
+          addon: !secret nodered_slug

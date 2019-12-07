@@ -84,11 +84,16 @@ class CalNotifier(hass.Hass):
         else:   #evening
 
             #get the things to check for tomorrow
-            vcln = self.get_state("input_datetime.cal_cln")
-            vbin = self.get_state("input_datetime.cal_bin")
-            vrec = self.get_state("input_datetime.cal_rec")
-            vgrw = self.get_state("input_datetime.cal_grw")
-            vskp = self.get_state("input_datetime.cal_skp")
+            #vcln = self.get_state("input_datetime.cal_cln")
+            vcln = self.get_state("calendar.cleaner", attribute="start_time")
+            #vbin = self.get_state("input_datetime.cal_bin")
+            vbin = self.get_state("calendar.bin", attribute="start_time")
+            #vrec = self.get_state("input_datetime.cal_rec")
+            vrec = self.get_state("calendar.recycling", attribute="start_time")
+            #vgrw = self.get_state("input_datetime.cal_grw")
+            vgrw = self.get_state("calendar.greenwaste", attribute="start_time")
+            #vskp = self.get_state("input_datetime.cal_skp")
+            vskp = self.get_state("calendar.skipbin", attribute="start_time")
 
             vsblanket = self.get_state("binary_sensor.sbed")
             vmblanket = self.get_state("binary_sensor.mbed")
@@ -101,24 +106,30 @@ class CalNotifier(hass.Hass):
             if self.get_state("binary_sensor.cal_dnd_on") == "on":
                 self.basemessage += "Have fun at D&D guys!" + "\n"
                 tosend = 1
-
-            if str(vcln) == str(onedaylead.date()):
+                
+            #self.log(str(vcln)[0:11]+" "+str(onedaylead)[0:11])
+            #if str(vcln) == str(onedaylead.date()):
+            if str(vcln)[0:11] == str(onedaylead)[0:11]:
                 self.basemessage += "Tony is coming to clean tomorrow." + "\n"
                 tosend = 1
 
-            if str(vbin) == str(onedaylead.date()):
+            #if str(vbin) == str(onedaylead.date()):
+            if str(vbin)[0:11] == str(onedaylead)[0:11]:
                 self.basemessage += "Bin pick up is tomorrow morning, put it out, please." + "\n"
                 tosend = 1
 
-            if str(vrec) == str(onedaylead.date()):
+            #if str(vrec) == str(onedaylead.date()):
+            if str(vrec)[0:11] == str(onedaylead)[0:11]:
                 self.basemessage += "Recycling pick up is tomorrow morning, put it out, please." + "\n"
                 tosend = 1
 
-            if str(vgrw) == str(onedaylead.date()):
+            #if str(vgrw) == str(onedaylead.date()):
+            if str(vgrw)[0:11] == str(onedaylead)[0:11]:
                 self.basemessage += "Green waste pick up is tomorrow morning, put it out, please." + "\n"
                 tosend = 1
 
-            if str(vskp) == str(onedaylead.date()):
+            #if str(vskp) == str(onedaylead.date()):
+            if str(vskp)[0:11] == str(onedaylead)[0:11]:
                 self.basemessage += "Skip Bin pick up is tomorrow, go fill it up, please." + "\n"
                 tosend = 1
 # blankets

@@ -26,6 +26,12 @@ group:
       - sensor.epson_ink_level_magenta
       - sensor.epson_ink_level_yellow
      
+  dishwasher_e:
+    name: Dishwasher Entities
+    view: no
+    entities:
+      - input_boolean.dishwasher_notify_system
+  
   # printer_a:
   #   name: Printer Automations
   #   view: no
@@ -87,6 +93,10 @@ input_boolean:
     initial: off
     icon: mdi:printer-alert
   
+  dishwasher_notify_system:
+    name: Dishwasher Finished Message
+    initial: off
+    icon: mdi:dishwasher-alert
 
 #################################################################
 #                                                               #

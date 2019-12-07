@@ -16,8 +16,8 @@ class General_Messages(hass.Hass):
     
     mess = ""
     flag = 0
-    washer = "Washing Machine stopped"
-    dryer = "Dryer stopped"
+    #washer = "Washing Machine stopped"
+    #dryer = "Dryer stopped"
     batt = "'s phone is low on battery"
     printer = "'s printer ink is low"
     disk = "Laptop Server hard drive is almost full"
@@ -46,8 +46,8 @@ class General_Messages(hass.Hass):
         self.listen_state(self.disk_notify, "binary_sensor.disk_alert")
         self.listen_state(self.cpu_notify, "binary_sensor.cpu_alert")
 
-        self.listen_state(self.washing_notify, "binary_sensor.samwash")
-        self.listen_state(self.drying_notify, "binary_sensor.samdry")
+        #self.listen_state(self.washing_notify, "binary_sensor.samwash")
+        #self.listen_state(self.drying_notify, "binary_sensor.samdry")
 
         self.listen_state(self.cook_flag, "sensor.cook_calendar")
 
@@ -97,13 +97,13 @@ class General_Messages(hass.Hass):
             self.turn_on("input_boolean.cpu_notify_system")
 
 
-    def washing_notify(self, entity, attribute, old, new, kwargs):
-        if new == "off":
-            self.notifier.notify(self.washer)
+    #def washing_notify(self, entity, attribute, old, new, kwargs):
+    #    if new == "off":
+    #        self.notifier.notify(self.washer)
 
-    def drying_notify(self, entity, attribute, old, new, kwargs):
-        if new == "off":
-            self.notifier.notify(self.dryer)
+    #def drying_notify(self, entity, attribute, old, new, kwargs):
+    #    if new == "off":
+    #        self.notifier.notify(self.dryer)
 
     def disk_notify(self, entity, attribute, old, new, kwargs):
         if new == "off":

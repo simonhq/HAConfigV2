@@ -141,15 +141,15 @@ automation:
             {% endif %}
 
   #turn off the light when the tv gets turned off
-  - alias: harmony_tv_off_lightstrip_off
-    trigger:
-      platform: state
-      entity_id: input_select.harmony
-      to: 'PowerOff'
-    action:
-      - service: light.turn_off
-        entity_id: 
-          - light.lounge_lightstrip
+  # - alias: harmony_tv_off_lightstrip_off
+  #   trigger:
+  #     platform: state
+  #     entity_id: input_select.harmony
+  #     to: 'PowerOff'
+  #   action:
+  #     - service: light.turn_off
+  #       entity_id: 
+  #         - light.lounge_lightstrip
 
   #turn on the light when the tv gets turned on (evening or night)
   - alias: harmony_tv_on_lightstrip_on
@@ -172,6 +172,9 @@ automation:
         - condition: state
           entity_id: input_select.time_mode
           state: 'Evening'
+        - condition: state
+          entity_id: input_select.time_mode
+          state: 'Late'
         - condition: state
           entity_id: input_select.time_mode
           state: 'Night'

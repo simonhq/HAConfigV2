@@ -26,6 +26,7 @@
 !appdaemon/apps/pykevoplus/
 !appdaemon/apps/travel/
 !packages/
+!packages/addons/
 !packages/batteries/
 !packages/bed_warming/
 !packages/bus_times/

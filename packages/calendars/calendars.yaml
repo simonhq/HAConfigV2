@@ -32,18 +32,17 @@ group:
       - binary_sensor.cal_morn_on
       - binary_sensor.cal_guest_on
       - binary_sensor.cal_tv_on
-
-      #- sensor.hass_calendar
-      #- sensor.cook_calendar
-      # - sensor.dandd_calendar
-      # - sensor.cleaner_calendar
-      # - sensor.bin_calendar
-      # - sensor.recycling_calendar
-      # - sensor.greenwaste_calendar
-#      - sensor.skipbin_calendar
-#      - sensor.morning_calendar
-#      - sensor.tv_calendar
-#      - sensor.guest_calendar
+      - sensor.hass_calendar
+      - sensor.cook_calendar
+      - sensor.dandd_calendar
+      - sensor.cleaner_calendar
+      - sensor.bin_calendar
+      - sensor.recycling_calendar
+      - sensor.greenwaste_calendar
+      - sensor.skipbin_calendar
+      - sensor.morning_calendar
+      - sensor.tv_calendar
+      - sensor.guest_calendar
 
   calendars_a:
     name: Calendars Automations
