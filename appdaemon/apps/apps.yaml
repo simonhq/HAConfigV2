@@ -57,6 +57,18 @@ travel:
     - globals
     - secrets
 
+
+# for gtfs clean up
+gtfs_cleanup:
+  module: cleangtfs
+  class: Clean_GTFS
+  GTFS_DB: "action.sqlite"
+  MY_STOPS: "5513,5517,1736,1737,4979,4972,3418,3419,4529,3003,3409,13,1808,1803,1076,1075,1078,1077,2705,2709,2710,2706"
+  GTFS_FLAG: "input_boolean.clean_gtfs"
+  global_dependencies:
+    - globals
+    - secrets
+
 # turn back on in September - update
 #climate:
 #  module: climate
@@ -65,8 +77,8 @@ travel:
 # front-lock:
 #   module: locks
 #   class: DoorLock
-#   select_name: "fdoor"
-#   lock_id: secret_flock_id
+#   select_name: "fdoor" 
+#   lock_id: secret_flock_id 
 #   k_user: secret_kevo_email
 #   k_pass: secret_kevo_pass
 #   global_dependencies:

@@ -13,7 +13,7 @@ class DoorLock(hass.Hass):
     sname = ""
 
     def initialize(self):
-             
+
         #create and set instance variables
         self.lock = globals.get_arg(self.args, "lock_id")
         self.kuser = globals.get_arg(self.args, "k_user")
@@ -31,7 +31,7 @@ class DoorLock(hass.Hass):
         r_next = random.randint(4,9)
         self.log("Update " + self.sname + " every " + str(r_next) + " minutes")
         self.run_every(self.lock_status, ti_now, r_next * 60)
-                  
+
     def changer(self, entity, attribute, old, new, kwargs):
 
         self.a_lock.StartSession()

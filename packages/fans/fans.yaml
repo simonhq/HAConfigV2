@@ -53,6 +53,20 @@ bond:
   host: !secret bond_ip
   token: !secret bond_token
 
+#################################################################
+#                                                               #
+#                       Dyson Integration                        #
+#                                                               #
+#################################################################
+
+dyson:
+  username: !secret dyson_user
+  password: !secret dyson_pass
+  language: AU
+  devices:
+    device_id: !secret dyson_dida
+    device_ip: !secret dyson_dipa
+
 
 #################################################################
 #                                                               #

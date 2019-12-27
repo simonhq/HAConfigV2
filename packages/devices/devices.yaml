@@ -116,6 +116,8 @@ group:
       - binary_sensor.kitchen_water_leak_sensor_water
       - binary_sensor.dishwasher_water_leak_sensor_water
       - binary_sensor.laundry_water_leak_sensor_water
+      - binary_sensor.bathroom_water_leak_sensor_water
+      - binary_sensor.ensuite_water_leak_sensor_water
 
   hometab_e:
     name: HomeTab Entities
@@ -210,7 +212,7 @@ binary_sensor:
   - platform: template
     sensors:
       water_leak_yes:
-        value_template: "{{ is_state('binary_sensor.kitchen_water_leak_sensor_water', 'on') or is_state('binary_sensor.dishwasher_water_leak_sensor_water', 'on') or is_state('binary_sensor.laundry_water_leak_sensor_water', 'on') }}"
+        value_template: "{{ is_state('binary_sensor.kitchen_water_leak_sensor_water', 'on') or is_state('binary_sensor.dishwasher_water_leak_sensor_water', 'on') or is_state('binary_sensor.laundry_water_leak_sensor_water', 'on') or is_state('binary_sensor.bathroom_water_leak_sensor_water', 'on') or is_state('binary_sensor.ensuite_water_leak_sensor_water', 'on') }}"
         friendly_name: 'Water Leak!'
         device_class: moisture
         icon_template: mdi:water

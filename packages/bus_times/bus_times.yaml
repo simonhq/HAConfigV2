@@ -31,7 +31,27 @@ group:
       - sensor.woden_to_tugg_r4_homecheck
       - sensor.tugg_to_home_79_homecheck
       - sensor.woden_to_home_r5_homecheck
-      
+      - input_boolean.clean_gtfs
+
+#################################################################
+#                                                               #
+#                       Input Boolean                           #
+#                                                               #
+#################################################################
+
+input_boolean:
+
+####################################################
+#                                                  #
+#                flag to clean up new database     #
+#                                                  #
+####################################################
+
+  clean_gtfs:
+    name: Clean up new GTFS Database
+    initial: off
+    icon: mdi:bus-clock
+
 #################################################################
 #                                                               #
 #                       Sensors                                 #

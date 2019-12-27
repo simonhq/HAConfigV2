@@ -448,7 +448,7 @@
   },
   "node-red-contrib-home-assistant-websocket": {
    "name": "node-red-contrib-home-assistant-websocket",
-   "version": "0.16.3",
+   "version": "0.17.1",
    "local": false,
    "nodes": {
     "server": {
@@ -501,6 +501,16 @@
      "module": "node-red-contrib-home-assistant-websocket",
      "file": "/opt/node_modules/node-red-contrib-home-assistant-websocket/nodes/poll-state/poll-state.js"
     },
+    "ha-webhook": {
+     "name": "ha-webhook",
+     "types": [
+      "ha-webhook"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-contrib-home-assistant-websocket",
+     "file": "/opt/node_modules/node-red-contrib-home-assistant-websocket/nodes/webhook/webhook.js"
+    },
     "api-call-service": {
      "name": "api-call-service",
      "types": [
@@ -520,6 +530,16 @@
      "local": false,
      "module": "node-red-contrib-home-assistant-websocket",
      "file": "/opt/node_modules/node-red-contrib-home-assistant-websocket/nodes/fire-event/fire-event.js"
+    },
+    "ha-entity": {
+     "name": "ha-entity",
+     "types": [
+      "ha-entity"
+     ],
+     "enabled": true,
+     "local": false,
+     "module": "node-red-contrib-home-assistant-websocket",
+     "file": "/opt/node_modules/node-red-contrib-home-assistant-websocket/nodes/entity/entity.js"
     },
     "api-current-state": {
      "name": "api-current-state",
@@ -656,7 +676,7 @@
   },
   "node-red-contrib-modbus": {
    "name": "node-red-contrib-modbus",
-   "version": "5.1.0",
+   "version": "5.2.0",
    "local": false,
    "nodes": {
     "Modbus-Client": {
@@ -915,7 +935,7 @@
       "alexa-home",
       "alexa-home-resp"
      ],
-     "enabled": true,
+     "enabled": false,
      "local": false,
      "module": "node-red-contrib-alexa-home-skill",
      "file": "/opt/node_modules/node-red-contrib-alexa-home-skill/alexa.js"
@@ -941,7 +961,7 @@
   },
   "node-red-dashboard": {
    "name": "node-red-dashboard",
-   "version": "2.19.1",
+   "version": "2.19.2",
    "local": false,
    "nodes": {
     "ui_base": {
@@ -1501,7 +1521,8 @@
    "menu-deploymenu-item-flow": true,
    "menu-deploymenu-item-full": false,
    "menu-deploymenu-item-node": false,
-   "menu-menu-item-sidebar": true
+   "menu-menu-item-sidebar": true,
+   "menu-menu-item-palette": true
   }
  }
 }

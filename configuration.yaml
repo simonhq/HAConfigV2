@@ -71,6 +71,9 @@ history:
 # View all events in a logbook
 logbook:
 
+# shopping !include_dir_list 
+shopping_list:
+
 # Enables a map showing the location of tracked devices
 map:
 
