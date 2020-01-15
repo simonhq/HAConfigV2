@@ -21,6 +21,7 @@ group:
       - camera.bom_canberra_radar
       - sensor.inside_now
       - input_boolean.weather_storms
+      # dam levels
 
   weather_bom_e:
     name: Weather BOM Entities
@@ -88,6 +89,22 @@ group:
       - sensor.dark_sky_wind_speed_0d
       - sensor.dark_sky_wind_speed_1d
 
+  weather_dam_e:
+    name: Weather Dam Entities
+    view: no
+    entities:
+      - input_boolean.check_dams
+      - input_text.dam_act_catchment_total
+      - input_text.dam_act_catchment_percent
+      - input_text.dam_act_googong_total
+      - input_text.dam_act_googong_percent
+      - input_text.dam_act_cotter_total
+      - input_text.dam_act_cotter_percent
+      - input_text.dam_act_corin_total
+      - input_text.dam_act_corin_percent
+      - input_text.dam_act_bendora_total
+      - input_text.dam_act_bendora_percent
+
 #################################################################
 #                                                               #
 #                      Input Boolean                            #
@@ -105,6 +122,65 @@ input_boolean:
   weather_storms:
     name: Lightning around home
     icon: mdi:weather-lightning
+
+  weather_fires:
+    name: Fires around home
+    icon: mdi:fire
+
+#  DAM_FLAG: "input_boolean.check_dams"
+  check_dams:
+    name: Check ACT Dam levels
+    icon: mdi:cup-water
+
+#################################################################
+#                                                               #
+#                            Input_text  for dams               #
+#                                                               #
+#################################################################
+
+#input_text:
+
+# #  CATCHMENT_T: "input_text.dam_act_catchment_total"
+#   dam_act_catchment_total:
+#     name: ACT Catchment Total
+#     initial: '0'
+# #  CATCHMENT_P: "input_text.dam_act_catchment_percent"
+#   dam_act_catchment_percent:
+#     name: ACT Catchment %
+#     initial: '0'
+# #  GOOGONG_T: "input_text.dam_act_googong_total"
+#   dam_act_googong_total:
+#     name: ACT Googong Total
+#     initial: '0'
+# #  GOOGONG_P: "input_text.dam_act_googong_percent"
+#   dam_act_googong_percent:
+#     name: ACT Googong %
+#     initial: '0'
+# #  COTTER_T: "input_text.dam_act_cotter_total"
+#   dam_act_cotter_total:
+#     name: ACT Cotter Total
+#     initial: '0'
+# #  COTTER_P: "input_text.dam_act_cotter_percent"
+#   dam_act_cotter_percent:
+#     name: ACT Cotter %
+#     initial: '0'
+# #  CORIN_T: "input_text.dam_act_corin_total"
+#   dam_act_corin_total:
+#     name: ACT Corin Total
+#     initial: '0'
+# #  CORIN_P: "input_text.dam_act_corin_percent"
+#   dam_act_corin_percent:
+#     name: ACT Corin %
+#     initial: '0'
+# #  BENDORA_T: "input_text.dam_act_bendora_total"
+#   dam_act_bendora_total:
+#     name: ACT Bendora Total
+#     initial: '0'
+# #  BENDORA_P: "input_text.dam_act_bendora_percent"
+#   dam_act_bendora_percent:
+#     name: ACT Bendora %
+#     initial: '0'
+
 
 #################################################################
 #                                                               #
@@ -176,6 +252,19 @@ openuv:
 #################################################################
 
 sensor:
+
+####################################################
+#                                                  #
+#                      Scrape    see appdaemon     #
+#                                                  #
+####################################################
+
+  # - platform: scrape
+  #   resource: https://www.eldersweather.com.au/dam-level/act/
+  #   select: "td"
+  #   name: ACT Dam Levels
+  #   scan_interval: 259200
+  #   # request every 3 days
 
 ####################################################
 #                                                  #
@@ -346,6 +435,29 @@ automation:
     action:
       - service: home_assistant.turn_off
         entity_id: input_boolean.weather_storms
+
+
+  - alias: weather_fires_on
+    trigger:
+      platform: geo_location
+      source: nsw_rural_fire_service_feed
+      zone: zone.Home
+      event: enter  # or "leave"
+    action:
+      - service: home_assistant.turn_on
+        entity_id: input_boolean.weather_fires
+
+  - alias: weather_fires_off
+    trigger:
+      platform: geo_location
+      source: nsw_rural_fire_service_feed
+      zone: zone.Home
+      event: leave
+    action:
+      - service: home_assistant.turn_off
+        entity_id: input_boolean.weather_fires
+
+
 
 ####################################################
 #                                                  #

@@ -195,6 +195,19 @@ device_tracker:
   #  username: !secret trackr_username
   #  password: !secret trackr_password
 
+
+#################################################################
+#                                                               #
+#                   Tuya platform                               #
+#                                                               #
+#################################################################
+
+tuya:
+  username: !secret tuya_user
+  password: !secret tuya_pass
+  country_code: !secret tuya_code
+  #platform: tuya #smart_life
+
 #################################################################
 #                                                               #
 #                   Binary Sensors                              #

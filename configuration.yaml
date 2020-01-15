@@ -25,11 +25,11 @@ homeassistant:
 
 # uncomment when using SSL
 http:
-   base_url: !secret HA_URL
-   ssl_certificate: /ssl/fullchain.pem
-   ssl_key: /ssl/privkey.pem
-   ip_ban_enabled: true
-   login_attempts_threshold: 5
+  base_url: !secret HA_URL
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -94,7 +94,7 @@ logger:
 hacs:
   token: !secret hacs_token
   appdaemon: true
-  theme: true
+  #theme: true
 
 # controlled through hacs
 breaking_changes:

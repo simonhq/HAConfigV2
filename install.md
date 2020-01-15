@@ -105,4 +105,11 @@ ssh in to the command line
 
 ## Delete duplicate entities:
 
-Delete entitys in /config/.storage/core.entity_registry
+Delete entities in /config/.storage/core.entity_registry
+
+## Slow boot times
+
+Delete cast entities in /config/.storage/core.entity_registry
+Delete cast entities in /config/.storage/core.device_registry
+comment the discovery, zeroconf and ssdp config entries
+restart and then uncomment the config entries

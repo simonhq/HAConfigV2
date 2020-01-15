@@ -69,6 +69,19 @@ gtfs_cleanup:
     - globals
     - secrets
 
+canberra_dams:
+  module: canberradams
+  class: Get_ACT_Dams
+  DAM_FLAG: "input_boolean.check_dams"
+  DAM_SENSOR: "sensor.act_dam_levels"
+  global_dependencies:
+    - globals
+    - secrets
+
+
+
+#333333333333333333333333333333333333333333333333333333333333333333
+
 # turn back on in September - update
 #climate:
 #  module: climate
