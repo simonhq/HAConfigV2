@@ -12,13 +12,8 @@ global_parameters:
     use_hass_icon: 1
 
 layout:
-    #- clock (2x1),                  myweather (2x2),            group.family_lights (2x1),      input_boolean.mode_evening
-    #- st_presence, d_presence,                                  group.back_hall (2x1),          input_boolean.mode_day
-    #- group.staci_bedroom (2x1),    group.delia_bedroom (2x1),  bth_select (2x1),               input_boolean.mode_morning
-    #- group.study,  group.toilet,   group.front_hall, group.living_lights, group.kitchen_lights, load_study_panel,       input_boolean.mode_night
-
     - time_select (2x1),        fam_lights (2x1),           bus_ej,                             clock (2x1)
-    - sw_d_blanket, sw_st_blanket,             l_living,                   l_kitchen,              bus_eg,     myweather (2x2)
+    - sw_d_blanket, sw_st_blanket,             l_living,                   l_kitchen,             spacer,     q_weather (2x2)
     - bth_select (2x1),         l_toilet,                   l_fhall,                bus_city_ej 
     - d_presence,               l_delias (2x1),         l_bhall,        l_stacis (2x1),      st_presence
 
@@ -117,13 +112,36 @@ l_lounge:
     icon_on: mdi-sofa
     icon_off: mdi-sofa
 
-
 clock:
     widget_type: clock
 
 myweather:
     widget_type: weather
     units: "&deg;C"
+
+q_weather:
+    title: Today
+    show_forecast: 1
+    forecast_title: Tomorrow
+    prefer_icons: 1
+    widget_type: weather
+    units: “&deg;C”
+    sensors:
+        icon: sensor.dark_sky_icon
+        temperature: sensor.dark_sky_temperature
+        temperature_max: sensor.dark_sky_daytime_high_temperature_0d
+        temperature_min: sensor.dark_sky_overnight_low_temperature_0d
+        apparent_temperature: sensor.dark_sky_apparent_temperature
+        humidity: sensor.dark_sky_humidity
+        precip_probability: sensor.dark_sky_precip_probability
+        precip_intensity: sensor.dark_sky_precip_intensity
+        precip_type: sensor.dark_sky_precip
+        pressure: sensor.dark_sky_pressure
+        wind_speed: sensor.dark_sky_wind_speed
+        wind_bearing: sensor.dark_sky_wind_bearing
+        forecast_icon: sensor.dark_sky_icon_1d
+        forecast_temperature_min: sensor.dark_sky_overnight_low_temperature_1d
+        forecast_temperature_max: sensor.dark_sky_daytime_high_temperature_1d
 
 s_presence:
     widget_type: device_tracker

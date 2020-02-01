@@ -12,11 +12,11 @@ global_parameters:
     use_hass_icon: 1
 
 layout:
-    - fd_select,        time_select (2x1),                      clock (2x1),                            myweather (2x2)                  
+    - fd_select,        time_select (2x1),                      clock (2x1),                            weather (2x2)                  
     - ge_select,        presence_select (2x1),                  sensor.dark_sky_daily_summary (2x1)         
     - ge_cover,         message_select (2x1),                   bool_returning,     spacer,             guest_bool,     away_bool                                                                     
     - l_lounge,         l_dining,               spacer,   l_fext,                   spacer,     l_study,                l_kitchen                  
-    - sw_lounge,        sw_chairs,              spacer,   l_fhall,                  spacer,     sw_study,               l_living           
+    - sw_lounge,        sw_chairs,              f_lounge,   l_fhall,                  spacer,     sw_study,               l_living           
     - lnd_select (2x1),                         ens_select (2x1),                   bth_select (2x1),                   gnd_select      
               
 
@@ -26,6 +26,37 @@ clock:
 myweather:
     widget_type: weather
     units: "&deg;C"
+
+f_lounge:
+    widget_type: switch
+    entity: fan.lounge
+    title: Dyson Fan
+    icon_on: mdi-fan
+    icon_off: mdi-fan-off
+
+weather:
+    title: Today
+    show_forecast: 1
+    forecast_title: Tomorrow
+    prefer_icons: 1
+    widget_type: weather
+    units: “&deg;C”
+    sensors:
+        icon: sensor.dark_sky_icon
+        temperature: sensor.dark_sky_temperature
+        temperature_max: sensor.dark_sky_daytime_high_temperature_0d
+        temperature_min: sensor.dark_sky_overnight_low_temperature_0d
+        apparent_temperature: sensor.dark_sky_apparent_temperature
+        humidity: sensor.dark_sky_humidity
+        precip_probability: sensor.dark_sky_precip_probability
+        precip_intensity: sensor.dark_sky_precip_intensity
+        precip_type: sensor.dark_sky_precip
+        pressure: sensor.dark_sky_pressure
+        wind_speed: sensor.dark_sky_wind_speed
+        wind_bearing: sensor.dark_sky_wind_bearing
+        forecast_icon: sensor.dark_sky_icon_1d
+        forecast_temperature_min: sensor.dark_sky_overnight_low_temperature_1d
+        forecast_temperature_max: sensor.dark_sky_daytime_high_temperature_1d
 
 l_fhall:
     widget_type: light
