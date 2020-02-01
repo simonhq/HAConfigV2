@@ -139,6 +139,24 @@ binary_sensor:
         value_template: "{{ is_state('binary_sensor.fans_off', 'off') }}"
         icon_template: mdi:fan
 
+####################################################
+#                                                  #
+#            binary Sensor - Interface              #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      purifier_off:
+        friendly_name: Purifier Off
+        value_template: "{{ is_state('fan.lounge', 'off') }}"
+        icon_template: mdi:fan-off
+        device_class: motion
+      purifier_on:
+        friendly_name: Purifier On
+        value_template: "{{ is_state('binary_sensor.fans_off', 'off') }}"
+        icon_template: mdi:fan
+
 #################################################################
 #                                                               #
 #                       Scripts                                 #

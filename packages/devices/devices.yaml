@@ -106,7 +106,7 @@ group:
       - binary_sensor.app_system
       - binary_sensor.samwash
       - binary_sensor.samdry
-         
+
   water_e:
     name: Leak Sensors
     view: no

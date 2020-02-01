@@ -46,8 +46,6 @@ group:
       - light.staci_s_light
       - light.study
       - light.toilet
-      - binary_sensor.lights_on
-      - binary_sensor.lights_off
 
   light_groups_e:
     name: Light Group Entities
@@ -70,7 +68,7 @@ group:
       - light.study_2         #study
       - light.toilet_2        #toilet
       - light.bathroom_2      #bathroom
-     
+
   ensuite:
     name: Ensuite Light Entities
     view: no
@@ -135,11 +133,11 @@ binary_sensor:
       sensors:
         lights_on:
           friendly_name: Lights On
-          value_template: "{{ is_state('group.all_lights', 'on') }}"
+          value_template: "{{ is_state('group.lights_e', 'on') }}"
           icon_template: mdi:lightbulb-on-outline
         lights_off:
           friendly_name: Lights Off
-          value_template: "{{ is_state('group.all_lights', 'off') }}"
+          value_template: "{{ is_state('group.lights_e', 'off') }}"
           icon_template: mdi:lightbulb-outline
           device_class: motion
 
