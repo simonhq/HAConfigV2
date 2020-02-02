@@ -22,6 +22,8 @@ class General_Messages(hass.Hass):
     printer = "'s printer ink is low"
     disk = "Laptop Server hard drive is almost full"
     cpu = "Laptop Server CPU is very high"
+    drink = "The local pressure has decreased, drink another glass of water with a 1/8tsp of salt"
+    potas = "The local pressure has increased, smash some potassium"
     
     def initialize(self):
         
@@ -45,6 +47,10 @@ class General_Messages(hass.Hass):
         self.listen_state(self.printer_notify, "input_boolean.ink_notify_system")
         self.listen_state(self.disk_notify, "binary_sensor.disk_alert")
         self.listen_state(self.cpu_notify, "binary_sensor.cpu_alert")
+
+        self.listen_state(self.potas_notify, "binary_sensor.diet_press_up")
+        self.listen_state(self.drink_notify, "binary_sensor.diet_press_down")
+
 
         #nodered
         #self.listen_state(self.washing_notify, "binary_sensor.samwash")
@@ -116,6 +122,18 @@ class General_Messages(hass.Hass):
         if new == "off":
             self.notifier.notify(self.cpu)
             self.turn_off("input_boolean.cpu_notify_system")
+
+    def drink_notify(self, entity, attribute, old, new, kwargs):
+        if new == "on":
+            self.notifier.notify(self.drink)
+            mbar = self.get_state("sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb")
+            self.set_state("input_number.last_measure", state=mbar)
+
+    def potas_notify(self, entity, attribute, old, new, kwargs):
+        if new == "on":
+            self.notifier.notify(self.potas)
+            mbar = self.get_state("sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb")
+            self.set_state("input_number.last_measure", state=mbar)
 
 
     def printer_notify(self, entity, attribute, old, new, kwargs):

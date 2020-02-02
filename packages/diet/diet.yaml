@@ -1,0 +1,84 @@
+#################################################################
+#                                                               #
+#                     Packages/Climate                          #
+#                                                               #
+#################################################################
+
+#################################################################
+#                                                               #
+#                       Group                                   #
+#                                                               #
+#################################################################
+
+group:
+  diet_e:
+    name: Climate Entities
+    view: no
+    entities:
+      - input_number.last_measure
+      - binary_sensor.diet_press_up
+      - binary_sensor.diet_press_down
+      - binary_sensor.diet_press_over
+      - binary_sensor.diet_press_under
+      - binary_sensor.diet_press_on
+      - sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb
+
+#################################################################
+#                                                               #
+#                            Input Number                       #
+#                                                               #
+#################################################################
+
+input_number:
+
+####################################################
+#                                                  #
+#                climate ranges                    #
+#                                                  #
+####################################################
+
+  last_measure:
+    min: 950
+    max: 1050
+    name: 'Last Pressure'
+    icon: mdi:arrow-collapse-vertical
+
+#################################################################
+#                                                               #
+#                            Binary sensor                      #
+#                                                               #
+#################################################################
+
+binary_sensor:
+
+  - platform: template
+    sensors:
+      #Just higher
+      diet_press_over:
+        friendly_name: Pressure rising
+        value_template: "{{ (states('sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb')|float > states('input_number.last_measure')|float) }}"
+        icon_template: mdi:arrow-collapse-up
+      #Just under
+      diet_press_under:
+        friendly_name: Pressure dropping
+        value_template: "{{ (states('sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb')|float < states('input_number.last_measure')|float) }}"
+        icon_template: mdi:arrow-collapse-down
+      #current
+      diet_press_on:
+        friendly_name: Pressure Current
+        value_template: "{{ (states('sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb')|float == states('input_number.last_measure')|float) }}"
+        icon_template: mdi:arrow-collapse-all
+      
+      # high - reset
+      diet_press_up:
+        friendly_name: Pressure Up - reset
+        value_template: "{{ (states('sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb')|float > (states('input_number.last_measure')|float + 6)) }}"
+        icon_template: mdi:arrow-collapse-right
+        
+      # low - reset
+      diet_press_down:
+        friendly_name: Pressure Down - reset
+        value_template: "{{ (states('sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb')|float < (states('input_number.last_measure')|float - 6)) }}"
+        icon_template: mdi:arrow-collapse-left
+        
+

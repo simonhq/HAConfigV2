@@ -423,7 +423,7 @@ automation:
       zone: zone.Watch
       event: enter  # or "leave"
     action:
-      - service: home_assistant.turn_on
+      - service: homeassistant.turn_on
         entity_id: input_boolean.weather_storms
 
   - alias: weather_lightning_strikes_off
@@ -433,7 +433,7 @@ automation:
       zone: zone.Watch
       event: leave
     action:
-      - service: home_assistant.turn_off
+      - service: homeassistant.turn_off
         entity_id: input_boolean.weather_storms
 
 
@@ -444,7 +444,7 @@ automation:
       zone: zone.Watch
       event: enter  # or "leave"
     action:
-      - service: home_assistant.turn_on
+      - service: homeassistant.turn_on
         entity_id: input_boolean.weather_fires
 
   - alias: weather_fires_off
@@ -454,7 +454,7 @@ automation:
       zone: zone.Watch
       event: leave
     action:
-      - service: home_assistant.turn_off
+      - service: homeassistant.turn_off
         entity_id: input_boolean.weather_fires
 
 

@@ -29,8 +29,8 @@ f_lounge:
     widget_type: switch
     entity: fan.lounge
     title: Dyson Fan
-    icon_on: mdi-fan
-    icon_off: mdi-fan-off
+    icon_on: mdi-air-filter
+    icon_off: mdi-crosshairs-off
 
 sw_ironing:
     widget_type: switch

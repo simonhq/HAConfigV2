@@ -37,6 +37,7 @@
 !packages/cooking/
 !packages/date_time/
 !packages/devices/
+!packages/diet/
 !packages/doors/
 !packages/fans/
 !packages/garage_door/
