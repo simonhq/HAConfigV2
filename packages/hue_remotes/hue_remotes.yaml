@@ -13,7 +13,6 @@
 group:
   hue_remote_e:
     name: Hue Remote Entities
-    view: no
     entities:
       - sensor.bedroom_remote
       - sensor.remote
@@ -26,7 +25,6 @@ group:
 
   hue_remote_a:
     name: Hue Remote Automations
-    view: no
     entities:
   #     - automation.bed_remote_megan_lamp_toggle
   #     - automation.bed_remote_toggle_ensuite

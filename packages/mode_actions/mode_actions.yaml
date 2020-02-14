@@ -14,12 +14,10 @@ group:
 
 #  mode_action_e:
 #    name: Mode Action Entities
-#    view: no
 #    entities:
       
   mode_action_a:
     name: Mode Action Automations
-    view: no
     entities:
       - automation.presence_all_away_day
       - automation.presence_all_away_evening
@@ -30,7 +28,7 @@ group:
       - automation.mode_settings_evening
       - automation.mode_settings_night
       - automation.mode_settings_night_bedroom_dim
-     
+
 
 #################################################################
 #                                                               #

@@ -13,7 +13,6 @@
 group:
   remote_control_e:
     name: Remote Control Entities
-    view: no
     entities:
       - remote.harmony_hub
       - input_select.harmony
@@ -23,7 +22,6 @@ group:
 
   remote_control_a:
     name: Remote Control Automations
-    view: no
     entities:
       - automation.harmony_state_change
       - automation.harmony_activity_select
@@ -65,6 +63,16 @@ input_select:
     initial: None
     icon: mdi:television
 
+#################################################################
+#                                                               #
+#                       Config for remote                       #
+#                                                               #
+#################################################################
+
+remote:
+  - platform: harmony
+    name: harmony_hub
+    host: 10.0.0.16
 
 #################################################################
 #                                                               #

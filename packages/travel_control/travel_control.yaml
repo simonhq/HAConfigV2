@@ -13,7 +13,6 @@
 group:
   travel_control_e:
     name: Travel Control Entities
-    view: no
     entities:
       - binary_sensor.simon_meg_car
       - binary_sensor.simon_staci_car
@@ -54,7 +53,6 @@ group:
       
   travel_control_a:
     name: Travel Control Automations
-    view: no
     entities:
       - automation.transport_megan_enter_northquarter
       - automation.mode_set_returning

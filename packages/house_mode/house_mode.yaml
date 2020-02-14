@@ -13,7 +13,6 @@
 group:
   house_mode_e:
     name: House Mode Entities
-    view: no
     entities:
       - binary_sensor.mode_day
       - binary_sensor.mode_evening
@@ -24,7 +23,6 @@ group:
       
   house_mode_a:
     name: House Mode Automations
-    view: no
     entities:
       - automation.mode_set_morning
       - automation.mode_set_day
@@ -138,6 +136,8 @@ automation:
       - platform: sun
         event: sunset
         offset: '-00:30:00'
+      - platform: time
+        at: '18:30:00'
     action:
       - service: input_select.select_option
         data_template:

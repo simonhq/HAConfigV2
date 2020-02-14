@@ -13,7 +13,6 @@
 group:
   bus_travel_e:
     name: Bus Travel Entities
-    view: no
     entities:
       - zone.HaydonDr
       - zone.CalHospital
@@ -39,7 +38,6 @@ group:
 
   bus_travel_a:
     name: Bus Travel Automations
-    view: no
     entities:
       - automation.transport_simon_leave_citywest
       - automation.transport_simon_leave_anubus

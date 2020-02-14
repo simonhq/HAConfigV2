@@ -13,7 +13,6 @@
 group:
   bedwarm_e:
     name: Bed Warm Entities
-    view: no
     entities:
       - input_number.bed_s_flag
       - input_number.bed_m_flag
@@ -34,7 +33,6 @@ group:
 
   bedwarm_s:
     name: Bed Warm Scripts
-    view: no
     entities:
       - script.beds_on_prewarm
       - script.bed_s_on
@@ -54,7 +52,6 @@ group:
 
   bedwarm_a:
     name: Bed Warm Automations
-    view: no
     entities:
       - automation.bed_auto_on_evening
       - automation.bed_timer_s

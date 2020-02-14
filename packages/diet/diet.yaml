@@ -13,7 +13,6 @@
 group:
   diet_e:
     name: Climate Entities
-    view: no
     entities:
       - input_number.last_measure
       - binary_sensor.diet_press_up

@@ -13,7 +13,6 @@
 group:
   smoke_detectors_e:
     name: Smoke Detectors Entities
-    view: no
     entities:
       - binary_sensor.hallway_nest_protect_online
       - binary_sensor.back_hall_nest_protect_online
@@ -32,14 +31,12 @@ group:
 
   protect_e:
     name: Protect Entities
-    view: no
     entities:
       - device_tracker.protect_back_hall
       - device_tracker.protect_front_hall
       
   protect_s:
     name: Protect System
-    view: no
     entities:
       - binary_sensor.nest_system
       - binary_sensor.hallway_nest_protect_online
@@ -48,7 +45,6 @@ group:
 
   # smoke_detectors_a:
   #   name: Smoke Detectors Automations
-  #   view: no
   #   entities:
   #     - automation.
   #     - automation.

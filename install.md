@@ -7,12 +7,6 @@ on how to install hassio in a docker container, here are the steps;
 
 * Install Ubuntu or Xubuntu
 
-I also had an issue where the wifi card wasn't turned on my laptop:
-    * Open the Xubuntu menu and go to Software and Updates
-    * Go to the Additional Drivers tab
-    * On the Wifi Card, check on the use the proprietry drivers
-    * Restart the computer
-
 * Open a terminal and gain root access
 
 ```
@@ -87,15 +81,6 @@ I also had an issue where the wifi card wasn't turned on my laptop:
 Hassio - http://xxx.xxx.xxx.xxx:8123
 Portainter - http://xxx.xxx.xxx.xxx:9000
 
-
-You then have to go into
-
-/usr/share/hassio/homeassistant 
-
-sudo chmod -R 777 /usr/share/hassio/homeassistant 
-
-(and again after known_devices.yaml has been created)
-
 to install a particular version of Hassio
 
 ssh in to the command line
@@ -113,3 +98,19 @@ Delete cast entities in /config/.storage/core.entity_registry
 Delete cast entities in /config/.storage/core.device_registry
 comment the discovery, zeroconf and ssdp config entries
 restart and then uncomment the config entries
+
+## Wireguard
+
+```
+sudo add-apt-repository ppa:wireguard/wireguard
+sudo apt-get update
+sudo apt-get install wireguard
+```
+
+## Pi-hole
+
+```
+sudo netstat -tulpn | grep ":53"
+sudo systemctl disable systemd-resolved.service
+sudo systemctl stop systemd-resolved.service
+```

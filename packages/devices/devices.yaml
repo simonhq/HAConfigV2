@@ -13,7 +13,6 @@
 group:
   hub_e:
     name: Hub Network Entities
-    view: no
     entities:
       - device_tracker.fan_hub
       - device_tracker.harmonyhub
@@ -25,7 +24,6 @@ group:
 
   hub_s:
     name: Hub System
-    view: no
     entities:
       - binary_sensor.hubs_system
       - binary_sensor.bond
@@ -40,7 +38,6 @@ group:
 
   network_e:
     name: Network Entities
-    view: no
     entities:
       - device_tracker.orbi_kitchen
       - device_tracker.orbi_lounge
@@ -49,7 +46,6 @@ group:
       
   network_s:
     name: Network System
-    view: no
     entities:
       - binary_sensor.net_system
       - binary_sensor.wifi_kitchen
@@ -58,7 +54,6 @@ group:
 
   media_e:
     name: Media Entities
-    view: no
     entities:
       - device_tracker.kitchen_home_speaker
       - device_tracker.ensuite_mini_speaker
@@ -70,7 +65,6 @@ group:
       
   media_s:
     name: Media System
-    view: no
     entities:
       - binary_sensor.media_system
       - binary_sensor.sp_kitchen
@@ -83,7 +77,6 @@ group:
 
   app_e:
     name: Appliance Entities
-    view: no
     entities:
       - device_tracker.samsung_washer
       - device_tracker.samsung_dryer
@@ -101,7 +94,6 @@ group:
 
   app_s:
     name: Appliance System
-    view: no
     entities:
       - binary_sensor.app_system
       - binary_sensor.samwash
@@ -109,7 +101,6 @@ group:
 
   water_e:
     name: Leak Sensors
-    view: no
     entities:
       - binary_sensor.water_leak_yes
       - binary_sensor.water_leak_no
@@ -121,7 +112,6 @@ group:
 
   hometab_e:
     name: HomeTab Entities
-    view: no
     entities:
       - device_tracker.hometab_study
       - device_tracker.hometab_kitchen
@@ -129,7 +119,6 @@ group:
       
   hometab_s:
     name: HomeTab System
-    view: no
     entities:
       - binary_sensor.ht_system
       - binary_sensor.ht_study
@@ -138,7 +127,6 @@ group:
       
   pdevices_e:
     name: Personal Devices Entities
-    view: no
     entities:
       - device_tracker.simon_watch
       - device_tracker.simon_tablet
@@ -161,16 +149,6 @@ group:
 
 # track devices 
 device_tracker:
-  #- platform: nmap_tracker
-  #  hosts: 
-  #    - 192.168.1.0/24
-  #  interval_seconds: 15
-  #  consider_home: 180
-  #  exclude:
-  #   - !secret hass_wired
-  #  new_device_defaults:
-  #    track_new_devices: yes
-  #    hide_if_away: False
   - platform: netgear
     host: 10.0.0.1
     port: 80
@@ -183,7 +161,6 @@ device_tracker:
     consider_home: 180
     new_device_defaults:
       track_new_devices: true
-      hide_if_away: false
 
   - platform: tile
     username: !secret tile_user
@@ -378,6 +355,11 @@ binary_sensor:
       sp_gtv:
         value_template: "{{ is_state('device_tracker.gaming_chromecast', 'home') }}"
         friendly_name: 'Gaming TV'
+        device_class: connectivity
+        icon_template: mdi:google-chrome
+      sp_delia:
+        value_template: "{{ is_state('device_tracker.delia_nest_mini', 'home') }}"
+        friendly_name: 'Delia Mini'
         device_class: connectivity
         icon_template: mdi:google-chrome
       sharptv:

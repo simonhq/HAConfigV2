@@ -13,7 +13,6 @@
 group:
   timedate_e:
     name: Time & Date Entities
-    view: no
     entities:
       - binary_sensor.workday_sensor
       - sensor.time

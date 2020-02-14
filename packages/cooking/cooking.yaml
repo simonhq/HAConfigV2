@@ -13,7 +13,6 @@
 group:
   cooking_e:
     name: House Mode Entities
-    view: no
     entities:
       - binary_sensor.cook_simon
       - binary_sensor.cook_megan

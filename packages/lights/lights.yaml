@@ -13,7 +13,6 @@
 group:
   lights_e:
     name: Light Entities
-    view: no
     entities:
       - light.back_hall  
       - light.bathroom
@@ -49,7 +48,6 @@ group:
 
   light_groups_e:
     name: Light Group Entities
-    view: no
     entities:
       - light.delias
       - light.dining          #dining_1, _2, _3, _4
@@ -71,28 +69,24 @@ group:
 
   ensuite:
     name: Ensuite Light Entities
-    view: no
     entities:
       - light.ensuite_spot #spot
       - light.ensuite_light #normal
 
   kitchen_prep_lights:
     name: Kitchen Preping Entities
-    view: no
     entities:
       - light.kitchen_2
       - light.kitchen_4
 
   kitchen_cook_lights:
     name: Cooking Lights Entities
-    view: no
     entities:
       - light.kitchen_1
       - light.kitchen_3
 
   family_lights:
     name: Family Lights Entities
-    view: no
     entities:
       - light.front_light
       - light.dining
@@ -107,7 +101,6 @@ group:
       
   wetroom_lights:
     name: Wetroom Light Entities
-    view: no
     entities:
       - light.laundry_2         #laundry_2
       - light.toilet_2          #toilet_2

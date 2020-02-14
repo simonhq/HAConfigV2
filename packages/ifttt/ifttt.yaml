@@ -13,13 +13,11 @@
 group:
   #ifttt_e:
   #  name: IFTTT Entities
-  #  view: no
   #  entities:
   #    - 
 
   ifttt_a:
     name: IFTTT Automations
-    view: no
     entities:
       - automation.ifttt_trigger
       

@@ -13,7 +13,6 @@
 group:
   garage_door_e:
     name: Garage Door Entities
-    view: no
     entities:
       - cover.near_garage_door
       - binary_sensor.roller_close
@@ -21,7 +20,6 @@ group:
 
   # garage_door_a:
   #   name: Garage Door Automations
-  #   view: no
   #   entities:
   #     - automation.
   #     - automation.

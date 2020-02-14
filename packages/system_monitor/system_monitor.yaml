@@ -13,7 +13,6 @@
 group:
   system_monitor_e:
     name: System Monitor Entities
-    view: no
     entities:
       - sensor.disk_use_percent
       - sensor.memory_use_percent
@@ -84,7 +83,7 @@ sensor:
     resource: https://api.ipify.org?format=json
     name: External IP
     value_template: '{{ value_json.ip }}'
-    scan_interval: 10  
+    scan_interval: 300  
 
 # sensor.current_version
   - platform: version

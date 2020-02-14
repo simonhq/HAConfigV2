@@ -24,7 +24,7 @@ class General_Messages(hass.Hass):
     cpu = "Laptop Server CPU is very high"
     drink = "The local pressure has decreased, drink another glass of water with a 1/8tsp of salt"
     potas = "The local pressure has increased, smash some potassium"
-    
+
     def initialize(self):
         
         # bring in the messaging module
@@ -51,6 +51,7 @@ class General_Messages(hass.Hass):
         self.listen_state(self.potas_notify, "binary_sensor.diet_press_up")
         self.listen_state(self.drink_notify, "binary_sensor.diet_press_down")
 
+        self.listen_state(self.gps_notify, "input_boolean.button_pushed")
 
         #nodered
         #self.listen_state(self.washing_notify, "binary_sensor.samwash")
@@ -135,6 +136,10 @@ class General_Messages(hass.Hass):
             mbar = self.get_state("sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb")
             self.set_state("input_number.last_measure", state=mbar)
 
+    def gps_notify(self, entity, attribute, old, new, kwargs):
+        if new == "on":
+            self.turn_off("input_boolean.button_pushed")
+            self.notifier.notify("gps")
 
     def printer_notify(self, entity, attribute, old, new, kwargs):
         if new == "on":

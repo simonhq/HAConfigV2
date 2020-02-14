@@ -13,7 +13,6 @@
 group:
   doors_e:
     name: Door Entities
-    view: no
     entities:
       - input_boolean.fdoor
       - input_boolean.gdoor

@@ -13,7 +13,6 @@
 group:
   car_times_e:
     name: Car Times Entities
-    view: no
     entities:
       - binary_sensor.drive_meg
       - binary_sensor.drive_simon
@@ -53,7 +52,6 @@ group:
       
   car_times_a:
     name: Car Times Automations
-    view: no
     entities:
       - automation.transport_car_connect_timer_start
       #- automation.transport_car_connect_timer_done

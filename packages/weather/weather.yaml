@@ -13,7 +13,6 @@
 group:
   weather_e:
     name: Weather Entities
-    view: no
     entities:
       - sun.sun
       - sensor.season
@@ -25,7 +24,6 @@ group:
 
   weather_bom_e:
     name: Weather BOM Entities
-    view: no
     entities:
       - sensor.bom_tuggeranong_isabella_plains_aws_air_temp_c
       - sensor.bom_tuggeranong_isabella_plains_aws_delta_temp_c
@@ -43,7 +41,6 @@ group:
       
   weather_dsky_e:
     name: Weather Dark Sky Entities
-    view: no
     entities:
       - sensor.dark_sky_apparent_temperature
       - sensor.dark_sky_cloud_coverage
@@ -91,7 +88,6 @@ group:
 
   weather_dam_e:
     name: Weather Dam Entities
-    view: no
     entities:
       - input_boolean.check_dams
       - input_text.dam_act_catchment_total
@@ -228,21 +224,22 @@ geo_location:
 
 openuv:
   api_key: !secret uv_key
-  binary_sensors:
-    monitored_conditions:
-      - uv_protection_window
-  sensors:
-    monitored_conditions:
-      - current_ozone_level
-      - current_uv_index
-      - current_uv_level
-      - max_uv_index
-      - safe_exposure_time_type_1
-      - safe_exposure_time_type_2
-      - safe_exposure_time_type_3
-      - safe_exposure_time_type_4
-      - safe_exposure_time_type_5
-      - safe_exposure_time_type_6
+  #the below is no longer valid from 0.105.0
+  # binary_sensors:
+  #   monitored_conditions:
+  #     - uv_protection_window
+  # sensors:
+  #   monitored_conditions:
+  #     - current_ozone_level
+  #     - current_uv_index
+  #     - current_uv_level
+  #     - max_uv_index
+  #     - safe_exposure_time_type_1
+  #     - safe_exposure_time_type_2
+  #     - safe_exposure_time_type_3
+  #     - safe_exposure_time_type_4
+  #     - safe_exposure_time_type_5
+  #     - safe_exposure_time_type_6
 
 
 #################################################################

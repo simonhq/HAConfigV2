@@ -15,7 +15,6 @@
 group:
   calendars_e:
     name: Calendars Entities
-    view: no
     entities:
       - input_boolean.cal_trigger_cal
       - input_datetime.cal_cln
@@ -46,7 +45,6 @@ group:
 
   calendars_a:
     name: Calendars Automations
-    view: no
     entities:
       - automation.calendar_check_flags
       - automation.calendar_send_message

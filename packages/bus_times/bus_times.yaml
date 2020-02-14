@@ -13,7 +13,6 @@
 group:
   bus_times_e:
     name: Bus Time Entities
-    view: no
     entities:
       - sensor.home_to_tugg_79_ej
       - sensor.home_to_tugg_79_is

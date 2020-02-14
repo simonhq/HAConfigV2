@@ -13,7 +13,6 @@
 group:
   notifiers_e:
     name: Notifiers Entities
-    view: no
     entities:
       - binary_sensor.mess_hang
       - binary_sensor.mess_push

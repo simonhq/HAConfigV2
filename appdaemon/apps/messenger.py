@@ -16,6 +16,13 @@ class Messenger(hass.Hass):
     discify = "notify/discord_thompson"
     dischook = "notify/discord_webhook"
 
+    # for gps resetting
+    sappnotify = "notify/mobile_app_pixel_3"
+    mappnotify = "notify/mobile_app_sm_g965f"
+    stappnotify = "notify/mobile_app_pixel_3a"
+    dappnotify = "notify/mobile_app_moto_g_5s_plus"
+    gps= "request_location_update"
+
     mess_platform = "Webhook"
 
     #discord
@@ -68,14 +75,21 @@ class Messenger(hass.Hass):
         if dd == True:
             self.call_service(self.enotify,title=mess,message=self.dmessage)
         else:
-            if self.mess_platform == "Pushbullet":
-                self.call_service(self.mnotify,message=mess)
-                self.call_service(self.snotify,message=mess)
-                self.call_service(self.dnotify,message=mess)
-                self.call_service(self.stnotify,message=mess)
-            elif self.mess_platform  == "Hangouts":
-                self.call_service(self.hangify,message=mess)
-            elif self.mess_platform  == "Webhook":
-                self.call_service(self.dischook,message=mess)
-            elif self.mess_platform == "Discord":
-                self.call_service(self.discify,target=self.channel,message=mess)
+            if mess == "gps":
+                self.call_service(self.sappnotify,message=gps)
+                self.call_service(self.mappnotify,message=gps)
+                self.call_service(self.stappnotify,message=gps)
+                self.call_service(self.dappnotify,message=gps)
+                self.log("Calling reset GPS on devices")
+            else:
+                if self.mess_platform == "Pushbullet":
+                    self.call_service(self.mnotify,message=mess)
+                    self.call_service(self.snotify,message=mess)
+                    self.call_service(self.dnotify,message=mess)
+                    self.call_service(self.stnotify,message=mess)
+                elif self.mess_platform  == "Hangouts":
+                    self.call_service(self.hangify,message=mess)
+                elif self.mess_platform  == "Webhook":
+                    self.call_service(self.dischook,message=mess)
+                elif self.mess_platform == "Discord":
+                    self.call_service(self.discify,target=self.channel,message=mess)

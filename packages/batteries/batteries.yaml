@@ -13,7 +13,6 @@
 group:
   batteries_e:
     name: Batteries Entities
-    view: no
     entities:
       - binary_sensor.simon_batt_low
       - binary_sensor.megan_batt_low
@@ -44,7 +43,6 @@ group:
 
   # batteries_a:
   #   name: Batteries Automations
-  #   view: no
   #   entities:
   #     - automation.
   #     - automation.

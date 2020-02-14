@@ -13,7 +13,6 @@
 group:
   climate_e:
     name: Climate Entities
-    view: no
     entities:
       - input_number.temp_opt_high
       - input_number.temp_opt_low

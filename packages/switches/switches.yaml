@@ -13,7 +13,6 @@
 group:
   sw_e:
     name: Switch Entities
-    view: no
     entities:
       - device_tracker.study_switch
       - device_tracker.tv_switch
@@ -32,7 +31,6 @@ group:
   
   swbed_e:
     name: Bed Switch Entities
-    view: no
     entities:
       - device_tracker.simon_blanket
       - device_tracker.megan_blanket
@@ -41,7 +39,6 @@ group:
 
   sw_all:
     name: Switch Entities
-    view: no
     entities:
       - switch.lounge_chairs
       - switch.lounge_tv
@@ -54,7 +51,6 @@ group:
 
   sw_s:
     name: Switch System
-    view: no
     entities:
       - binary_sensor.sw_system
       - binary_sensor.sw_study
@@ -64,7 +60,6 @@ group:
 
   swbed_s:
     name: Bed Switch System
-    view: no
     entities:
       - binary_sensor.swbed_system
       - binary_sensor.sw_sb
@@ -74,7 +69,6 @@ group:
 
   switch_e:
     name: Switch Statistics
-    view: no
     entities:
       #- sensor.dri_current_w
       #- sensor.dri_current_a
@@ -96,10 +90,9 @@ group:
       - sensor.lch_today_kwh
       - sensor.lch_total_kwh
       - sensor.lch_voltage
-     
+
   # calendars_a:
   #   name: Calendars Automations
-  #   view: no
   #   entities:
   #     - automation.
   #     - automation.

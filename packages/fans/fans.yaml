@@ -13,7 +13,6 @@
 group:
   fans_e:
     name: Fan Entities
-    view: no
     entities:
       - input_select.master_fan_flag
       - input_select.staci_fan_flag
@@ -24,7 +23,6 @@ group:
 
   fans_a:
     name: Fan Automations
-    view: no
     entities:
       - script.fans_off
       - script.fans_on
@@ -154,7 +152,7 @@ binary_sensor:
         device_class: motion
       purifier_on:
         friendly_name: Purifier On
-        value_template: "{{ is_state('binary_sensor.fans_off', 'off') }}"
+        value_template: "{{ is_state('binary_sensor.purifier_off', 'off') }}"
         icon_template: mdi:air-filter
 
 #################################################################
