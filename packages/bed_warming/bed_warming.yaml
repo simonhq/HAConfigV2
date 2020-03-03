@@ -481,78 +481,78 @@ automation:
 #                                                  #
 ####################################################
 
-  - alias: bed_s_auto_off
-    trigger:
-      - platform: event
-        event_type: timer.finished
-        event_data:
-          entity_id: timer.bed_s_timer
-      - platform: state
-        entity_id: binary_sensor.mode_night
-        to: 'on'
-      - platform: state
-        entity_id: binary_sensor.mode_day
-        to: 'on'
-      - platform: state
-        entity_id: binary_sensor.mode_morning
-        to: 'on'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_s_off
+  # - alias: bed_s_auto_off
+  #   trigger:
+  #     - platform: event
+  #       event_type: timer.finished
+  #       event_data:
+  #         entity_id: timer.bed_s_timer
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_night
+  #       to: 'on'
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_day
+  #       to: 'on'
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_morning
+  #       to: 'on'
+  #   action:
+  #     - service: script.turn_on
+  #       entity_id: script.bed_s_off
 
-  - alias: bed_m_auto_off
-    trigger:
-      - platform: event
-        event_type: timer.finished
-        event_data:
-          entity_id: timer.bed_m_timer
-      - platform: state
-        entity_id: binary_sensor.mode_night
-        to: 'on'
-      - platform: state
-        entity_id: binary_sensor.mode_day
-        to: 'on'
-      - platform: state
-        entity_id: binary_sensor.mode_morning
-        to: 'on'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_m_off
+  # - alias: bed_m_auto_off
+  #   trigger:
+  #     - platform: event
+  #       event_type: timer.finished
+  #       event_data:
+  #         entity_id: timer.bed_m_timer
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_night
+  #       to: 'on'
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_day
+  #       to: 'on'
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_morning
+  #       to: 'on'
+  #   action:
+  #     - service: script.turn_on
+  #       entity_id: script.bed_m_off
 
-  - alias: bed_st_auto_off
-    trigger:
-      - platform: event
-        event_type: timer.finished
-        event_data:
-          entity_id: timer.bed_st_timer
-      - platform: state
-        entity_id: binary_sensor.mode_night
-        to: 'on'
-      - platform: state
-        entity_id: binary_sensor.mode_day
-        to: 'on'
-      - platform: state
-        entity_id: binary_sensor.mode_morning
-        to: 'on'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_st_off
+  # - alias: bed_st_auto_off
+  #   trigger:
+  #     - platform: event
+  #       event_type: timer.finished
+  #       event_data:
+  #         entity_id: timer.bed_st_timer
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_night
+  #       to: 'on'
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_day
+  #       to: 'on'
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_morning
+  #       to: 'on'
+  #   action:
+  #     - service: script.turn_on
+  #       entity_id: script.bed_st_off
 
-  - alias: bed_d_auto_off
-    trigger:
-      - platform: event
-        event_type: timer.finished
-        event_data:
-          entity_id: timer.bed_d_timer
-      - platform: state
-        entity_id: binary_sensor.mode_night
-        to: 'on'
-      - platform: state
-        entity_id: binary_sensor.mode_day
-        to: 'on'
-      - platform: state
-        entity_id: binary_sensor.mode_morning
-        to: 'on'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_d_off
+  # - alias: bed_d_auto_off
+  #   trigger:
+  #     - platform: event
+  #       event_type: timer.finished
+  #       event_data:
+  #         entity_id: timer.bed_d_timer
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_night
+  #       to: 'on'
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_day
+  #       to: 'on'
+  #     - platform: state
+  #       entity_id: binary_sensor.mode_morning
+  #       to: 'on'
+  #   action:
+  #     - service: script.turn_on
+  #       entity_id: script.bed_d_off

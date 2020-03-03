@@ -1,12 +1,162 @@
 [
     {
-        "complete": false,
+        "complete": true,
         "id": "4664650672d543649397c3b3c2f1c2e4",
         "name": "barbecue sauce"
     },
     {
-        "complete": false,
+        "complete": true,
         "id": "7bf093eb6cf04e91bd129af885889939",
         "name": "garbage bags"
+    },
+    {
+        "complete": false,
+        "id": "e008d0e58280491b870b61fa2e7eee3a",
+        "name": "light rye bread"
+    },
+    {
+        "complete": true,
+        "id": "15f9851ee52949d983ae8f69d2f3c875",
+        "name": "cheese slices"
+    },
+    {
+        "complete": true,
+        "id": "735e129c40194c8bbac22032169ddd81",
+        "name": "lettuce and/or spinach"
+    },
+    {
+        "complete": true,
+        "id": "a0560af56e604733b842adab8ffbff56",
+        "name": "salami"
+    },
+    {
+        "complete": true,
+        "id": "1ec0b77f0b0d491c8250b13efeaa8234",
+        "name": "coles brand protein bars"
+    },
+    {
+        "complete": true,
+        "id": "5789dece8d014173960659a7031ee89b",
+        "name": "salmon (frozen?) "
+    },
+    {
+        "complete": true,
+        "id": "7676cc6a506b411d81c664bf612a9418",
+        "name": "cottage cheese full fat"
+    },
+    {
+        "complete": true,
+        "id": "c4b627993eca4bd18625a9938ac1914f",
+        "name": "potatoes"
+    },
+    {
+        "complete": true,
+        "id": "6f9d1fb3e7f04b4e80b3486a1b92d984",
+        "name": "shredded cheese"
+    },
+    {
+        "complete": true,
+        "id": "e5081163316d4c8cb25feb0fd009a97e",
+        "name": "carrots"
+    },
+    {
+        "complete": true,
+        "id": "318a38e068b043ff87b11536611696fc",
+        "name": "small mushrooms"
+    },
+    {
+        "complete": true,
+        "id": "a8341b22c8394598a981f9a0f25db133",
+        "name": "broccoli"
+    },
+    {
+        "complete": true,
+        "id": "d9ad29f4b60b44d7a685ab7399891f51",
+        "name": "frozen peas and corn"
+    },
+    {
+        "complete": true,
+        "id": "77bf31c34b3149e3afb25974fe80937b",
+        "name": "2 zucchini"
+    },
+    {
+        "complete": true,
+        "id": "660b26409e0d470fb0f6c127b00edc4f",
+        "name": "two lots of eggs"
+    },
+    {
+        "complete": true,
+        "id": "9a7e9489dffe445db0a8e9f92d1d992c",
+        "name": "milk"
+    },
+    {
+        "complete": true,
+        "id": "b6dd298e407b4e1c8ff244764ee4a73d",
+        "name": "canned tuna in oil"
+    },
+    {
+        "complete": true,
+        "id": "3d147f999bc746d3883635dd2669c79d",
+        "name": "2 small cans of tuna in spring water"
+    },
+    {
+        "complete": true,
+        "id": "5d4e5531b3904c638f1a99789360c8fd",
+        "name": "sandwich ^turkey^ or ham packets x5 "
+    },
+    {
+        "complete": true,
+        "id": "7c9de0f705be4d318a026a7f206ff002",
+        "name": "avocado"
+    },
+    {
+        "complete": false,
+        "id": "f4cd751a1a594866a0beb8dd6cddae5b",
+        "name": "hamburgers"
+    },
+    {
+        "complete": false,
+        "id": "9d34abdd0ba74b6a9c235df888b24467",
+        "name": "fried rice"
+    },
+    {
+        "complete": false,
+        "id": "055b986cfaad448b82e968b90ead8171",
+        "name": "spaghetti"
+    },
+    {
+        "complete": false,
+        "id": "f8327989695d44118ec0c2043f8c6f5f",
+        "name": "tofu firm"
+    },
+    {
+        "complete": false,
+        "id": "fcbbacc19ba84d2da76961277bff8092",
+        "name": "steak"
+    },
+    {
+        "complete": false,
+        "id": "142f28bc76e34b4a80a7f46f51b04662",
+        "name": "stirfry - chicken thighs"
+    },
+    {
+        "complete": true,
+        "id": "cf227382a7ef4579b06f1f3b7cd5fb2b",
+        "name": "snow peas"
+    },
+    {
+        "complete": false,
+        "id": "ccd0a7c15af4425299f251a4249ab027",
+        "name": "paper towels"
+    },
+    {
+        "complete": false,
+        "id": "522a72686fe54196856cb07c24acc640",
+        "name": "picture hanging strips"
+    },
+    {
+        "complete": false,
+        "id": "ce8ba79aa2c347d28b71576184294ba3",
+        "name": "salt"
     }
 ]

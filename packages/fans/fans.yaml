@@ -129,7 +129,7 @@ binary_sensor:
       fans_off:
         friendly_name: Fans Off
         #value_template: "{{ is_state('input_select.master_fan_flag', 'Off') and is_state('input_select.staci_fan_flag', 'Off') and is_state('input_select.delia_fan_flag', 'Off')  }}"
-        value_template: "{{ is_state('fan.master_fan', 'off') and is_state('fan.staci_s_fan', 'off') and is_state('fan.delia_s_fan', 'off')  }}"
+        value_template: "{{ is_state('fan.fan', 'off') and is_state('fan.fan_2', 'off') and is_state('fan.fan_3', 'off')  }}"
         icon_template: mdi:fan-off
         device_class: motion
       fans_on:

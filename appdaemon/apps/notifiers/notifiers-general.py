@@ -57,7 +57,6 @@ class General_Messages(hass.Hass):
         #self.listen_state(self.washing_notify, "binary_sensor.samwash")
         #self.listen_state(self.drying_notify, "binary_sensor.samdry")
 
-        #nodered
         #self.listen_state(self.cook_flag, "sensor.cook_calendar") 
 
         #self.listen_state(self.gps_notify, "device_tracker.sphone_net")
