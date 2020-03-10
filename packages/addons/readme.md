@@ -47,35 +47,35 @@ VPN into home network, works well apart from our inconsistent internet connectio
 
 <h5 align="left">Monitoring & Administration</h5>
 
-* Glances
+* Glances ^
 Shows the state of the server that home assistant is being run on
-* SSH & Web Terminal
+* SSH & Web Terminal ^^
 Allows access when the front-end is unavailable
-* Check Home Assistant configuration
+* Check Home Assistant configuration ^
 Run before upgrading to see potential issues
-* Samba Share
+* Samba Share ^^^
 Allows access to the directory structure on the server for in network updates
-* Visual Studio Code
+* Visual Studio Code ^
 Allows access through a web browser for external updates if required
 
 <h5 align="left">Database</h5>
 
-* InfluxDB
+* InfluxDB ^^^
 Long term storage of information for reporting
-* MariaDB
+* MariaDB ^^^
 Extended database for HA and some of the addons
-* phpMyAdmin
+* phpMyAdmin ^
 Database admin to manage MariaDB
-* Hass.io Google Drive Backup
+* Hass.io Google Drive Backup ^^^
 Full snapshot backups of the HA environment to Google Drive
 
 <h5 align="left">Capability</h5>
 
-* Bookstack
+* Bookstack ^^
 A wiki, used to keep track of non-sensitive, non-time-dependant family information
-* Grafana
+* Grafana ^^
 Graphing tool that uses the long-term data in InfluxDB
-* Grocy
+* Grocy ^^
 A home management tool to keep track of things in the house
 
 
