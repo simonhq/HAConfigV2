@@ -79,26 +79,30 @@ class Travel_Messages(hass.Hass):
     def sim_loc(self, entity, attribute, old, new, kwargs):
         self.s_loc = new
         if new != 'home' and self.m_loc != 'home':
-            self.set_state("input_select.master_fan_flag", state="Transition") #set to transition to ensure in correct state
-            self.set_state("input_select.master_fan_flag", state="Off")
+            self.turn_off("fan.fan")
+            #self.set_state("input_select.master_fan_flag", state="Transition") #set to transition to ensure in correct state
+            #self.set_state("input_select.master_fan_flag", state="Off")
     
     def meg_loc(self, entity, attribute, old, new, kwargs):
         self.m_loc = new
         if new != 'home' and self.s_loc != 'home':
-            self.set_state("input_select.master_fan_flag", state="Transition") #set to transition to ensure in correct state
-            self.set_state("input_select.master_fan_flag", state="Off")
+            self.turn_off("fan.fan")
+            #self.set_state("input_select.master_fan_flag", state="Transition") #set to transition to ensure in correct state
+            #self.set_state("input_select.master_fan_flag", state="Off")
 
     def sta_loc(self, entity, attribute, old, new, kwargs):
         self.st_loc = new
         if new != 'home':
-            self.set_state("input_select.staci_fan_flag", state="Transition") #set to transition to ensure in correct state
-            self.set_state("input_select.staci_fan_flag", state="Off")
+            self.turn_off("fan.fan_2")
+            #self.set_state("input_select.staci_fan_flag", state="Transition") #set to transition to ensure in correct state
+            #self.set_state("input_select.staci_fan_flag", state="Off")
 
     def del_loc(self, entity, attribute, old, new, kwargs):
         self.d_loc = new
         if new != 'home':
-            self.set_state("input_select.delia_fan_flag", state="Transition") #set to transition to ensure in correct state
-            self.set_state("input_select.delia_fan_flag", state="Off")
+            self.turn_off("fan.fan_3")
+            #self.set_state("input_select.delia_fan_flag", state="Transition") #set to transition to ensure in correct state
+            #self.set_state("input_select.delia_fan_flag", state="Off")
 
 
     ###

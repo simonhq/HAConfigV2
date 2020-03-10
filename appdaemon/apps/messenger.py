@@ -17,11 +17,11 @@ class Messenger(hass.Hass):
     dischook = "notify/discord_webhook"
 
     # for gps resetting
-    sappnotify = "notify/mobile_app_pixel_3"
-    mappnotify = "notify/mobile_app_sm_g965f"
-    stappnotify = "notify/mobile_app_pixel_3a"
-    dappnotify = "notify/mobile_app_moto_g_5s_plus"
-    gps= "request_location_update"
+    sappnotify = "notify/mobile_app_spixel3"
+    mappnotify = "notify/mobile_app_msam9"
+    stappnotify = "notify/mobile_app_stpixel3a"
+    dappnotify = "notify/mobile_app_dmotog5"
+    gps = "request_location_update"
 
     mess_platform = "Webhook"
 
@@ -76,11 +76,23 @@ class Messenger(hass.Hass):
             self.call_service(self.enotify,title=mess,message=self.dmessage)
         else:
             if mess == "gps":
-                self.call_service(self.sappnotify,message=gps)
-                self.call_service(self.mappnotify,message=gps)
-                self.call_service(self.stappnotify,message=gps)
-                self.call_service(self.dappnotify,message=gps)
+                self.call_service(self.sappnotify,message=self.gps)
+                self.call_service(self.mappnotify,message=self.gps)
+                self.call_service(self.stappnotify,message=self.gps)
+                self.call_service(self.dappnotify,message=self.gps)
                 self.log("Calling reset GPS on devices")
+            elif mess == "sgps":
+                self.call_service(self.sappnotify,message=self.gps)
+                self.log("Calling reset GPS for Simon")
+            elif mess == "mgps":
+                self.call_service(self.mappnotify,message=self.gps)
+                self.log("Calling reset GPS for Megan")
+            elif mess == "stgps":
+                self.call_service(self.stappnotify,message=self.gps)
+                self.log("Calling reset GPS for Staci")
+            elif mess == "dgps":
+                self.call_service(self.dappnotify,message=self.gps)
+                self.log("Calling reset GPS for Delia")
             else:
                 if self.mess_platform == "Pushbullet":
                     self.call_service(self.mnotify,message=mess)

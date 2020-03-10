@@ -890,7 +890,7 @@ automation:
         to: 'Bathroom Off'
     action:
       - service: light.turn_off
-        entity_id: light.bathroom_2
+        entity_id: light.bathroom
 
   - alias: mode_set_bathroom_on
     trigger:
@@ -899,7 +899,7 @@ automation:
         to: 'Bathroom On'
     action:
       - service: light.turn_on
-        entity_id: light.bathroom_2
+        entity_id: light.bathroom
 
   ###################################
   ##  toilet Mode control
@@ -915,7 +915,7 @@ automation:
         to: 'Toilet Off'
     action:
       - service: light.turn_off
-        entity_id: light.toilet_2
+        entity_id: light.toilet
 
   - alias: mode_set_toilet_on
     trigger:
@@ -924,7 +924,7 @@ automation:
         to: 'Toilet On'
     action:
       - service: light.turn_on
-        entity_id: light.toilet_2
+        entity_id: light.toilet
 
   ###################################
   ##  ensuite Mode control
@@ -940,7 +940,7 @@ automation:
         to: 'Ensuite Off'
     action:
       - service: light.turn_off
-        entity_id: group.ensuite_3
+        entity_id: group.ensuite
 
   - alias: mode_set_ensuite_on
     trigger:
@@ -949,7 +949,7 @@ automation:
         to: 'Ensuite On'
     action:
       - service: light.turn_on
-        entity_id: group.ensuite_3
+        entity_id: group.ensuite
 
   ###################################
   ##  laundry Mode control
@@ -965,7 +965,7 @@ automation:
         to: 'Laundry Off'
     action:
       - service: light.turn_off
-        entity_id: light.laundry_2
+        entity_id: light.laundry
 
   - alias: mode_set_laundry_on
     trigger:
@@ -974,7 +974,7 @@ automation:
         to: 'Laundry On'
     action:
       - service: light.turn_on
-        entity_id: light.laundry_2
+        entity_id: light.laundry
 
   ###################################
   ##  garage Mode control
@@ -990,7 +990,7 @@ automation:
         to: 'Garage Off'
     action:
       - service: light.turn_off
-        entity_id: light.garage_2
+        entity_id: light.garage
 
   - alias: mode_set_garage_on
     trigger:
@@ -999,29 +999,29 @@ automation:
         to: 'Garage On'
     action:
       - service: light.turn_on
-        entity_id: light.garage_2
+        entity_id: light.garage
 
-  ###################################
-  ##  toilet Mode control
-  ###################################
+  # ###################################
+  # ##  toilet Mode control
+  # ###################################
 
-  - alias: mode_set_toilet_motion_off
-    trigger:
-      - platform: state
-        entity_id: input_select.ton
-        to: 'Motion'
-      - platform: state
-        entity_id: input_select.ton
-        to: 'Toilet Off'
-    action:
-      - service: light.turn_off
-        entity_id: light.toilet_2
+  # - alias: mode_set_toilet_motion_off
+  #   trigger:
+  #     - platform: state
+  #       entity_id: input_select.ton
+  #       to: 'Motion'
+  #     - platform: state
+  #       entity_id: input_select.ton
+  #       to: 'Toilet Off'
+  #   action:
+  #     - service: light.turn_off
+  #       entity_id: light.toilet_2
 
-  - alias: mode_set_toilet_on
-    trigger:
-      - platform: state
-        entity_id: input_select.ton
-        to: 'Toilet On'
-    action:
-      - service: light.turn_on
-        entity_id: light.toilet_2
+  # - alias: mode_set_toilet_on
+  #   trigger:
+  #     - platform: state
+  #       entity_id: input_select.ton
+  #       to: 'Toilet On'
+  #   action:
+  #     - service: light.turn_on
+  #       entity_id: light.toilet_2

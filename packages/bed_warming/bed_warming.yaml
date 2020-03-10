@@ -378,10 +378,10 @@ automation:
 #                                                  #
 ####################################################
 
-  - alias: bed_auto_on_evening
+  - alias: bed_auto_on_late
     trigger:
       - platform: state
-        entity_id: binary_sensor.mode_evening
+        entity_id: binary_sensor.mode_late
         to: 'on'
     action:
       - service: script.turn_on

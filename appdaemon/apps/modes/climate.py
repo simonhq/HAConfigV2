@@ -23,10 +23,10 @@ class Climate_Control(hass.Hass):
         # this checks
         self.listen_state(self.climate_fan, "binary_sensor.climate_hot_outside_on_fan")
         self.listen_state(self.climate_fan, "binary_sensor.climate_cool_outside_off_fan")
-        self.listen_state(self.climate_fan, "binary_sensor.sphone", new='on')
-        self.listen_state(self.climate_fan, "binary_sensor.mphone", new='on')
-        self.listen_state(self.climate_fan, "binary_sensor.stphone", new='on')
-        self.listen_state(self.climate_fan, "binary_sensor.dphone", new='on')
+        self.listen_state(self.climate_fan, "person.simon")
+        self.listen_state(self.climate_fan, "person.megan")
+        self.listen_state(self.climate_fan, "person.staci")
+        self.listen_state(self.climate_fan, "person.delia")
 
         self.listen_state(self.climate_cont, "binary_sensor.climate_hot_turn_on_cooling")
         self.listen_state(self.climate_cont, "binary_sensor.climate_cold_turn_on_warming")
@@ -64,30 +64,36 @@ class Climate_Control(hass.Hass):
             if self.get_state('binary_sensor.climate_cool_outside_off_fan') == 'off' and self.get_state('binary_sensor.climate_hot_outside_on_fan') == 'on':
                 # turn on the fans
                 if self.get_state('person.simon') == 'home' or self.get_state('person.megan') == 'home':
-                    self.set_state("input_select.master_fan_flag", state="Transition") #set to transition to ensure in correct state
-                    self.set_state("input_select.master_fan_flag", state="1")
+                    self.turn_on("fan.fan")
+                    #self.set_state("input_select.master_fan_flag", state="Transition") #set to transition to ensure in correct state
+                    #self.set_state("input_select.master_fan_flag", state="1")
                     self.sendmess += 'Master fan to on.' + '\n'
                 if self.get_state('person.staci') == 'home':
-                    self.set_state("input_select.staci_fan_flag", state="Transition") #set to transition to ensure in correct state
-                    self.set_state("input_select.staci_fan_flag", state="1")
+                    self.turn_on("fan.fan_2")
+                    #self.set_state("input_select.staci_fan_flag", state="Transition") #set to transition to ensure in correct state
+                    #self.set_state("input_select.staci_fan_flag", state="1")
                     self.sendmess += "Staci's fan to on." + '\n'
                 if self.get_state('person.delia') == 'home':
-                    self.set_state("input_select.delia_fan_flag", state="Transition") #set to transition to ensure in correct state
-                    self.set_state("input_select.delia_fan_flag", state="1")
+                    self.turn_on("fan.fan_3")
+                    #self.set_state("input_select.delia_fan_flag", state="Transition") #set to transition to ensure in correct state
+                    #self.set_state("input_select.delia_fan_flag", state="1")
                     self.sendmess += "Delia's fan to on." + '\n'
             elif self.get_state('binary_sensor.climate_cool_outside_off_fan') == 'on' and self.get_state('binary_sensor.climate_hot_outside_on_fan') == 'off':
                 # turn off the fans
                 if self.get_state('person.simon') == 'home' or self.get_state('person.megan') == 'home':
-                    self.set_state("input_select.master_fan_flag", state="Transition") #set to transition to ensure in correct state
-                    self.set_state("input_select.master_fan_flag", state="Off")
+                    self.turn_off("fan.fan")
+                    #self.set_state("input_select.master_fan_flag", state="Transition") #set to transition to ensure in correct state
+                    #self.set_state("input_select.master_fan_flag", state="Off")
                     self.sendmess += 'Master fan to off.' + '\n'
                 if self.get_state('person.staci') == 'home':
-                    self.set_state("input_select.staci_fan_flag", state="Transition") #set to transition to ensure in correct state
-                    self.set_state("input_select.staci_fan_flag", state="Off")
+                    self.turn_off("fan.fan_2")
+                    #self.set_state("input_select.staci_fan_flag", state="Transition") #set to transition to ensure in correct state
+                    #self.set_state("input_select.staci_fan_flag", state="Off")
                     self.sendmess += "Staci's fan to off." + '\n'
                 if self.get_state('person.delia') == 'home':
-                    self.set_state("input_select.delia_fan_flag", state="Transition") #set to transition to ensure in correct state
-                    self.set_state("input_select.delia_fan_flag", state="Off")
+                    self.turn_off("fan.fan_3")
+                    #self.set_state("input_select.delia_fan_flag", state="Transition") #set to transition to ensure in correct state
+                    #self.set_state("input_select.delia_fan_flag", state="Off")
                     self.sendmess += "Delia's fan to off." + '\n'
        
         if self.sendmess != "":

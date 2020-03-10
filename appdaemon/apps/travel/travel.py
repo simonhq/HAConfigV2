@@ -17,6 +17,8 @@ class Travel_Messages(hass.Hass):
     d_loc = "home"
 
     sendmess = ""
+    #the request timer will set how often to request gps notifications on returning to the house
+    requesttimer = 20
 
     smess = "Simon is currently at "
     mmess = "Megan is currently at "
@@ -49,14 +51,6 @@ class Travel_Messages(hass.Hass):
         # delia car or walkbus
         self.listen_state(self.del_trav, "binary_sensor.delia_car")
         self.listen_state(self.del_trav, "binary_sensor.delia_walk_bus")
-        
-
-        # tasker proximity code - trial
-        #self.listen_state(self.arr_task, "input_boolean.simon_outback_home")
-        #self.listen_state(self.arr_task, "input_boolean.megan_outback_home")
-        #these maybe needed if the girls starting driving - not implemented now
-        #self.listen_state(self.arr_task, "input_boolean.staci_outback_home")
-        #self.listen_state(self.arr_task, "input_boolean.delia_outback_home")
 
         # ha proximity code - doesn't work consistently due to gps
         self.listen_state(self.arr_prox, "proximity.home_meg")
@@ -68,38 +62,37 @@ class Travel_Messages(hass.Hass):
         # car away
         self.listen_state(self.car_away, "input_boolean.presence_holiday")
         # keep track of locations
-        self.listen_state(self.sim_loc, "device_tracker.sphone")
-        self.listen_state(self.meg_loc, "device_tracker.mphone")
-        self.listen_state(self.sta_loc, "device_tracker.stphone")
-        self.listen_state(self.del_loc, "device_tracker.dphone")
+        self.listen_state(self.sim_loc, "person.simon")
+        self.listen_state(self.meg_loc, "person.megan")
+        self.listen_state(self.sta_loc, "person.staci")
+        self.listen_state(self.del_loc, "person.delia")
 
     def car_away(self, entity, attribute, old, new, kwargs):
         self.away_flag = new
 
+    ###
+    #   These look at if people are home, and if they leave it turns off their fans
+    ###
+
     def sim_loc(self, entity, attribute, old, new, kwargs):
         self.s_loc = new
         if new != 'home' and self.m_loc != 'home':
-            self.set_state("input_select.master_fan_flag", state="Transition") #set to transition to ensure in correct state
-            self.set_state("input_select.master_fan_flag", state="Off")
+            self.turn_off("fan.fan")
     
     def meg_loc(self, entity, attribute, old, new, kwargs):
         self.m_loc = new
         if new != 'home' and self.s_loc != 'home':
-            self.set_state("input_select.master_fan_flag", state="Transition") #set to transition to ensure in correct state
-            self.set_state("input_select.master_fan_flag", state="Off")
+            self.turn_off("fan.fan")
 
     def sta_loc(self, entity, attribute, old, new, kwargs):
         self.st_loc = new
         if new != 'home':
-            self.set_state("input_select.staci_fan_flag", state="Transition") #set to transition to ensure in correct state
-            self.set_state("input_select.staci_fan_flag", state="Off")
+            self.turn_off("fan.fan_2")
 
     def del_loc(self, entity, attribute, old, new, kwargs):
         self.d_loc = new
         if new != 'home':
-            self.set_state("input_select.delia_fan_flag", state="Transition") #set to transition to ensure in correct state
-            self.set_state("input_select.delia_fan_flag", state="Off")
-
+            self.turn_off("fan.fan_3")
 
     ###
     #   This sets the proximity through the proximity platform
@@ -113,7 +106,14 @@ class Travel_Messages(hass.Hass):
             # leaving/arriving canberra region
             if entity == "proximity.home_simon":
                 if self.get_state("input_select.trav_simon") == "Car":
-                    if int(self.get_state("proximity.home_simon")) <= 1:
+                    #close tracking
+                    if int(self.get_state("proximity.home_simon")) <= 5 and int(self.get_state("proximity.home_simon")) > 1:
+                        if self.get_state("sensor.s_travel_direction") == "towards":
+                            if self.get_state("input_boolean.garage_just") != "on":
+                                # proximity under 5 kilometres, and arriving by car - start requesting gps updates
+                                self.run_in(self.personal_gps("sgps"), self.requesttimer)
+                    #garage door
+                    elif int(self.get_state("proximity.home_simon")) <= 1:
                         if self.get_state("sensor.s_travel_direction") == "towards":
                             if self.get_state("input_boolean.garage_just") != "on":
                                 # proximity under 1 kilometre, and arriving by car - open garage door
@@ -132,6 +132,13 @@ class Travel_Messages(hass.Hass):
                             self.sendmess = "Car has returned to the Canberra Region, messages around driving enabled"
             elif entity == "proximity.home_meg":
                 if self.get_state("input_select.trav_megan") == "Car":
+                    #close tracking
+                    if int(self.get_state("proximity.home_meg")) <= 5 and int(self.get_state("proximity.home_meg")) > 1:
+                        if self.get_state("sensor.m_travel_direction") == "towards":
+                            if self.get_state("input_boolean.garage_just") != "on":
+                                # proximity under 5 kilometres, and arriving by car - start requesting gps updates
+                                self.run_in(self.personal_gps("mgps"), self.requesttimer)
+                    #garage door
                     if int(self.get_state("proximity.home_meg")) <= 1:
                         if self.get_state("sensor.m_travel_direction") == "towards":
                             if self.get_state("input_boolean.garage_just") != "on":
@@ -153,28 +160,14 @@ class Travel_Messages(hass.Hass):
         #send the message
         if self.sendmess != "":
             self.notifier.notify(self.sendmess)
-            
-    ###
-    #   watches the tasker proximity for Simon & Megan and if they are in the car, open the garage door
-    ###
     
-    # def arr_task(self, entity, attribute, old, new, kwargs):
- 
-    #     self.sendmess = ""
+    ###
+    #   when turned on, will continue to request gps updates for tracking close to the house
+    ###
 
-    #     # arriving home - open garage door
-    #     if entity == "input_boolean.simon_outback_home" and new == "on": #simon coming home via tasker
-    #         if self.get_state("binary_sensor.drive_simon") == "on" and self.get_state("input_boolean.outback_just") == "off": #is driving and not just started the car
-    #             self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
-    #             self.sendmess = "Opening the Garage Door for Simon arriving by car (Tasker/Proximity)"
-    #     elif entity == "input_boolean.megan_outback_home" and new == "on": #simon coming home via tasker
-    #         if self.get_state("binary_sensor.drive_meg") == "on" and self.get_state("input_boolean.outback_just") == "off": #is driving and not just started the car
-    #             self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
-    #             self.sendmess = "Opening the Garage Door for Megan arriving by car (Tasker/Proximity)"
-                        
-    #     #send the message
-    #     if self.sendmess != "":
-    #         self.notifier.notify(self.sendmess)
+    def personal_gps(self, mess, kwargs):
+        # gps will be requested more often to ensure the garage door entry is more consistent
+        self.notifier.notify(mess)
 
     ###
     #   watches the connection to the car and send the appropriate message
@@ -309,13 +302,13 @@ class Travel_Messages(hass.Hass):
         ### Showing walking or catching the bus, nothing specific here now 
         elif self.get_state("binary_sensor.simon_walk_bus") == 'on':
 
-             #wait for a time to ensure not yet at home when you disconnect from the car
+            #wait for a time to ensure not yet at home when you disconnect from the car
             self.handle = self.run_in(self.sim_walk, 180, **kwargs)
 
         #send the message
         if self.sendmess != "":
             self.notifier.notify(self.sendmess)
-      
+
     def sim_walk(self, kwargs):
 
         if self.get_state("input_select.trav_simon") != 'Home' and self.get_state("binary_sensor.simon_walk_bus") == 'on':
@@ -401,17 +394,5 @@ class Travel_Messages(hass.Hass):
             self.notifier.notify(self.sendmess)
         
 
-    
 
-
-
-
-
-       
-
-
-   
-
-   
-                
 
