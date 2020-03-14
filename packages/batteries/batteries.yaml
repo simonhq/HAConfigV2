@@ -14,32 +14,51 @@ group:
   batteries_e:
     name: Batteries Entities
     entities:
+      #- Integrations
+      #- Phone batteries - via app
+      - sensor.megans_ipad_battery_level
+      - sensor.megans_ipad_battery_state
+      - sensor.moto_g_5s_plus_battery_level
+      - sensor.pixel_3_battery_level
+      - sensor.pixel_3a_battery_level
+      - sensor.sm_g965f_battery_level
+      #- smoke detectors
+      - sensor.back_hall_nest_protect_battery_health
+      - sensor.hallway_nest_protect_battery_health
+      #- smartthings multisensors
+      - sensor.back_door_state_battery
+      - sensor.front_door_state_battery
+      - sensor.dishwasher_multipurpose_sensor_battery            
+      #- smartthings motion sensors
+      - sensor.bathroom_motion_battery
+      - sensor.toilet_motion_battery      
+      #- smartthings water leak sensors
+      - sensor.bathroom_water_leak_sensor_battery
+      - sensor.dishwasher_water_leak_sensor_battery
+      - sensor.ensuite_water_leak_sensor_battery
+      - sensor.kitchen_water_leak_sensor_battery
+      - sensor.laundry_water_leak_sensor_battery
+      #- smartthings buttons
+      - sensor.megs_button_battery
+      #- Hue - coded - see below
+      - sensor.ensuite_motion_sensor_battery_level
+      - sensor.laundry_motion_sensor_battery_level
+      - sensor.garage_motion_sensor_battery_level
+      - sensor.living_room_hue_remote_battery_level
+      - sensor.bedroom_hue_remote_battery_level
+      - sensor.bedroom_2_hue_remote_battery_level
+      #---------------- binaries
       - binary_sensor.simon_batt_low
       - binary_sensor.megan_batt_low
       - binary_sensor.staci_batt_low
       - binary_sensor.delia_batt_low
+      - binary_sensor.megan_ipad_batt_low
+      #---------------- phone battery notification
       - input_number.batt_alert
       - input_boolean.batt_notify_system
-      - sensor.sphone_battery
-      - sensor.mphone_battery
-      - sensor.stphone_battery
-      - sensor.dphone_battery
-      - sensor.bed_remote_batt
-      - sensor.live_remote_batt
-      - sensor.mbed_remote_batt
-      #- sensor.bathroom_motion_sensor_battery_level
-      - sensor.ensuite_motion_sensor_battery_level
-      - sensor.laundry_motion_sensor_battery_level
-      - sensor.garage_motion_sensor_battery_level
-      # smartthings
-      - sensor.back_door_state_battery
-      - sensor.front_door_state_battery
-      - sensor.toilet_motion_battery
-      #- sensor.
-      #- sensor.
-
-# toilet battery? - smartthings integration?
-# door batteries?
+      #---------------- device battery notification
+      - input_number.dbatt_alert
+      - input_boolean.dbatt_notify_system
 
   # batteries_a:
   #   name: Batteries Automations
@@ -67,21 +86,25 @@ binary_sensor:
     sensors:
       simon_batt_low:
         friendly_name: Simon Battery Low
-        value_template: "{{ states('sensor.sphone_battery')|float < states('input_number.batt_alert')|float }}"
+        value_template: "{{ states('sensor.pixel_3_battery_level')|float < states('input_number.batt_alert')|float }}"
         icon_template: mdi:battery-10
       megan_batt_low:
         friendly_name: Megan Battery Low
-        value_template: "{{ states('sensor.mphone_battery')|float < states('input_number.batt_alert')|float }}"
+        value_template: "{{ states('sensor.sm_g965f_battery_level')|float < states('input_number.batt_alert')|float }}"
         icon_template: mdi:battery-10
       staci_batt_low:
         friendly_name: Staci Battery Low
-        value_template: "{{ states('sensor.stphone_battery')|float < states('input_number.batt_alert')|float }}"
+        value_template: "{{ states('sensor.pixel_3a_battery_level')|float < states('input_number.batt_alert')|float }}"
         icon_template: mdi:battery-10
       delia_batt_low: 
         friendly_name: Delia Battery Low
-        value_template: "{{ states('sensor.dphone_battery')|float < states('input_number.batt_alert')|float }}"
+        value_template: "{{ states('sensor.moto_g_5s_plus_battery_level')|float < states('input_number.batt_alert')|float }}"
         icon_template: mdi:battery-10
- 
+      megan_ipad_batt_low:
+        friendly_name: Megan iPad Battery Low
+        value_template: "{{ states('sensor.megans_ipad_battery_level')|float < states('input_number.batt_alert')|float }}"
+        icon_template: mdi:battery-10
+
 
 #################################################################
 #                                                               #
@@ -101,7 +124,11 @@ input_boolean:
     name: Battery Message
     initial: off
     icon: mdi:battery-10
- 
+
+  dbatt_notify_system:
+    name: Device Battery Message
+    initial: off
+    icon: mdi:battery-10
 
 #################################################################
 #                                                               #
@@ -120,11 +147,17 @@ input_number:
   batt_alert:
     min: 0
     max: 100
-    name: 'Battery Notify at'
-    #initial: 15
+    name: 'Phone Battery Notify at'
     unit_of_measurement: '%'
     icon: mdi:alarm-bell
- 
+
+  dbatt_alert:
+    min: 10
+    max: 50
+    name: 'Device Battery Notify at'
+    unit_of_measurement: '%'
+    icon: mdi:alarm-bell
+
 #################################################################
 #                                                               #
 #                       Sensor                                  #
@@ -135,41 +168,9 @@ sensor:
 
 ####################################################
 #                                                  #
-#           sensor - phone batteries               #
-#                                                  #
-####################################################      
-
-  - platform: template
-    sensors:
-      sphone_battery:
-        friendly_name: Simon Phone Battery
-        value_template: '{{ states.device_tracker.sphone.attributes.battery_level }}'
-        unit_of_measurement: '%'
-      mphone_battery:
-        friendly_name: Megan Phone Battery
-        value_template: '{{ states.device_tracker.mphone.attributes.battery_level }}'
-        unit_of_measurement: '%'
-      stphone_battery:
-        friendly_name: Staci Phone Battery
-        value_template: '{{ states.device_tracker.stphone.attributes.battery_level }}'
-        unit_of_measurement: '%'
-      dphone_battery:
-        friendly_name: Delia Phone Battery
-        value_template: '{{ states.device_tracker.dphone.attributes.battery_level }}'
-        unit_of_measurement: '%'
-
-####################################################
-#                                                  #
 #           sensor - hue motion sensors            #
 #                                                  #
 ####################################################      
-
-  # - platform: rest
-  #   resource: !secret hue_bth_temp
-  #   value_template: '{{ value_json.config.battery }}'
-  #   unit_of_measurement: '%'
-  #   scan_interval: 1800
-  #   name: 'Bathroom Motion Sensor Battery Level'
 
   - platform: rest
     resource: !secret hue_ens_temp
@@ -192,46 +193,32 @@ sensor:
     scan_interval: 1800
     name: 'Garage Motion Sensor Battery Level'
 
-
 ####################################################
 #                                                  #
-#           sensor - other batteries               #
+#           sensor - hue remotes                   #
 #                                                  #
 #################################################### 
 
-  # - platform: template
-  #   sensors:
-  #     bed_remote_batt:
-  #       friendly_name: Bedroom Remote Battery
-  #       value_template: '{{ states.sensor.bedroom_remote.attributes.battery }}'
-  #       unit_of_measurement: '%'
-  #     live_remote_batt:
-  #       friendly_name: Living Remote Battery
-  #       value_template: '{{ states.sensor.remote.attributes.battery }}'
-  #       unit_of_measurement: '%'
-  #     mbed_remote_batt:
-  #       friendly_name: mBedroom Remote Battery
-  #       value_template: '{{ states.sensor.mbedroom_remote.attributes.battery }}'
-  #       unit_of_measurement: '%'
-
+  - platform: rest
+    resource: !secret hue_rem_liv
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Living Room Hue Remote Battery Level'
 
   - platform: rest
     resource: !secret hue_rem_bed
     value_template: '{{ value_json.config.battery }}'
-    name: 'Bedroom Remote Battery'
-    scan_interval: 60
-      
-  - platform: rest
-    resource: !secret hue_rem_liv
-    value_template: '{{ value_json.config.battery }}'
-    name: 'Living Remote Battery'
-    scan_interval: 60
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Bedroom Hue Remote Battery Level'
 
   - platform: rest
     resource: !secret hue_rem_mbed
     value_template: '{{ value_json.config.battery }}'
-    name: 'MBed Remote Battery'
-    scan_interval: 60
+    unit_of_measurement: '%'
+    scan_interval: 1800
+    name: 'Bedroom 2 Hue Remote Battery Level'
 
 #################################################################
 #                                                               #
@@ -240,8 +227,3 @@ sensor:
 #################################################################
 
 # please see appdaemon
-
-
-
-
-  

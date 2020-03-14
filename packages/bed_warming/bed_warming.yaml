@@ -14,59 +14,27 @@ group:
   bedwarm_e:
     name: Bed Warm Entities
     entities:
+      #- Personal Low Number
       - input_number.bed_s_flag
       - input_number.bed_m_flag
       - input_number.bed_st_flag
       - input_number.bed_d_flag
+      #- Flag - Will it turn on tonight?
       - binary_sensor.sbed
       - binary_sensor.mbed
       - binary_sensor.stbed
       - binary_sensor.dbed
+      #- Flag - Is it currently on?
       - input_boolean.bed_s
       - input_boolean.bed_m
       - input_boolean.bed_st
       - input_boolean.bed_d
+      #- Timer
       - timer.bed_s_timer
       - timer.bed_m_timer
       - timer.bed_st_timer
       - timer.bed_d_timer
 
-  bedwarm_s:
-    name: Bed Warm Scripts
-    entities:
-      - script.beds_on_prewarm
-      - script.bed_s_on
-      - script.bed_m_on
-      - script.bed_st_on
-      - script.bed_d_on
-      - script.beds_on_timer
-      - script.bed_s_on_t
-      - script.bed_m_on_t
-      - script.bed_st_on_t
-      - script.bed_d_on_t
-      - script.beds_off
-      - script.bed_s_off
-      - script.bed_m_off
-      - script.bed_st_off
-      - script.bed_d_off
-
-  bedwarm_a:
-    name: Bed Warm Automations
-    entities:
-      - automation.bed_auto_on_evening
-      - automation.bed_timer_s
-      - automation.bed_timer_m
-      - automation.bed_timer_st
-      - automation.bed_timer_d
-      - automation.bed_s_off
-      - automation.bed_m_off
-      - automation.bed_st_off
-      - automation.bed_d_off
-      - automation.bed_s_auto_off
-      - automation.bed_m_auto_off
-      - automation.bed_st_auto_off
-      - automation.bed_d_auto_off
-  
 
 #################################################################
 #                                                               #
@@ -80,13 +48,15 @@ input_number:
 #                                                  #
 #                Input Numbers - Warm Beds         #
 #                                                  #
+# Personal Low Numbers, what overnight temperature 
+# do you want the blanket switched on at?
+#                                                 #
 ####################################################
 
   bed_s_flag:
     min: 5
     max: 15
     name: "Warm Simon's bed"
-    #initial: 12
     unit_of_measurement: 'C'
     icon: mdi:hotel
 
@@ -94,7 +64,6 @@ input_number:
     min: 5
     max: 15
     name: "Warm Megan's bed"
-    #initial: 12
     unit_of_measurement: 'C'
     icon: mdi:hotel
 
@@ -102,7 +71,6 @@ input_number:
     min: 5
     max: 15
     name: "Warm Staci's bed"
-    #initial: 12
     unit_of_measurement: 'C'
     icon: mdi:hotel
 
@@ -110,7 +78,6 @@ input_number:
     min: 5
     max: 15
     name: "Warm Delia's bed"
-    #initial: 12
     unit_of_measurement: 'C'
     icon: mdi:hotel
     
@@ -146,7 +113,7 @@ binary_sensor:
         friendly_name: Warm Delia's bed tonight
         value_template: "{{ is_state('input_boolean.away_delia', 'off') and states('sensor.dark_sky_overnight_low_temperature_0d')|float < states('input_number.bed_d_flag')|float }}"
         icon_template: mdi:radiator
- 
+
 #################################################################
 #                                                               #
 #                            Input Boolean                      #
@@ -209,350 +176,13 @@ timer:
 
 #################################################################
 #                                                               #
-#                            Script                             #
-#                                                               #
-#################################################################
-
-script:
-
-####################################################
-#                                                  #
-#                script  - turn on beds prewarm    #
-#                                                  #
-####################################################
-
-  beds_on_prewarm:
-    sequence:
-      service: script.turn_on
-      entity_id:
-        - script.bed_s_on
-        - script.bed_m_on
-        - script.bed_st_on
-        - script.bed_d_on
-
-  bed_s_on:
-    sequence:
-      - condition: state
-        entity_id: binary_sensor.sbed
-        state: 'on'
-      - service: homeassistant.turn_on
-        entity_id: switch.simon_blanket
-
-  bed_m_on:
-    sequence:
-      - condition: state
-        entity_id: binary_sensor.mbed
-        state: 'on'
-      - service: homeassistant.turn_on
-        entity_id: switch.megan_blanket
-
-  bed_st_on:
-    sequence:
-      - condition: state
-        entity_id: binary_sensor.stbed
-        state: 'on'
-      - service: homeassistant.turn_on
-        entity_id: switch.staci_blanket
-
-  bed_d_on:
-    sequence:
-      - condition: state
-        entity_id: binary_sensor.dbed
-        state: 'on'
-      - service: homeassistant.turn_on
-        entity_id: switch.delia_blanket
-
-####################################################
-#                                                  #
-#                script  - turn on beds timer      #
-#                                                  #
-####################################################
-
-  beds_on_timer:
-    sequence:
-      service: script.turn_on
-      entity_id:
-        - script.bed_s_on_t
-        - script.bed_m_on_t
-        - script.bed_st_on_t
-        - script.bed_d_on_t
-
-  bed_s_on_t:
-    sequence:
-      - service: homeassistant.turn_on
-        entity_id: switch.simon_blanket
-      - service: timer.start
-        entity_id: timer.bed_s_timer
-      
-
-  bed_m_on_t:
-    sequence:
-      - service: homeassistant.turn_on
-        entity_id: switch.megan_blanket
-      - service: timer.start
-        entity_id: timer.bed_m_timer
-      
-
-  bed_st_on_t:
-    sequence:
-      - service: homeassistant.turn_on
-        entity_id: switch.staci_blanket
-      - service: timer.start
-        entity_id: timer.bed_st_timer
-      
-
-  bed_d_on_t:
-    sequence:
-      - service: homeassistant.turn_on
-        entity_id: switch.delia_blanket
-      - service: timer.start
-        entity_id: timer.bed_d_timer
-      
-
-####################################################
-#                                                  #
-#                script  - turn off beds           #
-#                                                  #
-####################################################
-
-  beds_off:
-    sequence:
-      service: script.turn_on
-      entity_id:
-        - script.bed_s_off
-        - script.bed_m_off
-        - script.bed_st_off
-        - script.bed_d_off
-
-  bed_s_off:
-    sequence:
-      - service: homeassistant.turn_off
-        entity_id: 
-          - switch.simon_blanket
-          - input_boolean.bed_s
-      - service: timer.cancel
-        entity_id: timer.bed_s_timer
-
-  bed_m_off:
-    sequence:
-      - service: homeassistant.turn_off
-        entity_id: 
-          - switch.megan_blanket
-          - input_boolean.bed_m
-      - service: timer.cancel
-        entity_id: timer.bed_m_timer
-
-
-  bed_st_off:
-    sequence:
-      - service: homeassistant.turn_off
-        entity_id: 
-          - switch.staci_blanket
-          - input_boolean.bed_st
-      - service: timer.cancel
-        entity_id: timer.bed_st_timer
-
-
-  bed_d_off:
-    sequence:
-      - service: homeassistant.turn_off
-        entity_id: 
-          - switch.delia_blanket
-          - input_boolean.bed_d
-      - service: timer.cancel
-        entity_id: timer.bed_d_timer
-
-
-#################################################################
-#                                                               #
 #                            Automation                         #
 #                                                               #
 #################################################################
 
-automation:
+# See Node-Red
+# Climate
+# Time Actions
+# Remotes and Buttons
+# Timers
 
-####################################################
-#                                                  #
-#                automation - turn on beds         #
-# evening mode (if overnight temp cold)
-#                                                  #
-####################################################
-
-  - alias: bed_auto_on_late
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.mode_late
-        to: 'on'
-    action:
-      - service: script.turn_on
-        entity_id: script.beds_on_prewarm
-
-####################################################
-#                                                  #
-#                automation - turn on beds         #
-# flagged on - turn on with timer
-#                                                  #
-####################################################
-
-  - alias: bed_timer_s
-    trigger:
-      - platform: state
-        entity_id: input_boolean.bed_s
-        to: 'on'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_s_on_t
-
-  - alias: bed_timer_m
-    trigger:
-      - platform: state
-        entity_id: input_boolean.bed_m
-        to: 'on'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_m_on_t
-
-  - alias: bed_timer_st
-    trigger:
-      - platform: state
-        entity_id: input_boolean.bed_st
-        to: 'on'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_st_on_t
-
-  - alias: bed_timer_d
-    trigger:
-      - platform: state
-        entity_id: input_boolean.bed_d
-        to: 'on'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_d_on_t
-
-####################################################
-#                                                  #
-#                automation - turn off beds switch #
-# flagged off - turn off and timer
-#                                                  #
-####################################################
-
-  - alias: bed_s_off
-    trigger:
-      - platform: state
-        entity_id: input_boolean.bed_s
-        to: 'off'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_s_off
-
-  - alias: bed_m_off
-    trigger:
-      - platform: state
-        entity_id: input_boolean.bed_m
-        to: 'off'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_m_off
-
-  - alias: bed_st_off
-    trigger:
-      - platform: state
-        entity_id: input_boolean.bed_st
-        to: 'off'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_st_off
-
-  - alias: bed_d_off
-    trigger:
-      - platform: state
-        entity_id: input_boolean.bed_d
-        to: 'off'
-    action:
-      - service: script.turn_on
-        entity_id: script.bed_d_off
-
-
-####################################################
-#                                                  #
-#                automation  - turn off beds       #
-# timer done, night, day or morning modes
-#                                                  #
-####################################################
-
-  # - alias: bed_s_auto_off
-  #   trigger:
-  #     - platform: event
-  #       event_type: timer.finished
-  #       event_data:
-  #         entity_id: timer.bed_s_timer
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_night
-  #       to: 'on'
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_day
-  #       to: 'on'
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_morning
-  #       to: 'on'
-  #   action:
-  #     - service: script.turn_on
-  #       entity_id: script.bed_s_off
-
-  # - alias: bed_m_auto_off
-  #   trigger:
-  #     - platform: event
-  #       event_type: timer.finished
-  #       event_data:
-  #         entity_id: timer.bed_m_timer
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_night
-  #       to: 'on'
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_day
-  #       to: 'on'
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_morning
-  #       to: 'on'
-  #   action:
-  #     - service: script.turn_on
-  #       entity_id: script.bed_m_off
-
-  # - alias: bed_st_auto_off
-  #   trigger:
-  #     - platform: event
-  #       event_type: timer.finished
-  #       event_data:
-  #         entity_id: timer.bed_st_timer
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_night
-  #       to: 'on'
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_day
-  #       to: 'on'
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_morning
-  #       to: 'on'
-  #   action:
-  #     - service: script.turn_on
-  #       entity_id: script.bed_st_off
-
-  # - alias: bed_d_auto_off
-  #   trigger:
-  #     - platform: event
-  #       event_type: timer.finished
-  #       event_data:
-  #         entity_id: timer.bed_d_timer
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_night
-  #       to: 'on'
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_day
-  #       to: 'on'
-  #     - platform: state
-  #       entity_id: binary_sensor.mode_morning
-  #       to: 'on'
-  #   action:
-  #     - service: script.turn_on
-  #       entity_id: script.bed_d_off

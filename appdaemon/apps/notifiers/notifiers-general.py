@@ -4,7 +4,6 @@
 # washer
 # dryer
 # hassio laptop
-# phone batteries
 # printer
 #
 
@@ -18,7 +17,6 @@ class General_Messages(hass.Hass):
     flag = 0
     #washer = "Washing Machine stopped"
     #dryer = "Dryer stopped"
-    batt = "'s phone is low on battery"
     printer = "'s printer ink is low"
     disk = "Laptop Server hard drive is almost full"
     cpu = "Laptop Server CPU is very high"
@@ -38,16 +36,10 @@ class General_Messages(hass.Hass):
         self.listen_state(self.ink_set, "binary_sensor.ink_magenta_alert")
         self.listen_state(self.ink_set, "binary_sensor.ink_yellow_alert")
 
-        self.listen_state(self.batt_set, "binary_sensor.simon_batt_low")
-        self.listen_state(self.batt_set, "binary_sensor.megan_batt_low")
-        self.listen_state(self.batt_set, "binary_sensor.staci_batt_low")
-        self.listen_state(self.batt_set, "binary_sensor.delia_batt_low")
-
-        self.listen_state(self.batt_notify, "input_boolean.batt_notify_system")
         self.listen_state(self.printer_notify, "input_boolean.ink_notify_system")
         self.listen_state(self.disk_notify, "binary_sensor.disk_alert")
         self.listen_state(self.cpu_notify, "binary_sensor.cpu_alert")
-
+        
         self.listen_state(self.potas_notify, "binary_sensor.diet_press_up")
         self.listen_state(self.drink_notify, "binary_sensor.diet_press_down")
 
@@ -92,10 +84,6 @@ class General_Messages(hass.Hass):
         if new == "on":
             self.turn_on("input_boolean.ink_notify_system")
 
-    def batt_set(self, entity, attribute, old, new, kwargs):
-        if new == "on":
-            self.turn_on("input_boolean.batt_notify_system")
-    
     def disk_set(self, entity, attribute, old, new, kwargs):
         if new == "on":
             self.turn_on("input_boolean.disk_notify_system")
@@ -174,39 +162,7 @@ class General_Messages(hass.Hass):
             self.turn_off("input_boolean.ink_notify_system")
             self.notifier.notify(self.mess)
 
-    def batt_notify(self, entity, attribute, old, new, kwargs):
-        if new == "on":
-            self.mess = ""
-            self.flag = 0
-
-            if self.get_state("binary_sensor.simon_batt_low") == "on":
-                self.mess = "Simon"
-                self.flag = 1
-
-            if self.get_state("binary_sensor.megan_batt_low") == "on":
-                if self.flag > 0:
-                    self.mess += " & Megan"
-                else:
-                    self.mess = "Megan"
-                    self.flag = 1
-            
-            if self.get_state("binary_sensor.staci_batt_low") == "on":
-                if self.flag > 0:
-                    self.mess += " & Staci"
-                else:
-                    self.mess = "Staci"
-                    self.flag = 1
-
-            if self.get_state("binary_sensor.delia_batt_low") == "on":
-                if self.flag > 0:
-                    self.mess += " & Delia"
-                else:
-                    self.mess = "Delia"
-                    flag = 1
-
-            self.mess += self.batt
-            self.turn_off("input_boolean.batt_notify_system")   
-            self.notifier.notify(self.mess)         
+    
 
     # def gps_notify(self, entity, attribute, old, new, kwargs):
     #     self.mess = ""
@@ -225,6 +181,6 @@ class General_Messages(hass.Hass):
     #             self.mess = "Hi Delia, logging hasn't reported for a while, can you check it please."
 
     #     self.notifier.notify(self.mess)   
-       
+
 
 

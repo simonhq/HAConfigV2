@@ -105,12 +105,6 @@ sensor:
   #   scan_interval: 2
   #   name: 'Bathroom Motion'
 
-  # - platform: rest
-  #   resource: !secret hue_bth_temp
-  #   value_template: '{{ value_json.config.battery }}'
-  #   unit_of_measurement: '%'
-  #   scan_interval: 1800
-  #   name: 'Bathroom Motion Sensor Battery Level'
 
   #ensuite
   - platform: rest
@@ -131,12 +125,7 @@ sensor:
     scan_interval: 2
     name: 'Ensuite Motion'
 
-  - platform: rest
-    resource: !secret hue_ens_temp
-    value_template: '{{ value_json.config.battery }}'
-    unit_of_measurement: '%'
-    scan_interval: 1800
-    name: 'Ensuite Motion Sensor Battery Level'
+
 
   #laundry
   - platform: rest
@@ -157,12 +146,6 @@ sensor:
     scan_interval: 2
     name: 'Laundry Motion'
 
-  - platform: rest
-    resource: !secret hue_lnd_temp
-    value_template: '{{ value_json.config.battery }}'
-    unit_of_measurement: '%'
-    scan_interval: 1800
-    name: 'Laundry Motion Sensor Battery Level'
 
   #garage
   - platform: rest
@@ -183,12 +166,7 @@ sensor:
     scan_interval: 2
     name: 'Garage Motion'
 
-  - platform: rest
-    resource: !secret hue_gar_temp
-    value_template: '{{ value_json.config.battery }}'
-    unit_of_measurement: '%'
-    scan_interval: 1800
-    name: 'Garage Motion Sensor Battery Level'
+
 
 
 #################################################################

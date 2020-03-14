@@ -245,12 +245,12 @@ automation:
       - service: light.turn_off
         entity_id: 
           - light.ensuite_2
-      - service: homeassistant.turn_off
-        entity_id: 
-          - switch.simon_blanket
-          - switch.megan_blanket
-          - switch.staci_blanket
-          - switch.delia_blanket
+      # - service: homeassistant.turn_off
+      #   entity_id: 
+      #     - switch.simon_blanket
+      #     - switch.megan_blanket
+      #     - switch.staci_blanket
+      #     - switch.delia_blanket
 
 
 ####################################################
@@ -281,14 +281,14 @@ automation:
         data_template:
           entity_id: input_select.ton
           option: '{{"Motion"}}'
-      - service: homeassistant.turn_off
-        entity_id: 
-          - group.all_lights
-          - switch.dining_room_iron
-          - switch.simon_blanket
-          - switch.megan_blanket
-          - switch.staci_blanket
-          - switch.delia_blanket
+      # - service: homeassistant.turn_off
+      #   entity_id: 
+      #     - group.all_lights
+      #     - switch.dining_room_iron
+      #     - switch.simon_blanket
+      #     - switch.megan_blanket
+      #     - switch.staci_blanket
+      #     - switch.delia_blanket
 
 ####################################################
 #                                                  #
@@ -361,12 +361,12 @@ automation:
       - service: light.turn_off
         entity_id: 
           - group.family_lights
-      - service: homeassistant.turn_off #turn off the beds for night mode
-        entity_id: 
-          - switch.simon_blanket
-          - switch.megan_blanket
-          - switch.staci_blanket
-          - switch.delia_blanket
+      # - service: homeassistant.turn_off #turn off the beds for night mode
+      #   entity_id: 
+      #     - switch.simon_blanket
+      #     - switch.megan_blanket
+      #     - switch.staci_blanket
+      #     - switch.delia_blanket
 
 ####################################################
 #                                                  #

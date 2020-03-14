@@ -32,10 +32,18 @@ Here is a Todo list of packages:
 
 * Interface/Lovelace
 
-## Packages Done (1st draft)
+## Packages Done (2nd draft)
 
+* Addons
+* Appdaemon (notifiers-batteries)
 * Batteries
 * Bed Warming
+* Node-Red (for Bed Warming)
+
+
+
+## (1st Draft)
+
 * Bus Times
 * Bus Travel
 * Calendars

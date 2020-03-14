@@ -16,16 +16,13 @@ group:
     entities:
       - binary_sensor.hallway_nest_protect_online
       - binary_sensor.back_hall_nest_protect_online
-      - sensor.back_hall_nest_protect_battery_health
-      - sensor.hallway_nest_protect_battery_health
-      
       - sensor.hallway_nest_protect_co_status
       - sensor.hallway_nest_protect_color_status
       - sensor.hallway_nest_protect_smoke_status
       - sensor.back_hall_nest_protect_co_status
       - sensor.back_hall_nest_protect_color_status
       - sensor.back_hall_nest_protect_smoke_status
-
+      #- For battery info -see batteries package
       - binary_sensor.rushbrook_overlook_away
       - sensor.rushbrook_overlook_eta
 

@@ -111,7 +111,7 @@ class Travel_Messages(hass.Hass):
                         if self.get_state("sensor.s_travel_direction") == "towards":
                             if self.get_state("input_boolean.garage_just") != "on":
                                 # proximity under 5 kilometres, and arriving by car - start requesting gps updates
-                                self.run_in(self.personal_gps("sgps"), self.requesttimer)
+                                self.run_in(self.personal_gps("sgps"), self.requesttimer, **kwargs)
                     #garage door
                     elif int(self.get_state("proximity.home_simon")) <= 1:
                         if self.get_state("sensor.s_travel_direction") == "towards":
@@ -137,7 +137,7 @@ class Travel_Messages(hass.Hass):
                         if self.get_state("sensor.m_travel_direction") == "towards":
                             if self.get_state("input_boolean.garage_just") != "on":
                                 # proximity under 5 kilometres, and arriving by car - start requesting gps updates
-                                self.run_in(self.personal_gps("mgps"), self.requesttimer)
+                                self.run_in(self.personal_gps("mgps"), self.requesttimer, **kwargs)
                     #garage door
                     if int(self.get_state("proximity.home_meg")) <= 1:
                         if self.get_state("sensor.m_travel_direction") == "towards":

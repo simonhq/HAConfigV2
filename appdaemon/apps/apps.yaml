@@ -37,6 +37,15 @@ general-messages:
     - globals
     - secrets
 
+battery-messages:
+  module: notifiers-batteries
+  class: Battery_Messages
+  dependencies: 
+    - messaging
+  global_dependencies:
+    - globals
+    - secrets
+
 # bus messages
 transport-messages:
   module: notifiers-bus
