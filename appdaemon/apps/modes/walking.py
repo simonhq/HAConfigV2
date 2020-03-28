@@ -34,12 +34,12 @@ class WalkLock(hass.Hass):
 
     def initialize(self):
              
-        self.listen_state(self.walk_check,  "device_tracker.sphone")
-        self.listen_state(self.walk_check,  "device_tracker.mphone")
+        self.listen_state(self.walk_check,  "person.simon")
+        self.listen_state(self.walk_check,  "person.megan")
         self.listen_state(self.walk_check,  "device_tracker.stphone")
         self.listen_state(self.walk_check,  "device_tracker.dphone")
         #car
-        self.listen_state(self.car_check,  "device_tracker.mphone")
+        self.listen_state(self.car_check,  "person.megan")
         #
         self.listen_state(self.mess_flag, "input_select.message_flag")
 
@@ -48,7 +48,7 @@ class WalkLock(hass.Hass):
         
     def walk_check(self, entity, attribute, old, new, kwargs):
 
-        if entity == "device_tracker.sphone" and new == "home":
+        if entity == "person.simon" and new == "home":
             if self.get_state("input_boolean.walking_home_s") == "on":
                 self.turn_off("input_boolean.fdoor")
                 self.turn_off("input_boolean.walking_home_s")
@@ -61,7 +61,7 @@ class WalkLock(hass.Hass):
                     self.call_service(self.hangify,message=self.smessage_home)
                 #self.call_service("hangouts/send_message",target=[{ "name": "Home" }] ,message=[{ "text": self.smessage_home }])
                 #self.call_service(self.snotify,message=self.smessage_home)
-        elif entity == "device_tracker.mphone" and new == "home":
+        elif entity == "person.megan" and new == "home":
             if self.get_state("input_boolean.walking_home_m") == "on":
                 self.turn_off("input_boolean.fdoor")
                 self.turn_off("input_boolean.walking_home_m")
@@ -106,7 +106,7 @@ class WalkLock(hass.Hass):
 
     def car_check(self, entity, attribute, old, new, kwargs):
 
-        if entity == "device_tracker.mphone" and new == "home":
+        if entity == "person.megan" and new == "home":
             if self.get_state("input_select.trans_megan") == "Car":
                 self.turn_off("input_boolean.gdoor")
                 self.set_state("input_select.trans_megan", state="Walk")

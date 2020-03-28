@@ -39,15 +39,19 @@ Here is a Todo list of packages:
 * Batteries
 * Bed Warming
 * Node-Red (for Bed Warming)
+* Bus Times 
+* Bus Travel
+* Car Times
+* Zones (hidden or moved to GUI, had to get the new 'names' for automation from storage as these are not displayed anywhere)
 
 
+## Todo
+
+* Calendars
 
 ## (1st Draft)
 
-* Bus Times
-* Bus Travel
-* Calendars
-* Car Times
+
 * Climate
 * Cooking
 * Date/Time
@@ -96,5 +100,6 @@ Here is a Todo list of packages:
 [Installation Detail](./install.md)
 
 ## System Detail
+
 
 

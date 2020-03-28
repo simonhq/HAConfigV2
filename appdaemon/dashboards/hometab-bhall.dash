@@ -144,33 +144,33 @@ q_weather:
         forecast_temperature_max: sensor.dark_sky_daytime_high_temperature_1d
 
 s_presence:
-    widget_type: device_tracker
+    widget_type: person
     title: Simon
-    device: sphone
+    entity: person.simon
     icon_on: fa-male
     icon_off: mdi-account-off
     state_text: 1
 
 m_presence:
-    widget_type: device_tracker
+    widget_type: person
     title: Meg
-    device: mphone
+    entity: person.megan
     icon_on: fa-female
     icon_off: mdi-account-off
     state_text: 1
 
 d_presence:
-    widget_type: device_tracker
+    widget_type: person
     title: Delia
-    device: dphone
+    entity: person.delia
     icon_on: fa-female
     icon_off: mdi-account-off
     state_text: 1
 
 st_presence:
-    widget_type: device_tracker
+    widget_type: person
     title: Staci
-    device: stphone
+    entity: person.staci
     icon_on: fa-female
     icon_off: mdi-account-off
     state_text: 1

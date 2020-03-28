@@ -2,8 +2,6 @@
 #                                                               #
 #                     Packages/Calendars                        #
 #                                                               #
-# Most of this is now run from node red as the google calendar 
-# integration was constantly erroring and causing long start up times
 #################################################################
 
 #################################################################
@@ -197,7 +195,7 @@ binary_sensor:
 
 ####################################################
 #                                                  #
-#           sensor - bin/skip/recycling/dandd/greenwaste/cleaner              #
+# sensor - bin/skip/recycling/dandd/greenwaste/cleaner    
 #                                                  #
 ####################################################   
 
@@ -239,7 +237,6 @@ binary_sensor:
         value_template: "{{ is_state('calendar.dandd', 'on') }}"
         friendly_name: 'D&D Game Tonight'
         icon_template: mdi:sword-cross
-       
 
 #################################################################
 #                                                               #
@@ -298,28 +295,7 @@ sensor:
 #                                                               #
 #################################################################
 
-# please see appdaemon
-
 automation:
-
-  ###################################
-  ##  calendar control - notifiers
-  ##  this turns on the flag that then triggers the appdaemon code to send the messages if they are due
-  ###################################
-
-  # this controls the node-red calendar code. - not needed at the moment
-  # - alias: calendar_check_flags
-  #   trigger:
-  #     - platform: time
-  #       at: '05:00:00'
-  #     - platform: time
-  #       at: '17:00:00'
-  #     - platform: time
-  #       at: '23:00:00'
-  #   action:
-  #     - service: homeassistant.turn_on
-  #       entity_id:
-  #         - input_boolean.cal_trigger_cal
 
   - alias: calendar_send_message
     trigger:

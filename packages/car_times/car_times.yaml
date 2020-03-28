@@ -21,13 +21,9 @@ group:
       - input_boolean.presence_holiday
       - input_boolean.outback_just
       - input_boolean.simon_outback
-      #- input_boolean.simon_outback_home
       - input_boolean.megan_outback
-      #- input_boolean.megan_outback_home
       - input_boolean.staci_outback
-      #- input_boolean.staci_outback_home
       - input_boolean.delia_outback
-      #- input_boolean.delia_outback_home
       - timer.outback_just
       - sensor.waze_meg_time_to_work
       - sensor.waze_simon_time_to_uni
@@ -54,7 +50,6 @@ group:
     name: Car Times Automations
     entities:
       - automation.transport_car_connect_timer_start
-      #- automation.transport_car_connect_timer_done
       - automation.transport_garage_open_timer_start
       
 #################################################################
@@ -129,17 +124,9 @@ input_boolean:
     name: Simon is connected to the Outback
     icon: mdi:car-connected
 
-  # simon_outback_home:
-  #   name: Simon is within 200m of home
-  #   icon: mdi:car-connected
-
   megan_outback:
     name: Meg is connected to the Outback
     icon: mdi:car-connected
-
-  # megan_outback_home:
-  #   name: Megan is within 200m of home
-  #   icon: mdi:car-connected
 
 ######### NOT USED - here for completeness
 
@@ -147,17 +134,9 @@ input_boolean:
     name: Staci is connected to the Outback
     icon: mdi:car-connected
     
-  # staci_outback_home: #requires tasker - not being used
-  #   name: Staci is within 200m of home
-  #   icon: mdi:car-connected
-      
   delia_outback: #requires tasker - not being used
     name: Delia is connected to the Outback
     icon: mdi:car-connected
-      
-  # delia_outback_home: #requires tasker - not being used
-  #   name: Delia is within 200m of home
-  #   icon: mdi:car-connected
 
 #################################################################
 #                                                               #
@@ -181,7 +160,6 @@ timer:
   garage_just:
     duration: '00:05:00'
 
-
 #################################################################
 #                                                               #
 #                       Sensor                                  #
@@ -203,25 +181,25 @@ sensor:
   - platform: waze_travel_time
     name: Waze Meg time to work
     origin: device_tracker.sm_g965f
-    destination: zone.NorthQuarter
+    destination: zone.northquarter
     region: 'EU'
 
   - platform: waze_travel_time
     name: Waze Simon time to uni
     origin: device_tracker.pixel_3
-    destination: zone.CityWestBus
+    destination: zone.citywestbus
     region: 'EU'
 
   - platform: waze_travel_time
     name: Waze Meg time to home
     origin: device_tracker.sm_g965f
-    destination: zone.Home
+    destination: zone.home
     region: 'EU'
 
   - platform: waze_travel_time
     name: Waze Simon time to home
     origin: device_tracker.pixel_3
-    destination: zone.Home
+    destination: zone.home
     region: 'EU'
 
   - platform: waze_travel_time
@@ -328,19 +306,6 @@ automation:
         entity_id: timer.outback_just
       - service: homeassistant.turn_on
         entity_id: input_boolean.outback_just
-
-  # turn off flag after timer runs out - moved to node-red
-  # - alias: transport_car_connect_timer_done
-  #   trigger:
-  #     platform: event
-  #     event_type: timer.finished
-  #     event_data:
-  #       entity_id: timer.outback_just
-  #   action:
-  #     - service: input_boolean.turn_off
-  #       data:
-  #         entity_id: input_boolean.outback_just      
-
 
   # turn on flag when appdaemon opens the garage - node red will turn off
   - alias: transport_garage_open_timer_start

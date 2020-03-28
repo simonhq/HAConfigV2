@@ -55,16 +55,16 @@ sensor:
     sensors:
       sphone_gps_up:
         friendly_name: Simon Phone GPS
-        value_template: '{{ states.device_tracker.sphone.last_updated }}'
+        value_template: '{{ states.person.simon.last_updated }}'
       mphone_gps_up:
         friendly_name: Megan Phone GPS
-        value_template: '{{ states.device_tracker.mphone.last_updated }}'
+        value_template: '{{ states.person.simon.last_updated }}'
       stphone_gps_up:
         friendly_name: Staci Phone GPS
-        value_template: '{{ states.device_tracker.stphone.last_updated }}'
+        value_template: '{{ states.person.simon.last_updated }}'
       dphone_gps_up:
         friendly_name: Delia Phone GPS
-        value_template: '{{ states.device_tracker.dphone.last_updated }}'
+        value_template: '{{ states.person.simon.last_updated }}'
 
 ####################################################
 #                                                  #

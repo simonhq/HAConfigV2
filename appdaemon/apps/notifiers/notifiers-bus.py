@@ -76,10 +76,10 @@ class Transport_Messages(hass.Hass):
 
     def reset_transport(self, entity, attribute, old, new, kwargs):
         if new == "on":
-            self.set_state("input_select.trans_simon", state="Nil")
-            self.set_state("input_select.trans_megan", state="Nil")
-            self.set_state("input_select.trans_staci", state="Nil")
-            self.set_state("input_select.trans_delia", state="Nil")
+            self.set_state("input_select.trans_simon", state="Nil", attributes={"options": ['Nil','R5CW','R4CW','RC','R5W','R4W','R5T','R4T','7X','TX','Cal','Car'], "icon":"mdi:car-connected", "friendly_name":"Transport Simon"})
+            self.set_state("input_select.trans_megan", state="Nil", attributes={"options": ['Nil','RC','R5W','R4W','R5T','R4T','7X','TX','Cal','Car'], "icon":"mdi:car-connected", "friendly_name":"Transport Megan"})
+            self.set_state("input_select.trans_staci", state="Nil", attributes={"options": ['Nil','RC','R5W','R4W','R5T','R4T','7X','TX','Cal','Car'], "icon":"mdi:car-connected", "friendly_name":"Transport Staci"})
+            self.set_state("input_select.trans_delia", state="Nil", attributes={"options": ['Nil','RC','R5W','R4W','R5T','R4T','7X','TX','Cal','Car'], "icon":"mdi:car-connected", "friendly_name":"Transport Delia"})
 
     ################## look at this      
 
@@ -118,7 +118,7 @@ class Transport_Messages(hass.Hass):
                 self.notifier.notify(self.dmess_cal)
             elif new == "Central":
                 self.notifier.notify(self.dmess_ctr)
-              
+
     def transport_megan(self, entity, attribute, old, new, kwargs):
         if self.get_state("input_boolean.mode_return_home") == "on":
             if new == "R4W":
@@ -155,6 +155,3 @@ class Transport_Messages(hass.Hass):
             elif new == "Central":
                 self.notifier.notify(self.stmess_ctr)
 
-
-
-           

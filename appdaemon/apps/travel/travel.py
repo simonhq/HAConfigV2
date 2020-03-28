@@ -52,12 +52,12 @@ class Travel_Messages(hass.Hass):
         self.listen_state(self.del_trav, "binary_sensor.delia_car")
         self.listen_state(self.del_trav, "binary_sensor.delia_walk_bus")
 
-        # ha proximity code - doesn't work consistently due to gps
+        # ha proximity code
         self.listen_state(self.arr_prox, "proximity.home_meg")
         self.listen_state(self.arr_prox, "proximity.home_simon")
-        #these maybe needed if the girls starting driving - not implemented now
-        #self.listen_state(self.sta_prox, "proximity.home_staci")
-        #self.listen_state(self.del_prox, "proximity.home_delia")
+        #these maybe needed if the girls starting driving - just uncomment, code supports
+        #self.listen_state(self.arr_prox, "proximity.home_staci")
+        #self.listen_state(self.arr_prox, "proximity.home_delia")
 
         # car away
         self.listen_state(self.car_away, "input_boolean.presence_holiday")
@@ -95,78 +95,84 @@ class Travel_Messages(hass.Hass):
             self.turn_off("fan.fan_3")
 
     ###
-    #   This sets the proximity through the proximity platform
+    #   This controls various flags and actions through the the proximity platform
     ###
     
     def arr_prox(self, entity, attribute, old, new, kwargs):
-        
+
         self.sendmess = ""
+        prox = -1
+        dir_trav = ""
+        gps_person = ""
+        pname = ""
+        self.log(entity + " call ")
         
         if new != "not set":
-            # leaving/arriving canberra region
-            if entity == "proximity.home_simon":
-                if self.get_state("input_select.trav_simon") == "Car":
-                    #close tracking
-                    if int(self.get_state("proximity.home_simon")) <= 5 and int(self.get_state("proximity.home_simon")) > 1:
-                        if self.get_state("sensor.s_travel_direction") == "towards":
-                            if self.get_state("input_boolean.garage_just") != "on":
-                                # proximity under 5 kilometres, and arriving by car - start requesting gps updates
-                                self.run_in(self.personal_gps("sgps"), self.requesttimer, **kwargs)
-                    #garage door
-                    elif int(self.get_state("proximity.home_simon")) <= 1:
-                        if self.get_state("sensor.s_travel_direction") == "towards":
-                            if self.get_state("input_boolean.garage_just") != "on":
-                                # proximity under 1 kilometre, and arriving by car - open garage door
-                                self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
-                                self.set_state("input_boolean.garage_just", state="on")
-                                self.sendmess = "Opening the Garage Door for Simon arriving by car (Proximity)"
-                    #holiday
-                    elif int(self.get_state("proximity.home_simon")) > 50:
-                        if self.get_state("input_boolean.presence_holiday") == 'off':
-                            self.turn_on('input_boolean.presence_holiday')
-                            self.sendmess = "Car is going outside Canberra Region, messages around driving disabled"
-                    #coming home from holiday
-                    elif int(self.get_state("proximity.home_simon")) < 50:
-                        if self.get_state("input_boolean.presence_holiday") == 'on':
-                            self.turn_off('input_boolean.presence_holiday')
-                            self.sendmess = "Car has returned to the Canberra Region, messages around driving enabled"
+            if entity == "proximity.home_simon":    
+                if self.get_state("binary_sensor.drive_simon") == 'on':
+                    prox = int(new)
+                    dir_trav = self.get_state("sensor.s_travel_direction")
+                    gps_person = "sgps"
+                    pname = "Simon"
+                    self.log(str(prox) + " set")
             elif entity == "proximity.home_meg":
-                if self.get_state("input_select.trav_megan") == "Car":
-                    #close tracking
-                    if int(self.get_state("proximity.home_meg")) <= 5 and int(self.get_state("proximity.home_meg")) > 1:
-                        if self.get_state("sensor.m_travel_direction") == "towards":
-                            if self.get_state("input_boolean.garage_just") != "on":
-                                # proximity under 5 kilometres, and arriving by car - start requesting gps updates
-                                self.run_in(self.personal_gps("mgps"), self.requesttimer, **kwargs)
-                    #garage door
-                    if int(self.get_state("proximity.home_meg")) <= 1:
-                        if self.get_state("sensor.m_travel_direction") == "towards":
-                            if self.get_state("input_boolean.garage_just") != "on":
-                                # proximity under 1 kilometre, and arriving by car - open garage door
-                                self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
-                                self.set_state("input_boolean.garage_just", state="on")
-                                self.sendmess = "Opening the Garage Door for Megan arriving by car (Proximity)"
-                    #holiday
-                    elif int(self.get_state("proximity.home_meg")) > 50:
-                        if self.get_state("input_boolean.presence_holiday") == 'off':
-                            self.turn_on('input_boolean.presence_holiday')
-                            self.sendmess = "Car is going outside Canberra Region, messages around driving disabled"
-                    #coming home from holiday
-                    elif int(self.get_state("proximity.home_meg")) < 50:
-                        if self.get_state("input_boolean.presence_holiday") == 'on':
-                            self.turn_off('input_boolean.presence_holiday')
-                            self.sendmess = "Car has returned to the Canberra Region, messages around driving enabled"
+                if self.get_state("binary_sensor.drive_megan") == 'on':
+                    prox = int(new)
+                    dir_trav = self.get_state("sensor.m_travel_direction")
+                    gps_person = "mgps"
+                    pname = "Megan"
+                    self.log(str(prox) + " set")
+            elif entity == "proximity.home_staci":
+                if self.get_state("binary_sensor.drive_staci") == 'on':
+                    prox = int(new)
+                    dir_trav = self.get_state("sensor.st_travel_direction")
+                    gps_person = "stgps"
+                    pname = "Staci"
+            elif entity == "proximity.home_delia":
+                if self.get_state("binary_sensor.drive_delia") == 'on':
+                    prox = int(new)
+                    dir_trav = self.get_state("sensor.d_travel_direction")
+                    gps_person = "dgps"
+                    pname = "Delia"
+
+            self.log(str(prox) + " " + entity + " " + dir_trav)
+            if prox != -1:
+                #holiday
+                if prox > 50:
+                    if self.get_state("input_boolean.presence_holiday") == 'off':
+                        self.turn_on('input_boolean.presence_holiday')
+                        self.sendmess = "Car is going outside Canberra Region, messages around driving disabled"
+                #returning to canberra
+                elif prox < 50:
+                    if self.get_state("input_boolean.presence_holiday") == 'on':
+                        self.turn_off('input_boolean.presence_holiday')
+                        self.sendmess = "Car has returned to the Canberra Region, messages around driving enabled"
+
+                #close tracking
+                if dir_trav == "towards":
+                    if prox <= 5 and prox > 1:
+                        # proximity under 5 kilometres, and arriving by car - start requesting gps updates
+                        self.run_in(self.personal_gps(gps_person), self.requesttimer)
+                        self.log("requesting close update for " + pname)
+                    elif prox <= 1:
+                        # proximity under 1 kilometres, and arriving by car - open garage door
+                        if self.get_state("input_boolean.garage_just") != "on":
+                            # if you opened it for someone else in the last 5 minutes, don't open it again
+                            self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
+                            self.set_state("input_boolean.garage_just", state="on")
+                            self.sendmess = "Opening the Garage Door for " + pname + "arriving by car (Proximity)"
 
         #send the message
         if self.sendmess != "":
             self.notifier.notify(self.sendmess)
-    
+
     ###
     #   when turned on, will continue to request gps updates for tracking close to the house
     ###
 
-    def personal_gps(self, mess, kwargs):
+    def personal_gps(self, mess):
         # gps will be requested more often to ensure the garage door entry is more consistent
+        self.log("request gps for " + mess)
         self.notifier.notify(mess)
 
     ###

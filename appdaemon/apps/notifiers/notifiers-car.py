@@ -40,10 +40,10 @@ class Car_Messages(hass.Hass):
         self.listen_state(self.car_away, "input_boolean.presence_holiday")
 
         # keep track of locations
-        self.listen_state(self.sim_loc, "device_tracker.sphone")
-        self.listen_state(self.meg_loc, "device_tracker.mphone")
-        self.listen_state(self.sta_loc, "device_tracker.stphone")
-        self.listen_state(self.del_loc, "device_tracker.dphone")
+        self.listen_state(self.sim_loc, "person.simon")
+        self.listen_state(self.meg_loc, "person.megan")
+        self.listen_state(self.sta_loc, "person.staci")
+        self.listen_state(self.del_loc, "person.delia")
 
         #set messaging platform
         self.listen_state(self.mess_flag, "input_select.message_flag")
@@ -88,6 +88,7 @@ class Car_Messages(hass.Hass):
                     self.call_service(self.stnotify,message=self.sendmess)
                 elif self.mess_platform == "Hangouts":
                     self.call_service(self.hangify,message=self.sendmess)
+        
 
     def sim_car(self, entity, attribute, old, new, kwargs):
         if new == "on":

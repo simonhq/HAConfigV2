@@ -21,7 +21,7 @@ Standard Home Assistant Components
 
 ### Process
 
-<img src="https://github.com/simonhq/HAConfigV2/blob/master/images/bedwarming.png" width="500"/>
+<img src="https://github.com/simonhq/HAConfigV2/blob/master/images/bedwarming.png" width="750"/>
 
 Hardware
 

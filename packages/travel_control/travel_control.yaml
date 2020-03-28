@@ -328,37 +328,38 @@ proximity:
   home_meg: 
     zone: Home
     ignored_zones:
-      - DJSB_Mort
-      - SouthPort
+      - DESE_Mort
+      - Tugg_SouthPoint
     devices:
-      - device_tracker.mphone
+      - person.megan
     tolerance: 50  
 
   home_simon: 
     zone: Home
     ignored_zones:
-      - ANU
-      - SouthPort
+      - ANU_CBE
+      - DESE_CityWalk
+      - UC
+      - Tugg_SouthPoint
     devices:
-      - device_tracker.sphone
+      - person.simon
     tolerance: 50  
 
   home_delia: 
     zone: Home
     ignored_zones:
-      - Tugg_college
-      - SouthPort
+      - Tugg_College
+      - Tugg_SouthPoint
     devices:
-      - device_tracker.dphone
+      - person.delia
     tolerance: 50  
 
   home_staci: 
     zone: Home
     ignored_zones:
-      - Bruce_CIT
-      - SouthPort
+      - Tugg_SouthPoint
     devices:
-      - device_tracker.stphone
+      - person.staci
     tolerance: 50  
 
 #################################################################
@@ -392,20 +393,6 @@ sensor:
 #                                                               #
 #################################################################
 
-zone: 
-
-####################################################
-#                                                  #
-#           zone - car connect                     #
-#                                                  #
-#    where Meg parks for work                      #
-#                                                  #
-####################################################   
-
-  - name: NorthQuarter
-    latitude: -35.278375 
-    longitude: 149.133718
-    radius: 150
 
 #################################################################
 #                                                               #
@@ -416,7 +403,7 @@ zone:
 # please see automation/house_mode.yaml
 
 automation:
- 
+
 ####################################################
 #                                                  #
 #           automation -                           #
@@ -428,7 +415,7 @@ automation:
   - alias: transport_megan_enter_northquarter
     trigger:
       - platform: zone
-        entity_id: device_tracker.mphone
+        entity_id: person.megan
         zone: zone.NorthQuarter
         event: enter
     action:

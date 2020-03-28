@@ -105,7 +105,7 @@ class Battery_Messages(hass.Hass):
             if new != 'Ok':
                 self.turn_on("input_boolean.dbatt_notify_system")
         else:
-            if int(new) <= self.get_state("input_number.dbatt_alert"):
+            if float(new) <= float(self.get_state("input_number.dbatt_alert")):
                 self.turn_on("input_boolean.dbatt_notify_system")
 
     def dbatt_notify(self, entity, attribute, old, new, kwargs):

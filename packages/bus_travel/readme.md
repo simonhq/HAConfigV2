@@ -14,16 +14,16 @@ Me
 
 Standard Home Assistant Components
 
-* Zone - 
+* [Zone](https://www.home-assistant.io/components/zone/) 
+* [Timer](https://www.home-assistant.io/components/timer/)
+* [Input Select](https://www.home-assistant.io/components/input_select/) 
+* [Sensor](https://www.home-assistant.io/components/sensor/) 
 
-* Timer -
+<h4 align="left">Package Yaml includes</h4>
 
-* Input Select -
-
-* Sensor - 
-
-<h4 align="left">Package Automations:</h4>
-
-* Automation (appdaemon) to notify about decisions
+* Setup for Input Select (to trigger transitions between zones) 
+* Setup for Timer (to trigger potential buses on similar routes)
+* Setup for Automations (to watch leaving and entering zones to guess routes)
+* See Appdaemon - notifiers-bus.py for the messaging
 
 <hr --- </hr>

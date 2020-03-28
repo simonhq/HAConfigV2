@@ -49,19 +49,6 @@ sensor.epson_ink_level_magenta:
 sensor.epson_ink_level_yellow:
   friendly_name: 'Yellow'
   entity_picture: /local/pics/yellow.png
-# batteries
-sensor.sphone_battery:
-  friendly_name: 'Simon'
-  entity_picture: /local/pics/Simon.jpg
-sensor.mphone_battery:
-  friendly_name: 'Megan'
-  entity_picture: /local/pics/Megan.jpg
-sensor.stphone_battery:
-  friendly_name: 'Staci'
-  entity_picture: /local/pics/Staci.jpg
-sensor.dphone_battery:
-  friendly_name: 'Delia'
-  entity_picture: /local/pics/Delia.jpg
 # proximity
 proximity.home_meg:
   friendly_name: 'Meg from Home'

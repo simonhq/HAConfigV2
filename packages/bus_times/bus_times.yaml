@@ -65,24 +65,6 @@ sensor:
 #                                                  #
 ####################################################
 
-# home 78 to tugg
-  # - platform: gtfs
-  #   name: home_to_tugg_79_is
-  #   offset: 600 # 10min
-  #   origin: 1007 #isashops far
-  #   destination: 13 #tugg arr
-  #   scan_interval: 60 #1min
-  #   data: action.zip
-
-  # 78 to tugg
-  # - platform: gtfs
-  #   name: home_to_tugg_78_is
-  #   offset: 600 # 10min
-  #   origin: 1008 #isashops near
-  #   destination: 13 #tugg arr
-  #   scan_interval: 60 #1min
-  #   data: action.zip
-
 ######################################
 # Home 
 ######################################
@@ -189,7 +171,7 @@ sensor:
     scan_interval: 60 #1min
     data: action.zip
 
- # R5 south City west to Woden
+# R5 south City west to Woden
   - platform: gtfs
     name: citywest_to_woden_r5
     offset: 300 # 5min
@@ -462,34 +444,4 @@ sensor:
             unknown
           {% endif %}
 
-
-      # home_to_tugg_79_is_format:
-      #   friendly_name: Isa School - 79
-      #   icon_template: mdi:bus
-      #   value_template: >-
-      #     {% set departure = state_attr('sensor.home_to_tugg_79_is', 'origin_stop_departure_time') %}
-      #     {% if departure != None %}
-      #       {% set route = state_attr('sensor.home_to_tugg_79_is', 'route_route_short_name') %}
-      #       {% set departure = departure.split(' ') %}
-      #       {% set hms = departure[1].split(':') %}
-      #       {{ route }} at {{hms[0]}}:{{hms[1]}}
-      #     {% else %}
-      #       unknown
-      #     {% endif %}
-      
-
-      # home_to_tugg_78_is
-      # home_to_tugg_78_is_format:
-      #   friendly_name: Isa Shops - 78
-      #   icon_template: mdi:bus
-      #   value_template: >-
-      #     {% set departure = state_attr('sensor.home_to_tugg_78_is', 'origin_stop_departure_time') %}
-      #     {% if departure != None %}
-      #       {% set route = state_attr('sensor.home_to_tugg_78_is', 'route_route_short_name') %}
-      #       {% set departure = departure.split(' ') %}
-      #       {% set hms = departure[1].split(':') %}
-      #       {{ route }} at {{hms[0]}}:{{hms[1]}}
-      #     {% else %}
-      #       unknown
-      #     {% endif %}
 

@@ -224,23 +224,6 @@ geo_location:
 
 openuv:
   api_key: !secret uv_key
-  #the below is no longer valid from 0.105.0
-  # binary_sensors:
-  #   monitored_conditions:
-  #     - uv_protection_window
-  # sensors:
-  #   monitored_conditions:
-  #     - current_ozone_level
-  #     - current_uv_index
-  #     - current_uv_level
-  #     - max_uv_index
-  #     - safe_exposure_time_type_1
-  #     - safe_exposure_time_type_2
-  #     - safe_exposure_time_type_3
-  #     - safe_exposure_time_type_4
-  #     - safe_exposure_time_type_5
-  #     - safe_exposure_time_type_6
-
 
 #################################################################
 #                                                               #
@@ -249,19 +232,6 @@ openuv:
 #################################################################
 
 sensor:
-
-####################################################
-#                                                  #
-#                      Scrape    see appdaemon     #
-#                                                  #
-####################################################
-
-  # - platform: scrape
-  #   resource: https://www.eldersweather.com.au/dam-level/act/
-  #   select: "td"
-  #   name: ACT Dam Levels
-  #   scan_interval: 259200
-  #   # request every 3 days
 
 ####################################################
 #                                                  #
@@ -275,20 +245,6 @@ sensor:
         friendly_name: Temp Inside
         value_template: "{{ states('sensor.back_door_state_temperature_measurement') }}"
 
-####################################################
-#                                                  #
-#                Air Quality                       #
-#                                                  #
-####################################################
-
-  - platform: airvisual
-    api_key: !secret air_vis_key
-    monitored_conditions:
-      - us
-    show_on_map: false
-    city: Macarthur
-    state: ACT
-    country: Australia
 
 ####################################################
 #                                                  #
@@ -297,28 +253,6 @@ sensor:
 ####################################################
 
   - platform: season
-
-####################################################
-#                                                  #
-#                BOM FTP Sensor                    #
-#                                                  #
-####################################################
-
-  # - platform: bom_forecast
-  #   product_id: IDN60801
-  #   name: Isabella Plains
-  #   forecast_days: 6
-  #   rest_of_today: true
-  #   friendly: false
-  #   friendly_state_format: '{max}, {summary}'
-  #   monitored_conditions:
-  #     - 'max'
-  #     - 'min'
-  #     - 'chance_of_rain'
-  #     - 'possible_rainfall'
-  #     - 'summary'
-  #     - 'detailed_summary'
-  #     - 'icon'
 
 ####################################################
 #                                                  #
@@ -391,7 +325,7 @@ camera:
 #                BOM Radar                         #
 #                                                  #
 ####################################################
-     
+
   - platform: bom
     name: bom_canberra_radar
     location: Canberra

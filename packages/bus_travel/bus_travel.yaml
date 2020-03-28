@@ -14,19 +14,6 @@ group:
   bus_travel_e:
     name: Bus Travel Entities
     entities:
-      - zone.HaydonDr
-      - zone.CalHospital
-      - zone.CanHospital
-      - zone.CityBus_2
-      - zone.CityBus_4
-      - zone.CityWestBus
-      - zone.ANUBus
-      - zone.TuggBus
-      - zone.WodenBus
-      - zone.IsaCalBus
-      - zone.IsaShops
-      - zone.SydCentral
-      - zone.OutBus
       - input_select.trans_staci
       - input_select.trans_simon
       - input_select.trans_megan
@@ -105,116 +92,6 @@ timer:
   r4_r5_d:
     duration: '00:20:00'
 
-#################################################################
-#                                                               #
-#                Zone                                           #
-#                                                               #
-#################################################################
-
-zone:
-
-####################################################
-#                                                  #
-#            bus stops                             #
-#                                                  #
-####################################################   
-
-  #cit
-  - name: HaydonDr
-    latitude: -35.249276
-    longitude: 149.090256
-    radius: 50
-
-  #calvary hospital
-  - name: CalHospital
-    latitude: -35.253486
-    longitude: 149.090932
-    radius: 200
-
-  #canberra hospital
-  - name: CanHospital
-    latitude: -35.345924 
-    longitude: 149.101365
-    radius: 250
-  
-  #city bus 
-  - name: CityBus_4
-    latitude: -35.278486
-    longitude: 149.130062
-    radius: 50
-
-  - name: CityBus_2
-    latitude: -35.278302 
-    longitude: 149.128485
-    radius: 50
-
-  #city west bus
-  - name: CityWestBus
-    latitude: -35.279129
-    longitude: 149.125513
-    radius: 50
-
-  #city light rail stop 
-  - name: LR_Alinga
-    latitude: -35.277953
-    longitude: 149.129342
-    radius: 50
-
-  #ANU Rimmer
-  - name: ANUBus
-    latitude: -35.276309
-    longitude: 149.125934
-    radius: 50
-
-  #Tugg bus 
-  - name: TuggBus
-    latitude: -35.414607
-    longitude: 149.065512
-    radius: 80
-
-  #Woden bus
-  - name: WodenBus
-    latitude: -35.344244 
-    longitude: 149.087836
-    radius: 150
-
-  #Bus E&J
-  - name: IsaCalBus
-    latitude: -35.433854
-    longitude: 149.094592
-    radius: 50
-
-  #Isabella Shops
-  - name: IsaShops
-    latitude: -35.428366
-    longitude: 149.091705
-    radius: 100
-
-  # #Commonwealth Bridge
-  # - name: CommBridge
-  #   latitude: -35.291006
-  #   longitude: 149.127823
-  #   radius: 300
-
-  #Outtrim Avenue
-  - name: OutBus
-    latitude: -35.435692
-    longitude: 149.098516
-    radius: 50
-
-  #UC Bus
-  - name: UCBus
-    latitude: -35.242448
-    longitude: 149.086077
-    radius: 50
-
-  #Sydney Central
-  - name: SydCentral
-    latitude: -33.882463
-    longitude: 151.206420
-    radius: 50
-
-  
 
 #################################################################
 #                                                               #
@@ -235,13 +112,11 @@ input_select:
     name: Staci Transport Type
     options:
       - 'Nil'
-      - 'Central'
-      - 'R234'
-      - 'R6'
       - 'RC'
       - 'R4W'
       - 'R5W'
       - 'R5T'
+      - 'R4T'
       - '7X'
       - 'TX'
       - 'Cal'
@@ -254,11 +129,11 @@ input_select:
     name: Delia Transport
     options:
       - 'Nil'
-      - 'Central'
       - 'RC'
       - 'R4W'  
       - 'R5W'
       - 'R5T'
+      - 'R4T'
       - '7X'
       - 'TX'
       - 'Cal'
@@ -271,11 +146,11 @@ input_select:
     name: Megan Transport
     options:
       - 'Nil'
-      - 'Central'
       - 'RC'
       - 'R4W'  
       - 'R5W'
       - 'R5T'
+      - 'R4T'
       - '7X'
       - 'TX'
       - 'Cal'
@@ -288,7 +163,6 @@ input_select:
     name: Simon Transport Type
     options:
       - 'Nil'
-      - 'Central'
       - 'R5CW'
       - 'R4CW'
       - 'RC'
@@ -333,8 +207,8 @@ automation:
   - alias: transport_simon_leave_citywest
     trigger:
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.CityWestBus
+        entity_id: person.simon
+        zone: zone.citywestbus
         event: leave
     action:
       - service: input_select.select_option
@@ -346,8 +220,8 @@ automation:
   - alias: transport_simon_leave_anubus
     trigger:
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.ANUBus
+        entity_id: person.simon
+        zone: zone.anubus
         event: leave
     action:
       - service: input_select.select_option
@@ -359,16 +233,16 @@ automation:
   - alias: transport_simon_leave_citybus
     trigger:
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.CityBus_2
+        entity_id: person.simon
+        zone: zone.citybus_2
         event: leave
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.CityBus_4
+        entity_id: person.simon
+        zone: zone.citybus_4
         event: leave
     condition:
       - condition: template
-        value_template: "{{ not is_state('input_select.trans_simon', 'R4CW') and not is_state('input_select.trans_simon', 'R4CW') }}"
+        value_template: "{{ not is_state('input_select.trans_simon', 'R5CW') and not is_state('input_select.trans_simon', 'R4CW') }}"
     action:
       - service: timer.start
         entity_id: timer.r4_r5_s
@@ -381,8 +255,8 @@ automation:
   - alias: transport_simon_arrive_woden_r4
     trigger:
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.WodenBus
+        entity_id: person.simon
+        zone: zone.wodenbus
         event: enter
     condition:
       - condition: or 
@@ -410,8 +284,8 @@ automation:
   - alias: transport_simon_arrive_woden_r5
     trigger:
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.WodenBus
+        entity_id: person.simon
+        zone: zone.wodenbus
         event: enter
     condition:
       - condition: or 
@@ -437,8 +311,8 @@ automation:
   - alias: transport_simon_leave_tuggbus_7x
     trigger:
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.TuggBus
+        entity_id: person.simon
+        zone: zone.tuggbus
         event: leave
     condition:
       - condition: template
@@ -453,8 +327,8 @@ automation:
   - alias: transport_simon_leave_tuggbus_tx
     trigger:
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.TuggBus
+        entity_id: person.simon
+        zone: zone.tuggbus
         event: leave
     condition:
       - condition: template
@@ -469,8 +343,8 @@ automation:
   - alias: transport_simon_leave_calwell_r5
     trigger:
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.OutBus
+        entity_id: person.simon
+        zone: zone.caloutbus
         event: leave
     condition:
       - condition: template
@@ -485,8 +359,8 @@ automation:
   - alias: transport_simon_leave_calwell_home
     trigger:
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.OutBus
+        entity_id: person.simon
+        zone: zone.caloutbus
         event: leave
     condition:
       - condition: template
@@ -501,8 +375,8 @@ automation:
   - alias: transport_simon_home
     trigger:
       - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.Home
+        entity_id: person.simon
+        zone: zone.home
         event: enter
     action:
       - service: input_select.select_option
@@ -527,28 +401,28 @@ automation:
 ## Staci Arrive Home -> Nil
 
 ## Staci Leaving Haydon Drive -> R234 (Staci heading to city - 15min)
-  - alias: transport_staci_leave_haydondr
-    trigger:
-      - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.HaydonDr
-        event: leave
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_staci
-          option: '{{"R234"}}'
+  # - alias: transport_staci_leave_haydondr
+  #   trigger:
+  #     - platform: zone
+  #       entity_id: person.staci
+  #       zone: zone.HaydonDr
+  #       event: leave
+  #   action:
+  #     - service: input_select.select_option
+  #       data_template:
+  #         entity_id: input_select.trans_staci
+  #         option: '{{"R234"}}'
 
 ## Staci Leaving City -> RC + R_Timer (Staci leaving City), if R234 don't change
   - alias: transport_staci_leave_citybus
     trigger:
       - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.CityBus_2
+        entity_id: person.staci
+        zone: zone.citybus_2
         event: leave
       - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.CityBus_4
+        entity_id: person.staci
+        zone: zone.citybus_4
         event: leave
     condition:
       - condition: template
@@ -565,8 +439,8 @@ automation:
   - alias: transport_staci_arrive_woden_r4
     trigger:
       - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.WodenBus
+        entity_id: person.staci
+        zone: zone.wodenbus
         event: enter
     condition:
       - condition: or 
@@ -594,8 +468,8 @@ automation:
   - alias: transport_staci_arrive_woden_r5
     trigger:
       - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.WodenBus
+        entity_id: person.staci
+        zone: zone.wodenbus
         event: enter
     condition:
       - condition: and 
@@ -616,8 +490,8 @@ automation:
   - alias: transport_staci_leave_tuggbus_7x
     trigger:
       - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.TuggBus
+        entity_id: person.staci
+        zone: zone.tuggbus
         event: leave
     condition:
       - condition: template
@@ -632,8 +506,8 @@ automation:
   - alias: transport_staci_leave_tuggbus_tx
     trigger:
       - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.TuggBus
+        entity_id: person.staci
+        zone: zone.tuggbus
         event: leave
     condition:
       - condition: template
@@ -648,8 +522,8 @@ automation:
   - alias: transport_staci_leave_calwell_r5
     trigger:
       - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.OutBus
+        entity_id: person.staci
+        zone: zone.caloutbus
         event: leave
     condition:
       - condition: template
@@ -664,8 +538,8 @@ automation:
   - alias: transport_staci_leave_calwell_home
     trigger:
       - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.OutBus
+        entity_id: person.staci
+        zone: zone.caloutbus
         event: leave
     condition:
       - condition: template
@@ -680,39 +554,14 @@ automation:
   - alias: transport_staci_home
     trigger:
       - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.Home
+        entity_id: person.staci
+        zone: zone.home
         event: enter
     action:
       - service: input_select.select_option
         data_template:
           entity_id: input_select.trans_staci
           option: '{{"Nil"}}'
-
-####################################################
-#                                                  #
-#            automation -  Staci Travel Hospital
-#                                                  #
-#################################################### 
-
-
-# leaving canberra hospital - day
-
-  # - alias: transport_staci_leave_canhospital_67
-  #   trigger:
-  #     - platform: zone
-  #       entity_id: device_tracker.stphone
-  #       zone: zone.CanHospital
-  #       event: leave
-  #   #condition:
-  #   #  - condition: time
-  #   #    before: '20:00:00'
-  #   action:
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.trans_staci
-  #         option: '{{"67"}}'
-
 
 ####################################################
 #                                                  #
@@ -734,12 +583,12 @@ automation:
   - alias: transport_megan_leave_citybus
     trigger:
       - platform: zone
-        entity_id: device_tracker.mphone
-        zone: zone.CityBus_2
+        entity_id: person.megan
+        zone: zone.citybus_2
         event: leave
       - platform: zone
-        entity_id: device_tracker.mphone
-        zone: zone.CityBus_4
+        entity_id: person.megan
+        zone: zone.citybus_4
         event: leave
     action:
       - service: timer.start
@@ -753,8 +602,8 @@ automation:
   - alias: transport_megan_arrive_woden_r4
     trigger:
       - platform: zone
-        entity_id: device_tracker.mphone
-        zone: zone.WodenBus
+        entity_id: person.megan
+        zone: zone.wodenbus
         event: enter
     condition:
       - condition: and 
@@ -777,8 +626,8 @@ automation:
   - alias: transport_megan_arrive_woden_r5
     trigger:
       - platform: zone
-        entity_id: device_tracker.mphone
-        zone: zone.WodenBus
+        entity_id: person.megan
+        zone: zone.wodenbus
         event: enter
     condition:
       - condition: and 
@@ -799,8 +648,8 @@ automation:
   - alias: transport_megan_leave_tuggbus_7x
     trigger:
       - platform: zone
-        entity_id: device_tracker.mphone
-        zone: zone.TuggBus
+        entity_id: person.megan
+        zone: zone.tuggbus
         event: leave
     condition:
       - condition: template
@@ -815,8 +664,8 @@ automation:
   - alias: transport_megan_leave_tuggbus_tx
     trigger:
       - platform: zone
-        entity_id: device_tracker.mphone
-        zone: zone.TuggBus
+        entity_id: person.megan
+        zone: zone.tuggbus
         event: leave
     condition:
       - condition: template
@@ -831,8 +680,8 @@ automation:
   - alias: transport_megan_leave_calwell_r5
     trigger:
       - platform: zone
-        entity_id: device_tracker.mphone
-        zone: zone.OutBus
+        entity_id: person.megan
+        zone: zone.caloutbus
         event: leave
     condition:
       - condition: template
@@ -847,8 +696,8 @@ automation:
   - alias: transport_megan_leave_calwell_home
     trigger:
       - platform: zone
-        entity_id: device_tracker.mphone
-        zone: zone.OutBus
+        entity_id: person.megan
+        zone: zone.caloutbus
         event: leave
     condition:
       - condition: template
@@ -863,8 +712,8 @@ automation:
   - alias: transport_megan_home
     trigger:
       - platform: zone
-        entity_id: device_tracker.mphone
-        zone: zone.Home
+        entity_id: person.megan
+        zone: zone.home
         event: enter
     action:
       - service: input_select.select_option
@@ -894,12 +743,12 @@ automation:
   - alias: transport_delia_leave_citybus
     trigger:
       - platform: zone
-        entity_id: device_tracker.dphone
-        zone: zone.CityBus_2
+        entity_id: person.delia
+        zone: zone.citybus_2
         event: leave
       - platform: zone
-        entity_id: device_tracker.dphone
-        zone: zone.CityBus_4
+        entity_id: person.delia
+        zone: zone.citybus_4
         event: leave
     action:
       - service: timer.start
@@ -913,8 +762,8 @@ automation:
   - alias: transport_delia_arrive_woden_r4
     trigger:
       - platform: zone
-        entity_id: device_tracker.dphone
-        zone: zone.WodenBus
+        entity_id: person.delia
+        zone: zone.wodenbus
         event: enter
     condition:
       - condition: and 
@@ -937,8 +786,8 @@ automation:
   - alias: transport_delia_arrive_woden_r5
     trigger:
       - platform: zone
-        entity_id: device_tracker.dphone
-        zone: zone.WodenBus
+        entity_id: person.delia
+        zone: zone.wodenbus
         event: enter
     condition:
       - condition: and 
@@ -959,8 +808,8 @@ automation:
   - alias: transport_delia_leave_tuggbus_7x
     trigger:
       - platform: zone
-        entity_id: device_tracker.dphone
-        zone: zone.TuggBus
+        entity_id: person.delia
+        zone: zone.tuggbus
         event: leave
     condition:
       - condition: template
@@ -975,8 +824,8 @@ automation:
   - alias: transport_delia_leave_tuggbus_tx
     trigger:
       - platform: zone
-        entity_id: device_tracker.dphone
-        zone: zone.TuggBus
+        entity_id: person.delia
+        zone: zone.tuggbus
         event: leave
     condition:
       - condition: template
@@ -991,8 +840,8 @@ automation:
   - alias: transport_delia_leave_calwell_r5
     trigger:
       - platform: zone
-        entity_id: device_tracker.dphone
-        zone: zone.OutBus
+        entity_id: person.delia
+        zone: zone.caloutbus
         event: leave
     condition:
       - condition: template
@@ -1007,8 +856,8 @@ automation:
   - alias: transport_delia_leave_calwell_home
     trigger:
       - platform: zone
-        entity_id: device_tracker.dphone
-        zone: zone.OutBus
+        entity_id: person.delia
+        zone: zone.caloutbus
         event: leave
     condition:
       - condition: template
@@ -1023,8 +872,8 @@ automation:
   - alias: transport_delia_home
     trigger:
       - platform: zone
-        entity_id: device_tracker.dphone
-        zone: zone.Home
+        entity_id: person.delia
+        zone: zone.home
         event: enter
     action:
       - service: input_select.select_option
@@ -1032,65 +881,3 @@ automation:
           entity_id: input_select.trans_delia
           option: '{{"Nil"}}'
 
-####################################################
-#                                                  #
-#            automation -  Sydney Central          #
-#                                                  #
-#################################################### 
-  
-  - alias: transport_delia_central
-    trigger:
-      - platform: zone
-        entity_id: device_tracker.dphone
-        zone: zone.SydCentral
-        event: enter
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_delia
-          option: '{{"Central"}}'
-  
-  - alias: transport_staci_central
-    trigger:
-      - platform: zone
-        entity_id: device_tracker.stphone
-        zone: zone.SydCentral
-        event: enter
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_staci
-          option: '{{"Central"}}'
-
-  - alias: transport_simon_central
-    trigger:
-      - platform: zone
-        entity_id: device_tracker.sphone
-        zone: zone.SydCentral
-        event: enter
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_simon
-          option: '{{"Central"}}'  
-
-  - alias: transport_megan_central
-    trigger:
-      - platform: zone
-        entity_id: device_tracker.mphone
-        zone: zone.SydCentral
-        event: enter
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_megan
-          option: '{{"Central"}}'
-  
-      
-  
-
-  
-
-
-  
-  

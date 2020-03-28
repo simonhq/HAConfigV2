@@ -48,13 +48,9 @@ group:
       - person.staci
       - person.delia
       - device_tracker.sphone_net
-      - device_tracker.sphone
       - device_tracker.mphone_net
-      - device_tracker.mphone
       - device_tracker.stphone_net
-      - device_tracker.stphone
       - device_tracker.dphone_net
-      - device_tracker.dphone
 
   # presence_a:
   #   name: Presence Automations
