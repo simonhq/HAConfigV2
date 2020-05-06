@@ -105,32 +105,39 @@ class Travel_Messages(hass.Hass):
         dir_trav = ""
         gps_person = ""
         pname = ""
-        self.log(entity + " call ")
-        
-        if new != "not set":
-            if entity == "proximity.home_simon":    
-                if self.get_state("binary_sensor.drive_simon") == 'on':
-                    prox = int(new)
+        sdrive = self.get_state("input_boolean.simon_outback")
+        mdrive = self.get_state("input_boolean.megan_outback")
+        stdrive = self.get_state("input_boolean.staci_outback")
+        ddrive = self.get_state("input_boolean.delia_outback")
+        self.log(entity + " " + new + " call ")
+        self.log(sdrive + " s " + mdrive + " m ")
+
+        if new != 'not set':
+            self.log("past not set")
+            if entity == 'proximity.home_simon':    
+                self.log("past knowing it is simon " + sdrive ) 
+                if sdrive == 'on':
+                    prox = float(new)
                     dir_trav = self.get_state("sensor.s_travel_direction")
                     gps_person = "sgps"
                     pname = "Simon"
                     self.log(str(prox) + " set")
-            elif entity == "proximity.home_meg":
-                if self.get_state("binary_sensor.drive_megan") == 'on':
-                    prox = int(new)
+            elif entity == 'proximity.home_meg':
+                if mdrive == 'on':
+                    prox = float(new)
                     dir_trav = self.get_state("sensor.m_travel_direction")
                     gps_person = "mgps"
                     pname = "Megan"
                     self.log(str(prox) + " set")
-            elif entity == "proximity.home_staci":
-                if self.get_state("binary_sensor.drive_staci") == 'on':
-                    prox = int(new)
+            elif entity == 'proximity.home_staci':
+                if stdrive == 'on':
+                    prox = float(new)
                     dir_trav = self.get_state("sensor.st_travel_direction")
                     gps_person = "stgps"
                     pname = "Staci"
-            elif entity == "proximity.home_delia":
-                if self.get_state("binary_sensor.drive_delia") == 'on':
-                    prox = int(new)
+            elif entity == 'proximity.home_delia':
+                if ddrive == 'on':
+                    prox = float(new)
                     dir_trav = self.get_state("sensor.d_travel_direction")
                     gps_person = "dgps"
                     pname = "Delia"

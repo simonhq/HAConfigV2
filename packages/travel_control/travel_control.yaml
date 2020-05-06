@@ -125,7 +125,7 @@ binary_sensor:
         icon_template: mdi:home-map-marker
       megan_car:
         friendly_name: Megan
-        value_template: "{{ (is_state('binary_sensor.drive_megan', 'on') or (not is_state('person.megan', 'home') and is_state('binary_sensor.simon_meg_car', 'on'))) and is_state('input_boolean.away_megan', 'off') }}"
+        value_template: "{{ (is_state('binary_sensor.drive_meg', 'on') or (not is_state('person.megan', 'home') and is_state('binary_sensor.simon_meg_car', 'on'))) and is_state('input_boolean.away_megan', 'off') }}"
         icon_template: mdi:car
       megan_walk_bus:
         friendly_name: Megan

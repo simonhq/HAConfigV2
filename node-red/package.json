@@ -5,6 +5,7 @@
     "private": true,
     "dependencies": {
         "node-red-contrib-discord": "~4.0.3",
-        "node-red-contrib-google": "~0.2.0"
+        "node-red-contrib-google": "~0.2.0",
+        "node-red-contrib-http-autosuggest-service": "~0.2.2"
     }
 }

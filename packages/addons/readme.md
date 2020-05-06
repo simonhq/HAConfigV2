@@ -29,6 +29,24 @@ Key: ^^^ High usage, ^^ Some usage, ^ low usage or experimenting
 
 * AppDaemon 4 ^^^
 Python based automation and dashboarding
+
+need to include
+system_packages:
+  - build-base
+  - libxml2-dev
+  - libxslt-dev
+  - musl
+  - libcurl
+  - python3-dev
+  - curl-dev
+  - gcc
+  - g++
+python_packages:
+  - lxml
+init_commands: []
+
+to support some of my custom apps
+
 * Node-Red ^^^
 Visual based automation
 * ESPHome ^
@@ -40,8 +58,8 @@ Flashing mini-boards
 Updates the Duck DNS system with latest dynamic IP
 * Nginx Proxy Manager ^^^
 Handles SSL connections from Duck DNS address while allowing http connections internally
-* Pi-hole ^^
-Ad blocking DNS server, currently only used for WireGuard connections, need to extend current network
+* AdGuard Home ^^
+Ad blocking DNS server
 * WireGuard ^^
 VPN into home network, works well apart from our inconsistent internet connection...
 

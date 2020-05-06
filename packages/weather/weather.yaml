@@ -128,55 +128,15 @@ input_boolean:
     name: Check ACT Dam levels
     icon: mdi:cup-water
 
-#################################################################
-#                                                               #
-#                            Input_text  for dams               #
-#                                                               #
-#################################################################
+#   ACC_FLAG: "input_boolean.get_allergies_data"
+  get_allergies_data:
+    name: Get Allergies Data
+    icon: mdi:download-network
 
-#input_text:
-
-# #  CATCHMENT_T: "input_text.dam_act_catchment_total"
-#   dam_act_catchment_total:
-#     name: ACT Catchment Total
-#     initial: '0'
-# #  CATCHMENT_P: "input_text.dam_act_catchment_percent"
-#   dam_act_catchment_percent:
-#     name: ACT Catchment %
-#     initial: '0'
-# #  GOOGONG_T: "input_text.dam_act_googong_total"
-#   dam_act_googong_total:
-#     name: ACT Googong Total
-#     initial: '0'
-# #  GOOGONG_P: "input_text.dam_act_googong_percent"
-#   dam_act_googong_percent:
-#     name: ACT Googong %
-#     initial: '0'
-# #  COTTER_T: "input_text.dam_act_cotter_total"
-#   dam_act_cotter_total:
-#     name: ACT Cotter Total
-#     initial: '0'
-# #  COTTER_P: "input_text.dam_act_cotter_percent"
-#   dam_act_cotter_percent:
-#     name: ACT Cotter %
-#     initial: '0'
-# #  CORIN_T: "input_text.dam_act_corin_total"
-#   dam_act_corin_total:
-#     name: ACT Corin Total
-#     initial: '0'
-# #  CORIN_P: "input_text.dam_act_corin_percent"
-#   dam_act_corin_percent:
-#     name: ACT Corin %
-#     initial: '0'
-# #  BENDORA_T: "input_text.dam_act_bendora_total"
-#   dam_act_bendora_total:
-#     name: ACT Bendora Total
-#     initial: '0'
-# #  BENDORA_P: "input_text.dam_act_bendora_percent"
-#   dam_act_bendora_percent:
-#     name: ACT Bendora %
-#     initial: '0'
-
+#   DEB_FLAG: "input_boolean.reset_allergies_sensor"
+  reset_allergies_sensor:
+    name: Load Allergies Data
+    icon: mdi:reload-alert
 
 #################################################################
 #                                                               #
