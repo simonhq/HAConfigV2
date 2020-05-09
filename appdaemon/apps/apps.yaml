@@ -86,6 +86,19 @@ canberra_dams:
     - globals
     - secrets
 
+snowy_dams:
+  module: snowydams
+  class: Get_Snowy_Dams
+  DAM_FLAG: "input_boolean.check_snowy_dams"
+
+act_garbage:
+  module: act_garbage
+  class: Get_ACT_Garbage
+  GAR_FLAG: "input_boolean.check_act_garbage"
+  SUBURB: "ISABELLA PLAINS"
+  SPLIT_SUBURB: ""
+  #SUBURB: "Lyons"
+  #SPLIT_SUBURB: ""
 
 accu_allergies:
   module: accu_allergies
