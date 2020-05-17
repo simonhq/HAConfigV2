@@ -15,6 +15,8 @@ group:
     name: Climate Entities
     entities:
       - input_number.last_measure
+      - input_number.migraine_impact
+      - sensor.migraine_impact
       - binary_sensor.diet_press_up
       - binary_sensor.diet_press_down
       - binary_sensor.diet_press_over
@@ -41,6 +43,26 @@ input_number:
     max: 1050
     name: 'Last Pressure'
     icon: mdi:arrow-collapse-vertical
+
+  migraine_impact:
+    min: 0
+    max: 10
+    name: 'Migraine Impact'
+    icon: mdi:head-flash
+
+#################################################################
+#                                                               #
+#                            Sensor                             #
+#                                                               #
+#################################################################
+
+sensor:
+  - platform: template
+    sensors:
+      migraine_impact:
+        friendly_name: "Meg's migraine levels"
+        icon_template: mdi:head-flash
+        value_template: "{{ states('input_number.migraine_impact') }}"
 
 #################################################################
 #                                                               #

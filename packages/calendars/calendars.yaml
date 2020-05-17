@@ -1,7 +1,8 @@
 #################################################################
 #                                                               #
 #                     Packages/Calendars                        #
-#                                                               #
+#      
+# removed bin, recycling and greeenwaste since move to act open data integration
 #################################################################
 
 #################################################################
@@ -103,23 +104,23 @@ input_datetime:
     has_date: true
     has_time: false
 
-  cal_bin:
-    name: Bin pickup upcoming
-    icon: mdi:delete
-    has_date: true
-    has_time: false
+  #cal_bin:
+  #  name: Bin pickup upcoming
+  #  icon: mdi:delete
+  #  has_date: true
+  #  has_time: false
 
-  cal_rec:
-    name: Recycling pickup upcoming
-    icon: mdi:recycle
-    has_date: true
-    has_time: false
+  #cal_rec:
+  #  name: Recycling pickup upcoming
+  #  icon: mdi:recycle
+  #  has_date: true
+  #  has_time: false
 
-  cal_grw:
-    name: Greenwaste pickup upcoming
-    icon: mdi:tree-outline
-    has_date: true
-    has_time: false
+  #cal_grw:
+  #  name: Greenwaste pickup upcoming
+  #  icon: mdi:tree-outline
+  #  has_date: true
+  #  has_time: false
 
   cal_skp:
     name: Skip bin pickup upcoming
@@ -207,24 +208,24 @@ binary_sensor:
         value_template: "{{ is_state('calendar.cleaner', 'on') }}"
         friendly_name: 'Cleaner Today'
         icon_template: mdi:silverware-clean
-      cal_bin_on:
-        entity_id: sensor.time
-        #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_bin', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
-        value_template: "{{ is_state('calendar.bin', 'on') }}"
-        friendly_name: 'Bin Pick Up Today'
-        icon_template: mdi:delete
-      cal_rec_on:
-        entity_id: sensor.time
-        #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_rec', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
-        value_template: "{{ is_state('calendar.recycling', 'on') }}"
-        friendly_name: 'Recycling Pick Up Today'
-        icon_template: mdi:recycle
-      cal_grw_on:
-        entity_id: sensor.time
-        #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_grw', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
-        value_template: "{{ is_state('calendar.greenwaste', 'on') }}"
-        friendly_name: 'Greenwaste Pick Up Today'
-        icon_template: mdi:tree-outline
+      #cal_bin_on:
+      #  entity_id: sensor.time
+      #  #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_bin', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+      #  value_template: "{{ is_state('calendar.bin', 'on') }}"
+      #  friendly_name: 'Bin Pick Up Today'
+      #  icon_template: mdi:delete
+      #cal_rec_on:
+      #  entity_id: sensor.time
+      #  #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_rec', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+      #  value_template: "{{ is_state('calendar.recycling', 'on') }}"
+      #  friendly_name: 'Recycling Pick Up Today'
+      #  icon_template: mdi:recycle
+      #cal_grw_on:
+      #  entity_id: sensor.time
+      #  #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_grw', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True)  }}"
+      #  value_template: "{{ is_state('calendar.greenwaste', 'on') }}"
+      #  friendly_name: 'Greenwaste Pick Up Today'
+      #  icon_template: mdi:tree-outline
       cal_skp_on:
         entity_id: sensor.time
         #value_template: "{{ now().timestamp() | int | timestamp_custom('%Y-%m-%d', True) == state_attr('input_datetime.cal_skp', 'timestamp') | int | timestamp_custom('%Y-%m-%d', True) }}"
@@ -266,15 +267,15 @@ sensor:
       cleaner_calendar:
         friendly_name: Cleaner next comes on
         value_template: '{{ as_timestamp(states.calendar.cleaner.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
-      bin_calendar:
-        friendly_name: Next Bin pickup
-        value_template: '{{ as_timestamp(states.calendar.bin.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
-      recycling_calendar:
-        friendly_name: Next Recycling pickup
-        value_template: '{{ as_timestamp(states.calendar.recycling.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
-      greenwaste_calendar:
-        friendly_name: Next Greenwaste pickup
-        value_template: '{{ as_timestamp(states.calendar.greenwaste.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      #bin_calendar:
+      #  friendly_name: Next Bin pickup
+      #  value_template: '{{ as_timestamp(states.calendar.bin.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      #recycling_calendar:
+      #  friendly_name: Next Recycling pickup
+      #  value_template: '{{ as_timestamp(states.calendar.recycling.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      #greenwaste_calendar:
+      #  friendly_name: Next Greenwaste pickup
+      #  value_template: '{{ as_timestamp(states.calendar.greenwaste.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
       skipbin_calendar:
         friendly_name: Next Skipbin pickup
         value_template: '{{ as_timestamp(states.calendar.skipbin.attributes.start_time) | timestamp_custom("%a %d/%m") }}'

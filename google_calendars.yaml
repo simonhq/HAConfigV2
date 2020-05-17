@@ -17,18 +17,18 @@
     name: D&D
     track: true
     search: "#DandD"
-  - device_id: bin
-    name: Bin
-    track: true
-    search: "#Bin"
-  - device_id: recycling
-    name: Recycling
-    track: true
-    search: "#Recycling"
-  - device_id: greenwaste
-    name: Green Waste
-    track: true
-    search: "#Green"
+  #- device_id: bin
+  #  name: Bin
+  #  track: true
+  #  search: "#Bin"
+  #- device_id: recycling
+  #  name: Recycling
+  #  track: true
+  #  search: "#Recycling"
+  #- device_id: greenwaste
+  #  name: Green Waste
+  #  track: true
+  #  search: "#Green"
   - device_id: skipbin
     name: Skip Bin
     track: true

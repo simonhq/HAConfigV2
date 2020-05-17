@@ -1,3 +1,1415 @@
-- id: '1587372511792'
+- id: '1589437100467'
+  name: Evening Holiday
+  entities:
+    input_select.bshower:
+      editable: false
+      friendly_name: Bathroom Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Bathroom On
+      - Bathroom Off
+      state: Bathroom On
+    input_select.eshower:
+      editable: false
+      friendly_name: Ensuite Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Ensuite On
+      - Ensuite Off
+      state: Ensuite On
+    light.dining_1:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 1
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_2:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 2
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_3:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 3
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_4:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 4
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.front_door:
+      brightness: 255
+      friendly_name: Front Door
+      state: 'on'
+      supported_features: 41
+    light.front_garage:
+      brightness: 255
+      friendly_name: Front Garage
+      state: 'on'
+      supported_features: 41
+    light.kitchen_1:
+      brightness: 253
+      color_temp: 366
+      friendly_name: Kitchen 1
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_2:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 2
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_3:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 3
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_4:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 4
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.living_1:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 1
+      hs_color:
+      - 50
+      - 77.647
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 222
+      - 57
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.475
+      - 0.469
+    light.living_2:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 2
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_3:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 3
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_4:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 4
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.lounge_lightstrip:
+      brightness: 70
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Lounge Lightstrip
+      hs_color:
+      - 317.935
+      - 72.157
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 70
+      - 199
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.455
+      - 0.209
+    light.master_lightstrip:
+      brightness: 210
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Master lightstrip
+      hs_color:
+      - 14.4
+      - 78.431
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 103
+      - 55
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.62
+      - 0.337
+- id: '1589439462332'
+  name: Day
+  entities:
+    input_select.bshower:
+      editable: false
+      friendly_name: Bathroom Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Bathroom On
+      - Bathroom Off
+      state: Motion
+    input_select.eshower:
+      editable: false
+      friendly_name: Ensuite Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Ensuite On
+      - Ensuite Off
+      state: Motion
+    input_select.gon:
+      editable: false
+      friendly_name: Garage Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Garage On
+      - Garage Off
+      state: Motion
+    input_select.lon:
+      editable: false
+      friendly_name: Laundry Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Laundry On
+      - Laundry Off
+      state: Motion
+    input_select.ton:
+      editable: false
+      friendly_name: Toilet Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Toilet On
+      - Toilet Off
+      state: Motion
+    light.back_hall:
+      friendly_name: Back Hall
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.bathroom:
+      friendly_name: Bathroom
+      state: 'off'
+      supported_features: 41
+    light.delia_lightstrip:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Delia Lightstrip
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.delia_s_lamp:
+      friendly_name: Delia's Lamp
+      state: 'off'
+      supported_features: 41
+    light.dining_1:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 1
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.dining_2:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 2
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.dining_3:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 3
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.dining_4:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 4
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.ensuite_light:
+      friendly_name: Ensuite Light
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.ensuite_spot:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Ensuite Spot
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.front_door:
+      friendly_name: Front Door
+      state: 'off'
+      supported_features: 41
+    light.front_garage:
+      friendly_name: Front Garage
+      state: 'off'
+      supported_features: 41
+    light.front_hall:
+      friendly_name: Front Hall
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.garage:
+      friendly_name: Garage
+      state: 'off'
+      supported_features: 41
+    light.kitchen_1:
+      friendly_name: Kitchen 1
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.kitchen_2:
+      friendly_name: Kitchen 2
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.kitchen_3:
+      friendly_name: Kitchen 3
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.kitchen_4:
+      friendly_name: Kitchen 4
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.laundry:
+      friendly_name: Laundry
+      state: 'off'
+      supported_features: 41
+    light.living_1:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 1
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.living_2:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 2
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.living_3:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 3
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.living_4:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 4
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.lounge_lamp:
+      friendly_name: Lounge Lamp
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.lounge_light:
+      friendly_name: Lounge Light
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.lounge_lightstrip:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Lounge Lightstrip
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.master_lightstrip:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Master lightstrip
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.staci_s_lamp:
+      friendly_name: Staci's lamp
+      state: 'off'
+      supported_features: 41
+    light.staci_s_light:
+      friendly_name: Staci's light
+      state: 'off'
+      supported_features: 41
+    light.study:
+      friendly_name: Study
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.toilet:
+      friendly_name: Toilet
+      state: 'off'
+      supported_features: 41
+    switch.delia_blanket:
+      friendly_name: TP-LINK_Smart Plug_1C92
+      state: 'off'
+    switch.megan_blanket:
+      friendly_name: Megan Blanket
+      state: 'off'
+    switch.simon_blanket:
+      friendly_name: Simon Blanket
+      state: 'off'
+    switch.staci_blanket:
+      friendly_name: Staci Blanket
+      state: 'off'
+- id: '1589439961076'
+  name: Evening
+  entities:
+    input_select.bshower:
+      editable: false
+      friendly_name: Bathroom Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Bathroom On
+      - Bathroom Off
+      state: Bathroom On
+    input_select.eshower:
+      editable: false
+      friendly_name: Ensuite Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Ensuite On
+      - Ensuite Off
+      state: Motion
+    input_select.ton:
+      editable: false
+      friendly_name: Toilet Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Toilet On
+      - Toilet Off
+      state: Motion
+    light.dining_1:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 1
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_2:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 2
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_3:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 3
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_4:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 4
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.front_door:
+      brightness: 255
+      friendly_name: Front Door
+      state: 'on'
+      supported_features: 41
+    light.front_garage:
+      brightness: 255
+      friendly_name: Front Garage
+      state: 'on'
+      supported_features: 41
+    light.kitchen_1:
+      brightness: 253
+      color_temp: 366
+      friendly_name: Kitchen 1
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_2:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 2
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_3:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 3
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_4:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 4
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.living_1:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 1
+      hs_color:
+      - 49.697
+      - 77.647
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 221
+      - 57
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.476
+      - 0.468
+    light.living_2:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 2
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_3:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 3
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_4:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 4
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.lounge_lightstrip:
+      brightness: 70
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Lounge Lightstrip
+      hs_color:
+      - 318.771
+      - 70.196
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 76
+      - 198
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.454
+      - 0.213
+    light.master_lightstrip:
+      brightness: 210
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Master lightstrip
+      hs_color:
+      - 14.462
+      - 76.471
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 107
+      - 59
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.613
+      - 0.339
+- id: '1589440110047'
+  name: Turn Off Electric Blankets
+  entities:
+    switch.delia_blanket:
+      friendly_name: TP-LINK_Smart Plug_1C92
+      state: 'off'
+    switch.megan_blanket:
+      friendly_name: Megan Blanket
+      state: 'off'
+    switch.simon_blanket:
+      friendly_name: Simon Blanket
+      state: 'off'
+    switch.staci_blanket:
+      friendly_name: Staci Blanket
+      state: 'off'
+- id: '1589491843238'
   name: Morning
-  entities: {}
+  entities:
+    input_select.gon:
+      editable: false
+      friendly_name: Garage Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Garage On
+      - Garage Off
+      state: Motion
+    input_select.lon:
+      editable: false
+      friendly_name: Laundry Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Laundry On
+      - Laundry Off
+      state: Motion
+    input_select.ton:
+      editable: false
+      friendly_name: Toilet Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Toilet On
+      - Toilet Off
+      state: Motion
+    light.kitchen_3:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 3
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_4:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 4
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.living_1:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 1
+      hs_color:
+      - 49.697
+      - 77.647
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 221
+      - 57
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.476
+      - 0.468
+    light.living_2:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 2
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_3:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 3
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_4:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 4
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+- id: '1589492173590'
+  name: Arriving
+  entities:
+    light.front_door:
+      brightness: 255
+      friendly_name: Front Door
+      state: 'on'
+      supported_features: 41
+    light.front_garage:
+      brightness: 255
+      friendly_name: Front Garage
+      state: 'on'
+      supported_features: 41
+    light.kitchen_1:
+      brightness: 128
+      color_temp: 366
+      friendly_name: Kitchen 1
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_3:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 3
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.living_2:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 2
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_4:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 4
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+- id: '1589492509906'
+  name: Party
+  entities:
+    input_select.bshower:
+      editable: false
+      friendly_name: Bathroom Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Bathroom On
+      - Bathroom Off
+      state: Bathroom On
+    input_select.eshower:
+      editable: false
+      friendly_name: Ensuite Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Ensuite On
+      - Ensuite Off
+      state: Motion
+    input_select.ton:
+      editable: false
+      friendly_name: Toilet Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Toilet On
+      - Toilet Off
+      state: Toilet On
+    light.dining_1:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 1
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_2:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 2
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_3:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 3
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_4:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 4
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.front_door:
+      brightness: 255
+      friendly_name: Front Door
+      state: 'on'
+      supported_features: 41
+    light.front_garage:
+      brightness: 255
+      friendly_name: Front Garage
+      state: 'on'
+      supported_features: 41
+    light.kitchen_1:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 1
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_2:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 2
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_3:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 3
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_4:
+      brightness: 255
+      color_temp: 366
+      friendly_name: Kitchen 4
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.living_1:
+      brightness: 255
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 1
+      hs_color:
+      - 49.697
+      - 77.647
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 221
+      - 57
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.476
+      - 0.468
+    light.living_2:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 2
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_3:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 3
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_4:
+      brightness: 255
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 4
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.lounge_lightstrip:
+      brightness: 70
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Lounge Lightstrip
+      hs_color:
+      - 319.422
+      - 67.843
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 82
+      - 199
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.451
+      - 0.215
+    light.master_lightstrip:
+      brightness: 199
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Master lightstrip
+      hs_color:
+      - 14.211
+      - 74.51
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 110
+      - 64
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.606
+      - 0.34
+- id: '1589492764914'
+  name: Late
+  entities:
+    light.dining_1:
+      brightness: 102
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 1
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_2:
+      brightness: 104
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 2
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_3:
+      brightness: 105
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 3
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.dining_4:
+      brightness: 96
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 4
+      hs_color:
+      - 37.778
+      - 52.941
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 205
+      - 120
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.459
+      - 0.408
+    light.kitchen_1:
+      brightness: 113
+      color_temp: 366
+      friendly_name: Kitchen 1
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_2:
+      brightness: 114
+      color_temp: 366
+      friendly_name: Kitchen 2
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_3:
+      brightness: 114
+      color_temp: 366
+      friendly_name: Kitchen 3
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.kitchen_4:
+      brightness: 122
+      color_temp: 366
+      friendly_name: Kitchen 4
+      max_mireds: 454
+      min_mireds: 153
+      state: 'on'
+      supported_features: 43
+    light.living_1:
+      brightness: 122
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 1
+      hs_color:
+      - 49.697
+      - 77.647
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 221
+      - 57
+      state: 'on'
+      supported_features: 63
+      xy_color:
+      - 0.476
+      - 0.468
+    light.living_2:
+      brightness: 119
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 2
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_3:
+      brightness: 116
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 3
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+    light.living_4:
+      brightness: 122
+      color_temp: 366
+      effect: none
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 4
+      max_mireds: 500
+      min_mireds: 153
+      state: 'on'
+      supported_features: 63
+- id: '1589493077769'
+  name: All Motion
+  entities:
+    input_select.bshower:
+      editable: false
+      friendly_name: Bathroom Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Bathroom On
+      - Bathroom Off
+      state: Motion
+    input_select.eshower:
+      editable: false
+      friendly_name: Ensuite Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Ensuite On
+      - Ensuite Off
+      state: Motion
+    input_select.gon:
+      editable: false
+      friendly_name: Garage Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Garage On
+      - Garage Off
+      state: Motion
+    input_select.lon:
+      editable: false
+      friendly_name: Laundry Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Laundry On
+      - Laundry Off
+      state: Motion
+    input_select.ton:
+      editable: false
+      friendly_name: Toilet Mode
+      icon: mdi:vanish
+      options:
+      - Motion
+      - Toilet On
+      - Toilet Off
+      state: Motion

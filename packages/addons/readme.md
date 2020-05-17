@@ -32,20 +32,12 @@ Python based automation and dashboarding
 
 need to include
 system_packages:
-  - build-base
-  - libxml2-dev
-  - libxslt-dev
-  - musl
-  - libcurl
-  - python3-dev
-  - curl-dev
-  - gcc
-  - g++
 python_packages:
-  - lxml
+  - bs4
+  - xmltodict
 init_commands: []
 
-to support some of my custom apps
+to support my custom apps
 
 * Node-Red ^^^
 Visual based automation
