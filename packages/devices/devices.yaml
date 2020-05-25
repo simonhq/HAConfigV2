@@ -179,10 +179,10 @@ device_tracker:
 #                                                               #
 #################################################################
 
-tuya:
-  username: !secret tuya_user
-  password: !secret tuya_pass
-  country_code: !secret tuya_code
+#tuya:
+  #username: !secret tuya_user
+  #password: !secret tuya_pass
+  #country_code: !secret tuya_code
   #platform: tuya #smart_life
 
 #################################################################

@@ -114,3 +114,19 @@ sudo netstat -tulpn | grep ":53"
 sudo systemctl disable systemd-resolved.service
 sudo systemctl stop systemd-resolved.service
 ```
+
+## Plex
+
+Discover drive
+
+lsblk
+df -T
+
+Mount Drive
+
+mkdir -p /usr/share/media-drive
+sudo mount /dev/sdb1 /usr/share/media-drive
+
+for permanent
+echo "# Secondary Hard Drive" >> /etc/fstab
+echo "/dev/sdb1 /usr/share/media-drive ntfs defaults,noatime 0 2" >> /etc/fstab

@@ -185,6 +185,7 @@ geo_location:
 openuv:
   api_key: !secret uv_key
 
+
 #################################################################
 #                                                               #
 #                      Sensors                                  #
@@ -204,6 +205,18 @@ sensor:
       inside_now:
         friendly_name: Temp Inside
         value_template: "{{ states('sensor.back_door_state_temperature_measurement') }}"
+        unit_of_measurement: C
+
+####################################################
+#                                                  #
+#                      world air quality           #
+#                                                  #
+####################################################
+
+  - platform: waqi
+    token: !secret waqi_key
+    locations:
+      - monash
 
 
 ####################################################

@@ -25,7 +25,7 @@ homeassistant:
 
 # uncomment when using SSL
 http:
-  base_url: !secret HA_URL
+  #base_url: !secret HA_URL
   #ssl_certificate: /ssl/fullchain.pem
   #ssl_key: /ssl/privkey.pem
   #ip_ban_enabled: true
@@ -92,9 +92,9 @@ logger:
 #
 ###########################################################################
 
-hacs:
-  token: !secret hacs_token
-  appdaemon: true
+#hacs:
+#  token: !secret hacs_token
+#  appdaemon: true
   #theme: true
 
 # controlled through hacs

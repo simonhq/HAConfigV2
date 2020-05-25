@@ -1413,3 +1413,140 @@
       - Toilet On
       - Toilet Off
       state: Motion
+- id: '1590270523644'
+  name: NIght
+  entities:
+    light.back_hall:
+      friendly_name: Back Hall
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.dining_1:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 1
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.dining_2:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 2
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.dining_3:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 3
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.dining_4:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Dining 4
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.front_door:
+      friendly_name: Front Door
+      state: 'off'
+      supported_features: 41
+    light.front_garage:
+      friendly_name: Front Garage
+      state: 'off'
+      supported_features: 41
+    light.front_hall:
+      friendly_name: Front Hall
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.kitchen_1:
+      friendly_name: Kitchen 1
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.kitchen_2:
+      friendly_name: Kitchen 2
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.kitchen_3:
+      friendly_name: Kitchen 3
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.kitchen_4:
+      friendly_name: Kitchen 4
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.living_1:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 1
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.living_2:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 2
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.living_3:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 3
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.living_4:
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Living 4
+      max_mireds: 500
+      min_mireds: 153
+      state: 'off'
+      supported_features: 63
+    light.lounge_lamp:
+      friendly_name: Lounge Lamp
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.lounge_light:
+      friendly_name: Lounge Light
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43
+    light.study:
+      friendly_name: Study
+      max_mireds: 454
+      min_mireds: 153
+      state: 'off'
+      supported_features: 43

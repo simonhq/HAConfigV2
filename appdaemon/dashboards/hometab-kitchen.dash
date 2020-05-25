@@ -17,10 +17,10 @@ layout:
     #- myweather (2x2), sensor.dark_sky_daily_summary (2x1), load_status_panel, load_modes_panel, input_boolean.mode_morning
     #- group.family_lights, lnd_select, load_study_panel, load_people_panel, input_boolean.mode_night
 
-    - time_select (2x1),                    clock (2x1),                            l_fhall,           fd_select,              l_lounge
+    - time_select (2x1),                    clock (2x1),                            l_fhall,           l_study,              l_lounge
     - presence_select (2x1),                weather (2x2),                        l_kitchen,         kit_cook,               kit_prep
     - guest_bool,          away_bool,                                               l_living,          l_dining,               f_lounge
-    - ck_select (2x1),                      lnd_select,  gnd_select,                ge_cover,          ge_select,              l_fext      
+    - ck_select (2x1),                      lnd_select,  gnd_select,                ge_cover,          l_bhall,              l_fext      
 
 
 #fd_select, ge_select
@@ -31,6 +31,13 @@ f_lounge:
     title: Dyson Fan
     icon_on: mdi-air-filter
     icon_off: mdi-crosshairs-off
+
+l_study:
+    widget_type: light
+    entity: light.study
+    title: Study
+    icon_on: mdi-desktop-tower
+    icon_off: mdi-desktop-tower
 
 sw_ironing:
     widget_type: switch
