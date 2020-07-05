@@ -7,14 +7,6 @@
 ###########################################################################
 
 homeassistant:
-#  name: !secret HA_NAME
-#  latitude: !secret HA_LAT
-#  longitude: !secret HA_LONG
-#  elevation: !secret HA_ELE
-#  unit_system: metric
-#  #temperature_unit: C
-#  time_zone: !secret HA_TZ
-#  external_url: https://thompson-hq.duckdns.org
   packages: !include_dir_named packages
   customize: !include customize.yaml
 
@@ -92,15 +84,6 @@ logger:
 # Custom Card/Component Configuration
 #
 ###########################################################################
-
-#lock:
-#  - platform: Kevo
-#    email: !secret kevo_email         # Your Kevo account Email
-#    password: !secret kevo_pass       # Your Kevo account Password
-#    lock_id: !secret kevo_id_f        # Your Kevo lock id (obtained manually from kevo website*)
-#    max_retries: 3                    # Optionally set how many times it should try to initalise the lock
-#    retry_delay: 2                    # Optionally set the delay (in seconds) between each retry
-
 
 breaking_changes:
 
