@@ -157,14 +157,14 @@ device_tracker:
       - 78:D2:94:AA:76:0C
     username: !secret netgear_user
     password: !secret netgear_pass
-    interval_seconds: 10
+    interval_seconds: 20
     consider_home: 180
     new_device_defaults:
       track_new_devices: true
 
-  - platform: tile
-    username: !secret tile_user
-    password: !secret tile_pass
+  #- platform: tile
+  #  username: !secret tile_user
+  #  password: !secret tile_pass
 
 #other device tracking - to be turned on when ready
   #- platform: gpslogger

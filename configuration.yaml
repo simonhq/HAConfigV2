@@ -14,6 +14,7 @@ homeassistant:
 #  unit_system: metric
 #  #temperature_unit: C
 #  time_zone: !secret HA_TZ
+#  external_url: https://thompson-hq.duckdns.org
   packages: !include_dir_named packages
   customize: !include customize.yaml
 
@@ -92,12 +93,15 @@ logger:
 #
 ###########################################################################
 
-#hacs:
-#  token: !secret hacs_token
-#  appdaemon: true
-  #theme: true
+#lock:
+#  - platform: Kevo
+#    email: !secret kevo_email         # Your Kevo account Email
+#    password: !secret kevo_pass       # Your Kevo account Password
+#    lock_id: !secret kevo_id_f        # Your Kevo lock id (obtained manually from kevo website*)
+#    max_retries: 3                    # Optionally set how many times it should try to initalise the lock
+#    retry_delay: 2                    # Optionally set the delay (in seconds) between each retry
 
-# controlled through hacs
+
 breaking_changes:
 
 ###########################################################################

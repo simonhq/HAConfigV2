@@ -18,7 +18,7 @@ class Travel_Messages(hass.Hass):
 
     sendmess = ""
     #the request timer will set how often to request gps notifications on returning to the house
-    requesttimer = 20
+    requesttimer = 30
 
     smess = "Simon is currently at "
     mmess = "Megan is currently at "
@@ -269,9 +269,9 @@ class Travel_Messages(hass.Hass):
 
         ### Showing walking or catching the bus, nothing specific here now 
         elif self.get_state("binary_sensor.megan_walk_bus") == 'on':
-            
+            self.set_state("input_select.trav_megan", state="Walk")
             #wait for a time to ensure not yet at home when you disconnect from the car
-            self.handle = self.run_in(self.meg_walk, 180, **kwargs)
+            #self.handle = self.run_in(self.meg_walk, 180, **kwargs)
 
         #send the message
         if self.sendmess != "":
@@ -314,9 +314,9 @@ class Travel_Messages(hass.Hass):
 
         ### Showing walking or catching the bus, nothing specific here now 
         elif self.get_state("binary_sensor.simon_walk_bus") == 'on':
-
+            self.set_state("input_select.trav_simon", state="Walk")
             #wait for a time to ensure not yet at home when you disconnect from the car
-            self.handle = self.run_in(self.sim_walk, 180, **kwargs)
+            #self.handle = self.run_in(self.sim_walk, 180, **kwargs)
 
         #send the message
         if self.sendmess != "":

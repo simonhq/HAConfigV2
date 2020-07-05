@@ -221,8 +221,9 @@ class KevoLock(object):
         info_result = self.session.get(lock_info_url)
         if info_result.status_code != 200:
             raise KevoError("Error getting lock info: {}".format(info_result.text))
-        jsondata = info_result.read()
-        self.data = json.loads(jsondata.decode('utf-8'))
+        #jsondata = info_result.text
+        #json.loads(jsondata.decode('utf-8'))
+        self.data = info_result.json() 
         self.name = self.data["name"]
         self.state = self.data["bolt_state"]
 

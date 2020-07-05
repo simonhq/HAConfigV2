@@ -89,12 +89,12 @@ input_select:
 #                                                               #
 #################################################################
 
-grocy:
-  url: !secret grocy_path
-  api_key: !secret grocy_api
-  verify_ssl: false
-  port: 9192
-  sensor:
-    - enabled: true
-  binary_sensor:
-    - enabled : true
+#grocy:
+#  url: !secret grocy_path
+#  api_key: !secret grocy_api
+#  verify_ssl: false
+#  port: 9192
+#  sensor:
+#    - enabled: true
+#  binary_sensor:
+#    - enabled : true

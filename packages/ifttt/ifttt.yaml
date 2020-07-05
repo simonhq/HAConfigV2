@@ -56,3 +56,13 @@ automation:
       service_template: '{{ trigger.event.data.service }}'
       data_template:
         entity_id: '{{ trigger.event.data.entity_id }}'  
+
+
+## { "action": "call_service", "service": "homeassistant.turn_on", "entity_id": "input_boolean.megan_bed" }
+## { "action": "call_service", "service": "homeassistant.turn_off", "entity_id": "input_boolean.megan_bed" }
+## { "action": "call_service", "service": "homeassistant.turn_on", "entity_id": "input_boolean.simon_bed" }
+## { "action": "call_service", "service": "homeassistant.turn_off", "entity_id": "input_boolean.simon_bed" }
+## { "action": "call_service", "service": "homeassistant.turn_on", "entity_id": "input_boolean.staci_bed" }
+## { "action": "call_service", "service": "homeassistant.turn_off", "entity_id": "input_boolean.staci_bed" }
+## { "action": "call_service", "service": "homeassistant.turn_on", "entity_id": "input_boolean.delia_bed" }
+## { "action": "call_service", "service": "homeassistant.turn_off", "entity_id": "input_boolean.delia_bed" }

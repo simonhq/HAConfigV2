@@ -16,7 +16,7 @@ group:
     entities:
       - device_tracker.study_switch
       - device_tracker.tv_switch
-      - device_tracker.chairs_switch
+      #- device_tracker.chairs_switch
       - device_tracker.iron_switch
       - binary_sensor.switches_on
       - binary_sensor.switches_off
@@ -132,7 +132,7 @@ binary_sensor:
         device_class: connectivity
         icon_template: mdi:toggle-switch
       sw_chairs:
-        value_template: "{{ is_state('device_tracker.chairs_switch', 'home') }}"
+        value_template: "{{ is_state('device_tracker.simon_recliner', 'home') }}"
         friendly_name: 'Lounge Chairs'
         device_class: connectivity
         icon_template: mdi:toggle-switch
@@ -270,26 +270,26 @@ sensor:
         friendly_name: Study Printer Switch Voltage
         value_template: '{{ states.switch.study_printer.attributes.voltage }}'
         unit_of_measurement: 'V'
-      lch_current_w:
-        friendly_name: Lounge Chairs Current Watts
-        value_template: '{{ states.switch.lounge_chairs.attributes.current_power_w }}'
-        unit_of_measurement: 'W'
-      lch_current_a:
-        friendly_name: Lounge Chairs Switch Current Amps
-        value_template: '{{ states.switch.lounge_chairs.attributes.current_a }}'
-        unit_of_measurement: 'A'
-      lch_today_kwh:
-        friendly_name: Lounge Chairs Switch Today Energy Kwh
-        value_template: '{{ states.switch.lounge_chairs.attributes.today_energy_kwh }}'
-        unit_of_measurement: 'kW'
-      lch_total_kwh:
-        friendly_name: Lounge Chairs Switch Total Energy Kwh
-        value_template: '{{ states.switch.lounge_chairs.attributes.total_energy_kwh }}'
-        unit_of_measurement: 'kW'
-      lch_voltage:
-        friendly_name: Lounge Chairs Switch Voltage
-        value_template: '{{ states.switch.lounge_chairs.attributes.voltage }}'
-        unit_of_measurement: 'V'
+      # lch_current_w:
+      #   friendly_name: Lounge Chairs Current Watts
+      #   value_template: '{{ states.switch.lounge_chairs.attributes.current_power_w }}'
+      #   unit_of_measurement: 'W'
+      # lch_current_a:
+      #   friendly_name: Lounge Chairs Switch Current Amps
+      #   value_template: '{{ states.switch.lounge_chairs.attributes.current_a }}'
+      #   unit_of_measurement: 'A'
+      # lch_today_kwh:
+      #   friendly_name: Lounge Chairs Switch Today Energy Kwh
+      #   value_template: '{{ states.switch.lounge_chairs.attributes.today_energy_kwh }}'
+      #   unit_of_measurement: 'kW'
+      # lch_total_kwh:
+      #   friendly_name: Lounge Chairs Switch Total Energy Kwh
+      #   value_template: '{{ states.switch.lounge_chairs.attributes.total_energy_kwh }}'
+      #   unit_of_measurement: 'kW'
+      # lch_voltage:
+      #   friendly_name: Lounge Chairs Switch Voltage
+      #   value_template: '{{ states.switch.lounge_chairs.attributes.voltage }}'
+      #   unit_of_measurement: 'V'
 
 #################################################################
 #                                                               #

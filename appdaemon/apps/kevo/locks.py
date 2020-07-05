@@ -12,13 +12,16 @@ class DoorLock(hass.Hass):
     kpass = ""
     sname = ""
 
+    a_lock = None
+    select_name = ""
+
     def initialize(self):
 
         #create and set instance variables
-        self.lock = globals.get_arg(self.args, "lock_id")
-        self.kuser = globals.get_arg(self.args, "k_user")
-        self.kpass = globals.get_arg(self.args, "k_pass")
-        self.sname = globals.get_arg(self.args, "select_name")
+        self.lock = self.args["lock_id"]
+        self.kuser = self.args["k_user"]
+        self.kpass = self.args["k_pass"]
+        self.sname = self.args["select_name"]
 
         self.a_lock = KevoLock.FromLockID(self.lock, self.kuser, self.kpass)
         self.select_name = 'input_boolean.' + self.sname
@@ -28,7 +31,9 @@ class DoorLock(hass.Hass):
         #self.set_state(self.select_name, state= self.a_lock.GetBoltState())
         self.listen_state(self.changer,  self.select_name)
         ti_now = datetime.datetime.now()
-        r_next = random.randint(4,9)
+        ti_now = ti_now + datetime.timedelta(seconds=5)
+        #r_next = random.randint(4,9)
+        r_next = 5
         self.log("Update " + self.sname + " every " + str(r_next) + " minutes")
         self.run_every(self.lock_status, ti_now, r_next * 60)
 
