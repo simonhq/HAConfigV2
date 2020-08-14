@@ -1,81 +1,77 @@
-# scripts
 script.fans_off:
-  friendly_name: 'All Fans Off'
+  friendly_name: All Fans Off
   icon: mdi:fan-off
 script.fans_low:
-  friendly_name: 'All Fans On - Low'
+  friendly_name: All Fans On - Low
   icon: mdi:fan
-# presence
 person.simon:
-  friendly_name: 'Simon'
+  friendly_name: Simon
   entity_picture: /local/pics/Simon.jpg
 person.megan:
-  friendly_name: 'Megan'
+  friendly_name: Megan
   entity_picture: /local/pics/Megan.jpg
 person.staci:
-  friendly_name: 'Staci'
+  friendly_name: Staci
   entity_picture: /local/pics/Staci.jpg
 person.delia:
-  friendly_name: 'Delia'
+  friendly_name: Delia
   entity_picture: /local/pics/Delia.jpg
-# weather
 sensor.dark_sky_overnight_low_temperature_0:
-  friendly_name: 'Today Low'
+  friendly_name: Today Low
   entity_picture: /local/icons/alpha-l-circle-outline.png
-  #icon: 'mdi:alpha-l-circle-outline'
 sensor.dark_sky_daytime_high_temperature_0:
-  friendly_name: 'Today High'
+  friendly_name: Today High
   entity_picture: /local/icons/alpha-h-circle.png
-  #icon: mdi:alpha-h-circle
 sensor.bom_tuggeranong_isabella_plains_aws_feels_like_c:
-  friendly_name: 'Outside Now'
+  friendly_name: Outside Now
 sensor.front_door_state_temperature_measurement:
-  friendly_name: 'Front Door Temp'
+  friendly_name: Front Door Temp
 sensor.back_door_state_temperature_measurement:
-  friendly_name: 'Back Door Temp'
-# ink cartridges
+  friendly_name: Back Door Temp
 sensor.epson:
-  friendly_name: 'Printer'
+  friendly_name: Printer
   entity_picture: /local/pics/wf3720.jpg
 sensor.epson_ink_level_black:
-  friendly_name: 'Black'
+  friendly_name: Black
   entity_picture: /local/pics/black.png
 sensor.epson_ink_level_cyan:
-  friendly_name: 'Cyan'
+  friendly_name: Cyan
   entity_picture: /local/pics/cyan.png
 sensor.epson_ink_level_magenta:
-  friendly_name: 'Magenta'
+  friendly_name: Magenta
   entity_picture: /local/pics/magenta.png
 sensor.epson_ink_level_yellow:
-  friendly_name: 'Yellow'
+  friendly_name: Yellow
   entity_picture: /local/pics/yellow.png
-# proximity
 proximity.home_meg:
-  friendly_name: 'Meg from Home'
+  friendly_name: Meg from Home
 proximity.home_simon:
-  friendly_name: 'Simon from Home'
+  friendly_name: Simon from Home
 proximity.home_staci:
-  friendly_name: 'Staci from Home'
+  friendly_name: Staci from Home
 proximity.home_delia:
-  friendly_name: 'Delia from Home'
-# routes
+  friendly_name: Delia from Home
 sensor.waze_meg_time_to_work:
-  friendly_name: 'City'
+  friendly_name: City
 sensor.waze_meg_time_to_home:
-  friendly_name: 'Home'
+  friendly_name: Home
 sensor.waze_meg_to_simon:
-  friendly_name: 'Meg to Simon'
+  friendly_name: Meg to Simon
 sensor.waze_simon_time_to_uni:
-  friendly_name: 'City West'
+  friendly_name: City West
 sensor.waze_simon_time_to_home:
-  friendly_name: 'Home'
+  friendly_name: Home
 sensor.waze_meg_to_staci:
-  friendly_name: 'Staci'
+  friendly_name: Staci
 sensor.waze_meg_to_delia:
-  friendly_name: 'Delia'
+  friendly_name: Delia
 sensor.waze_simon_to_staci:
-  friendly_name: 'Staci'
+  friendly_name: Staci
 sensor.waze_simon_to_delia:
-  friendly_name: 'Delia'
+  friendly_name: Delia
 sensor.waze_staci_to_delia:
-  friendly_name: 'Staci to Delia'
+  friendly_name: Staci to Delia
+binary_sensor.bdoor_close:
+  entity_picture: /local/images/sdoor-closed.png
+binary_sensor.bdoor_open:
+  entity_picture: /local/images/sdoor-open.png

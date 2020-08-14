@@ -72,9 +72,9 @@ sensor:
       - type: last_boot
 
 # this will get the current state of the battery - should be 'charging'
-  - platform: command_line
-    name: "Laptop Battery State"
-    command: "cat /sys/class/power_supply/BAT0/status"
+#  - platform: command_line
+#    name: "Laptop Battery State"
+#    command: "cat /sys/class/power_supply/BAT0/status"
 
   # the current external ip
   #- platform: dnsip
@@ -96,11 +96,11 @@ sensor:
     source: hassio
 
 # CPU Temperature
-  - platform: command_line
-    name: CPU Temp
-    command: "cat /sys/class/thermal/thermal_zone0/temp"
-    unit_of_measurement: "°C"
-    value_template: '{{ value | multiply(0.001) | round(0) }}'
+#  - platform: command_line
+#    name: CPU Temp
+#    command: "cat /sys/class/thermal/thermal_zone0/temp"
+#    unit_of_measurement: "°C"
+#    value_template: '{{ value | multiply(0.001) | round(0) }}'
 
 #component counts
   - platform: template
@@ -174,7 +174,7 @@ sensor:
     #----- Count Timers
       count_timers:
         friendly_name: Timers
-        icon_template: mdi:timer
+        icon_template: mdi:timer-outline
         entity_id: sensor.date
         value_template: "{{ states.timer | list | length }}"
 

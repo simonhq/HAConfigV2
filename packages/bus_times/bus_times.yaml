@@ -83,7 +83,7 @@ sensor:
     name: home_to_city_r5_out
     offset: 600 # 10min
     origin: 1078 #outrim near
-    destination: 2710 #woden pt7 north
+    destination: 2709 #woden north
     scan_interval: 60 #1min
     data: action.zip
 

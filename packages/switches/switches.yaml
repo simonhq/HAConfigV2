@@ -159,22 +159,22 @@ binary_sensor:
         value_template: "{{ is_state('device_tracker.simon_blanket', 'home') }}"
         friendly_name: 'Simon Blanket'
         device_class: connectivity
-        icon_template: mdi:hotel
+        icon_template: mdi:bed
       sw_mb:
         value_template: "{{ is_state('device_tracker.megan_blanket', 'home') }}"
         friendly_name: 'Megan Blanket'
         device_class: connectivity
-        icon_template: mdi:hotel
+        icon_template: mdi:bed
       sw_stb:
         value_template: "{{ is_state('device_tracker.staci_blanket', 'home') }}"
         friendly_name: 'Staci Blanket'
         device_class: connectivity
-        icon_template: mdi:hotel
+        icon_template: mdi:bed
       sw_db:
         value_template: "{{ is_state('device_tracker.delia_blanket', 'home') }}"
         friendly_name: 'Delia Blanket'
         device_class: connectivity
-        icon_template: mdi:hotel        
+        icon_template: mdi:bed        
 
 ####################################################
 #                                                  #

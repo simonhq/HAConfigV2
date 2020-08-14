@@ -146,6 +146,11 @@ input_boolean:
 
 sun:
 
+binary_sensor:
+  - platform: sun2
+    monitored_conditions:
+      - elevation
+
 #################################################################
 #                                                               #
 #                      Weather                                  #
@@ -173,6 +178,44 @@ geo_location:
 #################################################################
 
 sensor:
+
+#################################################################
+#                                                               #
+#                      Moon                                     #
+#                                                               #
+#################################################################
+
+  - platform: moon
+
+#################################################################
+#                                                               #
+#                      Sun                                     #
+#                                                               #
+#################################################################
+
+  - platform: sun2
+    monitored_conditions:
+      - solar_midnight
+      - astronomical_dawn
+      - nautical_dawn
+      - dawn
+      - sunrise
+      - solar_noon
+      - sunset
+      - dusk
+      - nautical_dusk
+      - astronomical_dusk
+      - daylight
+      - civil_daylight
+      - nautical_daylight
+      - astronomical_daylight
+      - night
+      - civil_night
+      - nautical_night
+      - astronomical_night
+      - elevation
+      - min_elevation
+      - max_elevation
 
 ####################################################
 #                                                  #

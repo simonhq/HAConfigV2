@@ -44,7 +44,7 @@ binary_sensor:
       cook_megan:
         friendly_name: Meg cook
         value_template: "{{ is_state('input_select.cooking', 'Megan') }}"
-        icon_template: mdi:pot
+        icon_template: mdi:pot-steam
       cook_staci:
         friendly_name: Staci cook
         value_template: "{{ is_state('input_select.cooking', 'Staci') }}"

@@ -46,14 +46,14 @@ sw_st_blanket:
     widget_type: switch
     entity: switch.staci_blanket
     title: Staci Blanket
-    icon_on: mdi-hotel
+    icon_on: mdi-bed
     icon_off: mdi-bed-empty
 
 sw_d_blanket:
     widget_type: switch
     entity: switch.delia_blanket
     title: Delia Blanket
-    icon_on: mdi-hotel
+    icon_on: mdi-bed
     icon_off: mdi-bed-empty
 
 l_toilet:

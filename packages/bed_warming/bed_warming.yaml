@@ -58,28 +58,28 @@ input_number:
     max: 15
     name: "Warm Simon's bed"
     unit_of_measurement: 'C'
-    icon: mdi:hotel
+    icon: mdi:bed
 
   bed_m_flag:
     min: 5
     max: 15
     name: "Warm Megan's bed"
     unit_of_measurement: 'C'
-    icon: mdi:hotel
+    icon: mdi:bed
 
   bed_st_flag:
     min: 5
     max: 15
     name: "Warm Staci's bed"
     unit_of_measurement: 'C'
-    icon: mdi:hotel
+    icon: mdi:bed
 
   bed_d_flag:
     min: 5
     max: 15
     name: "Warm Delia's bed"
     unit_of_measurement: 'C'
-    icon: mdi:hotel
+    icon: mdi:bed
     
 #################################################################
 #                                                               #
@@ -131,22 +131,22 @@ input_boolean:
   bed_s:
     name: Simon Bed warm on timer
     initial: off
-    icon: mdi:hotel
+    icon: mdi:bed
 
   bed_m:
     name: Megan Bed warm on timer
     initial: off
-    icon: mdi:hotel
+    icon: mdi:bed
 
   bed_st:
     name: Staci Bed warm on timer
     initial: off
-    icon: mdi:hotel
+    icon: mdi:bed
 
   bed_d:
     name: Delia Bed warm on timer
     initial: off
-    icon: mdi:hotel        
+    icon: mdi:bed        
 
 #################################################################
 #                                                               #
@@ -173,6 +173,19 @@ timer:
 
   bed_d_timer:
     duration: '01:00:00'
+
+
+##
+#
+# Withings bed/sleep monitors
+#
+##
+
+#withings:
+#  client_id: !secret wit_client
+#  client_secret: !secret wit_consumer_secret
+#  use_webhook: true
+
 
 #################################################################
 #                                                               #

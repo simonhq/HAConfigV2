@@ -220,6 +220,27 @@ sensor:
     scan_interval: 1800
     name: 'Bedroom 2 Hue Remote Battery Level'
 
+####################################################
+#                                                  #
+#           sensor - power                         #
+#                                                  #
+#################################################### 
+
+  - platform: template
+    sensors:
+      solar_gen:
+        value_template: "{{ states('sensor.solaredge_current_power')|float }}"
+        friendly_name: 'Solar Generation'
+        unit_of_measurement: 'W'
+      solar_consume:
+        value_template: "{{ states('sensor.solaredge_power_consumption')|float * 1000 }}"
+        friendly_name: 'Household Consumption'
+        unit_of_measurement: 'W'
+      solar_import:
+        value_template: "{{ states('sensor.solaredge_grid_power')|float * 1000 }}"
+        friendly_name: 'Grid Import/Export'
+        unit_of_measurement: 'W'
+        
 #################################################################
 #                                                               #
 #                       Automation                              #

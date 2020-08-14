@@ -69,10 +69,10 @@ input_select:
 #                                                               #
 #################################################################
 
-remote:
-  - platform: harmony
-    name: harmony_hub
-    host: 10.0.0.16
+#remote:
+#  - platform: harmony
+#    name: harmony_hub
+#    host: 10.0.0.16
 
 #################################################################
 #                                                               #

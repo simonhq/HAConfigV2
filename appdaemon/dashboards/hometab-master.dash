@@ -68,14 +68,14 @@ sw_s_blanket:
     widget_type: switch
     entity: switch.simon_blanket
     title: Simon Blanket
-    icon_on: mdi-hotel
+    icon_on: mdi-bed
     icon_off: mdi-bed-empty
 
 sw_m_blanket:
     widget_type: switch
     entity: switch.megan_blanket
     title: Megan Blanket
-    icon_on: mdi-hotel
+    icon_on: mdi-bed
     icon_off: mdi-bed-empty
 
 ens_select:
