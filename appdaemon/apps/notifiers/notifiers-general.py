@@ -114,13 +114,13 @@ class General_Messages(hass.Hass):
     def drink_notify(self, entity, attribute, old, new, kwargs):
         if new == "on":
             self.notifier.notify(self.drink)
-            mbar = self.get_state("sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb")
+            mbar = self.get_state("sensor.dark_sky_pressure")
             self.set_state("input_number.last_measure", state=mbar)
 
     def potas_notify(self, entity, attribute, old, new, kwargs):
         if new == "on":
             self.notifier.notify(self.potas)
-            mbar = self.get_state("sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb")
+            mbar = self.get_state("sensor.dark_sky_pressure")
             self.set_state("input_number.last_measure", state=mbar)
 
     def gps_notify(self, entity, attribute, old, new, kwargs):
@@ -156,7 +156,7 @@ class General_Messages(hass.Hass):
                     self.mess += " & Yellow"
                 else:
                     self.mess = "Yellow"
-                    flag = 1
+                    self.flag = 1
 
             self.mess += self.printer            
             self.turn_off("input_boolean.ink_notify_system")

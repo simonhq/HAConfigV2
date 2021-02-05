@@ -115,25 +115,25 @@ notify:
 #                                                  #
 #################################################### 
 
-  - name: push_simon
-    platform: pushbullet
-    api_key: !secret simon_pushbullet_api_key
+  # - name: push_simon
+  #   platform: pushbullet
+  #   api_key: !secret simon_pushbullet_api_key
 
-  - name: push_megan
-    platform: pushbullet
-    api_key: !secret megan_pushbullet_api_key
+  # - name: push_megan
+  #   platform: pushbullet
+  #   api_key: !secret megan_pushbullet_api_key
 
-  - name: push_staci
-    platform: pushbullet
-    api_key: !secret staci_pushbullet_api_key
+  # - name: push_staci
+  #   platform: pushbullet
+  #   api_key: !secret staci_pushbullet_api_key
 
-  - name: push_delia
-    platform: pushbullet
-    api_key: !secret delia_pushbullet_api_key
+  # - name: push_delia
+  #   platform: pushbullet
+  #   api_key: !secret delia_pushbullet_api_key
 
-  - name: push_hassio
-    platform: pushbullet
-    api_key: !secret hassio_pushbullet_api_key
+  # - name: push_hassio
+  #   platform: pushbullet
+  #   api_key: !secret hassio_pushbullet_api_key
 
 ####################################################
 #                                                  #

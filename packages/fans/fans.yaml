@@ -39,19 +39,7 @@ group:
       - automation.delia_fan_2
       - automation.delia_fan_3
 
-
-
-#################################################################
-#                                                               #
-#                       Bond Integration                        #
-#                                                               #
-#################################################################
-
-bond:
-  host: !secret bond_ip
-  token: !secret bond_token
-
-#################################################################
+################################################################
 #                                                               #
 #                       Dyson Integration                        #
 #                                                               #
@@ -66,49 +54,6 @@ dyson:
     device_ip: !secret dyson_dipa
 
 
-#################################################################
-#                                                               #
-#                       Input Select                            #
-#                                                               #
-#################################################################
-
-#input_select:
-
-####################################################
-#                                                  #
-#            input_select fans                     #
-#                                                  #
-#################################################### 
-
-  # master_fan_flag:
-  #   name: Master Fan
-  #   options:
-  #     - 'Off'
-  #     - '1'
-  #     - '2'
-  #     - '3'
-  #     - 'Transition'
-  #   icon: mdi:fan
-
-  # staci_fan_flag:
-  #   name: Staci Fan
-  #   options:
-  #     - 'Off'
-  #     - '1'
-  #     - '2'
-  #     - '3'
-  #     - 'Transition'
-  #   icon: mdi:fan
-
-  # delia_fan_flag:
-  #   name: Delia Fan
-  #   options:
-  #     - 'Off'
-  #     - '1'
-  #     - '2'
-  #     - '3'
-  #     - 'Transition'
-  #   icon: mdi:fan
 
 #################################################################
 #                                                               #
@@ -139,7 +84,7 @@ binary_sensor:
 
 ####################################################
 #                                                  #
-#            binary Sensor - Interface              #
+#            binary Sensor - Interface     dyson         #
 #                                                  #
 #################################################### 
 
@@ -155,205 +100,20 @@ binary_sensor:
         value_template: "{{ is_state('binary_sensor.purifier_off', 'off') }}"
         icon_template: mdi:air-filter
 
-#################################################################
-#                                                               #
-#                       Scripts                                 #
-#                                                               #
-#################################################################
-
-#script:
-
 ####################################################
 #                                                  #
-#            script - all fans on/off              #
+#            binary Sensor - Interface     tuya heaters         #
 #                                                  #
 #################################################### 
 
-  # fans_off:
-  #   sequence:
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.master_fan_flag
-  #         option: '{{"Transition"}}'
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.staci_fan_flag
-  #         option: '{{"Transition"}}'
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.delia_fan_flag
-  #         option: '{{"Transition"}}'
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.master_fan_flag
-  #         option: '{{"Off"}}'
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.staci_fan_flag
-  #         option: '{{"Off"}}'
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.delia_fan_flag
-  #         option: '{{"Off"}}'
-      
-  # fans_low:
-  #   sequence:
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.master_fan_flag
-  #         option: '{{"Transition"}}'
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.staci_fan_flag
-  #         option: '{{"Transition"}}'
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.delia_fan_flag
-  #         option: '{{"Transition"}}'
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.master_fan_flag
-  #         option: '{{"1"}}'
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.staci_fan_flag
-  #         option: '{{"1"}}'
-  #     - service: input_select.select_option
-  #       data_template:
-  #         entity_id: input_select.delia_fan_flag
-  #         option: '{{"1"}}'
-
-#################################################################
-#                                                               #
-#                       Automation                              #
-#                                                               #
-#################################################################
-
-#automation:
-
-####################################################
-#                                                  #
-#            automation - ifttt triggers           #
-#                                                  #
-#################################################### 
-
-
-  #################################
-  ## Master
-  #################################
-
-  # - alias: master_fan_off
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.master_fan_flag
-  #       to: 'Off'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"master_fan_off"}
-
-  # - alias: master_fan_1
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.master_fan_flag
-  #       to: '1'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"master_fan_1"}
-
-  # - alias: master_fan_2
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.master_fan_flag
-  #       to: '2'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"master_fan_2"}
-
-  # - alias: master_fan_3
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.master_fan_flag
-  #       to: '3'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"master_fan_3"}
-
-  # #################################
-  # ## Staci
-  # #################################
-
-  # - alias: staci_fan_off
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.staci_fan_flag
-  #       to: 'Off'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"master_fan_off"}
-
-  # - alias: staci_fan_1
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.staci_fan_flag
-  #       to: '1'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"master_fan_1"}
-
-  # - alias: staci_fan_2
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.staci_fan_flag
-  #       to: '2'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"master_fan_2"}
-
-  # - alias: staci_fan_3
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.staci_fan_flag
-  #       to: '3'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"staci_fan_3"}
-
-  # #################################
-  # ## Delia
-  # #################################
-
-  # - alias: delia_fan_off
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.delia_fan_flag
-  #       to: 'Off'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"delia_fan_off"}
-
-  # - alias: delia_fan_1
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.delia_fan_flag
-  #       to: '1'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"delia_fan_1"}
-
-  # - alias: delia_fan_2
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.delia_fan_flag
-  #       to: '2'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"delia_fan_2"}
-
-  # - alias: delia_fan_3
-  #   trigger:
-  #     - platform: state
-  #       entity_id: input_select.delia_fan_flag
-  #       to: '3'
-  #   action:
-  #     - service: ifttt.trigger
-  #       data: {"event":"delia_fan_3"}
+  - platform: template
+    sensors:
+      heaters_off:
+        friendly_name: Heaters Off
+        value_template: "{{ is_state('climate.83607036e098068310e2', 'off') and is_state('climate.33805060a4cf12d11732', 'off') and is_state('climate.83607036e09806830fb8', 'off') }}"
+        icon_template: mdi:radiator-off
+        device_class: motion
+      heaters_on:
+        friendly_name: Heaters On
+        value_template: "{{ is_state('binary_sensor.purifier_off', 'off') }}"
+        icon_template: mdi:radiator

@@ -49,6 +49,15 @@ speedtestdotnet:
 
 #################################################################
 #                                                               #
+#                  Network 
+#                                                               #
+#################################################################
+
+#shell_command:
+#  map_nas_video_folder: mount 10.0.0.69:/plexshare /media/plex
+
+#################################################################
+#                                                               #
 #                       Sensors                                 #
 #                                                               #
 #################################################################
@@ -110,14 +119,14 @@ sensor:
       count_automations:
         friendly_name: Automations
         icon_template: mdi:arrow-decision-auto
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.automation | list | length }}"
 
     #----- Count Scripts
       count_scripts:
         friendly_name: Scripts
         icon_template: mdi:script
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.script| list | length }}"
 
       count_auto_scripts:
@@ -129,7 +138,7 @@ sensor:
       count_device_trackers:
         friendly_name: Device Trackers
         icon_template: mdi:radar
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.device_tracker | list | length }}"
 
     #------ as the router creates an entry for each satelite +1 (main, router 1, router 2) - so divide by 3
@@ -142,21 +151,21 @@ sensor:
       count_binary_sensors:
         friendly_name: Binary Sensors
         icon_template: mdi:electric-switch
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.binary_sensor| list | length }}"
 
     #----- Count Sensors
       count_sensors:
         friendly_name: Sensors
         icon_template: mdi:leak
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.sensor | list | length }}"
 
     #----- Count Switches
       count_switches:
         friendly_name: Switches
         icon_template: mdi:toggle-switch-off-outline
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.switch | list | length }}"
 
       count_sensor_control:
@@ -168,14 +177,14 @@ sensor:
       count_zones:
         friendly_name: Zones
         icon_template: mdi:map-marker-radius
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.zone | list | length }}"
 
     #----- Count Timers
       count_timers:
         friendly_name: Timers
         icon_template: mdi:timer-outline
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.timer | list | length }}"
 
       count_zone_timers:
@@ -187,35 +196,35 @@ sensor:
       count_input_booleans:
         friendly_name: Input Booleans
         icon_template: mdi:video-input-component
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.input_boolean | list | length }}"
 
     #----- Input Numbers
       count_input_numbers:
         friendly_name: Input Numbers
         icon_template: mdi:counter
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.input_number | list | length }}"
 
     #----- Input Texts
       count_input_texts:
         friendly_name: Input Texts
         icon_template: mdi:signature-text
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.input_text | list | length }}"
 
     #----- Input Selects
       count_input_selects:
         friendly_name: Input Selects
         icon_template: mdi:inbox-arrow-down
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.input_select | list | length }}"
 
     #----- Input Date Times
       count_input_datetimes:
         friendly_name: Input Date Times
         icon_template: mdi:calendar-range
-        entity_id: sensor.date
+        #entity_id: sensor.date
         value_template: "{{ states.input_datetime | list | length }}"
 
       count_inputs:

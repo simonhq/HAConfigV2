@@ -142,18 +142,3 @@ binary_sensor:
 
 script:
 
-####################################################
-#                                                  #
-#                master light                      #
-#                                                  #
-####################################################
-
-  master_fan_light_off:
-    sequence:
-      - service: ifttt.trigger
-        data: {"event":"master_light_off"}
-
-  master_fan_light_on:
-    sequence:
-      - service: ifttt.trigger
-        data: {"event":"master_light_on"}

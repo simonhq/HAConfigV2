@@ -1,181 +1,95 @@
-#################################################################
-#                                                               #
-#                     Packages/Climate                          #
-#                                                               #
-#################################################################
+# #################################################################
+# #                                                               #
+# #                     Packages/Climate                          #
+# #                                                               #
+# #################################################################
 
-#################################################################
-#                                                               #
-#                       Group                                   #
-#                                                               #
-#################################################################
+# #################################################################
+# #                                                               #
+# #                       Group                                   #
+# #                                                               #
+# #################################################################
 
-group:
-  climate_e:
-    name: Climate Entities
-    entities:
-      - input_number.temp_opt_high
-      - input_number.temp_opt_low
-      - input_number.temp_int_high
-      - input_number.temp_int_low
-      - input_number.temp_ext_high
-      - input_number.temp_ext_low
-      - binary_sensor.climate_warn_hot
-      - binary_sensor.climate_warn_hot_overnight
-      - binary_sensor.climate_warn_cold
-      - binary_sensor.climate_warn_cold_overday
-      - binary_sensor.climate_hot_turn_on_cooling
-      - binary_sensor.climate_opt_turn_off_warming
-      - binary_sensor.climate_opt_turn_off_cooling
-      - binary_sensor.climate_cold_turn_on_warming
-      - binary_sensor.climate_optimal
-      - binary_sensor.climate_hot_outside_on_fan
-      - binary_sensor.climate_cool_outside_off_fan
-      # internal temps
-      - sensor.back_door_state_temperature_measurement
-      - sensor.front_door_state_temperature_measurement
-      - sensor.toilet_motion_temperature_measurement
-      - sensor.bathroom_sensor_temperature
-      - sensor.ensuite_sensor_temperature
-      - sensor.laundry_sensor_temperature
-      - sensor.garage_sensor_temperature
+# group:
+#   climate_e:
+#     name: Climate Entities
+#     entities:
+#       - binary_sensor.cc_ac_off      
+#       - binary_sensor.cc_ac_fan
+#       - binary_sensor.cc_ac_cool_ext
+#       - binary_sensor.cc_ac_cool_int
+#       - binary_sensor.cc_ac_cool_opt
+#       - binary_sensor.cc_ac_heat_ext
+#       - binary_sensor.cc_ac_heat_int
+#       - binary_sensor.cc_ac_heat_opt
+#       - binary_sensor.climate_optimal
+#       # internal temps
+#       - sensor.back_door_state_temperature_measurement
+#       - sensor.front_door_state_temperature_measurement
+#       - sensor.toilet_motion_temperature_measurement
+#       - sensor.bathroom_sensor_temperature
+#       - sensor.ensuite_sensor_temperature
+#       - sensor.laundry_sensor_temperature
+#       - sensor.garage_sensor_temperature
       
-      
-#################################################################
-#                                                               #
-#                            Input Number                       #
-#                                                               #
-#################################################################
-
-input_number:
-
-####################################################
-#                                                  #
-#                climate ranges                    #
-#                                                  #
-####################################################
-
-  temp_opt_high:
-    min: 21
-    max: 22
-    name: 'Optimal (high)'
-    unit_of_measurement: 'C'
-    icon: mdi:arrow-expand-vertical
-
-  temp_opt_low:
-    min: 20
-    max: 21
-    name: 'Optimal (low)'
-    unit_of_measurement: 'C'
-    icon: mdi:arrow-collapse-vertical
-
-  temp_int_high:
-    min: 22
-    max: 24
-    name: 'Internal High (prefer)'
-    unit_of_measurement: 'C'
-    icon: mdi:arrow-collapse-up
-
-  temp_int_low:
-    min: 18
-    max: 20
-    name: 'Internal Low (prefer)'
-    unit_of_measurement: 'C'
-    icon: mdi:arrow-collapse-down
-
-  temp_ext_high:
-    min: 26
-    max: 30
-    name: 'External High (Warn)'
-    unit_of_measurement: 'C'
-    icon: mdi:fire
-
-  temp_ext_low:
-    min: 12
-    max: 16
-    name: 'External Low (Warn)'
-    unit_of_measurement: 'C'
-    icon: mdi:snowflake
-
+     
 
 #################################################################
 #                                                               #
 #                            Binary Sensor                      #
 #                                                               #
-#################################################################
+################################################################
 
 binary_sensor:
 
-  - platform: template
-    sensors:
-      # todays high is higher than our hot, and the internal temp is higher than optimal and it is before evening
-      climate_warn_hot:
-        friendly_name: Hot Day
-        value_template: "{{ (states('sensor.dark_sky_daytime_high_temperature_0d')|float > states('input_number.temp_ext_high')|float) and (states('sensor.inside_now')|float > states('input_number.temp_opt_high')|float) and (now().hour < 17) }}"
-        icon_template: mdi:air-conditioner
-        device_class: heat
-      # todays low is higher than our optimal, and the internal temp is higher than optimal and it is after evening
-      climate_warn_hot_overnight:
-        friendly_name: Hot Night
-        value_template: "{{ (states('sensor.dark_sky_overnight_low_temperature_0d')|float > states('input_number.temp_opt_high')|float) and (states('sensor.inside_now')|float > states('input_number.temp_opt_high')|float) and (now().hour > 17) }}"
-        icon_template: mdi:air-conditioner
-        device_class: heat
-      # todays low is lower than our cold, and the internal temp is lower than optimal and it is after evening
-      climate_warn_cold:
-        friendly_name: Cold Night
-        value_template: "{{ (states('sensor.dark_sky_overnight_low_temperature_0d')|float < states('input_number.temp_ext_low')|float) and (states('sensor.inside_now')|float < states('input_number.temp_opt_low')|float) and (now().hour > 17) }}"
-        icon_template: mdi:radiator
-        device_class: cold
-      # todays hign is lower than our optimal, and the internal temp is lower than optimal and it is before evening
-      climate_warn_cold_overday:
-        friendly_name: Cold Day
-        value_template: "{{ (states('sensor.dark_sky_daytime_high_temperature_0d')|float < states('input_number.temp_opt_low')|float) and (states('sensor.inside_now')|float < states('input_number.temp_opt_low')|float) and (now().hour < 17) }}"
-        icon_template: mdi:radiator
-        device_class: cold
-
-      # the internal temp is higher than internal high preference
-      climate_hot_turn_on_cooling:
-        friendly_name: Hot Now
-        value_template: "{{ (states('sensor.inside_now')|float > states('input_number.temp_int_high')|float) }}"
-        icon_template: mdi:air-conditioner
-        device_class: heat
-      # the internal temp is lower than internal low preference
-      climate_cold_turn_on_warming:
-        friendly_name: Cold Now
-        value_template: "{{ (states('sensor.inside_now')|float < states('input_number.temp_int_low')|float) }}"
-        icon_template: mdi:radiator
-        device_class: cold
-
-      # the internal temp is lower than internal optimal high 
-      climate_opt_turn_off_cooling:
-        friendly_name: Cooling
-        value_template: "{{ (states('sensor.inside_now')|float <= states('input_number.temp_opt_high')|float) }}"
-        icon_template: mdi:fan-off
-        device_class: sound
-      # the internal temp is higher than internal optimal low
-      climate_opt_turn_off_warming:
-        friendly_name: Warming
-        value_template: "{{ (states('sensor.inside_now')|float >= states('input_number.temp_opt_low')|float) }}"
-        icon_template: mdi:radiator-off
-        device_class: sound
-
-      # the internal temp is between optimals
-      climate_optimal:
-        friendly_name: Pleasant
-        value_template: "{{ (states('sensor.inside_now')|float >= states('input_number.temp_int_low')|float) and (states('sensor.inside_now')|float <= states('input_number.temp_int_high')|float) }}"
-        icon_template: mdi:emoticon-happy-outline
+    - platform: template
+      sensors:
+      # the internal temp is between optimal low and internal high
+         climate_optimal:
+            friendly_name: Pleasant
+            value_template: "{{ (states('sensor.inside_now')|float >= states('input_number.cc_optlow')|float) and (states('sensor.inside_now')|float <= states('input_number.cc_inthigh')|float) }}"
+            icon_template: mdi:emoticon-happy-outline
       
-      # for the fans
-      # the internal temp is higher than the internal low preference and the current outside temp is higher than the optimal high
-      climate_hot_outside_on_fan:
-        friendly_name: Fans
-        value_template: "{{ (states('sensor.inside_now')|float >= states('input_number.temp_int_low')|float) and (states('sensor.bom_tuggeranong_isabella_plains_aws_feels_like_c')|float >= states('input_number.temp_opt_high')|float) }}"
-        icon_template: mdi:fan
-      # the internal temp is lower than the internal optimal high and the current outside temp is lower than the internal high preference
-      climate_cool_outside_off_fan:
-        friendly_name: Fans
-        value_template: "{{ (states('sensor.inside_now')|float <= states('input_number.temp_opt_high')|float) and (states('sensor.bom_tuggeranong_isabella_plains_aws_feels_like_c')|float <= states('input_number.temp_int_high')|float) }}"
-        icon_template: mdi:fan-off
-        device_class: sound
 
+         cc_ac_manual_on:
+            friendly_name: AC Manual
+            value_template: "{{ (states('input_boolean.cc_ac_manual') == 'on') }}"
+            icon_template: mdi:crosshairs-question      
+         cc_ac_manual_off:
+            friendly_name: AC Auto
+            value_template: "{{ (states('input_boolean.cc_ac_manual') == 'off') }}"
+            icon_template: mdi:fan-auto      
+         
+         cc_ac_off:
+            friendly_name: AC Off
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'off') }}"
+            icon_template: mdi:hvac-off      
+         cc_ac_fan:
+            friendly_name: AC Fan
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'fan_only') }}"
+            icon_template: mdi:air-conditioner
+         cc_ac_cool_ext:
+            friendly_name: AC Cool (Ext)
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'cool') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_exthigh')|float) }}"
+            icon_template: mdi:arrow-collapse-down
+         cc_ac_cool_int:
+            friendly_name: AC Cool (Int)
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'cool') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_inthigh')|float) }}"
+            icon_template: mdi:arrow-expand-down
+         cc_ac_cool_opt:
+            friendly_name: AC Cool (Opt)
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'cool') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_opthigh')|float) }}"
+            icon_template: mdi:arrow-collapse-vertical
+         cc_ac_heat_ext:
+            friendly_name: AC Heat (Ext)
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'heat') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_extlow')|float) }}"
+            icon_template: mdi:arrow-collapse-up
+         cc_ac_heat_int:
+            friendly_name: AC Heat (Int)
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'heat') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_intlow')|float) }}"
+            icon_template: mdi:arrow-expand-up
+         cc_ac_heat_opt:
+            friendly_name: AC Heat (Opt)
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'heat') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_optlow')|float) }}"
+            icon_template: mdi:arrow-collapse-vertical
       

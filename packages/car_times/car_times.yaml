@@ -211,7 +211,7 @@ sensor:
   - platform: waze_travel_time
     name: Waze Meg to Delia
     origin: device_tracker.sm_g965f
-    destination: device_tracker.moto_g_5s_plus
+    destination: device_tracker.pixel_3a_2
     region: 'EU'
 
   - platform: waze_travel_time
@@ -223,7 +223,7 @@ sensor:
   - platform: waze_travel_time
     name: Waze Simon to Delia
     origin: device_tracker.pixel_3
-    destination: device_tracker.moto_g_5s_plus
+    destination: device_tracker.pixel_3a_2
     region: 'EU'
 
   - platform: waze_travel_time
@@ -234,7 +234,7 @@ sensor:
 
   - platform: waze_travel_time
     name: Waze Staci to Delia
-    origin: device_tracker.moto_g_5s_plus
+    origin: device_tracker.pixel_3a_2
     destination: device_tracker.pixel_3a
     region: 'EU'
 

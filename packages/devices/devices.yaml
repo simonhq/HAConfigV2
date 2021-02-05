@@ -155,6 +155,7 @@ device_tracker:
     accesspoints: 
       - 78:D2:94:AA:52:44
       - 78:D2:94:AA:76:0C
+      - 3C:37:86:44:C3:4A
     username: !secret netgear_user
     password: !secret netgear_pass
     interval_seconds: 20
@@ -162,28 +163,7 @@ device_tracker:
     new_device_defaults:
       track_new_devices: true
 
-  #- platform: tile
-  #  username: !secret tile_user
-  #  password: !secret tile_pass
 
-#other device tracking - to be turned on when ready
-  #- platform: gpslogger
-  #- platform: trackr
-  #  username: !secret trackr_username
-  #  password: !secret trackr_password
-
-
-#################################################################
-#                                                               #
-#                   Tuya platform                               #
-#                                                               #
-#################################################################
-
-#tuya:
-  #username: !secret tuya_user
-  #password: !secret tuya_pass
-  #country_code: !secret tuya_code
-  #platform: tuya #smart_life
 
 #################################################################
 #                                                               #
@@ -261,16 +241,7 @@ binary_sensor:
         friendly_name: 'Printer'
         device_class: connectivity
         icon_template: mdi:printer
-      ha_laptop:
-        value_template: "{{ is_state('device_tracker.ha_laptop', 'home') }}"
-        friendly_name: 'Hassio Server'
-        device_class: connectivity
-        icon_template: mdi:home-assistant
-      # hass_lt:
-      #   value_template: "{{ is_state('device_tracker.xubuntu_laptop', 'home') }}"
-      #   friendly_name: 'Hassio Server'
-      #   device_class: connectivity
-      #   icon_template: mdi:home-assistant
+      
       # tradfri:
       #   value_template: "{{ is_state('device_tracker.tradfri_hub', 'home') }}"
       #   friendly_name: 'Tradfri Hub'
@@ -302,22 +273,13 @@ binary_sensor:
         device_class: connectivity
         icon_template: mdi:orbit
       
-
-      hass_lt_w:
-        value_template: "{{ is_state('device_tracker.xubuntu_laptop_w', 'home') }}"
-        friendly_name: 'Hassio Server via Wifi'
-        device_class: connectivity
-        icon_template: mdi:home-assistant
       pi_server:
-        value_template: "{{ is_state('device_tracker.pi_server', 'home') }}"
+        value_template: "{{ is_state('device_tracker.raspberrypi', 'home') }}"
         friendly_name: 'Pi Server'
         device_class: connectivity
         icon_template: mdi:raspberry-pi
-      # pi_hole:
-      #   value_template: "{{ states('sensor.pi_hole_dns_unique_clients')|float > 0 }}"
-      #   friendly_name: 'Pi Hole'
-      #   device_class: connectivity
-      #   icon_template: mdi:fire
+     
+
 
 ####################################################
 #                                                  #
@@ -396,16 +358,7 @@ binary_sensor:
         friendly_name: 'Clothes Dryer'
         device_class: connectivity
         icon_template: mdi:tumble-dryer
-      # samwash_sw:
-      #   value_template: "{{ is_state('switch.washing_machine', 'on') }}"
-      #   friendly_name: 'Washing Machine'
-      #   device_class: connectivity
-      #   icon_template: mdi:washing-machine
-      # samdry_sw:
-      #   value_template: "{{ is_state('switch.tumble_dryer', 'on') }}"
-      #   friendly_name: 'Clothes Dryer'
-      #   device_class: connectivity
-      #   icon_template: mdi:tumble-dryer
+      
 
 ####################################################
 #                                                  #
@@ -416,13 +369,8 @@ binary_sensor:
 
   - platform: template
     sensors:
-      ht_study:
-        value_template: "{{ is_state('device_tracker.hometab_study', 'home') }}"
-        friendly_name: 'Study'
-        device_class: connectivity
-        icon_template: mdi:desktop-classic
       ht_kitchen:
-        value_template: "{{ is_state('device_tracker.hometab_kitchen', 'home') }}"
+        value_template: "{{ is_state('device_tracker.kitchen_surface', 'home') }}"
         friendly_name: 'Kitchen'
         device_class: connectivity
         icon_template: mdi:fridge-outline
@@ -431,13 +379,7 @@ binary_sensor:
         friendly_name: 'Back Hall'
         device_class: connectivity
         icon_template: mdi:door-closed
-      ht_system:
-        value_template: "{{ is_state('binary_sensor.ht_hall', 'on') and is_state('binary_sensor.ht_kitchen', 'on') and is_state('binary_sensor.ht_study', 'on') }}"
-        friendly_name: 'HomeTabs'
-        device_class: connectivity
-        icon_template: mdi:tab
-
-
+      
       
 ####################################################
 #                                                  #

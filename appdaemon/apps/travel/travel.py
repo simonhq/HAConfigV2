@@ -77,22 +77,22 @@ class Travel_Messages(hass.Hass):
     def sim_loc(self, entity, attribute, old, new, kwargs):
         self.s_loc = new
         if new != 'home' and self.m_loc != 'home':
-            self.turn_off("fan.fan")
+            self.turn_off("fan.master_fan")
     
     def meg_loc(self, entity, attribute, old, new, kwargs):
         self.m_loc = new
         if new != 'home' and self.s_loc != 'home':
-            self.turn_off("fan.fan")
+            self.turn_off("fan.master_fan")
 
     def sta_loc(self, entity, attribute, old, new, kwargs):
         self.st_loc = new
         if new != 'home':
-            self.turn_off("fan.fan_2")
+            self.turn_off("fan.staci_s_fan")
 
     def del_loc(self, entity, attribute, old, new, kwargs):
         self.d_loc = new
         if new != 'home':
-            self.turn_off("fan.fan_3")
+            self.turn_off("fan.delia_s_fan")
 
     ###
     #   This controls various flags and actions through the the proximity platform

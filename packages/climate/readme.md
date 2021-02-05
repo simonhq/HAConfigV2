@@ -2,6 +2,8 @@
 
 ### This package uses weather and internal sensors to determine the usage of heating/cooling options 
 
+## DEPRECIATED
+
 <hr --- </hr> 
 
 <h4 align="left">Package Credits:</h4>

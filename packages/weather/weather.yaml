@@ -22,22 +22,22 @@ group:
       - input_boolean.weather_storms
       # dam levels
 
-  weather_bom_e:
-    name: Weather BOM Entities
-    entities:
-      - sensor.bom_tuggeranong_isabella_plains_aws_air_temp_c
-      - sensor.bom_tuggeranong_isabella_plains_aws_delta_temp_c
-      - sensor.bom_tuggeranong_isabella_plains_aws_dew_point_c
-      - sensor.bom_tuggeranong_isabella_plains_aws_feels_like_c
-      - sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb
-      - sensor.bom_tuggeranong_isabella_plains_aws_pressure_msl
-      - sensor.bom_tuggeranong_isabella_plains_aws_pressure_qnh
-      - sensor.bom_tuggeranong_isabella_plains_aws_rain_today
-      - sensor.bom_tuggeranong_isabella_plains_aws_relative_humidity
-      - sensor.bom_tuggeranong_isabella_plains_aws_visability_km
-      - sensor.bom_tuggeranong_isabella_plains_aws_wind_direction
-      - sensor.bom_tuggeranong_isabella_plains_aws_wind_gust_kmh
-      - sensor.bom_tuggeranong_isabella_plains_aws_wind_speed_kmh
+  # weather_bom_e:
+  #   name: Weather BOM Entities
+  #   entities:
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_air_temp_c
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_delta_temp_c
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_dew_point_c
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_feels_like_c
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_pressure_msl
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_pressure_qnh
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_rain_today
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_relative_humidity
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_visability_km
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_wind_direction
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_wind_gust_kmh
+  #     - sensor.bom_tuggeranong_isabella_plains_aws_wind_speed_kmh
       
   weather_dsky_e:
     name: Weather Dark Sky Entities
@@ -167,9 +167,17 @@ weather:
 #                                                               #
 #################################################################
 
+#geo_location:
+#  - platform: nsw_rural_fire_service_feed
+
 geo_location:
   - platform: nsw_rural_fire_service_feed
-
+    entity_namespace: 'nsw_fire_service_feed'
+    radius: 30
+    categories:
+      - 'Emergency Warning'
+      - 'Watch and Act'
+      - 'Advice'
 
 #################################################################
 #                                                               #
@@ -257,23 +265,23 @@ sensor:
 ####################################################
 
 
-  - platform: bom
-    station: IDN60903.94925
-    name: Tuggeranong (Isabella Plains) AWS
-    monitored_conditions:
-      - apparent_t
-      - delta_t
-      - gust_kmh
-      - air_temp
-      - dewpt
-      - press
-      - press_qnh
-      - press_msl
-      - rain_trace
-      - rel_hum
-      - vis_km
-      - wind_dir
-      - wind_spd_kmh
+  # - platform: bom
+  #   station: IDN60903.94925
+  #   name: Tuggeranong (Isabella Plains) AWS
+  #   monitored_conditions:
+  #     - apparent_t
+  #     - delta_t
+  #     - gust_kmh
+  #     - air_temp
+  #     - dewpt
+  #     - press
+  #     - press_qnh
+  #     - press_msl
+  #     - rain_trace
+  #     - rel_hum
+  #     - vis_km
+  #     - wind_dir
+  #     - wind_spd_kmh
 
 ####################################################
 #                                                  #
@@ -314,19 +322,19 @@ sensor:
 #                                                               #
 #################################################################
 
-camera:
+# camera:
 
-####################################################
-#                                                  #
-#                BOM Radar                         #
-#                                                  #
-####################################################
+# ####################################################
+# #                                                  #
+# #                BOM Radar                         #
+# #                                                  #
+# ####################################################
 
-  - platform: bom
-    name: bom_canberra_radar
-    location: Canberra
-    filename: /config/www/images/canberraradar.gif
-    #delta: 600
+#   - platform: bom
+#     name: bom_canberra_radar
+#     location: Canberra
+#     filename: /config/www/images/canberraradar.gif
+#     #delta: 600
 
 
 #################################################################

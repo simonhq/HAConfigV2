@@ -229,17 +229,44 @@ sensor:
   - platform: template
     sensors:
       solar_gen:
-        value_template: "{{ states('sensor.solaredge_current_power')|float }}"
+        #this is using modbus - 30 seconds for production info
+        value_template: "{{ states('sensor.solaredgem_ac_power')|float }}"
+        #this is using solaredge website - 10 minute for production info
+        #value_template: "{{ states('sensor.solaredge_current_power')|float }}"
         friendly_name: 'Solar Generation'
         unit_of_measurement: 'W'
       solar_consume:
+        #this is using solaredge website - 10 minute for consumption info
         value_template: "{{ states('sensor.solaredge_power_consumption')|float * 1000 }}"
         friendly_name: 'Household Consumption'
         unit_of_measurement: 'W'
       solar_import:
+        #this is using solaredge website - 10 minute for grid usage info
         value_template: "{{ states('sensor.solaredge_grid_power')|float * 1000 }}"
         friendly_name: 'Grid Import/Export'
         unit_of_measurement: 'W'
+      solaredge_status:
+        friendly_name: "SolarEdge Status"
+        value_template: >-
+          {% if state_attr('sensor.solaredgem_status', 'status') == 1 %}
+            Off
+          {% elif state_attr('sensor.solaredgem_status', 'status') == 2 %}
+            Sleep
+          {% elif state_attr('sensor.solaredgem_status', 'status') == 3 %}
+            Wake-Up
+          {% elif state_attr('sensor.solaredgem_status', 'status') == 4 %}
+            Working
+          {% elif state_attr('sensor.solaredgem_status', 'status') == 5 %}
+            Throttled
+          {% elif state_attr('sensor.solaredgem_status', 'status') == 6 %}
+            Shut-Down
+          {% elif state_attr('sensor.solaredgem_status', 'status') == 7 %}
+            Fault
+          {% elif state_attr('sensor.solaredgem_status', 'status') == 8 %}
+            Maintenance
+          {% else %}
+            Unknown
+          {% endif %}
         
 #################################################################
 #                                                               #
