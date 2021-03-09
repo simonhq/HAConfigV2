@@ -20,8 +20,8 @@ class Messenger(hass.Hass):
     sappnotify = "notify/mobile_app_spixel3"
     mappnotify = "notify/mobile_app_msam9"
     stappnotify = "notify/mobile_app_stpixel3a"
-    dappnotify = "notify/mobile_app_dmotog5"
-    gps = "request_location_update"
+    dappnotify = "notify/mobile_app_dpixel"
+    gps = "command_high_accuracy_mode"
 
     mess_platform = "Webhook"
 
@@ -71,7 +71,7 @@ class Messenger(hass.Hass):
     def mess_flag(self, entity, attribute, old, new, kwargs):
         self.mess_platform = self.get_state("input_select.message_flag")
 
-    def notify(self, mess, dd=False):
+    def notify(self, mess, dd=False, onoff='off'):
         if dd == True:
             self.call_service(self.enotify,title=mess,message=self.dmessage)
         else:
@@ -82,17 +82,13 @@ class Messenger(hass.Hass):
                 self.call_service(self.dappnotify,message=self.gps)
                 self.log("Calling reset GPS on devices")
             elif mess == "sgps":
-                self.call_service(self.sappnotify,message=self.gps)
-                self.log("Calling reset GPS for Simon")
+                self.call_service(self.sappnotify,message=self.gps,title=onoff)
             elif mess == "mgps":
-                self.call_service(self.mappnotify,message=self.gps)
-                self.log("Calling reset GPS for Megan")
+                self.call_service(self.mappnotify,message=self.gps,title=onoff)
             elif mess == "stgps":
-                self.call_service(self.stappnotify,message=self.gps)
-                self.log("Calling reset GPS for Staci")
+                self.call_service(self.stappnotify,message=self.gps,title=onoff)
             elif mess == "dgps":
-                self.call_service(self.dappnotify,message=self.gps)
-                self.log("Calling reset GPS for Delia")
+                self.call_service(self.dappnotify,message=self.gps,title=onoff)
             else:
                 if self.mess_platform == "Pushbullet":
                     self.call_service(self.mnotify,message=mess)

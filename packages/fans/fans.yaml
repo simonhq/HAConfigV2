@@ -44,14 +44,13 @@ group:
 #                       Dyson Integration                        #
 #                                                               #
 #################################################################
-
-dyson:
-  username: !secret dyson_user
-  password: !secret dyson_pass
-  language: AU
-  devices:
-    device_id: !secret dyson_dida
-    device_ip: !secret dyson_dipa
+#dyson:
+#  username: !secret dyson_user
+#  password: !secret dyson_pass
+#  language: AU
+#  devices:
+#    device_id: !secret dyson_dida
+#    device_ip: !secret dyson_dipa
 
 
 
@@ -92,7 +91,7 @@ binary_sensor:
     sensors:
       purifier_off:
         friendly_name: Purifier Off
-        value_template: "{{ is_state('fan.lounge', 'off') }}"
+        value_template: "{{ is_state('fan.lounge_2', 'off') }}"
         icon_template: mdi:crosshairs-off
         device_class: motion
       purifier_on:
@@ -110,10 +109,10 @@ binary_sensor:
     sensors:
       heaters_off:
         friendly_name: Heaters Off
-        value_template: "{{ is_state('climate.83607036e098068310e2', 'off') and is_state('climate.33805060a4cf12d11732', 'off') and is_state('climate.83607036e09806830fb8', 'off') }}"
+        value_template: "{{ is_state('binary_sensor.heaters_on', 'off') }}"
         icon_template: mdi:radiator-off
         device_class: motion
       heaters_on:
         friendly_name: Heaters On
-        value_template: "{{ is_state('binary_sensor.purifier_off', 'off') }}"
+        value_template: "{{ is_state('climate.83607036e098068310e2', 'on') and is_state('climate.33805060a4cf12d11732', 'on') and is_state('climate.83607036e09806830fb8', 'on') }}"
         icon_template: mdi:radiator

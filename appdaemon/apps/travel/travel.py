@@ -18,7 +18,6 @@ class Travel_Messages(hass.Hass):
 
     sendmess = ""
     #the request timer will set how often to request gps notifications on returning to the house
-    requesttimer = 30
 
     smess = "Simon is currently at "
     mmess = "Megan is currently at "
@@ -35,6 +34,8 @@ class Travel_Messages(hass.Hass):
 
         # bring in the messaging module
         self.notifier = self.get_app('messaging')
+
+        self.listen_state(self.tester, "input_boolean.message_test")
 
         # car connection messages
         self.listen_state(self.con_car, "binary_sensor.drive_meg")
@@ -67,6 +68,12 @@ class Travel_Messages(hass.Hass):
         self.listen_state(self.sta_loc, "person.staci")
         self.listen_state(self.del_loc, "person.delia")
 
+
+    def tester(self, entity, attribute, old, new, kwargs):
+        self.personal_gps('sgps', 'turn_off')
+        self.log("requesting close update for Simon")
+
+
     def car_away(self, entity, attribute, old, new, kwargs):
         self.away_flag = new
 
@@ -78,21 +85,29 @@ class Travel_Messages(hass.Hass):
         self.s_loc = new
         if new != 'home' and self.m_loc != 'home':
             self.turn_off("fan.master_fan")
+        else:
+            self.personal_gps('sgps', 'turn_off')
     
     def meg_loc(self, entity, attribute, old, new, kwargs):
         self.m_loc = new
         if new != 'home' and self.s_loc != 'home':
             self.turn_off("fan.master_fan")
+        else:
+            self.personal_gps('mgps', 'turn_off')
 
     def sta_loc(self, entity, attribute, old, new, kwargs):
         self.st_loc = new
         if new != 'home':
             self.turn_off("fan.staci_s_fan")
+        else:
+            self.personal_gps('stgps', 'turn_off')
 
     def del_loc(self, entity, attribute, old, new, kwargs):
         self.d_loc = new
         if new != 'home':
             self.turn_off("fan.delia_s_fan")
+        else:
+            self.personal_gps('dgps', 'turn_off')
 
     ###
     #   This controls various flags and actions through the the proximity platform
@@ -157,9 +172,9 @@ class Travel_Messages(hass.Hass):
 
                 #close tracking
                 if dir_trav == "towards":
-                    if prox <= 5 and prox > 1:
+                    if prox <= 4 and prox > 1:
                         # proximity under 5 kilometres, and arriving by car - start requesting gps updates
-                        self.run_in(self.personal_gps(gps_person), self.requesttimer)
+                        self.personal_gps(gps_person, 'turn_on')
                         self.log("requesting close update for " + pname)
                     elif prox <= 1:
                         # proximity under 1 kilometres, and arriving by car - open garage door
@@ -168,6 +183,9 @@ class Travel_Messages(hass.Hass):
                             self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
                             self.set_state("input_boolean.garage_just", state="on")
                             self.sendmess = "Opening the Garage Door for " + pname + "arriving by car (Proximity)"
+                    else:
+                        # proximity over 5 kilometres, turn off the high accuracy gps
+                        self.personal_gps(gps_person, 'turn_off')
 
         #send the message
         if self.sendmess != "":
@@ -177,10 +195,10 @@ class Travel_Messages(hass.Hass):
     #   when turned on, will continue to request gps updates for tracking close to the house
     ###
 
-    def personal_gps(self, mess):
+    def personal_gps(self, person, onoffval):
         # gps will be requested more often to ensure the garage door entry is more consistent
-        self.log("request gps for " + mess)
-        self.notifier.notify(mess)
+        self.log("request accurate gps " + onoffval + " for " + person)
+        self.notifier.notify(mess=person, onoff=onoffval)
 
     ###
     #   watches the connection to the car and send the appropriate message
@@ -270,19 +288,12 @@ class Travel_Messages(hass.Hass):
         ### Showing walking or catching the bus, nothing specific here now 
         elif self.get_state("binary_sensor.megan_walk_bus") == 'on':
             self.set_state("input_select.trav_megan", state="Walk")
-            #wait for a time to ensure not yet at home when you disconnect from the car
-            #self.handle = self.run_in(self.meg_walk, 180, **kwargs)
-
+    
         #send the message
         if self.sendmess != "":
             self.notifier.notify(self.sendmess)
         
-    def meg_walk(self, kwargs):
-
-        if self.get_state("input_select.trav_megan") != 'Home' and self.get_state("binary_sensor.megan_walk_bus") == 'on':
-            # set Megan to being walking
-            self.set_state("input_select.trav_megan", state="Walk")
-
+    
 
     def sim_trav(self, entity, attribute, old, new, kwargs):
         
@@ -315,18 +326,10 @@ class Travel_Messages(hass.Hass):
         ### Showing walking or catching the bus, nothing specific here now 
         elif self.get_state("binary_sensor.simon_walk_bus") == 'on':
             self.set_state("input_select.trav_simon", state="Walk")
-            #wait for a time to ensure not yet at home when you disconnect from the car
-            #self.handle = self.run_in(self.sim_walk, 180, **kwargs)
 
         #send the message
         if self.sendmess != "":
             self.notifier.notify(self.sendmess)
-
-    def sim_walk(self, kwargs):
-
-        if self.get_state("input_select.trav_simon") != 'Home' and self.get_state("binary_sensor.simon_walk_bus") == 'on':
-            # set Simon to being walking
-            self.set_state("input_select.trav_simon", state="Walk")
 
     def sta_trav(self, entity, attribute, old, new, kwargs):
         

@@ -57,14 +57,14 @@ transport-messages:
     - secrets
 
 # car
-# travel:
-#   module: travel
-#   class: Travel_Messages
-#   dependencies: 
-#     - messaging
-#   global_dependencies:
-#     - globals
-#     - secrets
+travel:
+  module: travel
+  class: Travel_Messages
+  dependencies: 
+    - messaging
+  global_dependencies:
+    - globals
+    - secrets
 
 
 # for gtfs clean up
@@ -145,7 +145,10 @@ climatecontrol:
   intlow: "input_number.cc_intlow"
   extlow: "input_number.cc_extlow"
   aircon: "climate.rushbrook_aircon,climate.rushbrook_aircon_d,climate.rushbrook_aircon_s" # climate.lounge # if we want to use it
-  fan: "fan.staci_s_fan,fan.delia_s_fan" #fan.master_fan, fan.lounge" # master fan see - node-red
+  fan: "fan.staci_s_fan,fan.delia_s_fan,fan.master_fan" #fan.lounge" 
+  heater: "climate.83607036e098068310e2,climate.83607036e09806830fb8,climate.33805060a4cf12d11732" # ensuite, study, lounge
+  door: "binary_sensor.fdoor_open,binary_sensor.bdoor_open"
+  warnlight: "light.front_hall"
   manual_override: "input_boolean.cc_ac_manual"
 
 #333333333333333333333333333333333333333333333333333333333333333333

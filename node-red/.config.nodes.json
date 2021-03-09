@@ -1,7 +1,7 @@
 {
     "node-red": {
         "name": "node-red",
-        "version": "1.2.7",
+        "version": "1.2.9",
         "local": false,
         "nodes": {
             "inject": {
@@ -377,7 +377,7 @@
     },
     "node-red-contrib-actionflows": {
         "name": "node-red-contrib-actionflows",
-        "version": "2.0.3",
+        "version": "2.0.4",
         "local": false,
         "nodes": {
             "actionfilters": {
@@ -857,23 +857,6 @@
             }
         }
     },
-    "node-red-contrib-state-machine": {
-        "name": "node-red-contrib-state-machine",
-        "version": "1.2.0",
-        "local": false,
-        "nodes": {
-            "state-machine": {
-                "name": "state-machine",
-                "types": [
-                    "state-machine"
-                ],
-                "enabled": true,
-                "local": false,
-                "module": "node-red-contrib-state-machine",
-                "file": "/opt/node_modules/node-red-contrib-state-machine/state-machine.js"
-            }
-        }
-    },
     "node-red-contrib-statistics": {
         "name": "node-red-contrib-statistics",
         "version": "2.2.2",
@@ -910,7 +893,7 @@
     },
     "node-red-contrib-sunevents": {
         "name": "node-red-contrib-sunevents",
-        "version": "2.0.3",
+        "version": "3.0.0",
         "local": false,
         "nodes": {
             "node-red-contrib-sunevents": {
@@ -921,7 +904,7 @@
                 "enabled": true,
                 "local": false,
                 "module": "node-red-contrib-sunevents",
-                "file": "/opt/node_modules/node-red-contrib-sunevents/sunevents-node.js"
+                "file": "/opt/node_modules/node-red-contrib-sunevents/lib/sun-events-node.js"
             }
         }
     },
@@ -980,7 +963,7 @@
     },
     "node-red-dashboard": {
         "name": "node-red-dashboard",
-        "version": "2.27.0",
+        "version": "2.28.1",
         "local": false,
         "nodes": {
             "ui_base": {
@@ -1250,7 +1233,7 @@
     },
     "node-red-node-geofence": {
         "name": "node-red-node-geofence",
-        "version": "0.2.0",
+        "version": "0.2.1",
         "local": false,
         "nodes": {
             "geofence": {
@@ -1539,6 +1522,23 @@
                 "local": true,
                 "module": "node-red-contrib-http-autosuggest-service",
                 "file": "/config/node-red/node_modules/node-red-contrib-http-autosuggest-service/autosuggest-service.js"
+            }
+        }
+    },
+    "node-red-contrib-persistent-fsm": {
+        "name": "node-red-contrib-persistent-fsm",
+        "version": "1.1.0",
+        "local": false,
+        "nodes": {
+            "state-machine": {
+                "name": "state-machine",
+                "types": [
+                    "state-machine"
+                ],
+                "enabled": true,
+                "local": false,
+                "module": "node-red-contrib-persistent-fsm",
+                "file": "/opt/node_modules/node-red-contrib-persistent-fsm/state-machine.js"
             }
         }
     }

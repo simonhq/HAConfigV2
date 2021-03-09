@@ -130,3 +130,16 @@ sudo mount /dev/sdb1 /usr/share/media-drive
 for permanent
 echo "# Secondary Hard Drive" >> /etc/fstab
 echo "/dev/sdb1 /usr/share/media-drive ntfs defaults,noatime 0 2" >> /etc/fstab
+
+
+
+Adjust files in homeassistant
+
+log into the home assistant container: docker exec -it homeassistant /bin/bash
+cd /usr/src/homeassistant/homeassistant/components/withings
+edit common.py and config_flow.py as @myhomeiot suggested
+restart homeassistant
+
+https://github.com/home-assistant/core/issues/47329
+Replace this line with from . import const
+Comment this line

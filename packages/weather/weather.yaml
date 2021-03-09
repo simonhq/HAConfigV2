@@ -244,10 +244,10 @@ sensor:
 #                                                  #
 ####################################################
 
-  - platform: waqi
-    token: !secret waqi_key
-    locations:
-      - monash
+  # - platform: waqi
+  #   token: !secret waqi_key
+  #   locations:
+  #     - monash
 
 
 ####################################################

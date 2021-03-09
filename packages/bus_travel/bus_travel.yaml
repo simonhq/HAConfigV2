@@ -113,8 +113,7 @@ input_select:
     options:
       - 'Nil'
       - 'RC'
-      - 'R4W'
-      - 'R5W'
+      - 'RW'
       - 'R5T'
       - 'R4T'
       - '7X'
@@ -129,9 +128,9 @@ input_select:
     name: Delia Transport
     options:
       - 'Nil'
+      - 'R234'
       - 'RC'
-      - 'R4W'  
-      - 'R5W'
+      - 'RW'  
       - 'R5T'
       - 'R4T'
       - '7X'
@@ -147,8 +146,7 @@ input_select:
     options:
       - 'Nil'
       - 'RC'
-      - 'R4W'  
-      - 'R5W'
+      - 'RW'  
       - 'R5T'
       - 'R4T'
       - '7X'
@@ -166,8 +164,7 @@ input_select:
       - 'R5CW'
       - 'R4CW'
       - 'RC'
-      - 'R5W'
-      - 'R4W'
+      - 'RW'
       - 'R5T'
       - 'R4T'
       - '7X'
@@ -240,19 +237,21 @@ automation:
         entity_id: person.simon
         zone: zone.citybus_4
         event: leave
+      - platform: zone
+        entity_id: person.simon
+        zone: zone.citybus_london
+        event: leave
     condition:
       - condition: template
         value_template: "{{ not is_state('input_select.trans_simon', 'R5CW') and not is_state('input_select.trans_simon', 'R4CW') }}"
     action:
-      - service: timer.start
-        entity_id: timer.r4_r5_s
       - service: input_select.select_option
         data_template:
           entity_id: input_select.trans_simon
           option: '{{"RC"}}'
 
-## Simon Arrving Woden + R_Timer Running, or R4CW -> R4W (Simon - On R4, 79 for X, Change for R5 for X)
-  - alias: transport_simon_arrive_woden_r4
+## Simon Arrving Woden from the city
+  - alias: transport_simon_arrive_woden
     trigger:
       - platform: zone
         entity_id: person.simon
@@ -261,43 +260,12 @@ automation:
     condition:
       - condition: or 
         conditions:
-        - condition: and 
-          conditions:
-          - condition: state
-            entity_id: timer.r4_r5_s
-            state: 'active'
-          - condition: state
-            entity_id: input_select.trans_simon
-            state: 'RC'
+        - condition: state
+          entity_id: input_select.trans_simon
+          state: 'RC'
         - condition: state
           entity_id: input_select.trans_simon
           state: 'R4CW'
-    action:
-      - service: timer.cancel
-        entity_id: timer.r4_r5_s
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_simon
-          option: '{{"R4W"}}'
-
-## Simon Arrving Woden + R_Timer Stopped, or R5CW -> R5W (Simon - On R5 for X, Change for 79 for X)
-  - alias: transport_simon_arrive_woden_r5
-    trigger:
-      - platform: zone
-        entity_id: person.simon
-        zone: zone.wodenbus
-        event: enter
-    condition:
-      - condition: or 
-        conditions:
-        - condition: and 
-          conditions:
-          - condition: state
-            entity_id: timer.r4_r5_s
-            state: 'idle'
-          - condition: state
-            entity_id: input_select.trans_simon
-            state: 'RC'
         - condition: state
           entity_id: input_select.trans_simon
           state: 'R5CW'
@@ -305,7 +273,7 @@ automation:
       - service: input_select.select_option
         data_template:
           entity_id: input_select.trans_simon
-          option: '{{"R5W"}}'
+          option: '{{"RW"}}'
 
 ## Simon Leaving Tugg + R4W/R5W -> 7X (Simon on 7X Home from Tugg)
   - alias: transport_simon_leave_tuggbus_7x
@@ -316,7 +284,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ is_state('input_select.trans_simon', 'R4W') or is_state('input_select.trans_simon', 'R5W') }}"
+        value_template: "{{ is_state('input_select.trans_simon', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:
@@ -332,7 +300,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ not is_state('input_select.trans_simon', 'R4W') and not is_state('input_select.trans_simon', 'R5W') }}"
+        value_template: "{{ not is_state('input_select.trans_simon', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:
@@ -364,7 +332,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ is_state('input_select.trans_simon', 'R5W') }}"
+        value_template: "{{ is_state('input_select.trans_simon', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:
@@ -424,9 +392,13 @@ automation:
         entity_id: person.staci
         zone: zone.citybus_4
         event: leave
+      - platform: zone
+        entity_id: person.staci
+        zone: zone.citybus_london
+        event: leave
     condition:
       - condition: template
-        value_template: "{{ not is_state('input_select.trans_simon', 'R234') }}"
+        value_template: "{{ not is_state('input_select.trans_staci', 'R234') }}"
     action:
       - service: timer.start
         entity_id: timer.r4_r5_st
@@ -436,7 +408,7 @@ automation:
           option: '{{"RC"}}'
 
 ## Staci Arrving Woden + R_Timer Running, or R234 -> R4W (Staci - On R4, 79 for X, Change for R5 for X)
-  - alias: transport_staci_arrive_woden_r4
+  - alias: transport_staci_arrive_woden
     trigger:
       - platform: zone
         entity_id: person.staci
@@ -445,46 +417,17 @@ automation:
     condition:
       - condition: or 
         conditions:
-        - condition: and 
-          conditions:
-          - condition: state
-            entity_id: timer.r4_r5_st
-            state: 'active'
-          - condition: state
-            entity_id: input_select.trans_staci
-            state: 'RC'
+        - condition: state
+          entity_id: input_select.trans_staci
+          state: 'RC'
         - condition: state
           entity_id: input_select.trans_staci
           state: 'R234'
     action:
-      - service: timer.cancel
-        entity_id: timer.r4_r5_st
       - service: input_select.select_option
         data_template:
           entity_id: input_select.trans_staci
-          option: '{{"R4W"}}'
-
-## Staci Arrving Woden + R_Timer Stopped -> R5W (Staci - On R5 for X, Change for 79 for X)
-  - alias: transport_staci_arrive_woden_r5
-    trigger:
-      - platform: zone
-        entity_id: person.staci
-        zone: zone.wodenbus
-        event: enter
-    condition:
-      - condition: and 
-        conditions:
-        - condition: state
-          entity_id: timer.r4_r5_st
-          state: 'idle'
-        - condition: state
-          entity_id: input_select.trans_staci
-          state: 'RC'
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_staci
-          option: '{{"R5W"}}'
+          option: '{{"RW"}}'
 
 ## Staci Leaving Tugg + R4W/R5W -> 7X (Staci on 7X Home from Tugg)
   - alias: transport_staci_leave_tuggbus_7x
@@ -495,7 +438,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ is_state('input_select.trans_staci', 'R4W') or is_state('input_select.trans_staci', 'R5W') }}"
+        value_template: "{{ is_state('input_select.trans_staci', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:
@@ -511,7 +454,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ not is_state('input_select.trans_staci', 'R4W') and not is_state('input_select.trans_staci', 'R5W') }}"
+        value_template: "{{ not is_state('input_select.trans_staci', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:
@@ -543,7 +486,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ is_state('input_select.trans_staci', 'R5W') }}"
+        value_template: "{{ is_state('input_select.trans_staci', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:
@@ -590,59 +533,32 @@ automation:
         entity_id: person.megan
         zone: zone.citybus_4
         event: leave
+      - platform: zone
+        entity_id: person.megan
+        zone: zone.citybus_london
+        event: leave
     action:
-      - service: timer.start
-        entity_id: timer.r4_r5_m
       - service: input_select.select_option
         data_template:
           entity_id: input_select.trans_megan
           option: '{{"RC"}}'
 
 ## Megan Arrving Woden + R_Timer Running -> R4W (Megan - On R4, 79 for X, Change for R5 for X)
-  - alias: transport_megan_arrive_woden_r4
+  - alias: transport_megan_arrive_woden
     trigger:
       - platform: zone
         entity_id: person.megan
         zone: zone.wodenbus
         event: enter
     condition:
-      - condition: and 
-        conditions:
-        - condition: state
-          entity_id: timer.r4_r5_m
-          state: 'active'
-        - condition: state
-          entity_id: input_select.trans_megan
-          state: 'RC'
-    action:
-      - service: timer.cancel
-        entity_id: timer.r4_r5_m
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_megan
-          option: '{{"R4W"}}'
-
-## Megan Arrving Woden + R_Timer Stopped -> R5W (Megan - On R5 for X, Change for 79 for X)
-  - alias: transport_megan_arrive_woden_r5
-    trigger:
-      - platform: zone
-        entity_id: person.megan
-        zone: zone.wodenbus
-        event: enter
-    condition:
-      - condition: and 
-        conditions:
-        - condition: state
-          entity_id: timer.r4_r5_m
-          state: 'idle'
-        - condition: state
-          entity_id: input_select.trans_megan
-          state: 'RC'
+      - condition: state
+        entity_id: input_select.trans_megan
+        state: 'RC'
     action:
       - service: input_select.select_option
         data_template:
           entity_id: input_select.trans_megan
-          option: '{{"R5W"}}'
+          option: '{{"RW"}}'
 
 ## Megan Leaving Tugg + R4W/R5W -> 7X (Megan on 7X Home from Tugg)
   - alias: transport_megan_leave_tuggbus_7x
@@ -653,7 +569,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ is_state('input_select.trans_megan', 'R4W') or is_state('input_select.trans_megan', 'R5W') }}"
+        value_template: "{{ is_state('input_select.trans_megan', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:
@@ -669,7 +585,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ not is_state('input_select.trans_megan', 'R4W') and not is_state('input_select.trans_megan', 'R5W') }}"
+        value_template: "{{ not is_state('input_select.trans_megan', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:
@@ -701,7 +617,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ is_state('input_select.trans_megan', 'R5W') }}"
+        value_template: "{{ is_state('input_select.trans_megan', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:
@@ -738,6 +654,19 @@ automation:
 ## Delia Leaving Outtrim + R5W -> Cal (Delia walking home from Calwell)
 ## Delia Arrive Home -> Nil
 
+# Delia Leaving UC -> R234 (Staci heading to city - 15min)
+  - alias: transport_delia_leave_uc
+    trigger:
+      - platform: zone
+        entity_id: person.delia
+        zone: zone.ucbus
+        event: leave
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"R234"}}'
+
 
 ## Delia Leaving City -> RC + R_Timer (Delia leaving City)
   - alias: transport_delia_leave_citybus
@@ -750,59 +679,37 @@ automation:
         entity_id: person.delia
         zone: zone.citybus_4
         event: leave
+      - platform: zone
+        entity_id: person.delia
+        zone: zone.citybus_london
+        event: leave
     action:
-      - service: timer.start
-        entity_id: timer.r4_r5_d
       - service: input_select.select_option
         data_template:
           entity_id: input_select.trans_delia
           option: '{{"RC"}}'
 
 ## Delia Arrving Woden + R_Timer Running -> R4W (Delia - On R4, 79 for X, Change for R5 for X)
-  - alias: transport_delia_arrive_woden_r4
+  - alias: transport_delia_arrive_woden
     trigger:
       - platform: zone
         entity_id: person.delia
         zone: zone.wodenbus
         event: enter
     condition:
-      - condition: and 
+      - condition: or 
         conditions:
-        - condition: state
-          entity_id: timer.r4_r5_d
-          state: 'active'
         - condition: state
           entity_id: input_select.trans_delia
           state: 'RC'
-    action:
-      - service: timer.cancel
-        entity_id: timer.r4_r5_d
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_delia
-          option: '{{"R4W"}}'
-
-## Delia Arrving Woden + R_Timer Stopped -> R5W (Delia - On R5 for X, Change for 79 for X)
-  - alias: transport_delia_arrive_woden_r5
-    trigger:
-      - platform: zone
-        entity_id: person.delia
-        zone: zone.wodenbus
-        event: enter
-    condition:
-      - condition: and 
-        conditions:
-        - condition: state
-          entity_id: timer.r4_r5_d
-          state: 'idle'
         - condition: state
           entity_id: input_select.trans_delia
-          state: 'RC'
+          state: 'R234'
     action:
       - service: input_select.select_option
         data_template:
           entity_id: input_select.trans_delia
-          option: '{{"R5W"}}'
+          option: '{{"RW"}}'
 
 ## Delia Leaving Tugg + R4W/R5W -> 7X (Delia on 7X Home from Tugg)
   - alias: transport_delia_leave_tuggbus_7x
@@ -813,7 +720,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ is_state('input_select.trans_delia', 'R4W') or is_state('input_select.trans_delia', 'R5W') }}"
+        value_template: "{{ is_state('input_select.trans_delia', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:
@@ -829,7 +736,7 @@ automation:
         event: leave
     condition:
       - condition: template
-        value_template: "{{ not is_state('input_select.trans_delia', 'R4W') and not is_state('input_select.trans_delia', 'R5W') }}"
+        value_template: "{{ not is_state('input_select.trans_delia', 'RW') }}"
     action:
       - service: input_select.select_option
         data_template:

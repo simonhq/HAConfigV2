@@ -125,7 +125,7 @@ sensor:
   # woden to R5 home with no delay
   - platform: gtfs
     name: woden_to_home_R5
-    offset: 60 # 1min
+    offset: 0 # 0 sec
     origin: 2705 #woden pt3
     destination: 1077 #home out
     scan_interval: 60 #1min
@@ -134,7 +134,7 @@ sensor:
   # woden to R4 tugg with no delay
   - platform: gtfs
     name: woden_to_tugg_R4
-    offset: 60 # 1min
+    offset: 0 # 0 sec
     origin: 2706 #woden pt6
     destination: 13 #tugg
     scan_interval: 60 #1min
