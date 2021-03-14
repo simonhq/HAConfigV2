@@ -170,22 +170,22 @@ class Travel_Messages(hass.Hass):
                         self.turn_off('input_boolean.presence_holiday')
                         self.sendmess = "Car has returned to the Canberra Region, messages around driving enabled"
 
-                #close tracking
-                if dir_trav == "towards":
-                    if prox <= 4 and prox > 1:
-                        # proximity under 5 kilometres, and arriving by car - start requesting gps updates
-                        self.personal_gps(gps_person, 'turn_on')
-                        self.log("requesting close update for " + pname)
-                    elif prox <= 1:
-                        # proximity under 1 kilometres, and arriving by car - open garage door
-                        if self.get_state("input_boolean.garage_just") != "on":
-                            # if you opened it for someone else in the last 5 minutes, don't open it again
-                            self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
-                            self.set_state("input_boolean.garage_just", state="on")
-                            self.sendmess = "Opening the Garage Door for " + pname + "arriving by car (Proximity)"
-                    else:
-                        # proximity over 5 kilometres, turn off the high accuracy gps
-                        self.personal_gps(gps_person, 'turn_off')
+                    #close tracking
+                    if dir_trav == "towards":
+                        if prox <= 4 and prox > 1:
+                            # proximity under 5 kilometres, and arriving by car - start requesting gps updates
+                            self.personal_gps(gps_person, 'turn_on')
+                            self.log("requesting close update for " + pname)
+                        elif prox <= 1:
+                            # proximity under 1 kilometres, and arriving by car - open garage door
+                            if self.get_state("input_boolean.garage_just") != "on":
+                                # if you opened it for someone else in the last 5 minutes, don't open it again
+                                self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
+                                self.set_state("input_boolean.garage_just", state="on")
+                                self.sendmess = "Opening the Garage Door for " + pname + " arriving by car (Proximity)"
+                        if prox <= 8 and prox > 4:
+                            # proximity over 5 kilometres, turn off the high accuracy gps
+                            self.personal_gps(gps_person, 'turn_off')
 
         #send the message
         if self.sendmess != "":
