@@ -124,26 +124,26 @@ class Travel_Messages(hass.Hass):
         mdrive = self.get_state("input_boolean.megan_outback")
         stdrive = self.get_state("input_boolean.staci_outback")
         ddrive = self.get_state("input_boolean.delia_outback")
-        self.log(entity + " " + new + " call ")
-        self.log(sdrive + " s " + mdrive + " m ")
+        #self.log(entity + " " + new + " call ")
+        #self.log(sdrive + " s " + mdrive + " m ")
 
         if new != 'not set':
-            self.log("past not set")
+            #self.log("past not set")
             if entity == 'proximity.home_simon':    
-                self.log("past knowing it is simon " + sdrive ) 
+                #self.log("past knowing it is simon " + sdrive ) 
                 if sdrive == 'on':
                     prox = float(new)
                     dir_trav = self.get_state("sensor.s_travel_direction")
                     gps_person = "sgps"
                     pname = "Simon"
-                    self.log(str(prox) + " set")
+                    #self.log(str(prox) + " set")
             elif entity == 'proximity.home_meg':
                 if mdrive == 'on':
                     prox = float(new)
                     dir_trav = self.get_state("sensor.m_travel_direction")
                     gps_person = "mgps"
                     pname = "Megan"
-                    self.log(str(prox) + " set")
+                    #self.log(str(prox) + " set")
             elif entity == 'proximity.home_staci':
                 if stdrive == 'on':
                     prox = float(new)
@@ -157,7 +157,7 @@ class Travel_Messages(hass.Hass):
                     gps_person = "dgps"
                     pname = "Delia"
 
-            self.log(str(prox) + " " + entity + " " + dir_trav)
+            #self.log(str(prox) + " " + entity + " " + dir_trav)
             if prox != -1:
                 #holiday
                 if prox > 50:
@@ -175,7 +175,7 @@ class Travel_Messages(hass.Hass):
                         if prox <= 4 and prox > 1:
                             # proximity under 5 kilometres, and arriving by car - start requesting gps updates
                             self.personal_gps(gps_person, 'turn_on')
-                            self.log("requesting close update for " + pname)
+                            #self.sendmess = "requesting close update for " + pname
                         elif prox <= 1:
                             # proximity under 1 kilometres, and arriving by car - open garage door
                             if self.get_state("input_boolean.garage_just") != "on":
@@ -186,6 +186,7 @@ class Travel_Messages(hass.Hass):
                         if prox <= 8 and prox > 4:
                             # proximity over 5 kilometres, turn off the high accuracy gps
                             self.personal_gps(gps_person, 'turn_off')
+                            #self.sendmess = "cancelling close update for " + pname
 
         #send the message
         if self.sendmess != "":

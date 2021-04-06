@@ -114,5 +114,6 @@ binary_sensor:
         device_class: motion
       heaters_on:
         friendly_name: Heaters On
-        value_template: "{{ is_state('climate.83607036e098068310e2', 'on') and is_state('climate.33805060a4cf12d11732', 'on') and is_state('climate.83607036e09806830fb8', 'on') }}"
+        #value_template: "{{ is_state('climate.83607036e098068310e2', 'on') and is_state('climate.33805060a4cf12d11732', 'on') and is_state('climate.83607036e09806830fb8', 'on') }}"
+        value_template: "{{ not is_state('climate.83607036e098068310e2', 'off') and not is_state('climate.83607036e09806830fb8', 'off') }}"
         icon_template: mdi:radiator
