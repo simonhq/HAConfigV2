@@ -15,7 +15,7 @@ class Transport_Messages(hass.Hass):
     smess_tugg = "Simon just left Tuggeranong Interchange" #TX
     smess_cal = "Simon just arrived in Calwell" #Cal
 
-    stmess_cit = "Staci just left CIT heading to the city" #R234
+    stmess_cit = "Staci just left the city heading home" #R234
     stmess_woden = "" #R4W
     stmess_tugg_home = "Staci just left Tuggeranong travelling home" #7X
     stmess_tugg = "Staci just left Tuggeranong Interchange" #TX
@@ -34,6 +34,7 @@ class Transport_Messages(hass.Hass):
     mmess_tugg = "Megan just left Tuggeranong Interchange" #TX
     mmess_cal = "Megan just arrived in Calwell" #Cal
     mmess_car = "Megan is heading to the car from work"
+    mmess_bus = "Megan is heading home via bus from work"
 
 
     def initialize(self):
@@ -125,11 +126,13 @@ class Transport_Messages(hass.Hass):
                 self.notifier.notify(self.mmess_cal)
             elif new == "Car":
                 self.notifier.notify(self.mmess_car)
+            elif new == "RC":
+                self.notifier.notify(self.mmess_bus)
 
     def transport_staci(self, entity, attribute, old, new, kwargs):
         if self.get_state("input_boolean.mode_return_home") == "on":
-            #if new == "R234":
-            #    self.notifier.notify(self.stmess_cit)
+            if new == "RC":
+                self.notifier.notify(self.stmess_cit)
             if new == "RW":
                 self.stmess_woden = "Staci at Woden, R4 to Tugg79 " + self.get_state("sensor.tugg_to_home_79_homecheck") + " or R5 " + self.get_state("sensor.woden_to_home_r5_homecheck")
                 self.notifier.notify(self.stmess_woden)

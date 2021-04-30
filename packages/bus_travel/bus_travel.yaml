@@ -120,6 +120,7 @@ input_select:
       - 'TX'
       - 'Cal'
       - 'Car'
+      - 'Out'
     initial: 'Nil'
     icon: mdi:car-connected
 
@@ -137,6 +138,7 @@ input_select:
       - 'TX'
       - 'Cal'
       - 'Car'
+      - 'Out'
     initial: 'Nil'
     icon: mdi:car-connected
 
@@ -153,6 +155,7 @@ input_select:
       - 'TX'
       - 'Cal'
       - 'Car'
+      - 'Out'
     initial: 'Nil'
     icon: mdi:car-connected
 
@@ -171,6 +174,7 @@ input_select:
       - 'TX'
       - 'Cal'
       - 'Car'
+      - 'Out'
     initial: 'Nil'
     icon: mdi:car-connected
 
@@ -352,6 +356,39 @@ automation:
           entity_id: input_select.trans_simon
           option: '{{"Nil"}}'
 
+## Simon at zones like work etc. 
+  - alias: transport_simon_enter_out
+    trigger:
+      - platform: zone
+        entity_id: person.simon
+        zone: zone.cricket_aisk
+        event: enter
+      - platform: zone
+        entity_id: person.simon
+        zone: zone.tugg_south_point
+        event: enter
+      - platform: zone
+        entity_id: person.simon
+        zone: zone.dese_citywalk
+        event: enter
+      - platform: zone
+        entity_id: person.simon
+        zone: zone.anu_cbe
+        event: enter
+      - platform: zone
+        entity_id: person.simon
+        zone: zone.uc
+        event: enter   
+      - platform: zone
+        entity_id: person.simon
+        zone: zone.northquarter
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_simon
+          option: '{{"Out"}}'
+
 ####################################################
 #                                                  #
 #            automation -  Staci Travel
@@ -506,6 +543,27 @@ automation:
           entity_id: input_select.trans_staci
           option: '{{"Nil"}}'
 
+## staci at zones like work etc. 
+  - alias: transport_staci_enter_out
+    trigger:
+      - platform: zone
+        entity_id: person.staci
+        zone: zone.cit_reid
+        event: enter
+      - platform: zone
+        entity_id: person.staci
+        zone: zone.tugg_south_point
+        event: enter
+      - platform: zone
+        entity_id: person.staci
+        zone: zone.northquarter
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_staci
+          option: '{{"Out"}}'
+
 ####################################################
 #                                                  #
 #            automation -  Megan Travel
@@ -637,7 +695,34 @@ automation:
           entity_id: input_select.trans_megan
           option: '{{"Nil"}}'
 
-
+## Megan at zones like work etc. 
+  - alias: transport_megan_enter_out
+    trigger:
+      - platform: zone
+        entity_id: person.megan
+        zone: zone.dese_citywalk
+        event: enter
+      - platform: zone
+        entity_id: person.megan
+        zone: zone.tugg_south_point
+        event: enter
+      - platform: zone
+        entity_id: person.megan
+        zone: zone.northquarter
+        event: enter
+      - platform: zone
+        entity_id: person.megan
+        zone: zone.physio_accelerate
+        event: enter
+      - platform: zone
+        entity_id: person.megan
+        zone: zone.dese_mort
+        event: enter   
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_megan
+          option: '{{"Out"}}'
 
 ####################################################
 #                                                  #
@@ -788,3 +873,27 @@ automation:
           entity_id: input_select.trans_delia
           option: '{{"Nil"}}'
 
+## Delia at zones like work etc. 
+  - alias: transport_delia_enter_out
+    trigger:
+      - platform: zone
+        entity_id: person.delia
+        zone: zone.uc
+        event: enter
+      - platform: zone
+        entity_id: person.delia
+        zone: zone.tugg_south_point
+        event: enter
+      - platform: zone
+        entity_id: person.delia
+        zone: zone.northquarter
+        event: enter
+      - platform: zone
+        entity_id: person.delia
+        zone: zone.uc_bld7
+        event: enter
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.trans_delia
+          option: '{{"Out"}}'

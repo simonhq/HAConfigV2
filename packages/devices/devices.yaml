@@ -148,21 +148,38 @@ group:
 #################################################################
 
 # track devices 
-device_tracker:
-  - platform: netgear
-    host: 10.0.0.1
-    port: 80
-    accesspoints: 
-      - 78:D2:94:AA:52:44
-      - 78:D2:94:AA:76:0C
-      - 3C:37:86:44:C3:4A
-    username: !secret netgear_user
-    password: !secret netgear_pass
-    interval_seconds: 20
-    consider_home: 180
-    new_device_defaults:
-      track_new_devices: true
+# device_tracker:
+#   - platform: netgear
+#     host: 10.0.0.1
+#     port: 80
+#     accesspoints: 
+#       - 78:D2:94:AA:52:44
+#       - 78:D2:94:AA:76:0C
+#       - 3C:37:86:44:C3:4A
+#     username: !secret netgear_user
+#     password: !secret netgear_pass
+#     interval_seconds: 20
+#     consider_home: 180
+#     new_device_defaults:
+#       track_new_devices: true
 
+
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 10.0.0.1/24
+    home_interval: 3
+    interval_seconds: 30
+
+#################################################################
+#                                                               #
+#                  Google Wifi Stats                            #
+#                                                               #
+#################################################################
+
+
+sensor:
+  - platform: google_wifi
+    host: 10.0.0.1
 
 
 #################################################################

@@ -449,7 +449,7 @@ automation:
   - alias: mode_set_returning
     trigger:
       - platform: time
-        at: '15:00:00'
+        at: '14:30:00'
       - platform: state
         entity_id: input_select.time_mode
         to: 'Night'

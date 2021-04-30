@@ -37,10 +37,10 @@
     name: Morning
     track: true
     search: "#Morning"
-  - device_id: tv
-    name: TV
-    track: true
-    search: "#TV"
+  #- device_id: tv
+  #  name: TV
+  #  track: true
+  #  search: "#TV"
   - device_id: guest
     name: Guest
     track: true

@@ -1,0 +1,3064 @@
+#########################################
+#
+#
+#
+# Wifi
+#
+#
+#
+#########################################
+
+#########################################
+# Kitchen
+#########################################
+
+orbi_kitchen:
+  hide_if_away: false
+  icon:
+  mac: 78:D2:94:AA:52:44
+  name: Orbi Kitchen
+  picture: /local/pics/orbi.jpg
+  track: true
+
+#########################################
+# Lounge
+#########################################
+
+orbi_lounge:
+  hide_if_away: false
+  icon:
+  mac: 78:D2:94:AA:76:0C
+  name: Orbi Lounge
+  picture: /local/pics/orbi.jpg
+  track: true
+
+orbi_lounge_on_router:
+  hide_if_away: false
+  icon:
+  mac: 78:D2:94:AA:76:0C_78:D2:94:AA:52:44
+  name: Orbi Lounge on Router
+  picture:
+  track: true
+
+orbi_lounge_on_router_2:
+  name: Orbi_Lounge on Router
+  mac: 78:D2:94:AA:76:0C_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Back
+#########################################
+
+orbi_back:
+  hide_if_away: false
+  icon:
+  mac: 3C:37:86:44:C3:4A
+  name: Orbi Back (Delia)
+  picture:
+  track: true
+
+rbs40v_on_router:
+  name: RBS40V on Router
+  mac: 3C:37:86:44:C3:4A_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# Servers
+#
+#
+#
+#########################################
+
+#########################################
+# ProxMox bare metal server
+#########################################
+
+proxmox:
+  icon:
+  mac: 2C:F0:5D:26:19:19
+  name: PROXMOX Hardware
+  picture:
+  track: true
+
+desktop_lm8q12f_on_router:
+  icon:
+  mac: 2C:F0:5D:26:19:19_78:D2:94:AA:76:0C
+  name: DESKTOP-LM8Q12F on Router
+  picture:
+  track: true
+
+proxmox_on_router:
+  name: PROXMOX on Router
+  mac: 2C:F0:5D:26:19:19_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+#########################################
+# HomeAssistant
+#########################################
+
+homeassistant:
+  hide_if_away: false
+  icon:
+  mac: 7A:1C:C7:6D:5A:DF
+  name: HOMEASSISTANT
+  picture:
+  track: true
+
+homeassistant_on_router:
+  icon:
+  mac: 7A:1C:C7:6D:5A:DF_78:D2:94:AA:76:0C
+  name: HOMEASSISTANT on Router
+  picture:
+  track: true
+
+homeassistant_on_router_2:
+  name: HOMEASSISTANT on Router
+  mac: 7A:1C:C7:6D:5A:DF_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+homeassistant_on_router_3:
+  name: HOMEASSISTANT on Router
+  mac: 7A:1C:C7:6D:5A:DF_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+#########################################
+# FreeNas
+#########################################
+
+freenas:
+  icon:
+  mac: 4A:3F:0F:DD:D0:C9
+  name: FREENAS
+  picture:
+  track: true
+
+freenas_on_router_2:
+  icon:
+  mac: 4A:3F:0F:DD:D0:C9_78:D2:94:AA:76:0C
+  name: FREENAS on Router
+  picture:
+  track: true
+
+#########################################
+# PlexServer
+#########################################
+
+plexserver:
+  icon:
+  mac: 4A:3F:0F:D2:7D:90
+  name: PLEXSERVER
+  picture:
+  track: true
+
+plexserver_on_router_2:
+  icon:
+  mac: 4A:3F:0F:D2:7D:90_78:D2:94:AA:76:0C
+  name: PLEXSERVER on Router
+  picture:
+  track: true
+
+plexserver_on_router:
+  name: PLEXSERVER on Router
+  mac: 4A:3F:0F:D2:7D:90_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+plexserver_on_router_3:
+  name: PLEXSERVER on Router
+  mac: 4A:3F:0F:D2:7D:90_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+#########################################
+# DOCKER Server
+#########################################
+
+dockerserver:
+  icon:
+  mac: BA:83:23:C9:EE:18
+  name: UBUNTU-SERVER
+  picture:
+  track: true
+
+ubuntu_server_on_router_4:
+  icon:
+  mac: BA:83:23:C9:EE:18_78:D2:94:AA:76:0C
+  name: UBUNTU-SERVER on Router
+  picture:
+  track: true
+
+dmaster_on_router:
+  name: DMASTER on Router
+  mac: BA:83:23:C9:EE:18_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Pi
+#########################################
+
+raspberrypi:
+  hide_if_away: false
+  icon: mdi:pi
+  mac: B8:27:EB:5D:65:23
+  name: RASPBERRYPI W
+  picture:
+  track: true
+
+raspberrypi_on_router:
+  icon:
+  mac: B8:27:EB:5D:65:23_78:D2:94:AA:52:44
+  name: RASPBERRYPI on Router
+  picture:
+  track: true
+
+raspberrypi_on_router_2:
+  icon:
+  mac: B8:27:EB:5D:65:23_78:D2:94:AA:76:0C
+  name: RASPBERRYPI on Router
+  picture:
+  track: true
+
+raspberrypi_on_router_3:
+  icon:
+  mac: B8:27:EB:5D:65:23_3C:37:86:44:C3:4A
+  name: RASPBERRYPI on Router
+  picture:
+  track: true
+
+#########################################
+# Kubernetes servers on Ubuntu (off)
+#########################################
+
+kubmaster_server:
+  icon:
+  mac: BE:BD:E3:6D:A4:5B
+  name: UBUNTU-SERVER
+  picture:
+  track: true
+
+ubuntu_server_on_router:
+  icon:
+  mac: BE:BD:E3:6D:A4:5B_78:D2:94:AA:76:0C
+  name: UBUNTU-SERVER on Router
+  picture:
+  track: true
+
+kubslave1_server:
+  icon:
+  mac: 22:88:9D:64:3D:14
+  name: UBUNTU-SERVER
+  picture:
+  track: true
+
+ubuntu_server_on_router_2:
+  icon:
+  mac: 22:88:9D:64:3D:14_78:D2:94:AA:76:0C
+  name: UBUNTU-SERVER on Router
+  picture:
+  track: true
+
+kubslave2_server:
+  icon:
+  mac: 2E:34:FE:B9:3E:9C
+  name: UBUNTU-SERVER
+  picture:
+  track: true
+
+ubuntu_server_on_router_3:
+  icon:
+  mac: 2E:34:FE:B9:3E:9C_78:D2:94:AA:76:0C
+  name: UBUNTU-SERVER on Router
+  picture:
+  track: true
+
+
+#########################################
+# Epson Printer
+#########################################
+
+epson_printer:
+  hide_if_away: false
+  icon:
+  mac: 9C:AE:D3:BF:C1:58
+  name: Epson Workforce Pro WF-3720
+  picture: /local/pics/wf3720.jpg
+  track: true
+
+epsonbfc158_on_router:
+  hide_if_away: false
+  icon:
+  mac: 9C:AE:D3:BF:C1:58_78:D2:94:AA:52:44
+  name: Epson Workforce Pro WF-3720
+  picture: /local/pics/wf3720.jpg
+  track: true
+
+epsonbfc158_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 9C:AE:D3:BF:C1:58_78:D2:94:AA:76:0C
+  name: EPSONBFC158 on Router
+  picture:
+  track: true
+
+epsonbfc158_on_router_3:
+  icon:
+  mac: 9C:AE:D3:BF:C1:58_3C:37:86:44:C3:4A
+  name: EPSONBFC158 on Router
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# Hubs
+#
+#
+#
+#########################################
+
+#########################################
+# Smartthings
+#########################################
+
+smartthings_wifi:
+  hide_if_away: false
+  icon:
+  mac: BC:A5:8B:4C:7B:45
+  name: Smartthings WiFi
+  picture: /local/pics/smartthings.png
+  track: true
+
+smartthings_wifi_on_router:
+  hide_if_away: false
+  icon:
+  mac: BC:A5:8B:4C:7B:45_78:D2:94:AA:52:44
+  name: Smartthings WiFi
+  picture: /local/pics/smartthings.png
+  track: true
+
+#########################################
+# MyQ Hub
+#########################################
+
+myq_hub:
+  hide_if_away: false
+  icon:
+  mac: 64:52:99:88:04:D0
+  name: MyQ Hub
+  picture: /local/pics/myq.jpg
+  track: true
+
+myq_hub_on_router:
+  hide_if_away: false
+  icon:
+  mac: 64:52:99:88:04:D0_78:D2:94:AA:52:44
+  name: MyQ Hub 
+  picture: /local/pics/myq.jpg
+  track: true
+
+#########################################
+# Philips Hue Hub
+#########################################
+
+philips_hue:
+  hide_if_away: false
+  icon:
+  mac: 00:17:88:2D:67:7C
+  name: Hue Hub
+  picture: /local/pics/huehub.jpg
+  track: true
+
+
+philips_hue_on_router:
+  hide_if_away: false
+  icon:
+  mac: 00:17:88:2D:67:7C_78:D2:94:AA:52:44
+  name:  Hue Hub
+  picture: /local/pics/huehub.jpg
+  track: true
+
+#########################################
+# Harmony Hub
+#########################################
+
+harmonyhub:
+  hide_if_away: false
+  icon:
+  mac: 00:04:20:FA:12:7C
+  name: Harmony Hub
+  picture: /local/pics/harmonyelite.jpg
+  track: true
+
+harmonyhub_on_router:
+  hide_if_away: false
+  icon:
+  mac: 00:04:20:FA:12:7C_78:D2:94:AA:52:44
+  name: Harmony Hub
+  picture: /local/pics/harmonyelite.jpg
+  track: true
+
+harmonyhub_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 00:04:20:FA:12:7C_78:D2:94:AA:76:0C
+  name: HARMONYHUB on Router
+  picture:
+  track: true
+
+harmonyhub_on_router_3:
+  icon:
+  mac: 00:04:20:FA:12:7C_3C:37:86:44:C3:4A
+  name: HARMONYHUB on Router
+  picture:
+  track: true
+
+#########################################
+# Bond Fan Hub
+#########################################
+
+fan_hub:
+  hide_if_away: false
+  icon:
+  mac: 9E:65:F9:05:54:4B
+  name: Bond Hub
+  picture: /local/pics/bond.jpg
+  track: true
+
+fan_hub_on_router:
+  hide_if_away: false
+  icon:
+  mac: 9E:65:F9:05:54:4B_78:D2:94:AA:52:44
+  name: Bond Hub
+  picture: /local/pics/bond.jpg
+  track: true
+
+fan_hub_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 9E:65:F9:05:54:4B_78:D2:94:AA:76:0C
+  name: FAN Hub on Router
+  picture:
+  track: true
+
+bond_on_router:
+  name: Bond on Router
+  mac: 9E:65:F9:05:54:4B_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Kevo Lock Hub
+#########################################
+
+kevo_hub:
+  hide_if_away: false
+  icon:
+  mac: 7C:72:E4:90:40:03
+  name: Kevo Bridge
+  picture: /local/pics/kevobridge.jpg
+  track: true
+
+kevo_hub_on_router:
+  hide_if_away: false
+  icon:
+  mac: 7C:72:E4:90:40:03_78:D2:94:AA:52:44
+  name: Kevo Bridge
+  picture: /local/pics/kevobridge.jpg
+  track: true
+
+#########################################
+# Ikea Tradfri Hub
+#########################################
+
+tradfri_hub:
+  hide_if_away: false
+  icon:
+  mac: 44:91:60:24:DA:C9
+  name: Ikea Tradfri Hub
+  picture:
+  track: true
+
+gw_44916024dac9_on_router:
+  hide_if_away: false
+  icon:
+  mac: 44:91:60:24:DA:C9_78:D2:94:AA:52:44
+  name: GW-44916024DAC9 on Router
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# Media
+#
+#
+#
+#########################################
+
+#########################################
+# Google Homes/Chromecaset/Media
+#########################################
+
+kitchen_home_speaker:
+  hide_if_away: false
+  icon:
+  mac: A4:77:33:BF:2C:5B
+  name: Kitchen Home Speaker
+  picture: /local/pics/googlehome.jpg
+  track: true
+  vendor: Google, Inc.
+
+home_kitchen_on_router:
+  hide_if_away: false
+  icon:
+  mac: A4:77:33:BF:2C:5B_78:D2:94:AA:52:44
+  name: Kitchen Home Speaker
+  picture: /local/pics/googlehome.jpg
+  track: true
+
+home_kitchen_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: A4:77:33:BF:2C:5B_78:D2:94:AA:76:0C
+  name: HOME-Kitchen on Router
+  picture:
+  track: true
+
+home_kitchen_on_router_3:
+  name: HOME-Kitchen on Router
+  mac: A4:77:33:BF:2C:5B_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Google Homes mini - Ensuite
+#########################################
+
+home_mini_bathroom:
+  hide_if_away: false
+  icon:
+  mac: E4:F0:42:54:5E:F7
+  name: Ensuite Mini Speaker
+  picture: /local/pics/googlemini.jpg
+  track: true
+
+home_mini_bathroom_on_router:
+  hide_if_away: false
+  icon:
+  mac: E4:F0:42:54:5E:F7_78:D2:94:AA:52:44
+  name: Ensuite Mini Speaker
+  picture: /local/pics/googlemini.jpg
+  track: true
+
+home_mini_bathroom_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: E4:F0:42:54:5E:F7_78:D2:94:AA:76:0C
+  name: HOME-MINI-Bathroom on Router
+  picture:
+  track: true
+
+home_mini_bathroom_on_router_3:
+  name: HOME-MINI-Bathroom on Router
+  mac: E4:F0:42:54:5E:F7_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Google ChromeCast - Lounge
+#########################################
+
+lounge_chromecast:
+  hide_if_away: false
+  icon:
+  mac: 08:9E:08:3B:96:91
+  name: Lounge Room Chromecast
+  picture: /local/pics/googlecast.jpg
+  track: true
+  vendor: Google, Inc.
+
+chromecast_lounge_on_router:
+  hide_if_away: false
+  icon:
+  mac: 08:9E:08:3B:96:91_78:D2:94:AA:76:0C
+  name: CHROMECAST-Lounge on Router
+  picture:
+  track: true
+
+chromecast_lounge_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 08:9E:08:3B:96:91_78:D2:94:AA:52:44
+  name: CHROMECAST-Lounge on Router
+  picture:
+  track: true
+
+#########################################
+# Google Home Mini - Lounge
+#########################################
+
+lounge_mini_speaker:
+  hide_if_away: false
+  icon:
+  mac: E4:F0:42:34:9F:1C
+  name: Lounge Room Mini Speaker
+  picture: /local/pics/googlemini.jpg
+  track: true
+  vendor: Google, Inc.
+
+home_mini_lounge_on_router:
+  hide_if_away: false
+  icon:
+  mac: E4:F0:42:34:9F:1C_78:D2:94:AA:76:0C
+  name: HOME-MINI-Lounge on Router
+  picture:
+  track: true
+
+home_mini_lounge_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: E4:F0:42:34:9F:1C_78:D2:94:AA:52:44
+  name: HOME-MINI-Lounge on Router
+  picture:
+  track: true
+
+home_mini_lounge_on_router_3:
+  name: HOME-MINI-Lounge on Router
+  mac: E4:F0:42:34:9F:1C_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Google Home Mini - Delia
+#########################################
+
+delia_nest_mini:
+  hide_if_away: false
+  icon:
+  mac: D4:F5:47:D4:2E:A6
+  name: Delia Mini Speaker
+  picture: /local/pics/googlemini.jpg
+  track: true
+
+google_nest_mini_on_router:
+  hide_if_away: false
+  icon:
+  mac: D4:F5:47:D4:2E:A6_78:D2:94:AA:52:44
+  name: GOOGLE-NEST-MINI on Router
+  picture:
+  track: true
+
+google_nest_mini_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: D4:F5:47:D4:2E:A6_78:D2:94:AA:76:0C
+  name: GOOGLE-NEST-MINI on Router
+  picture:
+  track: true
+
+google_nest_mini_on_router_3:
+  icon:
+  mac: D4:F5:47:D4:2E:A6_3C:37:86:44:C3:4A
+  name: GOOGLE-NEST-MINI on Router
+  picture:
+  track: true
+
+#########################################
+# Google ChromeCast - Gaming
+#########################################
+
+gaming_chromecast:
+  hide_if_away: false
+  icon:
+  mac: 6C:AD:F8:D8:5A:EA
+  name: Game Room Chromecast
+  picture: /local/pics/googlecast.jpg
+  track: true
+  vendor: AzureWave Technology Inc.
+
+chromecast_on_router:
+  name: CHROMECAST on Router
+  mac: 6C:AD:F8:D8:5A:EA_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+chromecast_on_router_2:
+  name: CHROMECAST on Router
+  mac: 6C:AD:F8:D8:5A:EA_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+chromecast_on_router_3:
+  name: CHROMECAST on Router
+  mac: 6C:AD:F8:D8:5A:EA_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Sony PS4 - Gaming
+#########################################
+
+ps4:
+  hide_if_away: false
+  icon:
+  mac: AC:89:95:35:21:59
+  name: Sony PS4
+  picture: /local/pics/ps4.jpg
+  track: true
+
+ps4_on_router:
+  hide_if_away: false
+  icon:
+  mac: AC:89:95:35:21:59_78:D2:94:AA:52:44
+  name: Sony PS4
+  picture: /local/pics/ps4.jpg
+  track: true
+
+ps4_on_router_2:
+  icon:
+  mac: AC:89:95:35:21:59_3C:37:86:44:C3:4A
+  name: PS4 on Router
+  picture:
+  track: true
+
+ps4_on_router_3:
+  name: PS4 on Router
+  mac: AC:89:95:35:21:59_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Sharp TV - Lounge
+#########################################
+
+sharp_tv:
+  hide_if_away: false
+  icon:
+  mac: 24:26:42:98:A4:0C
+  name: Sharp TV
+  picture: /local/pics/sharptv.jpg
+  track: true
+
+unknown_on_router_8:
+  hide_if_away: false
+  icon:
+  mac: 24:26:42:98:A4:0C_78:D2:94:AA:76:0C
+  name: Unknown on Router
+  picture:
+  track: true
+
+unknown_on_router_9:
+  hide_if_away: false
+  icon:
+  mac: 24:26:42:98:A4:0C_78:D2:94:AA:52:44
+  name: Unknown on Router
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# Switches
+#
+#
+#
+#########################################
+
+#########################################
+# TV Switch
+#########################################
+
+#device_tracker.hs110_tv_on_router
+tv_switch:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:54:A4:19
+  name: TV Switch
+  picture: /local/pics/tplinkhs110.jpg
+  track: true
+
+hs110_tv_on_router:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:54:A4:19_78:D2:94:AA:52:44
+  name: HS110 TV on Router
+  picture:
+  track: true
+
+hs110_tv_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:54:A4:19_78:D2:94:AA:76:0C
+  name: HS110 TV on Router
+  picture:
+  track: true
+
+hs110_tv_on_router_3:
+  icon:
+  mac: AC:84:C6:54:A4:19_3C:37:86:44:C3:4A
+  name: HS110 TV on Router
+  picture:
+  track: true
+
+#########################################
+# Chair Switch - Unused?
+#########################################
+
+# device_tracker.hs110_chairs_on_router
+chairs_switch:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:8D:43:72
+  name: Chairs Switch
+  picture: /local/pics/tplinkhs110.jpg
+  track: true
+
+hs110_chairs_on_router:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:8D:43:72_78:D2:94:AA:52:44
+  name: HS110 Chairs on Router
+  picture:
+  track: true
+
+hs110_chairs_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:8D:43:72_78:D2:94:AA:76:0C
+  name: HS110 Chairs on Router
+  picture:
+  track: true
+
+
+#########################################
+# Iron Switch
+#########################################
+
+dining_switch:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:0D:1D:F8
+  name: Iron Switch
+  picture: /local/pics/tplinkhs110.jpg
+  track: true
+
+hs110_iron_on_router:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:0D:1D:F8_78:D2:94:AA:76:0C
+  name: HS110 Iron on Router
+  picture:
+  track: true
+
+hs110_iron_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:0D:1D:F8_78:D2:94:AA:52:44
+  name: HS110 Iron on Router
+  picture:
+  track: true
+
+hs110_iron_on_router_3:
+  icon:
+  mac: AC:84:C6:0D:1D:F8_3C:37:86:44:C3:4A
+  name: HS110 Iron on Router
+  picture:
+  track: true
+
+
+#########################################
+# Study Switch - Unused
+#########################################
+
+study_switch:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:54:95:68
+  name: Printer Switch
+  picture: /local/pics/tplinkhs110.jpg
+  track: true
+
+hs110_study_on_router:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:54:95:68_78:D2:94:AA:52:44
+  name: HS110 Study on Router
+  picture:
+  track: true
+
+hs110_study_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: AC:84:C6:54:95:68_78:D2:94:AA:76:0C
+  name: HS110 Study on Router
+  picture:
+  track: true
+
+hs110_study_on_router_3:
+  icon:
+  mac: AC:84:C6:54:95:68_3C:37:86:44:C3:4A
+  name: HS110 Study on Router
+  picture:
+  track: true
+
+#########################################
+# Megan Blanket Switch
+#########################################
+
+megan_blanket:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:08:08
+  name: Megan Electric Blanket
+  picture:
+  track: true  
+
+hs100_m_eb_on_router:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:08:08_78:D2:94:AA:52:44
+  name: HS100 - M EB on Router
+  picture:
+  track: true
+
+hs100_m_eb_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:08:08_78:D2:94:AA:76:0C
+  name: HS100 - M EB on Router
+  picture:
+  track: true
+
+hs100_m_eb_on_router_3:
+  icon:
+  mac: D8:0D:17:9A:08:08_3C:37:86:44:C3:4A
+  name: HS100 - M EB on Router
+  picture:
+  track: true
+
+#########################################
+# Staci Blanket Switch
+#########################################
+
+staci_blanket:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:0C:61
+  name: Staci Electric Blanket
+  picture:
+  track: true
+
+hs100_st_eb_on_router:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:0C:61_78:D2:94:AA:76:0C
+  name: HS100 - St EB on Router
+  picture:
+  track: true
+
+hs100_st_eb_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:0C:61_78:D2:94:AA:52:44
+  name: HS100 - St EB on Router
+  picture:
+  track: true
+
+hs100_st_eb_on_router_3:
+  icon:
+  mac: D8:0D:17:9A:0C:61_3C:37:86:44:C3:4A
+  name: HS100 - St EB on Router
+  picture:
+  track: true
+
+#########################################
+# Delia Blanket Switch
+#########################################
+
+delia_blanket:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:1C:92
+  name: Delia Electric Blanket
+  picture:
+  track: true
+
+hs100_d_eb_on_router:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:1C:92_78:D2:94:AA:52:44
+  name: HS100 - D EB on Router
+  picture:
+  track: true
+
+hs100_d_eb_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:1C:92_78:D2:94:AA:76:0C
+  name: HS100 - D EB on Router
+  picture:
+  track: true
+
+hs100_d_eb_on_router_3:
+  icon:
+  mac: D8:0D:17:9A:1C:92_3C:37:86:44:C3:4A
+  name: HS100 - D EB on Router
+  picture:
+  track: true
+
+#########################################
+# Simon Blanket Switch
+#########################################
+
+simon_blanket:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:14:6E
+  name: Simon Electric Blanket
+  picture:
+  track: true
+
+hs100_s_eb_on_router:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:14:6E_78:D2:94:AA:76:0C
+  name: HS100 - S EB on Router
+  picture:
+  track: true
+
+hs100_s_eb_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: D8:0D:17:9A:14:6E_78:D2:94:AA:52:44
+  name: HS100 - S EB on Router
+  picture:
+  track: true
+
+hs100_s_eb_on_router_3:
+  icon:
+  mac: D8:0D:17:9A:14:6E_3C:37:86:44:C3:4A
+  name: HS100 - S EB on Router
+  picture:
+  track: true
+
+#########################################
+# Lounge Chair Switch Board
+#########################################
+
+lounge_chair_board:
+  icon:
+  mac: 74:DA:88:96:16:46
+  name: KP303
+  picture:
+  track: true
+
+kp303_on_router:
+  icon:
+  mac: 74:DA:88:96:16:46_78:D2:94:AA:76:0C
+  name: KP303 on Router
+  picture:
+  track: true
+
+kp303_on_router_2:
+  icon:
+  mac: 74:DA:88:96:16:46_78:D2:94:AA:52:44
+  name: KP303 on Router
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# Motion Sensors
+#
+#
+#
+#########################################
+
+#########################################
+# Living Room Vision Sensor
+#########################################
+
+living_room_vision:
+  name: ANDROID-1D008A40E0BE2CE8
+  mac: 2C:4D:79:BE:B8:F6
+  icon:
+  picture:
+  track: true
+
+android_1d008a40e0be2ce8_on_router:
+  name: ANDROID-1D008A40E0BE2CE8 on Router
+  mac: 2C:4D:79:BE:B8:F6_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+android_1d008a40e0be2ce8_on_router_2:
+  name: ANDROID-1D008A40E0BE2CE8 on Router
+  mac: 2C:4D:79:BE:B8:F6_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+
+#########################################
+#
+#
+#
+# Tablets
+#
+#
+#
+#########################################
+
+#########################################
+# Simon's Bedroom Tablet
+#########################################
+
+simon_tablet:
+  hide_if_away: false
+  icon:
+  mac: 68:5A:CF:2A:7D:5A
+  name: Simon Tablet
+  picture: /local/pics/nexus7.jpg
+  track: true
+
+sgalaxy_tab_a_2017_on_router:
+  hide_if_away: false
+  icon:
+  mac: 68:5A:CF:2A:7D:5A_78:D2:94:AA:76:0C
+  name: SGALAXY-TAB-A-2017 on Router
+  picture:
+  track: true
+
+sgalaxy_tab_a_2017_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 68:5A:CF:2A:7D:5A_78:D2:94:AA:52:44
+  name: SGALAXY-TAB-A-2017 on Router
+  picture:
+  track: true
+
+sgalaxy_tab_a_2017_on_router_3:
+  name: SGALAXY-TAB-A-2017 on Router
+  mac: 68:5A:CF:2A:7D:5A_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Megan's Ipad
+#########################################
+
+meg_ipad:
+  hide_if_away: false
+  icon:
+  mac: 88:E9:FE:2D:CC:18
+  name: Megan iPad
+  picture: /local/pics/ipad.jpg
+  track: true
+  vendor: Apple Inc
+
+megans_ipad_on_router:
+  hide_if_away: false
+  icon:
+  mac: 88:E9:FE:2D:CC:18_78:D2:94:AA:76:0C
+  name: MEGANS-IPAD on Router
+  picture:
+  track: true
+
+megans_ipad_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 88:E9:FE:2D:CC:18_78:D2:94:AA:52:44
+  name: MEGANS-IPAD on Router
+  picture:
+  track: true
+
+megans_ipad_on_router_3:
+  icon:
+  mac: 88:E9:FE:2D:CC:18_3C:37:86:44:C3:4A
+  name: MEGANS-IPAD on Router
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# Computers
+#
+#
+#
+#########################################
+
+#########################################
+# Simon Linux laptop
+#########################################
+
+simon_linux_laptop:
+  hide_if_away: false
+  icon:
+  mac: 80:E8:2C:1C:CE:C8
+  name: HA-Laptop
+  picture:
+  track: true
+
+laptop_on_router:
+  hide_if_away: false
+  icon:
+  mac: 80:E8:2C:1C:CE:C8_78:D2:94:AA:76:0C
+  name: HA-Laptop on Router
+  picture:
+  track: true
+
+laptop_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 80:E8:2C:1C:CE:C8_78:D2:94:AA:52:44
+  name: HA-Laptop on Router
+  picture:
+  track: true
+
+#########################################
+# Megan Desktop
+#########################################
+
+meg_desktop:
+  hide_if_away: false
+  icon:
+  mac: 74:C6:3B:FF:C0:C7
+  name: Megan Desktop
+  picture: /local/pics/acer.jpg
+  track: true
+  vendor: AzureWave Technology Inc.
+
+mdesktop_aais1tl_on_router:
+  hide_if_away: false
+  icon:
+  mac: 74:C6:3B:FF:C0:C7_78:D2:94:AA:52:44
+  name: MDESKTOP-AAIS1TL on Router
+  picture:
+  track: true
+
+mdesktop_aais1tl_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 74:C6:3B:FF:C0:C7_78:D2:94:AA:76:0C
+  name: MDESKTOP-AAIS1TL on Router
+  picture:
+  track: true
+
+mdesktop_aais1tl_on_router_3:
+  icon:
+  mac: 74:C6:3B:FF:C0:C7_3C:37:86:44:C3:4A
+  name: MDESKTOP-AAIS1TL on Router
+  picture:
+  track: true
+
+#########################################
+# Megan Work Surface
+#########################################
+
+meg_work_laptop:
+  icon:
+  mac: F8:E4:E3:C6:FA:7A
+  name: Megan's Work Laptop (LA324518)
+  picture:
+  track: true
+
+la324518_on_router:
+  icon:
+  mac: F8:E4:E3:C6:FA:7A_78:D2:94:AA:52:44
+  name: LA324518 on Router
+  picture:
+  track: true
+
+la324518_on_router_2:
+  name: LA324518 on Router
+  mac: F8:E4:E3:C6:FA:7A_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+la324518_on_router_3:
+  name: LA324518 on Router
+  mac: F8:E4:E3:C6:FA:7A_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+
+#########################################
+# Megan Surfacebook
+#########################################
+
+meg_surfacebook:
+  hide_if_away: false
+  icon:
+  mac: B4:AE:2B:D9:50:F3
+  name: Meg Surfacebook
+  picture:
+  track: true
+
+desktop_ife7nba_on_router:
+  hide_if_away: false
+  icon:
+  mac: B4:AE:2B:D9:50:F3_78:D2:94:AA:52:44
+  name: DESKTOP-IFE7NBA on Router
+  picture:
+  track: true
+
+desktop_ife7nba_on_router_2:
+  name: DESKTOP-IFE7NBA on Router
+  mac: B4:AE:2B:D9:50:F3_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+desktop_ife7nba_on_router_3:
+  name: DESKTOP-IFE7NBA on Router
+  mac: B4:AE:2B:D9:50:F3_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Simon Desktop
+#########################################
+
+simon_desktop:
+  icon:
+  mac: 60:F2:62:76:3B:94
+  name: Simon Desktop
+  picture: /local/pics/acer.jpg
+  track: true
+
+desktop_8q37agv_on_router:
+  icon:
+  mac: 60:F2:62:76:3B:94_78:D2:94:AA:52:44
+  name: DESKTOP-8Q37AGV on Router
+  picture:
+  track: true
+
+desktop_8q37agv_on_router_2:
+  icon:
+  mac: 60:F2:62:76:3B:94_78:D2:94:AA:76:0C
+  name: DESKTOP-8Q37AGV on Router
+  picture:
+  track: true
+
+simon_desktop_on_router:
+  icon:
+  mac: 60:F2:62:76:3B:94_3C:37:86:44:C3:4A
+  name: SIMON-DESKTOP on Router
+  picture:
+  track: true
+
+#########################################
+# Delia Desktop - new 2020
+#########################################
+
+delia_desktop:
+  icon:
+  mac: 2C:F0:5D:72:56:96
+  name: Delia Desktop
+  picture:
+  track: true
+
+desktop_knsmcc4_on_router:
+  icon:
+  mac: 2C:F0:5D:72:56:96_78:D2:94:AA:76:0C
+  name: DESKTOP-KNSMCC4 on Router
+  picture:
+  track: true
+
+desktop_knsmcc4_on_router_2:
+  icon:
+  mac: 2C:F0:5D:72:56:96_3C:37:86:44:C3:4A
+  name: DESKTOP-KNSMCC4 on Router
+  picture:
+  track: true
+
+#########################################
+# Kitchen Surface
+#########################################
+
+#was simons - now retired 
+
+kitchen_surface:
+  hide_if_away: false
+  icon:
+  mac: B4:AE:2B:E6:31:7E
+  name: Simon Surface
+  picture: /local/pics/surface.jpg
+  track: true
+
+desktop_epd20t4_on_router:
+  hide_if_away: false
+  icon:
+  mac: B4:AE:2B:E6:31:7E_78:D2:94:AA:76:0C
+  name: DESKTOP-EPD20T4 on Router
+  picture:
+  track: true
+
+desktop_epd20t4_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: B4:AE:2B:E6:31:7E_78:D2:94:AA:52:44
+  name: DESKTOP-EPD20T4 on Router
+  picture:
+  track: true
+
+kitchen_screen_on_router:
+  name: Kitchen Screen on Router
+  mac: B4:AE:2B:E6:31:7E_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Staci Surface
+#########################################
+
+# replaced
+
+staci_surface:
+  hide_if_away: false
+  icon:
+  mac: BC:83:85:0C:22:E8
+  name: Staci Surface
+  picture: /local/pics/surface.jpg
+  track: true
+
+staci_surface_on_router:
+  hide_if_away: false
+  icon:
+  mac: BC:83:85:0C:22:E8_78:D2:94:AA:76:0C
+  name: Staci Surface on Router
+  picture:
+  track: true
+
+staci_surface_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: BC:83:85:0C:22:E8_78:D2:94:AA:52:44
+  name: Staci Surface on Router
+  picture:
+  track: true
+
+staci_surface_on_router_3:
+  name: Staci Surface on Router
+  mac: BC:83:85:0C:22:E8_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Delia Surface
+#########################################
+
+# was delia's now in kitchen/ to be retired
+
+delia_surface:
+  hide_if_away: false
+  icon:
+  mac: BC:83:85:0C:0C:81
+  name: Delia Surface
+  picture: /local/pics/surface.jpg
+  track: true
+
+del_laptop_on_router:
+  hide_if_away: false
+  icon:
+  mac: BC:83:85:0C:0C:81_78:D2:94:AA:52:44
+  name: DEL-LAPTOP on Router
+  picture: /local/pics/surface.jpg
+  track: true
+
+del_laptop_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: BC:83:85:0C:0C:81_78:D2:94:AA:76:0C
+  name: DEL-LAPTOP on Router
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# Phones by router
+#
+#
+#
+#########################################
+
+#########################################
+# Simon 
+#########################################
+
+sphone_net:
+  hide_if_away: false
+  icon:
+  mac: 3C:28:6D:22:5D:F6
+  name: Simon via router
+  picture: /local/pics/Simon.jpg
+  track: true
+
+spixel3_on_router:
+  hide_if_away: false
+  icon:
+  mac: 3C:28:6D:22:5D:F6_78:D2:94:AA:52:44
+  name: Simon via router
+  picture: /local/pics/Simon.jpg
+  track: true
+
+spixel3_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 3C:28:6D:22:5D:F6_78:D2:94:AA:76:0C
+  name: SPixel3 on Router
+  picture:
+  track: true
+
+spixel3_on_router_3:
+  icon:
+  mac: 3C:28:6D:22:5D:F6_3C:37:86:44:C3:4A
+  name: SPixel3 on Router
+  picture:
+  track: true
+
+#########################################
+# Staci 
+#########################################
+
+stphone_net:
+  hide_if_away: false
+  icon:
+  mac: 58:CB:52:48:8B:B5
+  name: Staci via router
+  picture: /local/pics/Staci.jpg
+  track: true
+
+unknown_on_router_5:
+  hide_if_away: false
+  icon:
+  mac: 58:CB:52:48:8B:B5_78:D2:94:AA:52:44
+  name: Unknown on Router
+  picture:
+  track: true
+
+unknown_on_router_6:
+  hide_if_away: false
+  icon:
+  mac: 58:CB:52:48:8B:B5_78:D2:94:AA:76:0C
+  name: Unknown on Router
+  picture:
+  track: true
+
+stphone_on_router:
+  icon:
+  mac: 58:CB:52:48:8B:B5_3C:37:86:44:C3:4A
+  name: StPhone on Router
+  picture:
+  track: true
+
+#########################################
+# Megan 
+#########################################
+
+#mphone_net:
+mphone_net:
+  hide_if_away: false
+  icon:
+  mac: 08:C5:E1:0E:95:FC
+  name: Megan via router
+  picture: /local/pics/Megan.jpg
+  track: true
+
+mgalaxy_s9_on_router:
+  hide_if_away: false
+  icon:
+  mac: 08:C5:E1:0E:95:FC_78:D2:94:AA:52:44
+  name: MGalaxy-S9 on Router
+  picture:
+  track: true
+
+mgalaxy_s9_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 08:C5:E1:0E:95:FC_78:D2:94:AA:76:0C
+  name: MGalaxy-S9 on Router
+  picture:
+  track: true
+
+mgalaxy_s9_on_router_3:
+  icon:
+  mac: 08:C5:E1:0E:95:FC_3C:37:86:44:C3:4A
+  name: MGalaxy-S9 on Router
+  picture:
+  track: true
+
+#########################################
+# Delia 
+#########################################
+
+
+dphone_net:
+  icon:
+  mac: 7E:F7:16:54:D5:AF
+  name: Delia via router
+  picture: /local/pics/Delia.jpg
+  track: true
+
+unknown_on_router_16:
+  icon:
+  mac: 7E:F7:16:54:D5:AF_78:D2:94:AA:52:44
+  name: Unknown on Router
+  picture:
+  track: true
+
+unknown_on_router_17:
+  icon:
+  mac: 7E:F7:16:54:D5:AF_78:D2:94:AA:76:0C
+  name: Unknown on Router
+  picture:
+  track: true
+
+dpixel_on_router:
+  icon:
+  mac: 7E:F7:16:54:D5:AF_3C:37:86:44:C3:4A
+  name: DPixel on Router
+  picture:
+  track: true
+
+#########################################
+# Delia 3DS
+#########################################
+
+nintendo_3ds:
+  hide_if_away: false
+  icon:
+  mac: 2C:10:C1:D0:54:A4
+  name: NINTENDO 3DS
+  picture:
+  track: true
+
+nintendo_3ds_on_router:
+  hide_if_away: false
+  icon:
+  mac: 2C:10:C1:D0:54:A4_78:D2:94:AA:52:44
+  name: NINTENDO 3DS on Router
+  picture:
+  track: true
+
+nintendo_3ds_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 2C:10:C1:D0:54:A4_78:D2:94:AA:76:0C
+  name: NINTENDO 3DS on Router
+  picture:
+  track: true
+
+#########################################
+# Delia Switch
+#########################################
+
+nintendo_switch:
+  icon:
+  mac: 48:A5:E7:D8:14:DD
+  name: Unknown
+  picture:
+  track: true
+
+unknown_on_router_18:
+  icon:
+  mac: 48:A5:E7:D8:14:DD_78:D2:94:AA:52:44
+  name: Unknown on Router
+  picture:
+  track: true
+
+unknown_on_router_19:
+  icon:
+  mac: 48:A5:E7:D8:14:DD_78:D2:94:AA:76:0C
+  name: Unknown on Router
+  picture:
+  track: true
+
+nintendo_on_router:
+  icon:
+  mac: 48:A5:E7:D8:14:DD_3C:37:86:44:C3:4A
+  name: Nintendo on Router
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# Appliances
+#
+#
+#
+#########################################
+
+#########################################
+# Front Lock
+#########################################
+
+samsung_front_lock:
+  name: DA16200_804A
+  mac: 00:16:B7:94:80:4A
+  icon:
+  picture:
+  track: true
+
+da16200_804a_on_router:
+  name: DA16200_804A on Router
+  mac: 00:16:B7:94:80:4A_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Fridge Switch
+#########################################
+
+fridge_switch:
+  icon:
+  mac: E0:98:06:C0:78:4B
+  name: ESP_C0784B
+  picture:
+  track: true
+
+esp_c0784b_on_router:
+  icon:
+  mac: E0:98:06:C0:78:4B_78:D2:94:AA:52:44
+  name: ESP_C0784B on Router
+  picture:
+  track: true
+
+esp_c0784b_on_router_2:
+  icon:
+  mac: E0:98:06:C0:78:4B_78:D2:94:AA:76:0C
+  name: ESP_C0784B on Router
+  picture:
+  track: true
+
+#########################################
+# Dryer
+#########################################
+
+samsung_dryer:
+  hide_if_away: false
+  icon:
+  mac: 70:2C:1F:8A:71:85
+  name: Samsung Dryer
+  picture:
+  track: true
+
+wisol_on_router:
+  icon:
+  mac: 70:2C:1F:8A:71:85_78:D2:94:AA:52:44
+  name: Wisol on Router
+  picture:
+  track: true
+
+
+#########################################
+# Washer
+#########################################
+
+samsung_washer:
+  hide_if_away: false
+  icon:
+  mac: 28:6D:97:45:26:16
+  name: Samsung Washer
+  picture: /local/pics/swasher.jpg
+  track: true
+
+samsung_washer_on_router:
+  hide_if_away: false
+  icon:
+  mac: 28:6D:97:45:26:16_78:D2:94:AA:52:44
+  name: Samsung Washer
+  picture: 
+  track: true
+
+samsung_washer_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 28:6D:97:45:26:16_78:D2:94:AA:76:0C
+  name: SAMSUNG WASHER on Router
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# Wearables
+#
+#
+#
+#########################################
+
+#########################################
+# Meg Fitbit
+#########################################
+
+meg_fitbit:
+  hide_if_away: false
+  icon:
+  mac: 18:00:DB:16:91:4B
+  name: Megan Fitbit
+  picture: /local/ionic.jpg
+  track: true
+  vendor: unknown
+
+ionic_on_router:
+  hide_if_away: false
+  icon:
+  mac: 18:00:DB:16:91:4B_78:D2:94:AA:52:44
+  name: IONIC on Router
+  picture:
+  track: true
+
+ionic_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 18:00:DB:16:91:4B_78:D2:94:AA:76:0C
+  name: IONIC on Router
+  picture:
+  track: true
+
+ionic_on_router_3:
+  icon:
+  mac: 18:00:DB:16:91:4B_3C:37:86:44:C3:4A
+  name: IONIC on Router
+  picture:
+  track: true
+
+#########################################
+# Simon Watch
+#########################################
+
+# old watch - replaced with fossil
+
+# simon_watch:
+#   hide_if_away: false
+#   icon:
+#   mac: 24:00:BA:AD:43:FF
+#   name: Simon Watch
+#   picture: /local/huawei.jpg
+#   track: true
+
+# android_917b9442f501bb3a_on_router:
+#   hide_if_away: false
+#   icon:
+#   mac: 24:00:BA:AD:43:FF_78:D2:94:AA:52:44
+#   name: ANDROID-917B9442F501BB3A on Router
+#   picture:
+#   track: true
+
+# android_917b9442f501bb3a_on_router_2:
+#   hide_if_away: false
+#   icon:
+#   mac: 24:00:BA:AD:43:FF_78:D2:94:AA:76:0C
+#   name: ANDROID-917B9442F501BB3A on Router
+#   picture:
+#   track: true
+
+# android_917b9442f501bb3a_on_router_3:
+#   name: ANDROID-917B9442F501BB3A on Router
+#   mac: 24:00:BA:AD:43:FF_3C:37:86:44:C3:4A
+#   icon:
+#   picture:
+#   track: true
+
+#########################################
+# Simon Keys
+#########################################
+
+tile_simon_keys:
+  hide_if_away: false
+  icon: mdi:view-grid
+  mac:
+  name: Simon Keys
+  picture:
+  track: true
+
+#simon pixel
+tile_p_e8a3203f8e1a005aa85de09f8e47b3b8:
+  hide_if_away: false
+  icon: mdi:view-grid
+  mac:
+  name: tile p e8a3203f8e1a005aa85de09f8e47b3b8
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# Nest Protect
+#
+#
+#
+#########################################
+
+#########################################
+# Nest Protect - Front Hall
+#########################################
+
+protect_front_hall:
+  hide_if_away: false
+  icon:
+  mac: 18:B4:30:A3:36:F5
+  name: Nest Front Hall
+  picture: /local/protect.jpg
+  track: true
+  vendor: Nest Labs Inc.
+
+unknown_on_router_3:
+  hide_if_away: false
+  icon:
+  mac: 18:B4:30:A3:36:F5_78:D2:94:AA:52:44
+  name: Unknown on Router
+  picture:
+  track: true
+
+unknown_on_router_10:
+  hide_if_away: false
+  icon:
+  mac: 18:B4:30:A3:36:F5_78:D2:94:AA:76:0C
+  name: Unknown on Router
+  picture:
+  track: true
+
+nest_protect_on_router_2:
+  name: Nest-Protect on Router
+  mac: 18:B4:30:A3:36:F5_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Nest Protect - Back Hall
+#########################################
+
+protect_back_hall:
+  hide_if_away: false
+  icon:
+  mac: 18:B4:30:AC:3A:71
+  name: Nest Back Hall
+  picture: /local/protect.jpg
+  track: true
+  vendor: Nest Labs Inc.
+
+unknown_on_router:
+  hide_if_away: false
+  icon:
+  mac: 18:B4:30:AC:3A:71_78:D2:94:AA:52:44
+  name: Unknown on Router
+  picture:
+  track: true
+
+unknown_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 18:B4:30:AC:3A:71_78:D2:94:AA:76:0C
+  name: Unknown on Router
+  picture:
+  track: true
+
+nest_protect_on_router:
+  icon:
+  mac: 18:B4:30:AC:3A:71_3C:37:86:44:C3:4A
+  name: Nest-Protect on Router
+  picture:
+  track: true
+
+#########################################
+# Mackenzie Phone
+#########################################
+
+mackenzie_phone:
+  hide_if_away: false
+  icon:
+  mac: C0:E8:62:7E:69:13
+  name: MACKENZIE
+  picture:
+  track: true
+
+mackenzie_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: C0:E8:62:7E:69:13_78:D2:94:AA:52:44
+  name: MACKENZIE on Router
+  picture:
+  track: true
+
+mackenzie_on_router_3:
+  hide_if_away: false
+  icon:
+  mac: C0:E8:62:7E:69:13_78:D2:94:AA:76:0C
+  name: MACKENZIE on Router
+  picture:
+  track: true
+
+mackenzie_on_router:
+  name: MACKENZIE on Router
+  mac: C0:E8:62:7E:69:13_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# Simon's keys
+#########################################
+
+tile_f4669525df594637:
+  hide_if_away: false
+  icon: mdi:view-grid
+  mac:
+  name: tile f4669525df594637
+  picture:
+  track: true
+
+#########################################
+# Wenche's Ipad
+#########################################
+
+wenches_ipad:
+  hide_if_away: false
+  icon:
+  mac: 34:AB:37:57:3B:76
+  name: WENCHES-IPAD
+  picture:
+  track: true
+
+wenches_ipad_on_router:
+  hide_if_away: false
+  icon:
+  mac: 34:AB:37:57:3B:76_78:D2:94:AA:76:0C
+  name: WENCHES-IPAD on Router
+  picture:
+  track: true
+
+#########################################
+# Imowyn's Ipad
+#########################################
+
+imowyns_ipad:
+  hide_if_away: false
+  icon:
+  mac: 24:1B:7A:1A:11:6C
+  name: Imowyn's Ipad
+  picture:
+  track: true
+
+imowyns_ipad_on_router:
+  hide_if_away: false
+  icon:
+  mac: 24:1B:7A:1A:11:6C_78:D2:94:AA:52:44
+  name: IMOWYNS-IPAD on Router
+  picture:
+  track: true
+
+imowyns_ipad_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 24:1B:7A:1A:11:6C_78:D2:94:AA:76:0C
+  name: IMOWYNS-IPAD on Router
+  picture:
+  track: true
+
+#########################################
+# Tuya Kitchen Camera
+######################################### 
+
+tuya_kitchen_camera:
+  hide_if_away: false
+  icon:
+  mac: 88:E6:28:A2:15:7F
+  name: Unknown
+  picture:
+  track: true
+
+unknown_on_router_12:
+  hide_if_away: false
+  icon:
+  mac: 88:E6:28:A2:15:7F_78:D2:94:AA:52:44
+  name: Unknown on Router
+  picture:
+  track: true
+
+unknown_on_router_14:
+  hide_if_away: false
+  icon:
+  mac: 88:E6:28:A2:15:7F_78:D2:94:AA:76:0C
+  name: Unknown on Router
+  picture:
+  track: true
+
+#########################################
+# Dyson Pure Hot/Cool
+#########################################
+
+dyson_pure_hot_cool:
+  hide_if_away: false
+  icon:
+  mac: C8:FF:77:76:BD:F9
+  name: Dyson Pure Hot/Cool
+  picture:
+  track: true
+
+a1f_au_mka0712a_on_router:
+  hide_if_away: false
+  icon:
+  mac: C8:FF:77:76:BD:F9_78:D2:94:AA:76:0C
+  name: A1F-AU-MKA0712A on Router
+  picture:
+  track: true
+
+dyson_pure_hot_cool_on_router:
+  hide_if_away: false
+  icon:
+  mac: C8:FF:77:76:BD:F9_78:D2:94:AA:52:44
+  name: Dyson Pure Hot Cool on Router
+  picture:
+  track: true
+
+#########################################
+# Kogan Heaters
+#########################################
+
+heater_a_ensuite:
+  icon:
+  mac: E0:98:06:83:10:E2
+  name: Kogan Heater A
+  picture:
+  track: true
+
+esp_8310e2_on_router:
+  icon:
+  mac: E0:98:06:83:10:E2_78:D2:94:AA:76:0C
+  name: ESP_8310E2 on Router
+  picture:
+  track: true
+
+esp_8310e2_on_router_2:
+  icon:
+  mac: E0:98:06:83:10:E2_78:D2:94:AA:52:44
+  name: ESP_8310E2 on Router
+  picture:
+  track: true
+
+esp_8310e2_on_router_3:
+  name: ESP_8310E2 on Router
+  mac: E0:98:06:83:10:E2_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#***************************************
+
+heater_b_lounge:
+  icon:
+  mac: A4:CF:12:D1:17:32
+  name: ESP_D11732
+  picture:
+  track: true
+
+esp_d11732_on_router:
+  icon:
+  mac: A4:CF:12:D1:17:32_78:D2:94:AA:52:44
+  name: ESP_D11732 on Router
+  picture:
+  track: true
+
+esp_d11732_on_router_2:
+  icon:
+  mac: A4:CF:12:D1:17:32_78:D2:94:AA:76:0C
+  name: ESP_D11732 on Router
+  picture:
+  track: true
+
+#***************************************
+
+heater_c_study:
+  icon:
+  mac: E0:98:06:83:0F:B8
+  name: ESP_830FB8
+  picture:
+  track: true
+
+esp_830fb8_on_router:
+  icon:
+  mac: E0:98:06:83:0F:B8_78:D2:94:AA:52:44
+  name: ESP_830FB8 on Router
+  picture:
+  track: true
+
+esp_830fb8_on_router_2:
+  icon:
+  mac: E0:98:06:83:0F:B8_78:D2:94:AA:76:0C
+  name: ESP_830FB8 on Router
+  picture:
+  track: true
+
+esp_830fb8_on_router_3:
+  name: ESP_830FB8 on Router
+  mac: E0:98:06:83:0F:B8_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#########################################
+# SolarEdge Inverter 
+#########################################
+
+solaredge_inverter:
+  hide_if_away: false
+  icon:
+  mac: 48:0B:B2:52:45:33
+  name: Unknown
+  picture:
+  track: true
+
+solaredge_on_router:
+  icon:
+  mac: 48:0B:B2:52:45:33_78:D2:94:AA:76:0C
+  name: Solaredge on Router
+  picture:
+  track: true
+
+unknown_on_router_15:
+  hide_if_away: false
+  icon:
+  mac: 48:0B:B2:52:45:33_78:D2:94:AA:52:44
+  name: Unknown on Router
+  picture:
+  track: true
+
+
+
+#########################################
+# Simon Mobile - DESE
+#########################################
+DESE_sphone:
+  icon:
+  mac: E2:BE:EF:94:10:31
+  name: DEV-94:10:31
+  picture:
+  track: true
+
+dev_94_10_31_on_router:
+  icon:
+  mac: E2:BE:EF:94:10:31_78:D2:94:AA:52:44
+  name: DEV-94:10:31 on Router
+  picture:
+  track: true
+
+dev_94_10_31_on_router_2:
+  icon:
+  mac: E2:BE:EF:94:10:31_78:D2:94:AA:76:0C
+  name: DEV-94:10:31 on Router
+  picture:
+  track: true
+
+s_dese_work_phone_on_router:
+  icon:
+  mac: E2:BE:EF:94:10:31_3C:37:86:44:C3:4A
+  name: S DESE Work Phone on Router
+  picture:
+  track: true
+
+#########################################
+# Simon Laptop - DESE
+#########################################
+
+ta318564:
+  hide_if_away: false
+  icon:
+  mac: 14:AB:C5:C8:EE:75
+  name: TA318564
+  picture:
+  track: true
+
+ta318564_on_router:
+  hide_if_away: false
+  icon:
+  mac: 14:AB:C5:C8:EE:75_78:D2:94:AA:76:0C
+  name: TA318564 on Router
+  picture:
+  track: true
+
+ta318564_on_router_2:
+  hide_if_away: false
+  icon:
+  mac: 14:AB:C5:C8:EE:75_78:D2:94:AA:52:44
+  name: TA318564 on Router
+  picture:
+  track: true
+
+
+#########################################
+# Withings Sleep Pad
+#########################################
+
+Megan_sleep_pad:
+  icon:
+  mac: 00:24:E4:8E:E8:1E
+  name: Unknown
+  picture:
+  track: true
+
+unknown_on_router_20:
+  icon:
+  mac: 00:24:E4:8E:E8:1E_78:D2:94:AA:52:44
+  name: Unknown on Router
+  picture:
+  track: true
+
+withings_on_router:
+  icon:
+  mac: 00:24:E4:8E:E8:1E_78:D2:94:AA:76:0C
+  name: Withings on Router
+  picture:
+  track: true
+
+withings_on_router_8:
+  icon:
+  mac: 00:24:E4:8E:E8:1E_3C:37:86:44:C3:4A
+  name: Withings on Router
+  picture:
+  track: true
+
+#***************************************
+
+Simon_sleep_pad:
+  icon:
+  mac: 00:24:E4:8E:F0:82
+  name: Unknown
+  picture:
+  track: true
+
+unknown_on_router_21:
+  icon:
+  mac: 00:24:E4:8E:F0:82_78:D2:94:AA:52:44
+  name: Unknown on Router
+  picture:
+  track: true
+
+withings_on_router_2:
+  icon:
+  mac: 00:24:E4:8E:F0:82_78:D2:94:AA:76:0C
+  name: Withings on Router
+  picture:
+  track: true
+
+withings_on_router_7:
+  icon:
+  mac: 00:24:E4:8E:F0:82_3C:37:86:44:C3:4A
+  name: Withings on Router
+  picture:
+  track: true
+
+#***************************************
+
+Staci_sleep_pad:
+  icon:
+  mac: 00:24:E4:8E:E5:94
+  name: unknown
+  picture:
+  track: true
+
+unknown_on_router_22:
+  icon:
+  mac: 00:24:E4:8E:E5:94_78:D2:94:AA:52:44
+  name: unknown on Router
+  picture:
+  track: true
+
+withings_on_router_6:
+  icon:
+  mac: 00:24:E4:8E:E5:94_3C:37:86:44:C3:4A
+  name: Withings on Router
+  picture:
+  track: true
+
+#***************************************
+
+Delia_sleep_pad:
+  icon:
+  mac: 00:24:E4:8E:ED:F0
+  name: unknown
+  picture:
+  track: true
+
+withings_on_router_3:
+  icon:
+  mac: 00:24:E4:8E:ED:F0_78:D2:94:AA:52:44
+  name: Withings on Router
+  picture:
+  track: true
+
+withings_on_router_4:
+  icon:
+  mac: 00:24:E4:8E:ED:F0_78:D2:94:AA:76:0C
+  name: Withings on Router
+  picture:
+  track: true
+
+withings_on_router_5:
+  icon:
+  mac: 00:24:E4:8E:ED:F0_3C:37:86:44:C3:4A
+  name: Withings on Router
+  picture:
+  track: true
+
+#***************************************
+# Airconditioners - main aircon
+#***************************************
+
+panasonic_aircon:
+  name: unknown
+  mac: D8:61:62:DE:D4:E0
+  icon:
+  picture:
+  track: true
+
+unknown_on_router_7:
+  name: unknown on Router
+  mac: D8:61:62:DE:D4:E0_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+wistron_aircon_on_router:
+  name: Wistron - Aircon on Router
+  mac: D8:61:62:DE:D4:E0_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+wistron_aircon_on_router_2:
+  name: Wistron - Aircon on Router
+  mac: D8:61:62:DE:D4:E0_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Delia fitbit watch
+#***************************************
+
+delia_watch_fitbit:
+  name: VERSA 2
+  mac: 5C:75:AF:30:38:A1
+  icon:
+  picture:
+  track: true
+
+versa_2_on_router:
+  name: VERSA 2 on Router
+  mac: 5C:75:AF:30:38:A1_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+versa_2_on_router_2:
+  name: VERSA 2 on Router
+  mac: 5C:75:AF:30:38:A1_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+versa_2_on_router_3:
+  name: VERSA 2 on Router
+  mac: 5C:75:AF:30:38:A1_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Simon Fossil watch
+#***************************************
+
+simon_watch_fossil:
+  name: Compal
+  mac: 08:97:98:2B:E8:43
+  icon:
+  picture:
+  track: true
+
+compal_on_router:
+  name: Compal on Router
+  mac: 08:97:98:2B:E8:43_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+compal_on_router_2:
+  name: Compal on Router
+  mac: 08:97:98:2B:E8:43_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+compal_on_router_3:
+  name: Compal on Router
+  mac: 08:97:98:2B:E8:43_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# staci compact switch
+#***************************************
+
+staci_switch:
+  name: Nintendo
+  mac: E8:DA:20:07:5F:02
+  icon:
+  picture:
+  track: true
+
+nintendo_on_router_2:
+  name: Nintendo on Router
+  mac: E8:DA:20:07:5F:02_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+nintendo_on_router_3:
+  name: Nintendo on Router
+  mac: E8:DA:20:07:5F:02_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+nintendo_on_router_4:
+  name: Nintendo on Router
+  mac: E8:DA:20:07:5F:02_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Simon Linux Laptop
+#***************************************
+
+simon_laptop:
+  name: SIMON-LAPTOP
+  mac: EC:5C:68:AF:2F:57
+  icon:
+  picture:
+  track: true
+
+simon_laptop_on_router:
+  name: SIMON-LAPTOP on Router
+  mac: EC:5C:68:AF:2F:57_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+simon_laptop_on_router_2:
+  name: SIMON-LAPTOP on Router
+  mac: EC:5C:68:AF:2F:57_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+simon_laptop_on_router_3:
+  name: SIMON-LAPTOP on Router
+  mac: EC:5C:68:AF:2F:57_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Simon DESE Phone?
+#***************************************
+
+dev_aa_76_0f:
+  name: DEV-AA:76:0F
+  mac: 7E:D2:94:AA:76:0F
+  icon:
+  picture:
+  track: true
+
+dev_aa_76_0f_on_router:
+  name: DEV-AA:76:0F on Router
+  mac: 7E:D2:94:AA:76:0F_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+dev_aa_76_0f_on_router_2:
+  name: DEV-AA:76:0F on Router
+  mac: 7E:D2:94:AA:76:0F_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+dev_aa_76_0f_on_router_3:
+  name: DEV-AA:76:0F on Router
+  mac: 7E:D2:94:AA:76:0F_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Simon DESE Laptop?
+#***************************************
+
+la327559:
+  name: LA327559
+  mac: A4:97:B1:64:87:BD
+  icon:
+  picture:
+  track: true
+
+la327559_on_router:
+  name: LA327559 on Router
+  mac: A4:97:B1:64:87:BD_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+la327559_on_router_2:
+  name: LA327559 on Router
+  mac: A4:97:B1:64:87:BD_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+la327559_on_router_3:
+  name: LA327559 on Router
+  mac: A4:97:B1:64:87:BD_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Staci or Delia Laptop?
+#***************************************
+
+desktop_3be4646:
+  name: DESKTOP-3BE4646
+  mac: E4:42:A6:B3:0E:34
+  icon:
+  picture:
+  track: true
+
+desktop_3be4646_on_router:
+  name: DESKTOP-3BE4646 on Router
+  mac: E4:42:A6:B3:0E:34_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Staci Dell Laptop
+#***************************************
+
+staci_laptop:
+  name: DDBJ1N93
+  mac: 14:18:C3:54:B9:06
+  icon:
+  picture:
+  track: true
+
+ddbj1n93_on_router:
+  name: DDBJ1N93 on Router
+  mac: 14:18:C3:54:B9:06_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+desktop_eep6opv_on_router:
+  name: DESKTOP-EEP6OPV on Router
+  mac: 14:18:C3:54:B9:06_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Delia Dell Laptop
+#***************************************
+
+delia_laptop:
+  name: D8YL1N93
+  mac: 14:18:C3:54:CD:D8
+  icon:
+  picture:
+  track: true
+
+d8yl1n93_on_router:
+  name: D8YL1N93 on Router
+  mac: 14:18:C3:54:CD:D8_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+desktop_facl93b_on_router:
+  name: DESKTOP-FACL93B on Router
+  mac: 14:18:C3:54:CD:D8_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+desktop_facl93b_on_router_2:
+  name: DESKTOP-FACL93B on Router
+  mac: 14:18:C3:54:CD:D8_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Aircon? - Staci?
+#***************************************
+
+gs_4f2fe8:
+  name: GS_4F2FE8
+  mac: E8:2A:44:4F:2F:E8
+  icon:
+  picture:
+  track: true
+
+gs_4f2fe8_on_router:
+  name: GS_4F2FE8 on Router
+  mac: E8:2A:44:4F:2F:E8_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+gs_4f2fe8_on_router_2:
+  name: GS_4F2FE8 on Router
+  mac: E8:2A:44:4F:2F:E8_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Aircon? - Delia?
+#***************************************
+
+gs_4dec27:
+  name: GS_4DEC27
+  mac: E8:2A:44:4D:EC:27
+  icon:
+  picture:
+  track: true
+
+gs_4dec27_on_router:
+  name: GS_4DEC27 on Router
+  mac: E8:2A:44:4D:EC:27_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+gs_4dec27_on_router_2:
+  name: GS_4DEC27 on Router
+  mac: E8:2A:44:4D:EC:27_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Delia Desktop?
+#***************************************
+
+desktop_knsmcc4:
+  name: DESKTOP-KNSMCC4
+  mac: 1C:BF:CE:5C:80:1B
+  icon:
+  picture:
+  track: true
+
+desktop_knsmcc4_on_router_3:
+  name: DESKTOP-KNSMCC4 on Router
+  mac: 1C:BF:CE:5C:80:1B_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Mackenzie Phone
+#***************************************
+
+mackenzie:
+  name: MACKENZIE
+  mac: 42:83:5B:29:E3:6F
+  icon:
+  picture:
+  track: true
+
+mackenzie_on_router_4:
+  name: MACKENZIE on Router
+  mac: 42:83:5B:29:E3:6F_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+mackenzie_on_router_5:
+  name: MACKENZIE on Router
+  mac: 42:83:5B:29:E3:6F_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+mackenzie_on_router_6:
+  name: MACKENZIE on Router
+  mac: 42:83:5B:29:E3:6F_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Meg's DESE Laptop
+#***************************************
+
+
+
+#***************************************
+# Meg's DESE Laptop
+#***************************************
+
+megans_ipad:
+  name: 12_9a_cf_27_4f_04
+  mac: 12:9A:CF:27:4F:04
+  icon:
+  picture:
+  track: true
+
+
+megans_ipad_on_router_4:
+  name: MEGANS-IPAD on Router
+  mac: 12:9A:CF:27:4F:04_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+megans_ipad_on_router_5:
+  name: MEGANS-IPAD on Router
+  mac: 12:9A:CF:27:4F:04_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+megans_ipad_on_router_6:
+  name: MEGANS-IPAD on Router
+  mac: 12:9A:CF:27:4F:04_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# Lounge ChromeCast
+#***************************************
+
+google_chromecast:
+  name: Google-Chromecast
+  mac: B0:E4:D5:BB:86:12
+  icon:
+  picture:
+  track: true
+
+google_chromecast_on_router:
+  name: Google-Chromecast on Router
+  mac: B0:E4:D5:BB:86:12_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+google_chromecast_on_router_2:
+  name: Google-Chromecast on Router
+  mac: B0:E4:D5:BB:86:12_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+google_chromecast_on_router_3:
+  name: Google-Chromecast on Router
+  mac: B0:E4:D5:BB:86:12_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+#***************************************
+# ?
+#***************************************
+
+dev_55_1a_8a:
+  icon:
+  mac: B6:6C:61:55:1A:8A
+  name: DEV-55:1A:8A
+  picture:
+  track: true
+
+dev_55_1a_8a_on_router:
+  icon:
+  mac: B6:6C:61:55:1A:8A_78:D2:94:AA:52:44
+  name: DEV-55:1A:8A on Router
+  picture:
+  track: true
+
+#########################################
+#
+#
+#
+# New Devices
+#
+#
+#
+#########################################
+
+#########################################
+# New
+#########################################
+
+
+
+
+#########################################
+# unknown
+#########################################
+
+
+
+
+
+
+
+
+front_lock_on_router:
+  name: Front Lock on Router
+  mac: 00:16:B7:94:80:4A_78:D2:94:AA:76:0C
+  icon:
+  picture:
+  track: true
+
+living_vision_sensor_on_router:
+  name: Living Vision Sensor on Router
+  mac: 2C:4D:79:BE:B8:F6_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+delaptop:
+  name: DELAPTOP
+  mac: 0C:37:96:30:F9:E7
+  icon:
+  picture:
+  track: true
+
+delaptop_on_router:
+  name: DELAPTOP on Router
+  mac: 0C:37:96:30:F9:E7_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+desktop_vqrs9bs_on_router:
+  name: DESKTOP-VQRS9BS on Router
+  mac: BC:83:85:0C:0C:81_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+kmb4ec38:
+  name: KMB4EC38
+  mac: 00:17:C8:B2:2D:18
+  icon:
+  picture:
+  track: true
+
+kmb4ec38_on_router:
+  name: KMB4EC38 on Router
+  mac: 00:17:C8:B2:2D:18_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+sharptv_on_router:
+  name: SharpTV on Router
+  mac: 24:26:42:98:A4:0C_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+proxmox_on_router_2:
+  name: PROXMOX on Router
+  mac: 2C:F0:5D:26:19:19_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+freenas_on_router:
+  name: FREENAS on Router
+  mac: 4A:3F:0F:DD:D0:C9_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+msi_lappy1:
+  name: MSI-LAPPY1
+  mac: 0C:54:15:F4:8D:8C
+  icon:
+  picture:
+  track: true
+
+msi_lappy1_on_router:
+  name: MSI-LAPPY1 on Router
+  mac: 0C:54:15:F4:8D:8C_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true
+
+solaredge_on_router_2:
+  name: Solaredge on Router
+  mac: 48:0B:B2:52:45:33_3C:37:86:44:C3:4A
+  icon:
+  picture:
+  track: true
+
+dmaster_on_router_2:
+  name: DMASTER on Router
+  mac: BA:83:23:C9:EE:18_78:D2:94:AA:52:44
+  icon:
+  picture:
+  track: true

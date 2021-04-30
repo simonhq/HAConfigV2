@@ -44,7 +44,7 @@ group:
 #                                                               #
 #################################################################
 
-speedtestdotnet:
+#speedtestdotnet:
 
 
 #################################################################
@@ -96,6 +96,9 @@ sensor:
 
 # sensor.current_version
   - platform: version
+  # - platform: command_line
+  #   name: Version
+  #   command: "cat /home/homeassistant/.homeassistant/.HA_VERSION"
 
 # latest available version
   - platform: version
@@ -145,7 +148,7 @@ sensor:
       count_devices:
         friendly_name: Devices
         icon_template: mdi:cellphone-link
-        value_template: "{{ states('sensor.count_device_trackers') | int / 3 | int }}"
+        value_template: "{{ states('sensor.count_device_trackers') | int | int }}"
 
     #----- Count Binary Sensors
       count_binary_sensors:
