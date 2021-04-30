@@ -13,7 +13,7 @@
         "menu-deploymenu-item-flow": true,
         "menu-deploymenu-item-full": false,
         "menu-deploymenu-item-node": false,
-        "menu-menu-item-sidebar": false,
+        "menu-menu-item-sidebar": true,
         "menu-menu-item-palette": true
     }
 }

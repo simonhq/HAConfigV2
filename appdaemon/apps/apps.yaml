@@ -21,7 +21,7 @@ messaging:
 daily-messages:
   module: notifiers-message
   class: CalNotifier
-  dependencies: 
+  dependencies:
     - messaging
   global_dependencies:
     - globals
@@ -31,7 +31,7 @@ daily-messages:
 general-messages:
   module: notifiers-general
   class: General_Messages
-  dependencies: 
+  dependencies:
     - messaging
   global_dependencies:
     - globals
@@ -40,7 +40,7 @@ general-messages:
 battery-messages:
   module: notifiers-batteries
   class: Battery_Messages
-  dependencies: 
+  dependencies:
     - messaging
   global_dependencies:
     - globals
@@ -50,7 +50,7 @@ battery-messages:
 transport-messages:
   module: notifiers-bus
   class: Transport_Messages
-  dependencies: 
+  dependencies:
     - messaging
   global_dependencies:
     - globals
@@ -60,12 +60,11 @@ transport-messages:
 travel:
   module: travel
   class: Travel_Messages
-  dependencies: 
+  dependencies:
     - messaging
   global_dependencies:
     - globals
     - secrets
-
 
 # for gtfs clean up
 gtfs_cleanup:
@@ -104,7 +103,6 @@ asx_portfolio:
   TICKER: "IAG:194"
   TICK_FLAG: "input_boolean.get_asx_portfolio_data"
 
-
 act_garbage:
   module: act_garbage
   class: Get_ACT_Garbage
@@ -128,7 +126,6 @@ accu_allergies:
     - globals
     - secrets
 
-
 climatecontrol:
   module: climatecontrol
   class: Manage_Climate
@@ -137,7 +134,7 @@ climatecontrol:
   cexttemp: "sensor.tuggeranong_temp"
   cinttemp: "sensor.inside_now"
   solarstatus: "input_boolean.power_ready"
-  presenceaway: "input_boolean.presence_away"
+  presenceaway: "binary_sensor.presence_away"
   exthigh: "input_number.cc_exthigh"
   inthigh: "input_number.cc_inthigh"
   opthigh: "input_number.cc_opthigh"
@@ -145,12 +142,11 @@ climatecontrol:
   intlow: "input_number.cc_intlow"
   extlow: "input_number.cc_extlow"
   aircon: "climate.rushbrook_aircon,climate.rushbrook_aircon_d,climate.rushbrook_aircon_s" # if we want to use it
-  fan: "fan.staci_s_fan,fan.delia_s_fan,fan.master_fan" 
+  fan: "fan.staci_s_fan,fan.delia_s_fan,fan.master_fan"
   heater: "climate.83607036e098068310e2,climate.83607036e09806830fb8" #,climate.33805060a4cf12d11732" # ensuite, study, lounge
   door: "binary_sensor.fdoor_open,binary_sensor.bdoor_open"
   warnlight: "light.front_hall"
   manual_override: "input_boolean.cc_ac_manual"
-
 #333333333333333333333333333333333333333333333333333333333333333333
 
 # turn back on in September - update
@@ -161,21 +157,21 @@ climatecontrol:
 # front-lock:
 #   module: locks
 #   class: DoorLock
-#   select_name: "fdoor" 
-#   lock_id: secret_flock_id 
+#   select_name: "fdoor"
+#   lock_id: secret_flock_id
 #   k_user: secret_kevo_email
 #   k_pass: secret_kevo_pass
 #   global_dependencies:
 #     - globals
 #     - secrets
-  
+
 # garage-lock:
 #   module: locks
 #   class: DoorLock
 #   select_name: "gdoor"
 #   lock_id: secret_glock_id
-#   k_user: secret_kevo_email 
+#   k_user: secret_kevo_email
 #   k_pass: secret_kevo_pass
 #   global_dependencies:
 #     - globals
-#     - secrets 
+#     - secrets

@@ -62,22 +62,22 @@ input_boolean:
 #                                                  #
 #################################################### 
 
-remote_homeassistant:
-  instances:
-  - host: 10.0.0.75
-    port: 8124
-    secure: false
-    verify_ssl: false
-    access_token: !secret ha2_token
-    entity_prefix: "ha2_"
-    include:
-      domains:
-      - sensor
-      - input_boolean
-      - binary_sensor
-    subscribe_events:
-      - state_changed
-      - service_registered
+# remote_homeassistant:
+#   instances:
+#   - host: 10.0.0.125
+#     port: 8124
+#     secure: false
+#     verify_ssl: false
+#     access_token: !secret ha2_token
+#     entity_prefix: "ha2_"
+#     include:
+#       domains:
+#       - sensor
+#       - input_boolean
+#       - binary_sensor
+#     subscribe_events:
+#       - state_changed
+#       - service_registered
 
 
 #################################################################
