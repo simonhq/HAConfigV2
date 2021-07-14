@@ -20,7 +20,6 @@ Standard Home Assistant Components
 
 * Input Boolean - [Input Boolean](https://www.home-assistant.io/components/input_boolean/)
 
-
 <h4 align="left">List of Addons in Use:</h4>
 
 Key: ^^^ High usage, ^^ Some usage, ^ low usage or experimenting
@@ -65,7 +64,7 @@ Allows access when the front-end is unavailable
 Run before upgrading to see potential issues
 * Samba Share ^^^
 Allows access to the directory structure on the server for in network updates
-* Visual Studio Code ^
+* Visual Studio Code ^^
 Allows access through a web browser for external updates if required
 
 <h5 align="left">Database</h5>

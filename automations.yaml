@@ -1,5 +1,15 @@
-- id: '1556519671181'
-  alias: New Automation
-  trigger: []
-  condition: []
-  action: []
+- id: '1621255086423'
+  alias: notify_garage_open
+  description: ''
+  use_blueprint:
+    path: vorion/actionable-notifications-for-android.yaml
+    input:
+      notify_device: c5db4758695a4b91a05f03496bac25a2
+      trigger_entity: input_boolean.garage_just
+      action_1_title: Close garage
+      first_action:
+      - service: cover.close_cover
+        target:
+          entity_id: cover.near_garage_door
+      action_2_title: Open HA
+      action_2_uri: /lovelace/12

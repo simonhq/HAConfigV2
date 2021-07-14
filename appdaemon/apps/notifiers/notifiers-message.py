@@ -82,7 +82,7 @@ class CalNotifier(hass.Hass):
             tosend = 1
 
         else:   #evening
-
+            
             #get the things to check for tomorrow
             #vcln = self.get_state("input_datetime.cal_cln")
             vcln = self.get_state("calendar.cleaner", attribute="start_time")
@@ -141,12 +141,12 @@ class CalNotifier(hass.Hass):
 # finish message
             #sign off
             self.basemessage += "\nHave a lovely night!"
-
+        
         # only send if something to say (always will send morning, sometimes in the evening)
         if tosend > 0:
             self.log(self.basemessage)
             self.notifier.notify(self.basemessage)
-
+        
         #set the check flag back off after sending messages
         self.turn_off("input_boolean.send_message")
 

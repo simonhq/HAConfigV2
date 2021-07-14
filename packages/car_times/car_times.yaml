@@ -178,65 +178,65 @@ sensor:
 # delia = device_tracker.moto_g_5s_plus
 #################################################### 
 
-  - platform: waze_travel_time
-    name: Waze Meg time to work
-    origin: device_tracker.sm_g965f
-    destination: zone.northquarter
-    region: 'EU'
+  # - platform: waze_travel_time
+  #   name: Waze Meg time to work
+  #   origin: device_tracker.sm_g965f
+  #   destination: zone.northquarter
+  #   region: 'EU'
 
-  - platform: waze_travel_time
-    name: Waze Simon time to uni
-    origin: device_tracker.pixel_3
-    destination: zone.citywestbus
-    region: 'EU'
+  # - platform: waze_travel_time
+  #   name: Waze Simon time to uni
+  #   origin: device_tracker.pixel_3
+  #   destination: zone.citywestbus
+  #   region: 'EU'
 
-  - platform: waze_travel_time
-    name: Waze Meg time to home
-    origin: device_tracker.sm_g965f
-    destination: zone.home
-    region: 'EU'
+  # - platform: waze_travel_time
+  #   name: Waze Meg time to home
+  #   origin: device_tracker.sm_g965f
+  #   destination: zone.home
+  #   region: 'EU'
 
-  - platform: waze_travel_time
-    name: Waze Simon time to home
-    origin: device_tracker.pixel_3
-    destination: zone.home
-    region: 'EU'
+  # - platform: waze_travel_time
+  #   name: Waze Simon time to home
+  #   origin: device_tracker.pixel_3
+  #   destination: zone.home
+  #   region: 'EU'
 
-  - platform: waze_travel_time
-    name: Waze Meg to Staci
-    origin: device_tracker.sm_g965f
-    destination: device_tracker.pixel_3a
-    region: 'EU'
+  # - platform: waze_travel_time
+  #   name: Waze Meg to Staci
+  #   origin: device_tracker.sm_g965f
+  #   destination: device_tracker.pixel_3a
+  #   region: 'EU'
 
-  - platform: waze_travel_time
-    name: Waze Meg to Delia
-    origin: device_tracker.sm_g965f
-    destination: device_tracker.pixel_3a_2
-    region: 'EU'
+  # - platform: waze_travel_time
+  #   name: Waze Meg to Delia
+  #   origin: device_tracker.sm_g965f
+  #   destination: device_tracker.pixel_3a_2
+  #   region: 'EU'
 
-  - platform: waze_travel_time
-    name: Waze Meg to Simon
-    origin: device_tracker.sm_g965f
-    destination: device_tracker.pixel_3
-    region: 'EU'
+  # - platform: waze_travel_time
+  #   name: Waze Meg to Simon
+  #   origin: device_tracker.sm_g965f
+  #   destination: device_tracker.pixel_3
+  #   region: 'EU'
 
-  - platform: waze_travel_time
-    name: Waze Simon to Delia
-    origin: device_tracker.pixel_3
-    destination: device_tracker.pixel_3a_2
-    region: 'EU'
+  # - platform: waze_travel_time
+  #   name: Waze Simon to Delia
+  #   origin: device_tracker.pixel_3
+  #   destination: device_tracker.pixel_3a_2
+  #   region: 'EU'
 
-  - platform: waze_travel_time
-    name: Waze Simon to Staci
-    origin: device_tracker.pixel_3
-    destination: device_tracker.pixel_3a
-    region: 'EU'
+  # - platform: waze_travel_time
+  #   name: Waze Simon to Staci
+  #   origin: device_tracker.pixel_3
+  #   destination: device_tracker.pixel_3a
+  #   region: 'EU'
 
-  - platform: waze_travel_time
-    name: Waze Staci to Delia
-    origin: device_tracker.pixel_3a_2
-    destination: device_tracker.pixel_3a
-    region: 'EU'
+  # - platform: waze_travel_time
+  #   name: Waze Staci to Delia
+  #   origin: device_tracker.pixel_3a_2
+  #   destination: device_tracker.pixel_3a
+  #   region: 'EU'
 
 ####################################################
 #                                                  #

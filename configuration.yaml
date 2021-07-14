@@ -21,8 +21,11 @@ http:
   #base_url: !secret HA_URL
   #ssl_certificate: /ssl/fullchain.pem
   #ssl_key: /ssl/privkey.pem
-  #ip_ban_enabled: true
-  #login_attempts_threshold: 5
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
+  use_x_forwarded_for: true 
+  trusted_proxies: 
+    - 172.30.0.0/16
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -96,3 +99,4 @@ breaking_changes:
 group: !include groups.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+automation: !include automations.yaml
