@@ -145,6 +145,7 @@ climatecontrol:
   fan: "fan.staci_s_fan,fan.delia_s_fan,fan.master_fan"
   heater: "climate.83607036e098068310e2,climate.83607036e09806830fb8" #,climate.33805060a4cf12d11732" # ensuite, study, lounge
   door: "binary_sensor.fdoor_open,binary_sensor.bdoor_open"
+  acrule: "input_text.ac_rule"
   warnlight: "light.front_hall"
   manual_override: "input_boolean.cc_ac_manual"
 #333333333333333333333333333333333333333333333333333333333333333333

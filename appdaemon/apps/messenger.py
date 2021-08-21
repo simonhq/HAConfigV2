@@ -17,7 +17,7 @@ class Messenger(hass.Hass):
     dischook = "notify/discord_webhook"
 
     # for gps resetting
-    sappnotify = "notify/mobile_app_spixel3"
+    sappnotify = "notify/mobile_app_spixel5"
     mappnotify = "notify/mobile_app_msam9"
     stappnotify = "notify/mobile_app_stpixel3a"
     dappnotify = "notify/mobile_app_dpixel"

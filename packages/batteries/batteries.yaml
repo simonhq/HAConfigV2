@@ -267,7 +267,126 @@ sensor:
           {% else %}
             Unknown
           {% endif %}
+      ####################################### for the energy component    
+      energy_day_consume:
+        #this is using solaredge website - 10 minute for consumption info
+        value_template: "{{ states('sensor.solaredge_consumption_power')|float / 1000  }}"
+        friendly_name: 'Energy Total Consumption'
+        unit_of_measurement: 'kWh'
         
+      energy_day_export:
+        #this is using solaredge website - 10 minute for consumption info
+        value_template: "{{ states('sensor.solaredge_exported_power')|float / 1000  }}"
+        friendly_name: 'Energy Total Export'
+        unit_of_measurement: 'kWh'
+        
+      energy_day_import:
+        #this is using solaredge website - 10 minute for consumption info
+        value_template: "{{ states('sensor.solaredge_imported_power')|float / 1000  }}"
+        friendly_name: 'Energy Total Import'
+        unit_of_measurement: 'kWh'
+        
+      energy_day_produce:
+        #this is using solaredge website - 10 minute for consumption info
+        value_template: "{{ states('sensor.solaredge_production_power')|float / 1000  }}"
+        friendly_name: 'Energy Total Production'
+        unit_of_measurement: 'kWh'
+        
+      energy_day_self_consume:
+        #this is using solaredge website - 10 minute for consumption info
+        value_template: "{{ states('sensor.solaredge_selfconsumption_power')|float / 1000  }}"
+        friendly_name: 'Energy Total Self Consumption'
+        unit_of_measurement: 'kWh'
+        
+      energy_life_produce:
+        #this is using solaredge website - 10 minute for consumption info
+        value_template: "{{ states('sensor.solaredge_lifetime_energy')|float / 1000  }}"
+        friendly_name: 'Energy Total Life Production'
+        unit_of_measurement: 'kWh'
+        #state_class: measurement
+
+####################################################
+#           Get the power values from solaredge
+####################################################
+      energy_consume:
+        #this is using solaredge website - 10 minute for consumption info
+        value_template: "{{ states('sensor.solaredge_power_consumption')|float * 1000 }}"
+        friendly_name: 'Energy Consumption'
+        unit_of_measurement: 'W'
+
+      energy_grid:
+        #this is using solaredge website - 10 minute for consumption info
+        value_template: "{{ states('sensor.solaredge_grid_power')|float * 1000 }}"
+        friendly_name: 'Energy Grid'
+        unit_of_measurement: 'W'
+
+      energy_produce:
+        #this is using solaredge website - 10 minute for consumption info
+        value_template: "{{ states('sensor.solaredge_current_power')|float }}"
+        friendly_name: 'Energy Production'
+        unit_of_measurement: 'W'
+
+####################################################
+#           create integrals to get the kWh values
+#################################################### 
+
+  - platform: integration
+    source: sensor.energy_consume
+    name: energy_consume_hour
+    unit_prefix: k
+    unit_time: h
+    round: 2
+
+  - platform: integration
+    source: sensor.energy_grid
+    name: energy_grid_hour
+    unit_prefix: k
+    unit_time: h
+    round: 2
+
+  - platform: integration
+    source: sensor.energy_produce
+    name: energy_produce_hour
+    unit_prefix: k
+    unit_time: h
+    round: 2
+
+####################################################
+#           now convert the integrals to measurement sensors
+####################################################
+
+utility_meter:
+  daily_energy_consumption:
+    source: sensor.solaredge_consumption_power
+    name: house_consumption
+    cycle: daily
+  daily_energy_exported:
+    source: sensor.solaredge_exported_power
+    name: grid_export
+    cycle: daily
+  daily_energy_imported:
+    source: sensor.solaredge_imported_power
+    name: grid_import
+    cycle: daily
+
+# template:
+#   - trigger:
+#       - platform: state
+#         entity_id: sensor.energy_produce_hour
+#       - platform: state
+#         entity_id: input_boolean.check_power
+#         from: 'off'
+#         to: 'on'
+#     sensor:
+#       - name: "House electricity production"
+#         unit_of_measurement: 'kWh'
+#         state: >
+#           {{ states("sensor.energy_produce_hour") | round(2) }}       
+#         device_class: energy
+#         state_class: measurement      
+#         attributes:         
+#            last_reset: '1970-01-01T00:00:00+00:00'
+
 #################################################################
 #                                                               #
 #                       Automation                              #

@@ -172,7 +172,7 @@ class Travel_Messages(hass.Hass):
 
                     #close tracking
                     if dir_trav == "towards":
-                        if prox <= 4 and prox > 1:
+                        if prox <= 6 and prox > 1:
                             # proximity under 5 kilometres, and arriving by car - start requesting gps updates
                             self.personal_gps(gps_person, 'turn_on')
                             #self.sendmess = "requesting close update for " + pname
@@ -180,10 +180,12 @@ class Travel_Messages(hass.Hass):
                             # proximity under 1 kilometres, and arriving by car - open garage door
                             if self.get_state("input_boolean.garage_just") != "on":
                                 # if you opened it for someone else in the last 5 minutes, don't open it again
-                                self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
                                 self.set_state("input_boolean.garage_just", state="on")
                                 self.sendmess = "Opening the Garage Door for " + pname + " arriving by car (Proximity)"
-                        if prox <= 8 and prox > 4:
+                                self.set_state("input_boolean.near_garage", state="on")
+                                #see automation.garage_open_near_on_toggle
+                                #self.call_service("cover/open_cover", entity_id = "cover.near_garage_door")
+                        elif prox <= 10 and prox > 6:
                             # proximity over 5 kilometres, turn off the high accuracy gps
                             self.personal_gps(gps_person, 'turn_off')
                             #self.sendmess = "cancelling close update for " + pname
@@ -249,7 +251,14 @@ class Travel_Messages(hass.Hass):
                 if self.d_loc != "home":
                     if int(self.get_state("sensor.waze_simon_to_delia")) >= 5:
                         self.sendmess += self.dmess + self.d_loc + self.t_mess + self.get_state("sensor.waze_simon_to_delia") + self.e_mess + self.get_state("sensor.s_to_d_route") + "\n"
-                
+
+            elif new == 'off' and self.get_state("input_boolean.garage_just") == 'on':
+                # if someone has just disconnected from the car and the garage has just been opened
+                #self.call_service("cover/close_cover", entity_id = "cover.near_garage_door")
+                #see automation.garage_close_near_on_toggle
+                self.set_state("input_boolean.near_garage", state="off")
+                self.sendmess = "Closing the Garage Door"
+
             #send the message
             if self.sendmess != "":
                 self.notifier.notify(self.sendmess)

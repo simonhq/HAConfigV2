@@ -13,3 +13,35 @@
           entity_id: cover.near_garage_door
       action_2_title: Open HA
       action_2_uri: /lovelace/12
+- id: '1627902597304'
+  alias: garage_open_ near_on_toggle
+  description: When the input boolean is turned on, open the near garage
+  trigger:
+  - platform: state
+    entity_id: input_boolean.near_garage
+    id: near garage toggle
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - device_id: 122a45e3bcc74c93904248061ff9de75
+    domain: cover
+    entity_id: cover.near_garage_door
+    type: open
+  mode: single
+- id: '1627902646601'
+  alias: garage_close_ near_on_toggle
+  description: When the input boolean is turned off, close the near garage
+  trigger:
+  - platform: state
+    entity_id: input_boolean.near_garage
+    id: near garage toggle
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - device_id: 122a45e3bcc74c93904248061ff9de75
+    domain: cover
+    entity_id: cover.near_garage_door
+    type: close
+  mode: single
