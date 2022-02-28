@@ -16,7 +16,6 @@ group:
     entities:
       - device_tracker.study_switch
       - device_tracker.tv_switch
-      #- device_tracker.chairs_switch
       - device_tracker.iron_switch
       - binary_sensor.switches_on
       - binary_sensor.switches_off
@@ -70,11 +69,6 @@ group:
   switch_e:
     name: Switch Statistics
     entities:
-      #- sensor.dri_current_w
-      #- sensor.dri_current_a
-      #- sensor.dri_today_kwh
-      #- sensor.dri_total_kwh
-      #- sensor.dri_voltage
       - sensor.ltv_current_w
       - sensor.ltv_current_a
       - sensor.ltv_today_kwh
@@ -90,14 +84,6 @@ group:
       - sensor.lch_today_kwh
       - sensor.lch_total_kwh
       - sensor.lch_voltage
-
-  # calendars_a:
-  #   name: Calendars Automations
-  #   entities:
-  #     - automation.
-  #     - automation.
-  #     - automation.
-  #     - automation.
 
 #################################################################
 #                                                               #
@@ -136,11 +122,7 @@ binary_sensor:
         friendly_name: 'Lounge Chairs'
         device_class: connectivity
         icon_template: mdi:toggle-switch
-      # sw_iron:
-      #   value_template: "{{ is_state('device_tracker.iron_switch', 'home') }}"
-      #   friendly_name: 'Iron'
-      #   device_class: connectivity
-      #   icon_template: mdi:toggle-switch
+
 
 ####################################################
 #                                                  #
@@ -210,26 +192,6 @@ sensor:
 
   - platform: template
     sensors:
-      # dri_current_w:
-      #   friendly_name: Iron Switch Current Watts
-      #   value_template: '{{ states.switch.dining_room_iron.attributes.current_power_w }}'
-      #   unit_of_measurement: 'W'
-      # dri_current_a:
-      #   friendly_name: Iron Switch Current Amps
-      #   value_template: '{{ states.switch.dining_room_iron.attributes.current_a }}'
-      #   unit_of_measurement: 'A'
-      # dri_today_kwh:
-      #   friendly_name: Iron Switch Today Energy Kwh
-      #   value_template: '{{ states.switch.dining_room_iron.attributes.today_energy_kwh }}'
-      #   unit_of_measurement: 'kW'
-      # dri_total_kwh:
-      #   friendly_name: Iron Switch Total Energy Kwh
-      #   value_template: '{{ states.switch.dining_room_iron.attributes.total_energy_kwh }}'
-      #   unit_of_measurement: 'kW'
-      # dri_voltage:
-      #   friendly_name: Iron Switch Voltage
-      #   value_template: '{{ states.switch.dining_room_iron.attributes.voltage }}'
-      #   unit_of_measurement: 'V'
       ltv_current_w:
         friendly_name: Lounge TV Switch Current Watts
         value_template: '{{ states.switch.lounge_tv.attributes.current_power_w }}'
@@ -270,27 +232,7 @@ sensor:
         friendly_name: Study Printer Switch Voltage
         value_template: '{{ states.switch.study_printer.attributes.voltage }}'
         unit_of_measurement: 'V'
-      # lch_current_w:
-      #   friendly_name: Lounge Chairs Current Watts
-      #   value_template: '{{ states.switch.lounge_chairs.attributes.current_power_w }}'
-      #   unit_of_measurement: 'W'
-      # lch_current_a:
-      #   friendly_name: Lounge Chairs Switch Current Amps
-      #   value_template: '{{ states.switch.lounge_chairs.attributes.current_a }}'
-      #   unit_of_measurement: 'A'
-      # lch_today_kwh:
-      #   friendly_name: Lounge Chairs Switch Today Energy Kwh
-      #   value_template: '{{ states.switch.lounge_chairs.attributes.today_energy_kwh }}'
-      #   unit_of_measurement: 'kW'
-      # lch_total_kwh:
-      #   friendly_name: Lounge Chairs Switch Total Energy Kwh
-      #   value_template: '{{ states.switch.lounge_chairs.attributes.total_energy_kwh }}'
-      #   unit_of_measurement: 'kW'
-      # lch_voltage:
-      #   friendly_name: Lounge Chairs Switch Voltage
-      #   value_template: '{{ states.switch.lounge_chairs.attributes.voltage }}'
-      #   unit_of_measurement: 'V'
-
+      
 #################################################################
 #                                                               #
 #                       Automation                              #

@@ -18,26 +18,6 @@ group:
       - binary_sensor.roller_close
       - binary_sensor.roller_open
 
-  # garage_door_a:
-  #   name: Garage Door Automations
-  #   entities:
-  #     - automation.
-  #     - automation.
-  #     - automation.
-  #     - automation.
-
-#################################################################
-#                                                               #
-#                Cover - MyQ Connection                         #
-#                                                               #
-#################################################################
-
-# cover:
-#   - platform: myq
-#     username: !secret myq_username
-#     password: !secret myq_password
-#     type: chamberlain
-
 
 #################################################################
 #                                                               #

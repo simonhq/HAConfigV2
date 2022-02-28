@@ -91,7 +91,7 @@ binary_sensor:
     sensors:
       purifier_off:
         friendly_name: Purifier Off
-        value_template: "{{ is_state('fan.lounge_2', 'off') }}"
+        value_template: "{{ is_state('climate.pure_hot_cool', 'off') and is_state('fan.pure_hot_cool', 'off') }}"
         icon_template: mdi:crosshairs-off
         device_class: motion
       purifier_on:
@@ -115,5 +115,6 @@ binary_sensor:
       heaters_on:
         friendly_name: Heaters On
         #value_template: "{{ is_state('climate.83607036e098068310e2', 'on') and is_state('climate.33805060a4cf12d11732', 'on') and is_state('climate.83607036e09806830fb8', 'on') }}"
-        value_template: "{{ not is_state('climate.83607036e098068310e2', 'off') and not is_state('climate.83607036e09806830fb8', 'off') }}"
+        #value_template: "{{ not is_state('climate.heater_ensuite', 'off') and not is_state('climate.heater_study', 'off') }}"
+        value_template: "{{ not is_state('climate.heater_study', 'off') }}"
         icon_template: mdi:radiator

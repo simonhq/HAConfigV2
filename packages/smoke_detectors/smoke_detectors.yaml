@@ -39,16 +39,6 @@ group:
       - binary_sensor.hallway_nest_protect_online
       - binary_sensor.back_hall_nest_protect_online
 
-
-  # smoke_detectors_a:
-  #   name: Smoke Detectors Automations
-  #   entities:
-  #     - automation.
-  #     - automation.
-  #     - automation.
-  #     - automation.
-
-
 #################################################################
 #                                                               #
 #                       Nest                                    #

@@ -47,7 +47,7 @@ binary_sensor:
       # the internal temp is between optimal low and internal high
          climate_optimal:
             friendly_name: Pleasant
-            value_template: "{{ (states('sensor.inside_now')|float >= states('input_number.cc_optlow')|float) and (states('sensor.inside_now')|float <= states('input_number.cc_inthigh')|float) }}"
+            value_template: "{{ float(states('sensor.inside_now'), default=0) >= float(states('input_number.cc_optlow'), default=0) and float(states('sensor.inside_now'), default=0) <= float(states('input_number.cc_inthigh'), default=0) }}"
             icon_template: mdi:emoticon-happy-outline
       
 
@@ -70,26 +70,26 @@ binary_sensor:
             icon_template: mdi:air-conditioner
          cc_ac_cool_ext:
             friendly_name: AC Cool (Ext)
-            value_template: "{{ (states('climate.rushbrook_aircon') == 'cool') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_exthigh')|float) }}"
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'cool') and (float(state_attr('climate.rushbrook_aircon', 'temperature'), default=0) == float(states('input_number.cc_exthigh'), default=0)) }}"
             icon_template: mdi:arrow-collapse-down
          cc_ac_cool_int:
             friendly_name: AC Cool (Int)
-            value_template: "{{ (states('climate.rushbrook_aircon') == 'cool') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_inthigh')|float) }}"
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'cool') and (float(state_attr('climate.rushbrook_aircon', 'temperature'), default=0) == float(states('input_number.cc_inthigh'), default=0)) }}"
             icon_template: mdi:arrow-expand-down
          cc_ac_cool_opt:
             friendly_name: AC Cool (Opt)
-            value_template: "{{ (states('climate.rushbrook_aircon') == 'cool') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_opthigh')|float) }}"
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'cool') and (float(state_attr('climate.rushbrook_aircon', 'temperature'), default=0) == float(states('input_number.cc_opthigh'), default=0)) }}"
             icon_template: mdi:arrow-collapse-vertical
          cc_ac_heat_ext:
             friendly_name: AC Heat (Ext)
-            value_template: "{{ (states('climate.rushbrook_aircon') == 'heat') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_extlow')|float) }}"
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'heat') and (float(state_attr('climate.rushbrook_aircon', 'temperature'), default=0) == float(states('input_number.cc_extlow'), default=0)) }}"
             icon_template: mdi:arrow-collapse-up
          cc_ac_heat_int:
             friendly_name: AC Heat (Int)
-            value_template: "{{ (states('climate.rushbrook_aircon') == 'heat') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_intlow')|float) }}"
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'heat') and (float(state_attr('climate.rushbrook_aircon', 'temperature'), default=0) == float(states('input_number.cc_intlow'), default=0)) }}"
             icon_template: mdi:arrow-expand-up
          cc_ac_heat_opt:
             friendly_name: AC Heat (Opt)
-            value_template: "{{ (states('climate.rushbrook_aircon') == 'heat') and (state_attr('climate.rushbrook_aircon', 'temperature')|float == states('input_number.cc_optlow')|float) }}"
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'heat') and (float(state_attr('climate.rushbrook_aircon', 'temperature'), default=0) == float(states('input_number.cc_optlow'), default=0)) }}"
             icon_template: mdi:arrow-collapse-vertical
       

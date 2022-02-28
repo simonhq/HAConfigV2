@@ -66,20 +66,5 @@ sensor:
         friendly_name: Delia Phone GPS
         value_template: '{{ states.person.simon.last_updated }}'
 
-####################################################
-#                                                  #
-#              Last thing to update person         #
-#                                                  #
-####################################################
 
-  - platform: template
-    sensors:
-      sphone_type:
-        value_template: '{{ states.person.simon.attributes.source }}'
-      mphone_type:
-        value_template: '{{ states.person.megan.attributes.source }}'
-      stphone_type:
-        value_template: '{{ states.person.staci.attributes.source }}'
-      dphone_type:
-        value_template: '{{ states.person.delia.attributes.source }}'
       

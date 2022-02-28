@@ -1,5 +1,5 @@
 import appdaemon.plugins.hass.hassapi as hass
-import globals
+#import globals
 
 class Messenger(hass.Hass):
 
@@ -59,11 +59,11 @@ class Messenger(hass.Hass):
 
     def initialize(self):
         
-        self.channel = globals.get_arg(self.args, "channel")
-        self.userSimon = globals.get_arg(self.args, "userA")
-        self.userMegan = globals.get_arg(self.args, "userB")
-        self.userStaci = globals.get_arg(self.args, "userC")
-        self.userDelia = globals.get_arg(self.args, "userD")
+        self.channel = self.args["channel"]
+        self.userSimon = self.args["userA"]
+        self.userMegan = self.args["userB"]
+        self.userStaci = self.args["userC"]
+        self.userDelia = self.args["userD"]
 
         #set messaging platform
         self.listen_state(self.mess_flag, "input_select.message_flag")

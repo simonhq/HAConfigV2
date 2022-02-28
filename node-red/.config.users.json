@@ -7,13 +7,19 @@
                 "view-node-show-label": true,
                 "view-show-tips": true,
                 "view-snap-grid": true,
-                "view-show-grid": true
+                "view-show-grid": true,
+                "view-show-welcome-tours": true,
+                "view-store-position": false,
+                "view-store-zoom": false
+            },
+            "tours": {
+                "welcome": "2.2.1"
             }
         },
         "menu-deploymenu-item-flow": true,
         "menu-deploymenu-item-full": false,
         "menu-deploymenu-item-node": false,
-        "menu-menu-item-sidebar": true,
+        "menu-menu-item-sidebar": false,
         "menu-menu-item-palette": true
     }
 }

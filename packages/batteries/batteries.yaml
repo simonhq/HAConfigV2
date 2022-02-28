@@ -86,23 +86,23 @@ binary_sensor:
     sensors:
       simon_batt_low:
         friendly_name: Simon Battery Low
-        value_template: "{{ states('sensor.pixel_3_battery_level')|float < states('input_number.batt_alert')|float }}"
+        value_template: "{{ float(states('sensor.pixel_3_battery_level'), default=0) < float(states('input_number.batt_alert'), default=0) }}"
         icon_template: mdi:battery-10
       megan_batt_low:
         friendly_name: Megan Battery Low
-        value_template: "{{ states('sensor.sm_g965f_battery_level')|float < states('input_number.batt_alert')|float }}"
+        value_template: "{{ float(states('sensor.sm_g965f_battery_level'), default=0) < float(states('input_number.batt_alert'), default=0)  }}"
         icon_template: mdi:battery-10
       staci_batt_low:
         friendly_name: Staci Battery Low
-        value_template: "{{ states('sensor.pixel_3a_battery_level')|float < states('input_number.batt_alert')|float }}"
+        value_template: "{{ float(states('sensor.pixel_3a_battery_level'), default=0)  < float(states('input_number.batt_alert'), default=0)  }}"
         icon_template: mdi:battery-10
       delia_batt_low: 
         friendly_name: Delia Battery Low
-        value_template: "{{ states('sensor.pixel_3a_battery_level_2')|float < states('input_number.batt_alert')|float }}"
+        value_template: "{{ float(states('sensor.pixel_3a_battery_level_2'), default=0)  < float(states('input_number.batt_alert'), default=0)  }}"
         icon_template: mdi:battery-10
       megan_ipad_batt_low:
         friendly_name: Megan iPad Battery Low
-        value_template: "{{ states('sensor.megans_ipad_battery_level_2')|float < states('input_number.batt_alert')|float }}"
+        value_template: "{{ float(states('sensor.megans_ipad_battery_level_2'), default=0)  < float(states('input_number.batt_alert'), default=0)  }}"
         icon_template: mdi:battery-10
 
 
@@ -230,19 +230,19 @@ sensor:
     sensors:
       solar_gen:
         #this is using modbus - 30 seconds for production info
-        value_template: "{{ states('sensor.solaredgem_ac_power')|float }}"
+        value_template: "{{ float(states('sensor.solaredgem_ac_power'), default=0) }}"
         #this is using solaredge website - 10 minute for production info
         #value_template: "{{ states('sensor.solaredge_current_power')|float }}"
         friendly_name: 'Solar Generation'
         unit_of_measurement: 'W'
       solar_consume:
         #this is using solaredge website - 10 minute for consumption info
-        value_template: "{{ states('sensor.solaredge_power_consumption')|float * 1000 }}"
+        value_template: "{{ float(states('sensor.solaredge_power_consumption'), default=0) * 1000 }}"
         friendly_name: 'Household Consumption'
         unit_of_measurement: 'W'
       solar_import:
         #this is using solaredge website - 10 minute for grid usage info
-        value_template: "{{ states('sensor.solaredge_grid_power')|float * 1000 }}"
+        value_template: "{{ float(states('sensor.solaredge_grid_power'), default=0) * 1000 }}"
         friendly_name: 'Grid Import/Export'
         unit_of_measurement: 'W'
       solaredge_status:
@@ -270,37 +270,37 @@ sensor:
       ####################################### for the energy component    
       energy_day_consume:
         #this is using solaredge website - 10 minute for consumption info
-        value_template: "{{ states('sensor.solaredge_consumption_power')|float / 1000  }}"
+        value_template: "{{ float(states('sensor.solaredge_consumption_power'), default=0) / 1000  }}"
         friendly_name: 'Energy Total Consumption'
         unit_of_measurement: 'kWh'
         
       energy_day_export:
         #this is using solaredge website - 10 minute for consumption info
-        value_template: "{{ states('sensor.solaredge_exported_power')|float / 1000  }}"
+        value_template: "{{ float(states('sensor.solaredge_exported_power'), default=0) / 1000  }}"
         friendly_name: 'Energy Total Export'
         unit_of_measurement: 'kWh'
         
       energy_day_import:
         #this is using solaredge website - 10 minute for consumption info
-        value_template: "{{ states('sensor.solaredge_imported_power')|float / 1000  }}"
+        value_template: "{{ float(states('sensor.solaredge_imported_power'), default=0) / 1000  }}"
         friendly_name: 'Energy Total Import'
         unit_of_measurement: 'kWh'
         
       energy_day_produce:
         #this is using solaredge website - 10 minute for consumption info
-        value_template: "{{ states('sensor.solaredge_production_power')|float / 1000  }}"
+        value_template: "{{ float(states('sensor.solaredge_production_power'), default=0) / 1000  }}"
         friendly_name: 'Energy Total Production'
         unit_of_measurement: 'kWh'
         
       energy_day_self_consume:
         #this is using solaredge website - 10 minute for consumption info
-        value_template: "{{ states('sensor.solaredge_selfconsumption_power')|float / 1000  }}"
+        value_template: "{{ float(states('sensor.solaredge_selfconsumption_power'), default=0) / 1000  }}"
         friendly_name: 'Energy Total Self Consumption'
         unit_of_measurement: 'kWh'
         
       energy_life_produce:
         #this is using solaredge website - 10 minute for consumption info
-        value_template: "{{ states('sensor.solaredge_lifetime_energy')|float / 1000  }}"
+        value_template: "{{ float(states('sensor.solaredge_lifetime_energy'), default=0) / 1000  }}"
         friendly_name: 'Energy Total Life Production'
         unit_of_measurement: 'kWh'
         #state_class: measurement
@@ -310,19 +310,19 @@ sensor:
 ####################################################
       energy_consume:
         #this is using solaredge website - 10 minute for consumption info
-        value_template: "{{ states('sensor.solaredge_power_consumption')|float * 1000 }}"
+        value_template: "{{ float(states('sensor.solaredge_power_consumption'), default=0) * 1000 }}"
         friendly_name: 'Energy Consumption'
         unit_of_measurement: 'W'
 
       energy_grid:
         #this is using solaredge website - 10 minute for consumption info
-        value_template: "{{ states('sensor.solaredge_grid_power')|float * 1000 }}"
+        value_template: "{{ float(states('sensor.solaredge_grid_power'), default=0) * 1000 }}"
         friendly_name: 'Energy Grid'
         unit_of_measurement: 'W'
 
       energy_produce:
         #this is using solaredge website - 10 minute for consumption info
-        value_template: "{{ states('sensor.solaredge_current_power')|float }}"
+        value_template: "{{ float(states('sensor.solaredge_current_power'), default=0) }}"
         friendly_name: 'Energy Production'
         unit_of_measurement: 'W'
 

@@ -77,6 +77,7 @@ sensor:
     destination: 13 #tugg arr
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
   
   # home R5 to woden
   - platform: gtfs
@@ -86,6 +87,7 @@ sensor:
     destination: 2709 #woden north
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
 ######################################
 # Tugg 
@@ -99,6 +101,7 @@ sensor:
     destination: 2709 #woden north
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
   # tugg 79 to home with delay from Woden (18min)
   - platform: gtfs
@@ -108,6 +111,7 @@ sensor:
     destination: 1076 #home e&j
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
   # tugg 79 to home with no delay
   - platform: gtfs
@@ -117,6 +121,7 @@ sensor:
     destination: 1076 #home e&j
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
 ######################################
 # Woden 
@@ -130,6 +135,7 @@ sensor:
     destination: 1077 #home out
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
   # woden to R4 tugg with no delay
   - platform: gtfs
@@ -139,6 +145,7 @@ sensor:
     destination: 13 #tugg
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
 ######################################
 # City 
@@ -152,6 +159,7 @@ sensor:
     destination: 4972 #uc
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
 # R4 south ANU to Woden
   - platform: gtfs
@@ -161,6 +169,7 @@ sensor:
     destination: 2706 #woden plt4
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
 # R4 south Assembly to Woden
   - platform: gtfs
@@ -170,15 +179,17 @@ sensor:
     destination: 2706 #woden plt4
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
 # R5 south City west to Woden
   - platform: gtfs
     name: citywest_to_woden_r5
     offset: 300 # 5min
-    origin: 3409 #city pt4 ->south
+    origin: 3409 #city pt7 ->south
     destination: 2705 #woden plt3
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
 ######################################
 # UC/CIT 
@@ -192,6 +203,7 @@ sensor:
     destination: 3418 #city
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
   # UC Public Hospital to Bel(31)
   - platform: gtfs
@@ -201,6 +213,7 @@ sensor:
     destination: 5517 #bel
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
   # Bel to UC Public Hospital (31)
   - platform: gtfs
@@ -210,6 +223,7 @@ sensor:
     destination: 1736 #uc
     scan_interval: 60 #1min
     data: action.zip
+    include_tomorrow: true
 
 ####################################################
 #                                                  #

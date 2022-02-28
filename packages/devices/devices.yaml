@@ -147,39 +147,17 @@ group:
 #                                                               #
 #################################################################
 
-# track devices 
 # device_tracker:
-#   - platform: netgear
-#     host: 10.0.0.1
-#     port: 80
-#     accesspoints: 
-#       - 78:D2:94:AA:52:44
-#       - 78:D2:94:AA:76:0C
-#       - 3C:37:86:44:C3:4A
-#     username: !secret netgear_user
-#     password: !secret netgear_pass
-#     interval_seconds: 20
-#     consider_home: 180
-#     new_device_defaults:
-#       track_new_devices: true
-
-
-device_tracker:
-  - platform: nmap_tracker
-    hosts: 10.0.0.1/24
-    home_interval: 3
-    interval_seconds: 30
+#   - platform: nmap_tracker
+#     hosts: 10.7.7.1/24
+#     home_interval: 3
+#     interval_seconds: 30
 
 #################################################################
 #                                                               #
 #                  Google Wifi Stats                            #
 #                                                               #
 #################################################################
-
-
-sensor:
-  - platform: google_wifi
-    host: 10.0.0.1
 
 
 #################################################################
@@ -398,35 +376,4 @@ binary_sensor:
         icon_template: mdi:door-closed
       
       
-####################################################
-#                                                  #
-#               button automation          #
-#                   
-#   three states - pushed, double, held                            
-####################################################
 
-#Megs Button
-# automation:
-
-#   - alias: a_mbutton_pushed
-#     trigger:
-#       platform: event
-#       event_type: "smartthings.button"
-#       event_data:
-#         device_id: "a16b7974-2253-4130-88ec-34a4d5a95796"
-#         value: "pushed"
-#     action:
-#       - service: homeassistant.turn_on
-#         entity_id: input_boolean.button_pushed
-
-#   - alias: a_mbutton_held
-#     trigger:
-#       platform: event
-#       event_type: "smartthings.button"
-#       event_data:
-#         device_id: "a16b7974-2253-4130-88ec-34a4d5a95796"
-#         #name: "Megs_button"
-#         value: "held"
-#     action:
-#       - service: homeassistant.turn_off
-#         entity_id: input_boolean.button_pushed

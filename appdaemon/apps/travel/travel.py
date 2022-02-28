@@ -5,7 +5,7 @@
 
 import appdaemon.plugins.hass.hassapi as hass
 import time
-import globals
+#import globals
 
 class Travel_Messages(hass.Hass):
 
@@ -69,12 +69,14 @@ class Travel_Messages(hass.Hass):
         self.listen_state(self.del_loc, "person.delia")
 
 
-    def tester(self, entity, attribute, old, new, kwargs):
+    #def tester(self, entity, attribute, old, new, kwargs):
+    def tester(self):
         self.personal_gps('sgps', 'turn_off')
         self.log("requesting close update for Simon")
 
 
-    def car_away(self, entity, attribute, old, new, kwargs):
+    #def car_away(self, entity, attribute, old, new, kwargs):
+    def car_away(self, new):
         self.away_flag = new
 
     ###
@@ -174,6 +176,7 @@ class Travel_Messages(hass.Hass):
                     if dir_trav == "towards":
                         if prox <= 6 and prox > 1:
                             # proximity under 5 kilometres, and arriving by car - start requesting gps updates
+                            self.log(gps_person + " fast update on")
                             self.personal_gps(gps_person, 'turn_on')
                             #self.sendmess = "requesting close update for " + pname
                         elif prox <= 1:
@@ -418,7 +421,3 @@ class Travel_Messages(hass.Hass):
         #send the message
         if self.sendmess != "":
             self.notifier.notify(self.sendmess)
-        
-
-
-

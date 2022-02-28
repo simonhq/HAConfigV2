@@ -34,7 +34,7 @@
 
 import appdaemon.plugins.hass.hassapi as hass
 import time
-import globals
+#import globals
 
 class Battery_Messages(hass.Hass):
     

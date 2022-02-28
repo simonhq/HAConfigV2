@@ -9,7 +9,7 @@ from datetime import time
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
-import globals
+#import globals
 
 class CalNotifier(hass.Hass):
 

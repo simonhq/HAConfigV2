@@ -99,19 +99,19 @@ binary_sensor:
     sensors:
       sbed:
         friendly_name: Warm Simon's bed tonight
-        value_template: "{{ is_state('input_boolean.away_simon', 'off') and states('sensor.dark_sky_overnight_low_temperature_0d')|float < states('input_number.bed_s_flag')|float }}"
+        value_template: "{{ is_state('input_boolean.away_simon', 'off') and float(states('sensor.dark_sky_overnight_low_temperature_0d'), default=0) < float(states('input_number.bed_s_flag'), default=0) }}"
         icon_template: mdi:radiator
       mbed:
         friendly_name: Warm Megan's bed tonight
-        value_template: "{{ is_state('input_boolean.away_megan', 'off') and states('sensor.dark_sky_overnight_low_temperature_0d')|float < states('input_number.bed_m_flag')|float }}"
+        value_template: "{{ is_state('input_boolean.away_megan', 'off') and float(states('sensor.dark_sky_overnight_low_temperature_0d'), default=0) < float(states('input_number.bed_m_flag'), default=0) }}"
         icon_template: mdi:radiator
       stbed:
         friendly_name: Warm Staci's bed tonight
-        value_template: "{{ is_state('input_boolean.away_staci', 'off') and states('sensor.dark_sky_overnight_low_temperature_0d')|float < states('input_number.bed_st_flag')|float }}"
+        value_template: "{{ is_state('input_boolean.away_staci', 'off') and float(states('sensor.dark_sky_overnight_low_temperature_0d'), default=0) < float(states('input_number.bed_st_flag'), default=0) }}"
         icon_template: mdi:radiator
       dbed:
         friendly_name: Warm Delia's bed tonight
-        value_template: "{{ is_state('input_boolean.away_delia', 'off') and states('sensor.dark_sky_overnight_low_temperature_0d')|float < states('input_number.bed_d_flag')|float }}"
+        value_template: "{{ is_state('input_boolean.away_delia', 'off') and float(states('sensor.dark_sky_overnight_low_temperature_0d'), default=0) < float(states('input_number.bed_d_flag'), default=0) }}"
         icon_template: mdi:radiator
 
 #################################################################
@@ -181,10 +181,10 @@ timer:
 #
 ##
 
-#withings:
-#  client_id: !secret wit_client
-#  client_secret: !secret wit_consumer_secret
-#  use_webhook: true
+withings:
+ client_id: !secret wit_client
+ client_secret: !secret wit_consumer_secret
+ use_webhook: true
 
 
 #################################################################

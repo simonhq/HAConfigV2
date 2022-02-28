@@ -40,24 +40,6 @@ group:
 
 #################################################################
 #                                                               #
-#                  Internet     Speedtest                       #
-#                                                               #
-#################################################################
-
-#speedtestdotnet:
-
-
-#################################################################
-#                                                               #
-#                  Network 
-#                                                               #
-#################################################################
-
-#shell_command:
-#  map_nas_video_folder: mount 10.0.0.69:/plexshare /media/plex
-
-#################################################################
-#                                                               #
 #                       Sensors                                 #
 #                                                               #
 #################################################################
@@ -80,25 +62,11 @@ sensor:
       - type: processor_use
       - type: last_boot
 
-# this will get the current state of the battery - should be 'charging'
-#  - platform: command_line
-#    name: "Laptop Battery State"
-#    command: "cat /sys/class/power_supply/BAT0/status"
-
-  # the current external ip
-  #- platform: dnsip
-
   - platform: rest
     resource: https://api.ipify.org?format=json
     name: External IP
     value_template: '{{ value_json.ip }}'
     scan_interval: 300  
-
-# sensor.current_version
-  - platform: version
-  # - platform: command_line
-  #   name: Version
-  #   command: "cat /home/homeassistant/.homeassistant/.HA_VERSION"
 
 # latest available version
   - platform: version
@@ -106,13 +74,6 @@ sensor:
     beta: false
     image: default
     source: hassio
-
-# CPU Temperature
-#  - platform: command_line
-#    name: CPU Temp
-#    command: "cat /sys/class/thermal/thermal_zone0/temp"
-#    unit_of_measurement: "°C"
-#    value_template: '{{ value | multiply(0.001) | round(0) }}'
 
 #component counts
   - platform: template
@@ -247,7 +208,7 @@ sensor:
       ha_uptime:
         friendly_name: HA Uptime
         value_template: >
-          {% if states('sensor.uptime') == '0.0' %} 
+          {% if (states('sensor.uptime') | int)  == '0' %} 
             Just restarted...
           {% else %}
             {% macro phrase(value, name) %}
@@ -258,7 +219,7 @@ sensor:
             
             {% set weeks = (states('sensor.uptime') | int / 7) | int %}
             {% set days = (states('sensor.uptime') | int) - (weeks * 7) %}
-            {% set hours = (states('sensor.uptime') | float - states('sensor.uptime') | int) * 24 %}
+            {% set hours = (states('sensor.uptime') | float(default=0)) - states('sensor.uptime') | int * 24  %}
             {% set minutes = (hours - hours | int) * 60 %}
 
             {{ [ phrase(weeks, 'week'), phrase(days, 'day'), phrase(hours, 'hr'), phrase(minutes, 'min') ] | select('!=','') | list | join(', ') }}
@@ -331,11 +292,11 @@ binary_sensor:
     sensors:
       disk_alert:
         friendly_name: Disk Alert
-        value_template: "{{ states('sensor.disk_use_percent')|float > states('input_number.disk_alert')|float }}"
+        value_template: "{{ states('sensor.disk_use_percent')|float > states('input_number.disk_alert')|float | float(default=0) }}"
         icon_template: mdi:harddisk
       cpu_alert:
         friendly_name: CPU Alert
-        value_template: "{{ states('sensor.processor_use')|float > states('input_number.cpu_alert')|float }}"
+        value_template: "{{ states('sensor.processor_use')|float > states('input_number.cpu_alert')|float | float(default=0) }}"
         icon_template: mdi:gauge-full
       on_power: #this shows in the disconnect hubs view - so it is negative e.g. opposite
         friendly_name: Hassio on Battery

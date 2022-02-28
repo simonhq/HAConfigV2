@@ -1,0 +1,40 @@
+esphome:
+  name: camera-a
+  platform: ESP32
+  board: esp-wrover-kit
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  password: "9dbeda9f1a9e8ecae031e701f34e2ab1"
+
+wifi:
+  ssid: "BB8"
+  password: "sCmtA9a7$"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Camera-A Fallback Hotspot"
+    password: "6kcdLjsHQADA"
+
+captive_portal:
+
+esp32_camera:
+  external_clock:
+    pin: GPIO21
+    frequency: 20MHz
+  i2c_pins:
+    sda: GPIO26
+    scl: GPIO27
+  data_pins: [GPIO4, GPIO5, GPIO18, GPIO19, GPIO36, GPIO39, GPIO34, GPIO35]
+  vsync_pin: GPIO25
+  href_pin: GPIO23
+  pixel_clock_pin: GPIO22
+
+  # Image settings
+  name: Camera A
+  # ...

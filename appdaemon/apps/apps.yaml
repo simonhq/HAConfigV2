@@ -3,7 +3,7 @@
 #################################################################
 global_modules:
   - secrets
-  - globals
+  #- globals
 
 messaging:
   module: messenger
@@ -14,7 +14,7 @@ messaging:
   userC: secret_discord_tag_staci
   userD: secret_discord_tag_delia
   global_dependencies:
-    - globals
+    #- globals
     - secrets
 
 # calendars
@@ -24,7 +24,7 @@ daily-messages:
   dependencies:
     - messaging
   global_dependencies:
-    - globals
+    #- globals
     - secrets
 
 # alerts
@@ -34,7 +34,7 @@ general-messages:
   dependencies:
     - messaging
   global_dependencies:
-    - globals
+    #- globals
     - secrets
 
 battery-messages:
@@ -43,7 +43,7 @@ battery-messages:
   dependencies:
     - messaging
   global_dependencies:
-    - globals
+    #- globals
     - secrets
 
 # bus messages
@@ -53,7 +53,7 @@ transport-messages:
   dependencies:
     - messaging
   global_dependencies:
-    - globals
+    #- globals
     - secrets
 
 # car
@@ -63,7 +63,7 @@ travel:
   dependencies:
     - messaging
   global_dependencies:
-    - globals
+    #- globals
     - secrets
 
 # for gtfs clean up
@@ -74,7 +74,7 @@ gtfs_cleanup:
   MY_STOPS: "5513,5517,1736,1737,4979,4972,3418,3419,4529,3003,3409,13,1808,1803,1076,1075,1078,1077,2705,2709,2710,2706"
   GTFS_FLAG: "input_boolean.clean_gtfs"
   global_dependencies:
-    - globals
+    #- globals
     - secrets
 
 canberra_dams:
@@ -82,7 +82,7 @@ canberra_dams:
   class: Get_ACT_Dams
   DAM_FLAG: "input_boolean.check_dams"
   global_dependencies:
-    - globals
+    #- globals
     - secrets
 
 snowy_dams:
@@ -123,14 +123,14 @@ accu_allergies:
   URL_COUNTRY: "au"
   URL_LANG: "en"
   global_dependencies:
-    - globals
+    #- globals
     - secrets
 
 climatecontrol:
   module: climatecontrol
   class: Manage_Climate
   fhigh: "sensor.calwell_temp_max_0"
-  flow: "sensor.calwell_temp_min_0"
+  flow: "sensor.calwell_temp_min_1"
   cexttemp: "sensor.tuggeranong_temp"
   cinttemp: "sensor.inside_now"
   solarstatus: "input_boolean.power_ready"
@@ -143,7 +143,7 @@ climatecontrol:
   extlow: "input_number.cc_extlow"
   aircon: "climate.rushbrook_aircon,climate.rushbrook_aircon_d,climate.rushbrook_aircon_s" # if we want to use it
   fan: "fan.staci_s_fan,fan.delia_s_fan,fan.master_fan"
-  heater: "climate.83607036e098068310e2,climate.83607036e09806830fb8" #,climate.33805060a4cf12d11732" # ensuite, study, lounge
+  heater: "climate.heater_ensuite,climate.heater_study" #,climate.33805060a4cf12d11732" # ensuite, study, lounge
   door: "binary_sensor.fdoor_open,binary_sensor.bdoor_open"
   acrule: "input_text.ac_rule"
   warnlight: "light.front_hall"

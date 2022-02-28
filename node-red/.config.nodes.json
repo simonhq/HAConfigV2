@@ -1,7 +1,7 @@
 {
     "node-red": {
         "name": "node-red",
-        "version": "2.0.5",
+        "version": "2.2.1",
         "local": false,
         "user": false,
         "nodes": {
@@ -64,7 +64,8 @@
                 "name": "link",
                 "types": [
                     "link in",
-                    "link out"
+                    "link out",
+                    "link call"
                 ],
                 "enabled": true,
                 "local": false,
@@ -423,30 +424,9 @@
             }
         }
     },
-    "node-red-contrib-actionflows": {
-        "name": "node-red-contrib-actionflows",
-        "version": "2.0.4",
-        "local": false,
-        "user": false,
-        "nodes": {
-            "actionfilters": {
-                "name": "actionfilters",
-                "types": [
-                    "actionflows",
-                    "actionflows_in",
-                    "actionflows_out"
-                ],
-                "enabled": true,
-                "local": false,
-                "user": false,
-                "module": "node-red-contrib-actionflows",
-                "file": "/opt/node_modules/node-red-contrib-actionflows/actionflows/actionflows.js"
-            }
-        }
-    },
     "node-red-contrib-bigtimer": {
         "name": "node-red-contrib-bigtimer",
-        "version": "2.7.5",
+        "version": "2.8.1",
         "local": false,
         "user": false,
         "nodes": {
@@ -503,7 +483,7 @@
     },
     "node-red-contrib-home-assistant-websocket": {
         "name": "node-red-contrib-home-assistant-websocket",
-        "version": "0.33.1",
+        "version": "0.42.5",
         "local": false,
         "user": false,
         "nodes": {
@@ -511,11 +491,13 @@
                 "name": "all",
                 "types": [
                     "ha-api",
+                    "ha-button",
                     "api-call-service",
                     "server",
                     "api-current-state",
                     "ha-device",
                     "ha-entity",
+                    "ha-entity-config",
                     "server-events",
                     "server-state-changed",
                     "ha-fire-event",
@@ -535,25 +517,6 @@
                 "user": false,
                 "module": "node-red-contrib-home-assistant-websocket",
                 "file": "/opt/node_modules/node-red-contrib-home-assistant-websocket/dist/index.js"
-            }
-        }
-    },
-    "node-red-contrib-http-request": {
-        "name": "node-red-contrib-http-request",
-        "version": "0.1.14",
-        "local": false,
-        "user": false,
-        "nodes": {
-            "www-request": {
-                "name": "www-request",
-                "types": [
-                    "www-request"
-                ],
-                "enabled": true,
-                "local": false,
-                "user": false,
-                "module": "node-red-contrib-http-request",
-                "file": "/opt/node_modules/node-red-contrib-http-request/www-request.js"
             }
         }
     },
@@ -619,7 +582,7 @@
     },
     "node-red-contrib-modbus": {
         "name": "node-red-contrib-modbus",
-        "version": "5.14.1",
+        "version": "5.21.0",
         "local": false,
         "user": false,
         "nodes": {
@@ -868,7 +831,7 @@
     },
     "node-red-contrib-time-range-switch": {
         "name": "node-red-contrib-time-range-switch",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "local": false,
         "user": false,
         "nodes": {
@@ -927,7 +890,7 @@
     },
     "node-red-dashboard": {
         "name": "node-red-dashboard",
-        "version": "2.30.0",
+        "version": "3.1.5",
         "local": false,
         "user": false,
         "nodes": {
@@ -1185,7 +1148,7 @@
     },
     "node-red-node-email": {
         "name": "node-red-node-email",
-        "version": "1.12.3",
+        "version": "1.14.0",
         "local": false,
         "user": false,
         "nodes": {
@@ -1206,7 +1169,7 @@
     },
     "node-red-node-feedparser": {
         "name": "node-red-node-feedparser",
-        "version": "0.2.1",
+        "version": "0.2.2",
         "local": false,
         "user": false,
         "nodes": {
@@ -1225,7 +1188,7 @@
     },
     "node-red-node-geofence": {
         "name": "node-red-node-geofence",
-        "version": "0.2.2",
+        "version": "0.3.1",
         "local": false,
         "user": false,
         "nodes": {
@@ -1320,7 +1283,7 @@
     },
     "node-red-node-serialport": {
         "name": "node-red-node-serialport",
-        "version": "0.14.1",
+        "version": "0.15.0",
         "local": false,
         "user": false,
         "nodes": {
@@ -1473,7 +1436,7 @@
     },
     "node-red-node-pi-gpio": {
         "name": "node-red-node-pi-gpio",
-        "version": "1.2.3",
+        "version": "2.0.1",
         "local": false,
         "user": false,
         "nodes": {

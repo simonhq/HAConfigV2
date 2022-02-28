@@ -103,12 +103,12 @@ binary_sensor:
       bdoor_close:
         friendly_name: Back Closed
         value_template: "{{ is_state('binary_sensor.back_door_state_contact', 'off') }}"
-        icon_template: mdi:door-closed
+        icon_template: mdi:door-sliding
         device_class: connectivity
       bdoor_open:
         friendly_name: Back Open
         value_template: "{{ is_state('binary_sensor.back_door_state_contact', 'on') }}"
-        icon_template: mdi:door-open
+        icon_template: mdi:door-sliding-open
         device_class: door
       gdoor_lock:
         friendly_name: GE Lock

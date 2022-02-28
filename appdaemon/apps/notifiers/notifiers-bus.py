@@ -4,7 +4,7 @@
 
 import appdaemon.plugins.hass.hassapi as hass
 import time
-import globals
+#import globals
 
 class Transport_Messages(hass.Hass):
 

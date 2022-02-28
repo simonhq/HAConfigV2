@@ -71,7 +71,7 @@ sensor.waze_simon_to_delia:
   friendly_name: Delia
 sensor.waze_staci_to_delia:
   friendly_name: Staci to Delia
-binary_sensor.bdoor_close:
-  entity_picture: /local/images/sdoor-closed.png
-binary_sensor.bdoor_open:
-  entity_picture: /local/images/sdoor-open.png
+# binary_sensor.bdoor_close:
+#   entity_picture: /local/images/sdoor-closed.png
+# binary_sensor.bdoor_open:
+#   entity_picture: /local/images/sdoor-open.png

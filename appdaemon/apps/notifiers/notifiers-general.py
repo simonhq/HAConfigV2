@@ -9,7 +9,7 @@
 
 import appdaemon.plugins.hass.hassapi as hass
 import time
-import globals
+#import globals
 
 class General_Messages(hass.Hass):
     
