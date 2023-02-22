@@ -171,11 +171,11 @@ sensor:
 
 #################################################################
 #                                                               #
-#                      Moon                                     #
+#                      Moon    - moved to ui                                #
 #                                                               #
 #################################################################
 
-  - platform: moon
+#  - platform: moon
 
 #################################################################
 #                                                               #
@@ -219,15 +219,24 @@ sensor:
         friendly_name: Temp Inside
         value_template: "{{ states('sensor.back_door_state_temperature_measurement') }}"
         unit_of_measurement: C
+      forecast_today_0:
+        friendly_name: Today Forecast L1
+        value_template: '{{ ( states.sensor.calwell_extended_text_0.state | wordwrap(100, true,"§")).split("§")[0]}}'
+      forecast_today_1:
+        friendly_name: Today Forecast L2
+        value_template: '{{ ( states.sensor.calwell_extended_text_0.state | wordwrap(100, true,"§")).split("§")[1]}}' 
+      forecast_today_2:
+        friendly_name: Today Forecast L3
+        value_template: '{{ ( states.sensor.calwell_extended_text_0.state | wordwrap(100, true,"§")).split("§")[2]}}' 
 
 
 ####################################################
 #                                                  #
-#                Season                            #
+#                Season  - moved to ui                          #
 #                                                  #
 ####################################################
 
-  - platform: season
+#  - platform: season
 
 
 ####################################################
@@ -330,27 +339,4 @@ automation:
 ####################################################
 
 
-  - alias: Update OpenUV every 30 minutes while the sun is at least 10 degrees above the horizon
-    trigger:
-      platform: time_pattern
-      minutes: '/30'
-    condition:
-      condition: numeric_state
-      entity_id: sun.sun
-      value_template: '{{ state.attributes.elevation }}'
-      above: 10
-    action:
-      service: openuv.update_uv_index_data      
-
-  - alias: Update OpenUV protection window four times a day
-    trigger:
-      - platform: time
-        at: "06:12:00"
-      - platform: time
-        at: "10:12:00"
-      - platform: time
-        at: "15:12:00"
-      - platform: time
-        at: "19:12:00"
-    action:
-      service: openuv.update_protection_data    
+  

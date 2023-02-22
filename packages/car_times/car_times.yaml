@@ -6,52 +6,26 @@
 
 #################################################################
 #                                                               #
-#                       Group                                   #
+#                     Traccar                         #
 #                                                               #
 #################################################################
 
-group:
-  car_times_e:
-    name: Car Times Entities
-    entities:
-      - binary_sensor.drive_meg
-      - binary_sensor.drive_simon
-      - binary_sensor.drive_staci
-      - binary_sensor.drive_delia
-      - input_boolean.presence_holiday
-      - input_boolean.outback_just
-      - input_boolean.simon_outback
-      - input_boolean.megan_outback
-      - input_boolean.staci_outback
-      - input_boolean.delia_outback
-      - timer.outback_just
-      - sensor.waze_meg_time_to_work
-      - sensor.waze_simon_time_to_uni
-      - sensor.waze_meg_time_to_home
-      - sensor.waze_simon_time_to_home
-      - sensor.waze_meg_to_staci
-      - sensor.waze_meg_to_delia
-      - sensor.waze_meg_to_simon
-      - sensor.waze_simon_to_delia
-      - sensor.waze_simon_to_staci
-      - sensor.waze_staci_to_delia
-      - sensor.m_to_h_route
-      - sensor.s_to_h_route
-      - sensor.m_to_w_route
-      - sensor.m_to_s_route
-      - sensor.m_to_st_route
-      - sensor.m_to_d_route
-      - sensor.s_to_w_route
-      - sensor.s_to_st_route
-      - sensor.s_to_d_route
-      - sensor.st_to_d_route
-      
-  car_times_a:
-    name: Car Times Automations
-    entities:
-      - automation.transport_car_connect_timer_start
-      - automation.transport_garage_open_timer_start
-      
+
+# Example configuration.yaml entry
+device_tracker:
+  - platform: traccar
+    host: localhost
+    port: 18683
+    ssl: false
+    verify_ssl: false
+    username: !secret traccar_user
+    password: !secret traccar_pass
+    event: 
+      - 'all_events'
+    monitored_conditions: ['alarm', 'ignition', 'speed', 'total_distance']
+    new_device_defaults:
+      track_new_devices: true
+
 #################################################################
 #                                                               #
 #                       Binary Sensors                          #
@@ -168,104 +142,38 @@ timer:
 
 sensor:
 
-####################################################
-#                                                  #
-#           sensor - waze travel times             #
-#       
-# simon = device_tracker.pixel_3
-# megan = device_tracker.sm_g965f
-# staci = device_tracker.pixel_3a
-# delia = device_tracker.moto_g_5s_plus
-#################################################### 
+#################################################################
+#                                                               #
+#                     FUEL
+#                                                               #
+#################################################################
 
-  # - platform: waze_travel_time
-  #   name: Waze Meg time to work
-  #   origin: device_tracker.sm_g965f
-  #   destination: zone.northquarter
-  #   region: 'EU'
-
-  # - platform: waze_travel_time
-  #   name: Waze Simon time to uni
-  #   origin: device_tracker.pixel_3
-  #   destination: zone.citywestbus
-  #   region: 'EU'
-
-  # - platform: waze_travel_time
-  #   name: Waze Meg time to home
-  #   origin: device_tracker.sm_g965f
-  #   destination: zone.home
-  #   region: 'EU'
-
-  # - platform: waze_travel_time
-  #   name: Waze Simon time to home
-  #   origin: device_tracker.pixel_3
-  #   destination: zone.home
-  #   region: 'EU'
-
-  # - platform: waze_travel_time
-  #   name: Waze Meg to Staci
-  #   origin: device_tracker.sm_g965f
-  #   destination: device_tracker.pixel_3a
-  #   region: 'EU'
-
-  # - platform: waze_travel_time
-  #   name: Waze Meg to Delia
-  #   origin: device_tracker.sm_g965f
-  #   destination: device_tracker.pixel_3a_2
-  #   region: 'EU'
-
-  # - platform: waze_travel_time
-  #   name: Waze Meg to Simon
-  #   origin: device_tracker.sm_g965f
-  #   destination: device_tracker.pixel_3
-  #   region: 'EU'
-
-  # - platform: waze_travel_time
-  #   name: Waze Simon to Delia
-  #   origin: device_tracker.pixel_3
-  #   destination: device_tracker.pixel_3a_2
-  #   region: 'EU'
-
-  # - platform: waze_travel_time
-  #   name: Waze Simon to Staci
-  #   origin: device_tracker.pixel_3
-  #   destination: device_tracker.pixel_3a
-  #   region: 'EU'
-
-  # - platform: waze_travel_time
-  #   name: Waze Staci to Delia
-  #   origin: device_tracker.pixel_3a_2
-  #   destination: device_tracker.pixel_3a
-  #   region: 'EU'
+  - platform: nsw_fuel_station
+    station_id: 18786
+    fuel_types: ['E10', 'U91']
+  - platform: nsw_fuel_station
+    station_id: 18809
+    fuel_types: ['P98']
+   
 
 ####################################################
 #                                                  #
-#           sensor - waze travel routes            #
+#           sensor - geofence from traccar         #
 #                                                  #
 #################################################### 
 
   - platform: template
     sensors:
-      m_to_h_route:
-        value_template: '{{ states.sensor.waze_meg_time_to_home.attributes.route }}'
-      s_to_h_route:
-        value_template: '{{ states.sensor.waze_simon_time_to_home.attributes.route }}'
-      m_to_w_route:
-        value_template: '{{ states.sensor.waze_meg_time_to_work.attributes.route }}'
-      m_to_s_route:
-        value_template: '{{ states.sensor.waze_meg_to_simon.attributes.route }}'
-      m_to_st_route:
-        value_template: '{{ states.sensor.waze_meg_to_staci.attributes.route }}'
-      m_to_d_route:
-        value_template: '{{ states.sensor.waze_meg_to_delia.attributes.route }}'
-      s_to_w_route:
-        value_template: '{{ states.sensor.waze_simon_time_to_uni.attributes.route }}'
-      s_to_st_route:
-        value_template: '{{ states.sensor.waze_simon_to_staci.attributes.route }}'
-      s_to_d_route:
-        value_template: '{{ states.sensor.waze_simon_to_delia.attributes.route }}'
-      st_to_d_route:
-        value_template: '{{ states.sensor.waze_staci_to_delia.attributes.route }}'
+      geofence_outback:
+        value_template: "{{ state_attr('device_tracker.outback', 'geofence') }}"
+      geofence_rx8:
+        value_template: "{{ state_attr('device_tracker.rx8', 'geofence') }}"
+      blue_msam9:
+        value_template: "{{ state_attr('sensor.mpixel_bluetooth_connection', 'connected_paired_devices') }}"
+      blue_spixel:
+        value_template: "{{ state_attr('sensor.spixel3_bluetooth_connection', 'connected_paired_devices') }}"
+        #28:A1:83:8A:48:63 Outback 
+        #F4:4E:FD:30:A8:28 RX8
 
 
 #################################################################
@@ -275,7 +183,7 @@ sensor:
 #################################################################
 
 # please see automation/house_mode.yaml
-
+#['08:97:98:28:DB:03 (Julianna HR 0489)']
 automation:
 
 ####################################################

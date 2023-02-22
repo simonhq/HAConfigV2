@@ -181,10 +181,10 @@ timer:
 #
 ##
 
-withings:
- client_id: !secret wit_client
- client_secret: !secret wit_consumer_secret
- use_webhook: true
+# withings:
+#  client_id: !secret wit_client
+#  client_secret: !secret wit_consumer_secret
+#  use_webhook: true
 
 
 #################################################################

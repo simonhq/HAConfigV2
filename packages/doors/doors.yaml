@@ -80,46 +80,36 @@ binary_sensor:
 
   - platform: template
     sensors:
-      fdoor_lock:
-        friendly_name: Front Lock
-        value_template: "{{ is_state('input_boolean.fdoor', 'on') and is_state('binary_sensor.front_door_state_contact', 'off') }}"
-        icon_template: mdi:lock
-        device_class: connectivity
-      fdoor_unlock:
-        friendly_name: Front Unlock
-        value_template: "{{ is_state('input_boolean.fdoor', 'off') }}"
-        icon_template: mdi:lock-open-outline
-        device_class: lock
       fdoor_close:
-        friendly_name: Front Closed
+        friendly_name: FD Closed
         value_template: "{{ is_state('binary_sensor.front_door_state_contact', 'off') }}"
         icon_template: mdi:door
         device_class: connectivity
       fdoor_open:
-        friendly_name: Front Open
+        friendly_name: FD Open
         value_template: "{{ is_state('binary_sensor.front_door_state_contact', 'on') }}"
         icon_template: mdi:door-open
         device_class: door
       bdoor_close:
-        friendly_name: Back Closed
+        friendly_name: BD Closed
         value_template: "{{ is_state('binary_sensor.back_door_state_contact', 'off') }}"
         icon_template: mdi:door-sliding
         device_class: connectivity
       bdoor_open:
-        friendly_name: Back Open
+        friendly_name: BD Open
         value_template: "{{ is_state('binary_sensor.back_door_state_contact', 'on') }}"
         icon_template: mdi:door-sliding-open
         device_class: door
-      gdoor_lock:
-        friendly_name: GE Lock
-        value_template: "{{ is_state('input_boolean.gdoor', 'on') }}"
-        icon_template: mdi:lock
+      gdoor_close:
+        friendly_name: GE Closed
+        value_template: "{{ is_state('binary_sensor.gdoor_door', 'off') }}"
+        icon_template: mdi:door
         device_class: connectivity
-      gdoor_unlock:
-        friendly_name: GE Unlock
-        value_template: "{{ is_state('input_boolean.gdoor', 'off') }}"
-        icon_template: mdi:lock-open-outline
-        device_class: lock
+      gdoor_open:
+        friendly_name: GE Open
+        value_template: "{{ is_state('binary_sensor.gdoor_door', 'on') }}"
+        icon_template: mdi:door-open
+        device_class: door
 
 ####################################################
 #                                                  #
@@ -140,21 +130,28 @@ binary_sensor:
         friendly_name: 'Back Sliding Door'
         device_class: door
         icon_template: mdi:door-open
-      #gdoor:
-      #  value_template: "{{ is_state('input_boolean.gdoor', 'off') }}"
-      #  friendly_name: 'Garage Entry'
-      #  device_class: lock
-      #  icon_template: mdi:lock
-    #lock status
-      fdoor:
-        value_template: "{{ is_state('input_boolean.fdoor', 'off') or is_state('binary_sensor.front_door_state_contact', 'on') }}"
-        friendly_name: 'Front Door'
-        device_class: lock
-        #entity_picture_template: /local/pics/kevolock.jpg 
-        icon_template: mdi:lock
-      gdoor:
-        value_template: "{{ is_state('input_boolean.gdoor', 'off') }}"
+      gdoor_door:
+        value_template: "{{ is_state('binary_sensor.garage_entry_door_iaszone', 'on') }}"
         friendly_name: 'Garage Entry'
-        device_class: lock
-        #entity_picture_template: /local/pics/kevolock.jpg 
-        icon_template: mdi:lock
+        device_class: door
+        icon_template: mdi:door-open
+
+####################################################
+#                                                  #
+#                Invert Garage Entry door       #
+#                                                  #
+####################################################
+
+lock:
+  - platform: template
+    name: Garage Entry Door
+    value_template: "{{ is_state('lock.garage_entry_lock_doorlock', 'off') }}"
+    lock:
+      service: lock.unlock
+      data:
+        entity_id: lock.garage_entry_lock_doorlock
+    unlock:
+      service: lock.lock
+      data:
+        entity_id: lock.garage_entry_lock_doorlock
+    #icon_template: "{% if is_state('lock.garage_entry_lock_doorlock', 'on') %}mdi:lock{% else %}mdi:lock-open{% endif %}"

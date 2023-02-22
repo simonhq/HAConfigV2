@@ -37,16 +37,6 @@ binary_sensor:
 
   - platform: template
     sensors:
-      mess_hang:
-        friendly_name: Hangouts
-        value_template: "{{ is_state('input_select.message_flag', 'Hangouts') }}"
-        icon_template: mdi:google-hangouts
-        device_class: connectivity
-      mess_push:
-        friendly_name: Pushbullet
-        value_template: "{{ is_state('input_select.message_flag', 'Pushbullet') }}"
-        icon_template: mdi:bullet
-        device_class: connectivity
       mess_discord:
         friendly_name: Discord Int
         value_template: "{{ is_state('input_select.message_flag', 'Discord') }}"

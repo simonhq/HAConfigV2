@@ -4,40 +4,6 @@
 #                                                               #
 #################################################################
 
-#################################################################
-#                                                               #
-#                       Group                                   #
-#                                                               #
-#################################################################
-
-group:
-  smoke_detectors_e:
-    name: Smoke Detectors Entities
-    entities:
-      - binary_sensor.hallway_nest_protect_online
-      - binary_sensor.back_hall_nest_protect_online
-      - sensor.hallway_nest_protect_co_status
-      - sensor.hallway_nest_protect_color_status
-      - sensor.hallway_nest_protect_smoke_status
-      - sensor.back_hall_nest_protect_co_status
-      - sensor.back_hall_nest_protect_color_status
-      - sensor.back_hall_nest_protect_smoke_status
-      #- For battery info -see batteries package
-      - binary_sensor.rushbrook_overlook_away
-      - sensor.rushbrook_overlook_eta
-
-  protect_e:
-    name: Protect Entities
-    entities:
-      - device_tracker.protect_back_hall
-      - device_tracker.protect_front_hall
-      
-  protect_s:
-    name: Protect System
-    entities:
-      - binary_sensor.nest_system
-      - binary_sensor.hallway_nest_protect_online
-      - binary_sensor.back_hall_nest_protect_online
 
 #################################################################
 #                                                               #
@@ -67,19 +33,18 @@ binary_sensor:
 - platform: template
   sensors:
     nest_system:
-      value_template: "{{ is_state('binary_sensor.hallway_nest_protect_online', 'on') and is_state('binary_sensor.back_hall_nest_protect_online', 'on') }}"
+      value_template: "{{ is_state('binary_sensor.hallway_nest_protect_online', 'on') and is_state('binary_sensor.back_hall_nest_protect_online', 'on') and is_state('binary_sensor.laundry_nest_protect_online', 'on') }}"
       friendly_name: 'Nest Protects'
       device_class: connectivity
       icon_template: mdi:smoke-detector
-
-
-
-#################################################################
-#                                                               #
-#                       Automation                              #
-#                                                               #
-#################################################################
-
-# please see appdaemon
+    nest_smoke:
+      value_template: "{{ is_state('sensor.back_hall_nest_protect_smoke_status', 'Ok') and is_state('sensor.front_hall_nest_smoke_status', 'Ok') and is_state('sensor.laundry_nest_protect_smoke_status', 'Ok')}}"
+      friendly_name: 'Nest Protects Smoke'
+      device_class: smoke
+      #icon_template: mdi:smoke-detector
+    nest_co:
+      value_template: "{{ is_state('sensor.back_hall_nest_protect_co_status', 'Ok') and is_state('sensor.front_hall_nest_co_status', 'Ok') and is_state('sensor.laundry_nest_protect_co_status', 'Ok')}}"
+      friendly_name: 'Nest Protects CO'
+      device_class: safety
 
   

@@ -45,7 +45,15 @@
     name: Guest
     track: true
     search: "#guest"
-
+  - device_id: botox
+    name: Botox
+    track: true
+    search: "#Botox"
+  - device_id: emgality
+    name: Emgality
+    track: true
+    search: "#Emgality
+    "
 # not needed
 
 # - cal_id: addressbook#contacts@group.v.calendar.google.com

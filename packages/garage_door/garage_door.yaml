@@ -17,6 +17,9 @@ group:
       - cover.near_garage_door
       - binary_sensor.roller_close
       - binary_sensor.roller_open
+      - cover.far_garage_door
+      - binary_sensor.rollerf_close
+      - binary_sensor.rollerf_open
 
 
 #################################################################
@@ -30,13 +33,23 @@ binary_sensor:
   - platform: template
     sensors:
       roller_close:
-        friendly_name: Garage Closed
+        friendly_name: Near Closed
         value_template: "{{ is_state('cover.near_garage_door', 'closed') }}"
         icon_template: mdi:garage
         device_class: motion
       roller_open:
-        friendly_name: Garage Open
+        friendly_name: Near Open
         value_template: "{{ is_state('binary_sensor.roller_close', 'off') }}"
+        icon_template: mdi:garage-open
+        device_class: opening
+      rollerf_close:
+        friendly_name: Far Closed
+        value_template: "{{ is_state('cover.far_garage_door', 'closed') }}"
+        icon_template: mdi:garage
+        device_class: motion
+      rollerf_open:
+        friendly_name: Far Open
+        value_template: "{{ is_state('binary_sensor.rollerf_close', 'off') }}"
         icon_template: mdi:garage-open
         device_class: opening
 

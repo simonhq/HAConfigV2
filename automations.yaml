@@ -1,47 +1,1238 @@
-- id: '1621255086423'
-  alias: notify_garage_open
+- id: '1655594790524'
+  alias: aa_DecreaseOvernightTemp
   description: ''
-  use_blueprint:
-    path: vorion/actionable-notifications-for-android.yaml
-    input:
-      notify_device: c5db4758695a4b91a05f03496bac25a2
-      trigger_entity: input_boolean.garage_just
-      action_1_title: Close garage
-      first_action:
-      - service: cover.close_cover
-        target:
-          entity_id: cover.near_garage_door
-      action_2_title: Open HA
-      action_2_uri: /lovelace/12
-- id: '1627902597304'
-  alias: garage_open_ near_on_toggle
-  description: When the input boolean is turned on, open the near garage
+  trigger:
+  - platform: time
+    at: 00:30:00
+  - platform: time
+    at: 03:00:00
+    enabled: false
+  - platform: time
+    at: '22:00:00'
+  condition: []
+  action:
+  - service: input_number.decrement
+    data: {}
+    target:
+      entity_id: input_number.cc_intlow
+  mode: single
+- id: '1655594932687'
+  alias: aa_IncreaseOvernightTemp
+  description: ''
+  trigger:
+  - platform: time
+    at: 05:00:00
+  - platform: time
+    at: 06:00:00
+  - platform: time
+    at: 05:30:00
+    enabled: false
+  condition: []
+  action:
+  - service: input_number.increment
+    data: {}
+    target:
+      entity_id: input_number.cc_intlow
+  mode: single
+- id: '1655594932387'
+  alias: update_openuv_30
+  description: Update OpenUV every 30 minutes while the sun is at least 10 degrees
+    above the horizon
+  trigger:
+  - platform: time_pattern
+    minutes: /30
+  condition:
+  - condition: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ state.attributes.elevation }}'
+    above: 10
+  action:
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id: sensor.current_uv_index
+- id: '1655594942387'
+  alias: update_openuv_protection
+  description: Update OpenUV protection window four times a day
+  trigger:
+  - platform: time
+    at: 06:12:00
+  - platform: time
+    at: '10:12:00'
+  - platform: time
+    at: '15:12:00'
+  - platform: time
+    at: '19:12:00'
+  action:
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id: binary_sensor.protection_window
+- id: '1666677281897'
+  alias: D_Outback/Meg arriving home
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: person.megan
+    zone: zone.outback_open_garage
+    event: enter
+  condition:
+  - condition: state
+    entity_id: input_boolean.megan_outback
+    state: 'on'
+  action:
+  - service: cover.open_cover
+    data: {}
+    target:
+      entity_id: cover.far_garage_door
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.megan_outback
+  mode: single
+- id: '1666677439958'
+  alias: D_Outback/Simon arriving home
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: person.simon
+    zone: zone.outback_open_garage
+    event: enter
+  condition:
+  - condition: state
+    entity_id: input_boolean.simon_outback
+    state: 'on'
+  action:
+  - service: cover.open_cover
+    data: {}
+    target:
+      entity_id: cover.far_garage_door
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.simon_outback
+  mode: single
+- id: '1666683654212'
+  alias: D_Outback/Simon turn off outback flag
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: person.simon
+    zone: zone.home
+    event: enter
+  condition:
+  - condition: state
+    entity_id: input_boolean.simon_outback
+    state: 'on'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.simon_outback
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id: counter.days_since_outback
+  mode: single
+- id: '1666683716073'
+  alias: D_Outback/Megan turn off outback flag
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: person.megan
+    zone: zone.home
+    event: enter
+  condition:
+  - condition: state
+    entity_id: input_boolean.megan_outback
+    state: 'on'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.megan_outback
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id: counter.days_since_outback
+  mode: single
+- id: '1667263136037'
+  alias: ab_play_storm
+  description: ''
   trigger:
   - platform: state
-    entity_id: input_boolean.near_garage
-    id: near garage toggle
-    from: 'off'
+    entity_id:
+    - binary_sensor.withings_in_bed_simon
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.mode_morning
+    state: 'off'
+  - condition: state
+    entity_id: binary_sensor.mode_day
+    state: 'off'
+  action:
+  - service: media_player.play_media
+    data:
+      media_content_id: x-sonosapi-hls-static:ALkSOiGN4blsPLbkZL_OIgdqOi8yunIN1dCHce2w-wKzjvS0?sid=284&flags=8&sn=2
+      media_content_type: music
+      enqueue: replace
+    target:
+      entity_id: media_player.master_simon
+  mode: single
+- id: '1667266218401'
+  alias: ab_play_dido
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.withings_in_bed_simon
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: binary_sensor.mode_day
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.migraine_flag
+    state: 'off'
+  action:
+  - service: media_player.play_media
+    data:
+      media_content_id: x-sonos-http:4d048a3b9242ead9e9d1a0fdafa44c7f3b206a24%3aNone%3a3486%3atrack.mp3?sid=212&flags=24616&sn=3
+      media_content_type: music
+      enqueue: replace
+    target:
+      entity_id: media_player.master_simon
+  mode: single
+- id: '1668640667988'
+  alias: E_Increment_Days_Since
+  description: Increment all the days_since helpers
+  trigger:
+  - platform: time
+    at: 00:00:00
+  condition:
+  - condition: state
+    entity_id: input_boolean.presence_holiday
+    state: 'off'
+  action:
+  - service: counter.increment
+    data: {}
+    target:
+      entity_id:
+      - counter.days_since_meg_toothbrush
+      - counter.days_since_sheets
+      - counter.days_since_simon_toothbrush
+      - counter.days_since_towels
+      - counter.days_since_outback
+      - counter.days_since_rx8
+  mode: single
+- id: '1668642403603'
+  alias: E_Reset_Days_Since_Towels
+  description: ''
+  trigger:
+  - device_id: 7bbdca24c48a4839a901526af4dcbec1
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 1
+    unique_id: 558b9154-3df8-4b0c-b9df-0ef8acfa1612
+  condition: []
+  action:
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id: counter.days_since_towels
+  mode: single
+- id: '1668642450059'
+  alias: E_Reset_Days_Since_Sheets
+  description: ''
+  trigger:
+  - device_id: 7bbdca24c48a4839a901526af4dcbec1
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 2
+    unique_id: 113b39fc-afad-4bd8-967a-d36fc20d67a9
+  condition: []
+  action:
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id: counter.days_since_sheets
+  mode: single
+- id: '1668642714359'
+  alias: E_Reset_Days_Since_Simon_Toothbrush
+  description: ''
+  trigger:
+  - device_id: 7bbdca24c48a4839a901526af4dcbec1
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 3
+    unique_id: 2c771249-c3ae-40fa-88b7-8563168d995e
+  condition: []
+  action:
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id: counter.days_since_simon_toothbrush
+  mode: single
+- id: '1668642754002'
+  alias: E_Reset_Days_Since_Meg_Toothbrush
+  description: ''
+  trigger:
+  - device_id: 7bbdca24c48a4839a901526af4dcbec1
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 4
+    unique_id: 270aa236-1951-4d9f-a119-6750d5d2ceeb
+  condition: []
+  action:
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id: counter.days_since_meg_toothbrush
+  mode: single
+- id: '1668728299581'
+  alias: E_Reset_Days_Since_Rx8
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: device_tracker.rx8
+    zone: zone.home
+    event: enter
+  condition: []
+  action:
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id: counter.days_since_rx8
+  mode: single
+- id: '1669598189122'
+  alias: B_Cast_Control_Kitchen_Start
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.kitchen_motion_sensor_motion
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+  condition: []
+  action:
+  - service: cast.show_lovelace_view
+    data:
+      entity_id: media_player.nesthub50ce
+      dashboard_path: lovelace-kitchen
+      view_path: kitchen-view
+  mode: single
+- id: '1669600236887'
+  alias: B_Cast_Control_Kitchen_Stop
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.kitchen_motion_sensor_motion
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition: []
+  action:
+  - service: media_player.turn_off
+    data: {}
+    target:
+      entity_id: media_player.nesthub50ce
+  mode: single
+- id: '1669605956885'
+  alias: B_Vacuum_Control_Start
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.daisy_schedule
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.migraine_flag
+    state: 'off'
+  action:
+  - service: vacuum.start
+    data: {}
+    target:
+      entity_id: vacuum.daisy_2
+  mode: single
+- id: '1669624783526'
+  alias: B_Vacuum_Control_Stop
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.daisy_schedule
+    to: 'off'
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: vacuum.daisy_2
+      state: docked
+  action:
+  - service: vacuum.return_to_base
+    data: {}
+    target:
+      entity_id: vacuum.daisy_2
+  mode: single
+- id: '1669625080995'
+  alias: C_Time_Midnight_MigraineFlagOff
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:00:00
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.migraine_flag
+  mode: single
+- id: '1675145789147'
+  alias: B_Motion_Control_Ensuite_On
+  description: Takes the external light, blind state, time of day (house mode) and
+    migraine mode into account
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.ensuite_sensor_motion
     to: 'on'
   condition: []
   action:
-  - device_id: 122a45e3bcc74c93904248061ff9de75
-    domain: cover
-    entity_id: cover.near_garage_door
-    type: open
+  - if:
+    - condition: state
+      entity_id: input_boolean.migraine_flag
+      state: 'on'
+    then:
+    - service: light.turn_on
+      data:
+        brightness_pct: 20
+      target:
+        entity_id: light.ensuite
+    else:
+    - if:
+      - condition: state
+        entity_id: input_select.time_mode
+        state: Night
+      then:
+      - service: light.turn_on
+        data:
+          brightness_pct: 20
+        target:
+          entity_id: light.ensuite
+      else:
+      - if:
+        - condition: device
+          device_id: 7431f46d47d986f044a8a08d10a56c69
+          domain: cover
+          entity_id: cover.ensuite_blinds_blind
+          type: is_closed
+        then:
+        - service: light.turn_on
+          data:
+            brightness_pct: 100
+          target:
+            entity_id: light.ensuite
+        else:
+        - if:
+          - condition: numeric_state
+            entity_id: sensor.external_illuminance
+            below: 1500
+          then:
+          - service: light.turn_on
+            data:
+              brightness_pct: 100
+            target:
+              entity_id: light.ensuite
   mode: single
-- id: '1627902646601'
-  alias: garage_close_ near_on_toggle
-  description: When the input boolean is turned off, close the near garage
+- id: '1675208780273'
+  alias: C_Time_Morning
+  description: ''
   trigger:
   - platform: state
-    entity_id: input_boolean.near_garage
-    id: near garage toggle
-    from: 'on'
-    to: 'off'
+    entity_id:
+    - input_select.time_mode
+    to: Morning
   condition: []
   action:
-  - device_id: 122a45e3bcc74c93904248061ff9de75
-    domain: cover
-    entity_id: cover.near_garage_door
-    type: close
+  - service: light.turn_on
+    data:
+      color_temp: 330
+      brightness_pct: 20
+    target:
+      entity_id: light.kitchen
+  mode: single
+- id: '1675209436805'
+  alias: B_Motion_Control_Kitchen
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.kitchen_motion_sensor_motion
+    to: 'on'
+  condition: []
+  action:
+  - if:
+    - condition: state
+      entity_id: input_select.time_mode
+      state: Night
+    then:
+    - service: light.turn_on
+      data:
+        color_temp: 440
+        brightness_pct: 20
+      target:
+        entity_id: light.kitchen
+    - service: light.turn_on
+      data:
+        transition: 300
+        brightness_pct: 0
+      target:
+        entity_id: light.kitchen
+    else:
+    - if:
+      - condition: state
+        entity_id: input_select.time_mode
+        state: Late
+      then:
+      - service: light.turn_on
+        data:
+          color_temp: 424
+          brightness_pct: 60
+        target:
+          entity_id: light.kitchen
+      else:
+      - if:
+        - condition: numeric_state
+          entity_id: sensor.external_illuminance
+          below: 1800
+        then:
+        - service: light.turn_on
+          data:
+            color_temp: 374
+            brightness_pct: 100
+          target:
+            entity_id: light.kitchen
+  mode: single
+- id: '1675209603361'
+  alias: C_External_Light_ON
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.external_illuminance
+    above: 1800
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.kitchen
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.toilet
+  mode: single
+- id: '1675210643294'
+  alias: B_Motion_Control_Toilet_On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.toilet_motion_motion
+    to: 'on'
+  condition: []
+  action:
+  - if:
+    - condition: state
+      entity_id: input_select.time_mode
+      state: Night
+    then:
+    - service: light.turn_on
+      data:
+        color_temp: 440
+        brightness_pct: 20
+      target:
+        entity_id: light.toilet
+    else:
+    - if:
+      - condition: numeric_state
+        entity_id: sensor.external_illuminance
+        below: 2000
+      then:
+      - service: light.turn_on
+        data:
+          color_temp: 312
+          brightness_pct: 100
+        target:
+          entity_id: light.toilet
+  mode: single
+- id: '1675212532349'
+  alias: B_Motion_Control_Bathroom_On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.bathroom_motion_motion
+    to: 'on'
+  condition: []
+  action:
+  - if:
+    - condition: state
+      entity_id: input_select.time_mode
+      state: Night
+    then:
+    - service: light.turn_on
+      data:
+        brightness_pct: 20
+      target:
+        entity_id: light.bathroom
+    else:
+    - service: light.turn_on
+      data:
+        brightness_pct: 100
+      target:
+        entity_id: light.bathroom
+  mode: single
+- id: '1675213007044'
+  alias: B_Motion_Control_Garage_On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.garage_sensor_motion
+    to: 'on'
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      brightness_pct: 100
+      color_temp: 153
+    target:
+      entity_id: light.garage
+  mode: single
+- id: '1675213558334'
+  alias: B_Motion_Control_Laundry_On
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.laundry_sensor_motion
+    to: 'on'
+  condition: []
+  action:
+  - if:
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: input_select.time_mode
+        state: Late
+      - condition: state
+        entity_id: input_select.time_mode
+        state: Night
+    then:
+    - service: light.turn_on
+      data:
+        brightness_pct: 50
+      target:
+        entity_id: light.laundry
+    else:
+    - if:
+      - condition: numeric_state
+        entity_id: sensor.external_illuminance
+        below: 1800
+      then:
+      - service: light.turn_on
+        data:
+          brightness_pct: 100
+        target:
+          entity_id: light.laundry
+  mode: single
+- id: '1675371205144'
+  alias: B_Motion_Control_Ensuite_Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.ensuite_sensor_motion
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.ensuite
+  mode: single
+- id: '1675377426308'
+  alias: B_Motion_Control_Garage_Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.garage_sensor_motion
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.garage
+  mode: single
+- id: '1675378120757'
+  alias: B_Motion_Control_Bathroom_Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.bathroom_motion_motion
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.bathroom
+  mode: single
+- id: '1675378269064'
+  alias: B_Motion_Control_Laundry_Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.laundry_sensor_motion
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 20
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.laundry
+  mode: single
+- id: '1675378486162'
+  alias: B_Motion_Control_Toilet_Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.toilet_motion_motion
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.toilet
+  mode: single
+- id: '1675632219082'
+  alias: MB_Button_SinglePress_Meg
+  description: ''
+  trigger:
+  - device_id: baabe4a1f04a0aa8fa5bd7ddc7a21237
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: remote_button_short_press
+  condition: []
+  action:
+  - service: light.toggle
+    data: {}
+    target:
+      entity_id: light.master_lightstrip
+  mode: single
+- id: '1675632543184'
+  alias: MB_Button_DoublePress_Meg
+  description: ''
+  trigger:
+  - device_id: baabe4a1f04a0aa8fa5bd7ddc7a21237
+    domain: zha
+    platform: device
+    type: remote_button_double_press
+    subtype: remote_button_double_press
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.megan_blanket
+  - service: timer.cancel
+    data: {}
+    target:
+      entity_id: timer.bed_m_timer
+  mode: single
+- id: '1675632863226'
+  alias: MB_Button_Hold_Meg
+  description: ''
+  trigger:
+  - device_id: baabe4a1f04a0aa8fa5bd7ddc7a21237
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: remote_button_long_press
+  condition: []
+  action:
+  - service: input_boolean.toggle
+    data: {}
+    target:
+      entity_id: input_boolean.migraine_flag
+  mode: single
+- id: '1675633320022'
+  alias: MB_Button_ShortPress_Ensuite
+  description: ''
+  trigger:
+  - device_id: feca980f9c30376afb8714d796854c3a
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: remote_button_short_press
+  condition: []
+  action:
+  - service: input_boolean.toggle
+    data: {}
+    target:
+      entity_id: input_boolean.shower_flag
+  mode: single
+- id: '1675633379677'
+  alias: MB_Button_DoublePress_Ensuite
+  description: ''
+  trigger:
+  - device_id: feca980f9c30376afb8714d796854c3a
+    domain: zha
+    platform: device
+    type: remote_button_double_press
+    subtype: remote_button_double_press
+  condition: []
+  action:
+  - service: input_boolean.toggle
+    data: {}
+    target:
+      entity_id: input_boolean.privacy_flag
+  mode: single
+- id: '1675633426890'
+  alias: MB_Button_Hold_Ensuite
+  description: ''
+  trigger:
+  - device_id: feca980f9c30376afb8714d796854c3a
+    domain: zha
+    platform: device
+    type: remote_button_long_press
+    subtype: remote_button_long_press
+  condition: []
+  action:
+  - service: input_boolean.toggle
+    data: {}
+    target:
+      entity_id: input_boolean.migraine_flag
+  mode: single
+- id: '1675640347159'
+  alias: MB_Button_ShortPress_FrontHall
+  description: ''
+  trigger:
+  - device_id: b4a12604e44405e97ed9e1d312447d07
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: remote_button_short_press
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.mailbox
+  mode: single
+- id: '1675640800306'
+  alias: B_Motion_Control_Mailbox
+  description: ''
+  trigger:
+  - type: occupied
+    platform: device
+    device_id: 9a745863b6deac1c54f347ddf8c5fd78
+    entity_id: binary_sensor.philips_sml001_occupancy
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.mailbox
+  mode: single
+- id: '1675912896959'
+  alias: F_FanLight_TurnOn_Master
+  description: ''
+  trigger:
+  - device_id: 9be64f86102636cc3e291ffe9282488e
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id: light.master_fan_control_light
+  mode: single
+- id: '1675912972855'
+  alias: F_FanLight_TurnOff_Master
+  description: ''
+  trigger:
+  - device_id: 9be64f86102636cc3e291ffe9282488e
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.master_fan_control_light
+  mode: single
+- id: '1675913039467'
+  alias: F_Fan_Decrease_Master
+  description: ''
+  trigger:
+  - device_id: 9be64f86102636cc3e291ffe9282488e
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: left
+  condition: []
+  action:
+  - service: fan.decrease_speed
+    data: {}
+    target:
+      entity_id: fan.master_fan_control_fan
+  mode: single
+- id: '1675913076304'
+  alias: F_Fan_Increase_Master
+  description: ''
+  trigger:
+  - device_id: 9be64f86102636cc3e291ffe9282488e
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: right
+  condition: []
+  action:
+  - service: fan.increase_speed
+    data: {}
+    target:
+      entity_id: fan.master_fan_control_fan
+  mode: single
+- id: '1675976139786'
+  alias: CC_FanControl_OptHighIncrease_Study
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.lumi_lumi_weather_temperature_2
+    above: input_number.cc_opthigh
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: person.megan
+      state: home
+    - condition: state
+      entity_id: person.simon
+      state: home
+  action:
+  - service: fan.increase_speed
+    data: {}
+    target:
+      entity_id: fan.study_fan_control_fan
+  - type: turn_on
+    device_id: 0ccc21d00b14468e61b424d557ed134f
+    entity_id: fan.pure_hot_cool
+    domain: fan
+  - service: climate.set_hvac_mode
+    data:
+      hvac_mode: cool
+    target:
+      entity_id: climate.pure_hot_cool
+  - service: fan.set_percentage
+    data:
+      percentage: 40
+    target:
+      entity_id: fan.pure_hot_cool
+  mode: single
+- id: '1675976227186'
+  alias: CC_FanControl_OptLowDecrease_Study
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.lumi_lumi_weather_temperature_2
+    below: input_number.cc_optlow
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: person.megan
+      state: home
+    - condition: state
+      entity_id: person.simon
+      state: home
+  action:
+  - service: fan.decrease_speed
+    data: {}
+    target:
+      entity_id: fan.study_fan_control_fan
+  - service: fan.turn_off
+    data: {}
+    target:
+      entity_id: fan.pure_hot_cool
+  mode: single
+- id: '1675977493580'
+  alias: CC_FanControl_IntLowHeat_Study
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.lumi_lumi_weather_temperature_2
+    below: input_number.cc_intlow
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: person.megan
+      state: home
+    - condition: state
+      entity_id: person.simon
+      state: home
+  action:
+  - type: turn_on
+    device_id: 0ccc21d00b14468e61b424d557ed134f
+    entity_id: fan.pure_hot_cool
+    domain: fan
+  - service: climate.set_hvac_mode
+    data:
+      hvac_mode: heat
+    target:
+      entity_id: climate.pure_hot_cool
+  - service: fan.set_percentage
+    data:
+      percentage: 40
+    target:
+      entity_id: fan.pure_hot_cool
+  mode: single
+- id: '1676421025184'
+  alias: F_FanLight_TurnOn_Study
+  description: ''
+  trigger:
+  - device_id: 4bc0ef719a84a4d8a67dac1de0ae3245
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id: light.study_fan_control_light
+  mode: single
+- id: '1676421103603'
+  alias: F_FanLight_TurnOff_Study
+  description: ''
+  trigger:
+  - device_id: 4bc0ef719a84a4d8a67dac1de0ae3245
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.study_fan_control_light
+  mode: single
+- id: '1676421174244'
+  alias: F_Fan_Decrease_Study
+  description: ''
+  trigger:
+  - device_id: 4bc0ef719a84a4d8a67dac1de0ae3245
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: left
+  condition: []
+  action:
+  - service: fan.decrease_speed
+    data: {}
+    target:
+      entity_id: fan.study_fan_control_fan
+  mode: single
+- id: '1676421216393'
+  alias: F_Fan_Increase_Study
+  description: ''
+  trigger:
+  - device_id: 4bc0ef719a84a4d8a67dac1de0ae3245
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: right
+  condition: []
+  action:
+  - service: fan.increase_speed
+    data: {}
+    target:
+      entity_id: fan.study_fan_control_fan
+  mode: single
+- id: '1676421347346'
+  alias: F_FanLight_TurnOff_Delia
+  description: ''
+  trigger:
+  - device_id: 984bd6b888194c8a339b567abd4fa1b8
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.delia_fan_control_light
+  mode: single
+- id: '1676421387708'
+  alias: F_FanLight_TurnOff_Staci
+  description: ''
+  trigger:
+  - device_id: b7f3ca1db33566e6d779f7e0383e9a1c
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_off
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.staci_fan_control_light
+  mode: single
+- id: '1676421435452'
+  alias: F_FanLight_TurnOn_Delia
+  description: ''
+  trigger:
+  - device_id: 984bd6b888194c8a339b567abd4fa1b8
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id: light.delia_fan_control_light
+  mode: single
+- id: '1676421469423'
+  alias: F_FanLight_TurnOn_Staci
+  description: ''
+  trigger:
+  - device_id: b7f3ca1db33566e6d779f7e0383e9a1c
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: turn_on
+  condition: []
+  action:
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id: light.staci_fan_control_light
+  mode: single
+- id: '1676421569732'
+  alias: F_Fan_Decrease_Delia
+  description: ''
+  trigger:
+  - device_id: 984bd6b888194c8a339b567abd4fa1b8
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: left
+  condition: []
+  action:
+  - service: fan.decrease_speed
+    data: {}
+    target:
+      entity_id: fan.delia_fan_control_fan
+  mode: single
+- id: '1676421610681'
+  alias: F_Fan_Decrease_Staci
+  description: ''
+  trigger:
+  - device_id: b7f3ca1db33566e6d779f7e0383e9a1c
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: left
+  condition: []
+  action:
+  - service: fan.decrease_speed
+    data: {}
+    target:
+      entity_id: fan.staci_fan_control_fan
+  mode: single
+- id: '1676421649108'
+  alias: F_Fan_Increase_Delia
+  description: ''
+  trigger:
+  - device_id: 984bd6b888194c8a339b567abd4fa1b8
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: right
+  condition: []
+  action:
+  - service: fan.increase_speed
+    data: {}
+    target:
+      entity_id: fan.delia_fan_control_fan
+  mode: single
+- id: '1676421686866'
+  alias: F_Fan_Increase_Staci
+  description: ''
+  trigger:
+  - device_id: b7f3ca1db33566e6d779f7e0383e9a1c
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: right
+  condition: []
+  action:
+  - service: fan.increase_speed
+    data: {}
+    target:
+      entity_id: fan.staci_fan_control_fan
   mode: single

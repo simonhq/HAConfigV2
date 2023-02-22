@@ -111,6 +111,7 @@ class General_Messages(hass.Hass):
             self.notifier.notify(self.cpu)
             self.turn_off("input_boolean.cpu_notify_system")
 
+    # you also need to change the items in diet.yaml
     def drink_notify(self, entity, attribute, old, new, kwargs):
         if new == "on":
             self.notifier.notify(self.drink)

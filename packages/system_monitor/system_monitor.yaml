@@ -69,11 +69,11 @@ sensor:
     scan_interval: 300  
 
 # latest available version
-  - platform: version
-    name: Latest Available Version
-    beta: false
-    image: default
-    source: hassio
+  # - platform: version
+  #   name: Latest Available Version
+  #   beta: false
+  #   image: default
+  #   source: hassio
 
 #component counts
   - platform: template
@@ -196,34 +196,11 @@ sensor:
         icon_template: mdi:textbox
         value_template: "{{ states('sensor.count_input_booleans') | int + states('sensor.count_input_numbers') | int + states('sensor.count_input_texts') | int + states('sensor.count_input_selects') | int + states('sensor.count_input_datetimes') | int }}"
 
-# How long HA is been running
-  - platform: uptime
+# How long HA is been running - moved to ui
+  #- platform: uptime
 
   - platform: template
     sensors:
-
-      #==========================
-      #=== Home Assistant uptime
-      #==========================
-      ha_uptime:
-        friendly_name: HA Uptime
-        value_template: >
-          {% if (states('sensor.uptime') | int)  == '0' %} 
-            Just restarted...
-          {% else %}
-            {% macro phrase(value, name) %}
-            {%- set value = value | int %}
-            {%- set end = 's' if value > 1 else '' %}
-            {{- '{} {}{}'.format(value, name, end) if value | int > 0 else '' }}
-            {%- endmacro %}
-            
-            {% set weeks = (states('sensor.uptime') | int / 7) | int %}
-            {% set days = (states('sensor.uptime') | int) - (weeks * 7) %}
-            {% set hours = (states('sensor.uptime') | float(default=0)) - states('sensor.uptime') | int * 24  %}
-            {% set minutes = (hours - hours | int) * 60 %}
-
-            {{ [ phrase(weeks, 'week'), phrase(days, 'day'), phrase(hours, 'hr'), phrase(minutes, 'min') ] | select('!=','') | list | join(', ') }}
-          {% endif %}
 
   #=========================================
       last_boot_date_time:
@@ -243,6 +220,20 @@ sensor:
 
           {{ as_timestamp(states('sensor.last_boot')) | timestamp_custom('%H:%M on %a') }} {{ date }} {{ as_timestamp(states('sensor.last_boot')) | timestamp_custom('%b %Y') }}
 
+#################################################################
+#                                                               #
+#                       Maria DB Size
+#                                                               #
+#################################################################
+
+
+  - platform: sql
+    db_url: mysql://homeassistant:uniCorn1am@core-mariadb/homeassistant?charset=utf8
+    queries:
+      - name: DB size
+        query: "SELECT table_schema AS 'db_name', ROUND(SUM( data_length + index_length ) / 1024 / 1024, 2) AS 'size_mb' FROM information_schema.TABLES WHERE table_schema='homeassistant'"
+        column: "size_mb"
+        unit_of_measurement: MB
 
 #################################################################
 #                                                               #

@@ -26,7 +26,6 @@ group:
   bus_travel_a:
     name: Bus Travel Automations
     entities:
-      - automation.transport_simon_leave_citywest
       - automation.transport_simon_leave_anubus
       - automation.transport_simon_leave_citybus
       - automation.transport_simon_arrive_woden_r4
@@ -204,19 +203,6 @@ automation:
 ## Simon Leaving Outtrim + R5W -> Cal (Simon walking home from Calwell)
 ## Simon Arrive Home -> Nil
 
-## Simon Leaving City West -> R5CW (Simon on R5 South)
-  - alias: transport_simon_leave_citywest
-    trigger:
-      - platform: zone
-        entity_id: person.simon
-        zone: zone.citywestbus
-        event: leave
-    action:
-      - service: input_select.select_option
-        data_template:
-          entity_id: input_select.trans_simon
-          option: '{{"R5CW"}}'
-
 ## Simon Leaving City ANU -> R4CW (Simon on R4 South)
   - alias: transport_simon_leave_anubus
     trigger:
@@ -366,10 +352,6 @@ automation:
       - platform: zone
         entity_id: person.simon
         zone: zone.tugg_south_point
-        event: enter
-      - platform: zone
-        entity_id: person.simon
-        zone: zone.dese_citywalk
         event: enter
       - platform: zone
         entity_id: person.simon
@@ -700,10 +682,6 @@ automation:
     trigger:
       - platform: zone
         entity_id: person.megan
-        zone: zone.dese_citywalk
-        event: enter
-      - platform: zone
-        entity_id: person.megan
         zone: zone.tugg_south_point
         event: enter
       - platform: zone
@@ -716,7 +694,7 @@ automation:
         event: enter
       - platform: zone
         entity_id: person.megan
-        zone: zone.dese_mort
+        zone: zone.woden_health
         event: enter   
     action:
       - service: input_select.select_option

@@ -190,48 +190,48 @@ sensor:
 #                                                  #
 ####################################################      
 
-  - platform: template
-    sensors:
-      ltv_current_w:
-        friendly_name: Lounge TV Switch Current Watts
-        value_template: '{{ states.switch.lounge_tv.attributes.current_power_w }}'
-        unit_of_measurement: 'W'
-      ltv_current_a:
-        friendly_name: Lounge TV Switch Current Amps
-        value_template: '{{ states.switch.lounge_tv.attributes.current_a }}'
-        unit_of_measurement: 'A'
-      ltv_today_kwh:
-        friendly_name: Lounge TV Switch Today Energy Kwh
-        value_template: '{{ states.switch.lounge_tv.attributes.today_energy_kwh }}'
-        unit_of_measurement: 'kW'
-      ltv_total_kwh:
-        friendly_name: Lounge TV Switch Total Energy Kwh
-        value_template: '{{ states.switch.lounge_tv.attributes.total_energy_kwh }}'
-        unit_of_measurement: 'kW'
-      ltv_voltage:
-        friendly_name: Lounge TV Switch Voltage
-        value_template: '{{ states.switch.lounge_tv.attributes.voltage }}'
-        unit_of_measurement: 'V'
-      sps_current_w:
-        friendly_name: Study Printer Switch Current Watts
-        value_template: '{{ states.switch.study_printer.attributes.current_power_w }}'
-        unit_of_measurement: 'W'
-      sps_current_a:
-        friendly_name: Study Printer Switch Current Amps
-        value_template: '{{ states.switch.study_printer.attributes.current_a }}'
-        unit_of_measurement: 'A'
-      sps_today_kwh:
-        friendly_name: Study Printer Switch Today Energy Kwh
-        value_template: '{{ states.switch.study_printer.attributes.today_energy_kwh }}'
-        unit_of_measurement: 'kW'
-      sps_total_kwh:
-        friendly_name: Study Printer Switch Total Energy Kwh
-        value_template: '{{ states.switch.study_printer.attributes.total_energy_kwh }}'
-        unit_of_measurement: 'kW'
-      sps_voltage:
-        friendly_name: Study Printer Switch Voltage
-        value_template: '{{ states.switch.study_printer.attributes.voltage }}'
-        unit_of_measurement: 'V'
+  # - platform: template
+  #   sensors:
+  #     ltv_current_w:
+  #       friendly_name: Lounge TV Switch Current Watts
+  #       value_template: '{{ states.switch.lounge_tv.attributes.current_power_w }}'
+  #       unit_of_measurement: 'W'
+  #     ltv_current_a:
+  #       friendly_name: Lounge TV Switch Current Amps
+  #       value_template: '{{ states.switch.lounge_tv.attributes.current_a }}'
+  #       unit_of_measurement: 'A'
+  #     ltv_today_kwh:
+  #       friendly_name: Lounge TV Switch Today Energy Kwh
+  #       value_template: '{{ states.switch.lounge_tv.attributes.today_energy_kwh }}'
+  #       unit_of_measurement: 'kW'
+  #     ltv_total_kwh:
+  #       friendly_name: Lounge TV Switch Total Energy Kwh
+  #       value_template: '{{ states.switch.lounge_tv.attributes.total_energy_kwh }}'
+  #       unit_of_measurement: 'kW'
+  #     ltv_voltage:
+  #       friendly_name: Lounge TV Switch Voltage
+  #       value_template: '{{ states.switch.lounge_tv.attributes.voltage }}'
+  #       unit_of_measurement: 'V'
+  #     sps_current_w:
+  #       friendly_name: Study Printer Switch Current Watts
+  #       value_template: '{{ states.switch.study_printer.attributes.current_power_w }}'
+  #       unit_of_measurement: 'W'
+  #     sps_current_a:
+  #       friendly_name: Study Printer Switch Current Amps
+  #       value_template: '{{ states.switch.study_printer.attributes.current_a }}'
+  #       unit_of_measurement: 'A'
+  #     sps_today_kwh:
+  #       friendly_name: Study Printer Switch Today Energy Kwh
+  #       value_template: '{{ states.switch.study_printer.attributes.today_energy_kwh }}'
+  #       unit_of_measurement: 'kW'
+  #     sps_total_kwh:
+  #       friendly_name: Study Printer Switch Total Energy Kwh
+  #       value_template: '{{ states.switch.study_printer.attributes.total_energy_kwh }}'
+  #       unit_of_measurement: 'kW'
+  #     sps_voltage:
+  #       friendly_name: Study Printer Switch Voltage
+  #       value_template: '{{ states.switch.study_printer.attributes.voltage }}'
+  #       unit_of_measurement: 'V'
       
 #################################################################
 #                                                               #

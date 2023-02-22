@@ -51,11 +51,13 @@ class Battery_Messages(hass.Hass):
         #smoke detectors
         self.listen_state(self.dbatt_set, "sensor.back_hall_nest_protect_battery_health")
         self.listen_state(self.dbatt_set, "sensor.hallway_nest_protect_battery_health")
+        self.listen_state(self.dbatt_set, "sensor.laundry_nest_protect_battery_health")
 
         #door sensors
         self.listen_state(self.dbatt_set, "sensor.back_door_state_battery")
         self.listen_state(self.dbatt_set, "sensor.front_door_state_battery")
-
+        self.listen_state(self.dbatt_set, "sensor.lumi_lumi_sensor_magnet_aq2_battery")
+        self.listen_state(self.dbatt_set, "sensor.garage_entry_door_battery")
         #dishwasher
         self.listen_state(self.dbatt_set, "sensor.dishwasher_multipurpose_sensor_battery")
 
@@ -63,10 +65,14 @@ class Battery_Messages(hass.Hass):
         #smartthings
         self.listen_state(self.dbatt_set, "sensor.bathroom_motion_battery")
         self.listen_state(self.dbatt_set, "sensor.toilet_motion_battery")
-        #hue   
-        self.listen_state(self.dbatt_set, "sensor.ensuite_motion_sensor_battery_level")
-        self.listen_state(self.dbatt_set, "sensor.laundry_motion_sensor_battery_level")
-        self.listen_state(self.dbatt_set, "sensor.garage_motion_sensor_battery_level")
+        #hue
+        self.listen_state(self.dbatt_set, "sensor.ensuite_sensor_battery")
+        self.listen_state(self.dbatt_set, "sensor.laundry_sensor_battery")
+        self.listen_state(self.dbatt_set, "sensor.garage_sensor_battery")
+        #zigbee
+        self.listen_state(self.dbatt_set, "sensor.kitchen_motion_sensor_battery")
+        self.listen_state(self.dbatt_set, "sensor.philips_sml001_battery") #hue mail
+        self.listen_state(self.dbatt_set, "sensor.lumi_lumi_motion_ac02_battery") #aqara study
 
         #leak sensors
         self.listen_state(self.dbatt_set, "sensor.bathroom_water_leak_sensor_battery")
@@ -74,19 +80,31 @@ class Battery_Messages(hass.Hass):
         self.listen_state(self.dbatt_set, "sensor.ensuite_water_leak_sensor_battery")
         self.listen_state(self.dbatt_set, "sensor.kitchen_water_leak_sensor_battery")
         self.listen_state(self.dbatt_set, "sensor.laundry_water_leak_sensor_battery")
+        self.listen_state(self.dbatt_set, "sensor.lumi_lumi_sensor_wleak_aq1_battery") #toilet
+        self.listen_state(self.dbatt_set, "sensor.lumi_lumi_sensor_wleak_aq1_battery_2") #ensuite
+
+        #fan remotes
+        self.listen_state(self.dbatt_set, "sensor.master_ikea_fan_remote_battery") #master
+
+        #temp
+        self.listen_state(self.dbatt_set, "sensor.lumi_lumi_weather_battery_3") #master
+        self.listen_state(self.dbatt_set, "sensor.lumi_lumi_weather_battery_2") #study
+        self.listen_state(self.dbatt_set, "sensor.lumi_lumi_weather_battery") #kitchen
 
         #remotes & buttons
-        self.listen_state(self.dbatt_set, "sensor.living_room_hue_remote_battery_level")
-        self.listen_state(self.dbatt_set, "sensor.bedroom_hue_remote_battery_level")
-        self.listen_state(self.dbatt_set, "sensor.bedroom_2_hue_remote_battery_level")
+        self.listen_state(self.dbatt_set, "sensor.remote_battery_level")
+        self.listen_state(self.dbatt_set, "sensor.bedroom_remote_battery_level")
+        self.listen_state(self.dbatt_set, "sensor.study_remote_battery_level")
         self.listen_state(self.dbatt_set, "sensor.megs_button_battery")
+        self.listen_state(self.dbatt_set, "sensor.ensuite_button_battery")
+        self.listen_state(self.dbatt_set, "sensor.lumi_lumi_remote_b1acn01_battery") #fronthall/mail
 
         #phones
         self.listen_state(self.batt_set, "binary_sensor.simon_batt_low")
         self.listen_state(self.batt_set, "binary_sensor.megan_batt_low")
         self.listen_state(self.batt_set, "binary_sensor.staci_batt_low")
         self.listen_state(self.batt_set, "binary_sensor.delia_batt_low")
-        self.listen_state(self.batt_set, "binary_sensor.megan_ipad_batt_low")
+        #self.listen_state(self.batt_set, "binary_sensor.megan_ipad_batt_low")
 
         #messaging
         self.listen_state(self.batt_notify, "input_boolean.batt_notify_system")
@@ -101,7 +119,10 @@ class Battery_Messages(hass.Hass):
         if entity == 'sensor.back_hall_nest_protect_battery_health':
             if new != 'Ok':
                 self.turn_on("input_boolean.dbatt_notify_system")
-        elif entity == 'hallway_nest_protect_battery_health':
+        elif entity == 'sensor.hallway_nest_protect_battery_health':
+            if new != 'Ok':
+                self.turn_on("input_boolean.dbatt_notify_system")
+        elif entity == 'sensor.laundry_nest_protect_battery_health':
             if new != 'Ok':
                 self.turn_on("input_boolean.dbatt_notify_system")
         else:

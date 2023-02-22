@@ -4,55 +4,6 @@
 #                                                               #
 #################################################################
 
-#################################################################
-#                                                               #
-#                       Group                                   #
-#                                                               #
-#################################################################
-
-group:
-  fans_e:
-    name: Fan Entities
-    entities:
-      - input_select.master_fan_flag
-      - input_select.staci_fan_flag
-      - input_select.delia_fan_flag
-      - binary_sensor.fans_on
-      - binary_sensor.fans_off
-      - device_tracker.bond_hub
-
-  fans_a:
-    name: Fan Automations
-    entities:
-      - script.fans_off
-      - script.fans_on
-      - automation.master_fan_off
-      - automation.master_fan_1
-      - automation.master_fan_2
-      - automation.master_fan_3
-      - automation.staci_fan_off
-      - automation.staci_fan_1
-      - automation.staci_fan_2
-      - automation.staci_fan_3
-      - automation.delia_fan_off
-      - automation.delia_fan_1
-      - automation.delia_fan_2
-      - automation.delia_fan_3
-
-################################################################
-#                                                               #
-#                       Dyson Integration                        #
-#                                                               #
-#################################################################
-#dyson:
-#  username: !secret dyson_user
-#  password: !secret dyson_pass
-#  language: AU
-#  devices:
-#    device_id: !secret dyson_dida
-#    device_ip: !secret dyson_dipa
-
-
 
 #################################################################
 #                                                               #
@@ -73,7 +24,7 @@ binary_sensor:
       fans_off:
         friendly_name: Fans Off
         #value_template: "{{ is_state('input_select.master_fan_flag', 'Off') and is_state('input_select.staci_fan_flag', 'Off') and is_state('input_select.delia_fan_flag', 'Off')  }}"
-        value_template: "{{ is_state('fan.master_fan', 'off') and is_state('fan.staci_s_fan', 'off') and is_state('fan.delia_s_fan', 'off')  }}"
+        value_template: "{{ is_state('fan.master_fan_control_fan', 'off') and is_state('fan.staci_fan_control_fan', 'off') and is_state('fan.delia_fan_control_fan', 'off') and is_state('fan.lounge_fan_control_fan', 'off') and is_state('fan.study_fan_control_fan', 'off')  }}"
         icon_template: mdi:fan-off
         device_class: motion
       fans_on:
@@ -109,12 +60,12 @@ binary_sensor:
     sensors:
       heaters_off:
         friendly_name: Heaters Off
-        value_template: "{{ is_state('binary_sensor.heaters_on', 'off') }}"
+        value_template: "{{ is_state('climate.heater_study', 'off') or is_state('climate.heater_study', 'unavailable') }}"
         icon_template: mdi:radiator-off
         device_class: motion
       heaters_on:
         friendly_name: Heaters On
         #value_template: "{{ is_state('climate.83607036e098068310e2', 'on') and is_state('climate.33805060a4cf12d11732', 'on') and is_state('climate.83607036e09806830fb8', 'on') }}"
         #value_template: "{{ not is_state('climate.heater_ensuite', 'off') and not is_state('climate.heater_study', 'off') }}"
-        value_template: "{{ not is_state('climate.heater_study', 'off') }}"
+        value_template: "{{ is_state('binary_sensor.heaters_off', 'off')   }}"
         icon_template: mdi:radiator

@@ -92,4 +92,7 @@ binary_sensor:
             friendly_name: AC Heat (Opt)
             value_template: "{{ (states('climate.rushbrook_aircon') == 'heat') and (float(state_attr('climate.rushbrook_aircon', 'temperature'), default=0) == float(states('input_number.cc_optlow'), default=0)) }}"
             icon_template: mdi:arrow-collapse-vertical
-      
+         cc_ac_cool_optl:
+            friendly_name: AC Cool (OptLow)
+            value_template: "{{ (states('climate.rushbrook_aircon') == 'cool') and (float(state_attr('climate.rushbrook_aircon', 'temperature'), default=0) == float(states('input_number.cc_optlow'), default=0)) }}"
+            icon_template: mdi:arrow-collapse-vertical

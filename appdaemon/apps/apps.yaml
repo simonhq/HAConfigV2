@@ -57,21 +57,21 @@ transport-messages:
     - secrets
 
 # car
-travel:
-  module: travel
-  class: Travel_Messages
-  dependencies:
-    - messaging
-  global_dependencies:
-    #- globals
-    - secrets
+# travel:
+#   module: travel
+#   class: Travel_Messages
+#   dependencies:
+#     - messaging
+#   global_dependencies:
+#     #- globals
+#     - secrets
 
 # for gtfs clean up
 gtfs_cleanup:
   module: cleangtfs
   class: Clean_GTFS
   GTFS_DB: "action.sqlite"
-  MY_STOPS: "5513,5517,1736,1737,4979,4972,3418,3419,4529,3003,3409,13,1808,1803,1076,1075,1078,1077,2705,2709,2710,2706"
+  MY_STOPS: "5513,5517,1736,1737,4979,4972,3418,3419,4529,3003,3409,13,1808,1803,1076,1075,1078,1077,2763,2767"
   GTFS_FLAG: "input_boolean.clean_gtfs"
   global_dependencies:
     #- globals
@@ -122,9 +122,26 @@ accu_allergies:
   URL_CITY: "canberra"
   URL_COUNTRY: "au"
   URL_LANG: "en"
+  WEB_VER: "APRIL22"
   global_dependencies:
     #- globals
     - secrets
+
+# accu_allergies:
+#   module: accu_allergies
+#   class: Get_Accu_Allergies
+#   ACC_FILE: "./allergies"
+#   ACC_FLAG: "input_boolean.get_allergies_data"
+#   DEB_FLAG: "input_boolean.reset_allergies_sensor"
+#   URL_ID: "2107191"
+#   URL_CITY: "coupland"
+#   URL_COUNTRY: "us"
+#   URL_LANG: "en"
+#   URL_POSTCODE: "78615"
+#   WEB_VER: "APRIL22"
+#   global_dependencies:
+#     #- globals
+#     - secrets
 
 climatecontrol:
   module: climatecontrol
@@ -141,8 +158,8 @@ climatecontrol:
   optlow: "input_number.cc_optlow"
   intlow: "input_number.cc_intlow"
   extlow: "input_number.cc_extlow"
-  aircon: "climate.rushbrook_aircon,climate.rushbrook_aircon_d,climate.rushbrook_aircon_s" # if we want to use it
-  fan: "fan.staci_s_fan,fan.delia_s_fan,fan.master_fan"
+  aircon: "climate.rushbrook_aircon" # if we want to use it
+  fan: "fan.lounge_fan_control_fan,fan.master_fan_control_fan"
   heater: "climate.heater_ensuite,climate.heater_study" #,climate.33805060a4cf12d11732" # ensuite, study, lounge
   door: "binary_sensor.fdoor_open,binary_sensor.bdoor_open"
   acrule: "input_text.ac_rule"
@@ -150,29 +167,50 @@ climatecontrol:
   manual_override: "input_boolean.cc_ac_manual"
 #333333333333333333333333333333333333333333333333333333333333333333
 
-# turn back on in September - update
-#climate:
-#  module: climate
-#  class: Climate_Control
+climatecontrol_staci:
+  module: climatecontrol
+  class: Manage_Climate
+  fhigh: "sensor.calwell_temp_max_0"
+  flow: "sensor.calwell_temp_min_1"
+  cexttemp: "sensor.tuggeranong_temp"
+  cinttemp: "sensor.rushbrook_aircon_s_inside_temperature"
+  solarstatus: "input_boolean.power_ready"
+  presenceaway: "person.staci"
+  exthigh: "input_number.cc_exthigh"
+  inthigh: "input_number.cc_inthigh"
+  opthigh: "input_number.cc_opthigh"
+  optlow: "input_number.cc_optlow"
+  intlow: "input_number.cc_intlow"
+  extlow: "input_number.cc_extlow"
+  aircon: "climate.rushbrook_aircon_s" # if we want to use it
+  fan: "fan.staci_fan_control_fan"
+  heater: "" 
+  door: "binary_sensor.fdoor_open,binary_sensor.bdoor_open"
+  acrule: "input_text.ac_st_rule"
+  warnlight: ""
+  manual_override: "input_boolean.cc_st_ac_manual"
+#333333333333333333333333333333333333333333333333333333333333333333
 
-# front-lock:
-#   module: locks
-#   class: DoorLock
-#   select_name: "fdoor"
-#   lock_id: secret_flock_id
-#   k_user: secret_kevo_email
-#   k_pass: secret_kevo_pass
-#   global_dependencies:
-#     - globals
-#     - secrets
-
-# garage-lock:
-#   module: locks
-#   class: DoorLock
-#   select_name: "gdoor"
-#   lock_id: secret_glock_id
-#   k_user: secret_kevo_email
-#   k_pass: secret_kevo_pass
-#   global_dependencies:
-#     - globals
-#     - secrets
+climatecontrol_delia:
+  module: climatecontrol
+  class: Manage_Climate
+  fhigh: "sensor.calwell_temp_max_0"
+  flow: "sensor.calwell_temp_min_1"
+  cexttemp: "sensor.tuggeranong_temp"
+  cinttemp: "sensor.rushbrook_aircon_d_inside_temperature"
+  solarstatus: "input_boolean.power_ready"
+  presenceaway: "person.delia"
+  exthigh: "input_number.cc_exthigh"
+  inthigh: "input_number.cc_inthigh"
+  opthigh: "input_number.cc_opthigh"
+  optlow: "input_number.cc_optlow"
+  intlow: "input_number.cc_intlow"
+  extlow: "input_number.cc_extlow"
+  aircon: "climate.rushbrook_aircon_d" # if we want to use it
+  fan: "fan.delia_fan_control_fan"
+  heater: "" 
+  door: "binary_sensor.fdoor_open,binary_sensor.bdoor_open"
+  acrule: "input_text.ac_d_rule"
+  warnlight: ""
+  manual_override: "input_boolean.cc_d_ac_manual"
+#333333333333333333333333333333333333333333333333333333333333333333

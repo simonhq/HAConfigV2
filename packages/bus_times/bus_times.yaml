@@ -84,7 +84,7 @@ sensor:
     name: home_to_city_r5_out
     offset: 600 # 10min
     origin: 1078 #outrim near
-    destination: 2709 #woden north
+    destination: 2763 #woden 3 - temp interchange
     scan_interval: 60 #1min
     data: action.zip
     include_tomorrow: true
@@ -98,7 +98,7 @@ sensor:
     name: tugg_to_city_r4
     offset: 1200 # 20min
     origin: 1808 #tugg pt8
-    destination: 2709 #woden north
+    destination: 2763 #woden 3 - temporary interchange
     scan_interval: 60 #1min
     data: action.zip
     include_tomorrow: true
@@ -131,7 +131,7 @@ sensor:
   - platform: gtfs
     name: woden_to_home_R5
     offset: 0 # 0 sec
-    origin: 2705 #woden pt3
+    origin: 2767 #woden pt4 - temp int
     destination: 1077 #home out
     scan_interval: 60 #1min
     data: action.zip
@@ -141,7 +141,7 @@ sensor:
   - platform: gtfs
     name: woden_to_tugg_R4
     offset: 0 # 0 sec
-    origin: 2706 #woden pt6
+    origin: 2767 #woden pt4 - temp int
     destination: 13 #tugg
     scan_interval: 60 #1min
     data: action.zip
@@ -163,10 +163,10 @@ sensor:
 
 # R4 south ANU to Woden
   - platform: gtfs
-    name: anu_to_woden_r4
+    name: anu_to_woden_r4r5
     offset: 300 # 5min
     origin: 4529 #anu->south
-    destination: 2706 #woden plt4
+    destination: 2767 #woden plt4 - temp int
     scan_interval: 60 #1min
     data: action.zip
     include_tomorrow: true
@@ -176,20 +176,11 @@ sensor:
     name: assembly_to_woden_r4
     offset: 300 # 5min
     origin: 3003 #assembly->south
-    destination: 2706 #woden plt4
+    destination: 2767 #woden plt4 - temp int
     scan_interval: 60 #1min
     data: action.zip
     include_tomorrow: true
 
-# R5 south City west to Woden
-  - platform: gtfs
-    name: citywest_to_woden_r5
-    offset: 300 # 5min
-    origin: 3409 #city pt7 ->south
-    destination: 2705 #woden plt3
-    scan_interval: 60 #1min
-    data: action.zip
-    include_tomorrow: true
 
 ######################################
 # UC/CIT 
@@ -325,7 +316,7 @@ sensor:
 
       # woden_to_tugg without delay
       woden_to_tugg_r4_homecheck:
-        friendly_name: Woden pt6 - R4(T)
+        friendly_name: Woden pt4 - R4(T)
         icon_template: mdi:bus
         value_template: >-
           {% set departure = state_attr('sensor.woden_to_tugg_R4', 'origin_stop_departure_time') %}
@@ -344,7 +335,7 @@ sensor:
       
       # woden_to_home_R5 without delay
       woden_to_home_r5_homecheck:
-        friendly_name: Woden pt6 - R5(H)
+        friendly_name: Woden pt4 - R5(H)
         icon_template: mdi:bus
         value_template: >-
           {% set departure = state_attr('sensor.woden_to_home_R5', 'origin_stop_departure_time') %}
@@ -381,12 +372,12 @@ sensor:
 
       # anu_to_woden_r4
       anu_to_woden_r4_format:
-        friendly_name: ANU - R4(S) 
+        friendly_name: ANU - R4/R5(S) 
         icon_template: mdi:bus
         value_template: >-
-          {% set departure = state_attr('sensor.anu_to_woden_r4', 'origin_stop_departure_time') %}
+          {% set departure = state_attr('sensor.anu_to_woden_r4r5', 'origin_stop_departure_time') %}
           {% if departure != None %}
-            {% set route = state_attr('sensor.anu_to_woden_r4', 'route_route_short_name') %}
+            {% set route = state_attr('sensor.anu_to_woden_r4r5', 'route_route_short_name') %}
             {% set departure = departure.split(' ') %}
             {% set hms = departure[1].split(':') %}
             {{ route }} at {{hms[0]}}:{{hms[1]}}
@@ -396,27 +387,12 @@ sensor:
 
       # assebemly_to_woden_r4
       ass_to_woden_r4_format:
-        friendly_name: London - R4(S) 
+        friendly_name: London - R4/R5(S) 
         icon_template: mdi:bus
         value_template: >-
           {% set departure = state_attr('sensor.assembly_to_woden_r4', 'origin_stop_departure_time') %}
           {% if departure != None %}
             {% set route = state_attr('sensor.assembly_to_woden_r4', 'route_route_short_name') %}
-            {% set departure = departure.split(' ') %}
-            {% set hms = departure[1].split(':') %}
-            {{ route }} at {{hms[0]}}:{{hms[1]}}
-          {% else %}
-            unknown
-          {% endif %}
-
-      # city_to_woden_r5
-      city_to_woden_r5_format:
-        friendly_name: City - R5(S) 
-        icon_template: mdi:bus
-        value_template: >-
-          {% set departure = state_attr('sensor.citywest_to_woden_r5', 'origin_stop_departure_time') %}
-          {% if departure != None %}
-            {% set route = state_attr('sensor.citywest_to_woden_r5', 'route_route_short_name') %}
             {% set departure = departure.split(' ') %}
             {% set hms = departure[1].split(':') %}
             {{ route }} at {{hms[0]}}:{{hms[1]}}

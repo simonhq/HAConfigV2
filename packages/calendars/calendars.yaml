@@ -54,10 +54,10 @@ group:
 #                                                               #
 #################################################################
 
-google:
+# google:
 
-  client_id: !secret ha_cal_client_id
-  client_secret: !secret ha_cal_client_secret
+#   client_id: !secret ha_cal_client_id
+#   client_secret: !secret ha_cal_client_secret
 
 #################################################################
 #                                                               #
@@ -288,6 +288,13 @@ sensor:
       guest_calendar:
         friendly_name: Guest staying from
         value_template: '{{ states.calendar.guest.attributes.message }} {{ as_timestamp(states.calendar.guest.attributes.start_time) | timestamp_custom("%a %d/%m %I:%M") }}'
+      botox_calendar:
+        friendly_name: Next Botox
+        value_template: '{{ as_timestamp(states.calendar.botox.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+      emgality_calendar:
+        friendly_name: Next Emgality
+        value_template: '{{ as_timestamp(states.calendar.emgality.attributes.start_time) | timestamp_custom("%a %d/%m") }}'
+
 
 
 #################################################################

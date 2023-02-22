@@ -22,7 +22,7 @@ group:
       - binary_sensor.diet_press_over
       - binary_sensor.diet_press_under
       - binary_sensor.diet_press_on
-      - sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb
+      - sensor.dark_sky_pressure
 
 #################################################################
 #                                                               #
@@ -63,7 +63,32 @@ sensor:
         friendly_name: "Meg's migraine levels"
         icon_template: mdi:head-flash
         value_template: "{{ states('input_number.migraine_impact') }}"
-
+        
+  - platform: fitbit
+    clock_format: 24H
+    unit_system: metric
+    monitored_resources:
+      - 'activities/elevation'
+      - 'activities/heart'
+      - 'activities/minutesFairlyActive'
+      - 'activities/minutesLightlyActive'
+      - 'activities/minutesSedentary'
+      - 'activities/minutesVeryActive'
+      - 'activities/steps'
+      - 'activities/tracker/minutesFairlyActive'
+      - 'activities/tracker/minutesLightlyActive'
+      - 'activities/tracker/minutesSedentary'
+      - 'activities/tracker/minutesVeryActive'
+      - 'activities/tracker/steps'
+      - 'devices/battery'
+      - 'sleep/awakeningsCount'
+      - 'sleep/efficiency'
+      - 'sleep/minutesAfterWakeup'
+      - 'sleep/minutesAsleep'
+      - 'sleep/minutesAwake'
+      - 'sleep/minutesToFallAsleep'
+      - 'sleep/startTime'
+      - 'sleep/timeInBed'
 #################################################################
 #                                                               #
 #                            Binary sensor                      #
@@ -71,35 +96,35 @@ sensor:
 #################################################################
 
 binary_sensor:
-
+# you also need to change the items in notifiers-general.yaml
   - platform: template
     sensors:
       #Just higher
       diet_press_over:
         friendly_name: Pressure rising
-        value_template: "{{ float(states('sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb'), default=0) > float(states('input_number.last_measure'), default=0) }}"
+        value_template: "{{ float(states('sensor.dark_sky_pressure'), default=0) > float(states('input_number.last_measure'), default=0) }}"
         icon_template: mdi:arrow-collapse-up
       #Just under
       diet_press_under:
         friendly_name: Pressure dropping
-        value_template: "{{ float(states('sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb'), default=0) < float(states('input_number.last_measure'), default=0) }}"
+        value_template: "{{ float(states('sensor.dark_sky_pressure'), default=0) < float(states('input_number.last_measure'), default=0) }}"
         icon_template: mdi:arrow-collapse-down
       #current
       diet_press_on:
         friendly_name: Pressure Current
-        value_template: "{{ float(states('sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb'), default=0) == float(states('input_number.last_measure'), default=0) }}"
+        value_template: "{{ float(states('sensor.dark_sky_pressure'), default=0) == float(states('input_number.last_measure'), default=0) }}"
         icon_template: mdi:arrow-collapse-all
       
       # high - reset
       diet_press_up:
         friendly_name: Pressure Up - reset
-        value_template: "{{ float(states('sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb'), default=0) > float(states('input_number.last_measure'), default=0) }}"
+        value_template: "{{ float(states('sensor.dark_sky_pressure'), default=0) > float(states('input_number.last_measure'), default=0) + 5.0 }}"
         icon_template: mdi:arrow-collapse-right
         
       # low - reset
       diet_press_down:
         friendly_name: Pressure Down - reset
-        value_template: "{{ float(states('sensor.bom_tuggeranong_isabella_plains_aws_pressure_mb'), default=0) < float(states('input_number.last_measure'), default=0) }}"
+        value_template: "{{ float(states('sensor.dark_sky_pressure'), default=0) < float(states('input_number.last_measure'), default=0) - 5.0 }}"
         icon_template: mdi:arrow-collapse-left
         
 
